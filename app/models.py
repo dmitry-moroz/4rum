@@ -36,19 +36,48 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    def generate_confirmation_token(self, expiration=3600):
+    def generate_confirmation_token(self, expiration=3600, **kwargs):
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
-        return s.dumps({'confirm': self.id})
+        data = {'user_id': self.id}
+        data.update(kwargs)
+        return s.dumps(data)
 
-    def confirm(self, token):
+    def confirm_token(self, token):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             data = s.loads(token)
         except:
-            return False
-        if data.get('confirm') != self.id:
+            return False, None
+        if data.get('user_id') != self.id:
+            return False, data
+        return True, data
+
+    def confirm_registration(self, token):
+        result, _ = self.confirm_token(token)
+        if not result:
             return False
         self.confirmed = True
+        db.session.add(self)
+        return True
+
+    def confirm_new_email(self, token):
+        result, data = self.confirm_token(token)
+        if not result:
+            return False
+        new_email = data.get('new_email')
+        if new_email is None:
+            return False
+        if self.query.filter_by(email=new_email).first() is not None:
+            return False
+        self.email = new_email
+        db.session.add(self)
+        return True
+
+    def confirm_reset(self, token, new_password):
+        result, _ = self.confirm_token(token)
+        if not result:
+            return False
+        self.password = new_password
         db.session.add(self)
         return True
 
