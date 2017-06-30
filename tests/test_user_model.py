@@ -1,8 +1,7 @@
-import time
 import unittest
-
+import time
 from app import create_app, db
-from app.models import User
+from app.models import User, AnonymousUser, Role, Permission
 
 
 class UserModelTestCase(unittest.TestCase):
@@ -11,6 +10,7 @@ class UserModelTestCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+        Role.insert_roles()
 
     def tearDown(self):
         db.session.remove()
@@ -40,8 +40,8 @@ class UserModelTestCase(unittest.TestCase):
         u = User(password='cat')
         db.session.add(u)
         db.session.commit()
-        token = u.generate_confirmation_token()
-        self.assertTrue(u.confirm(token))
+        token = u.generate_token()
+        self.assertTrue(u.confirm_registration(token))
 
     def test_invalid_confirmation_token(self):
         u1 = User(password='cat')
@@ -49,13 +49,68 @@ class UserModelTestCase(unittest.TestCase):
         db.session.add(u1)
         db.session.add(u2)
         db.session.commit()
-        token = u1.generate_confirmation_token()
-        self.assertFalse(u2.confirm(token))
+        token = u1.generate_token()
+        self.assertFalse(u2.confirm_registration(token))
 
     def test_expired_confirmation_token(self):
         u = User(password='cat')
         db.session.add(u)
         db.session.commit()
-        token = u.generate_confirmation_token(1)
+        token = u.generate_token(expiration=1)
         time.sleep(2)
-        self.assertFalse(u.confirm(token))
+        self.assertFalse(u.confirm_registration(token))
+
+    def test_valid_reset_token(self):
+        u = User(password='cat')
+        db.session.add(u)
+        db.session.commit()
+        token = u.generate_token()
+        self.assertTrue(u.confirm_reset(token, 'dog'))
+        self.assertTrue(u.verify_password('dog'))
+
+    def test_invalid_reset_token(self):
+        u1 = User(password='cat')
+        u2 = User(password='dog')
+        db.session.add(u1)
+        db.session.add(u2)
+        db.session.commit()
+        token = u1.generate_token()
+        self.assertFalse(u2.confirm_reset(token, 'horse'))
+        self.assertTrue(u2.verify_password('dog'))
+
+    def test_valid_email_change_token(self):
+        u = User(email='john@example.com', password='cat')
+        db.session.add(u)
+        db.session.commit()
+        token = u.generate_token(new_email='susan@example.org')
+        self.assertTrue(u.confirm_new_email(token))
+        self.assertTrue(u.email == 'susan@example.org')
+
+    def test_invalid_email_change_token(self):
+        u1 = User(email='john@example.com', password='cat')
+        u2 = User(email='susan@example.org', password='dog')
+        db.session.add(u1)
+        db.session.add(u2)
+        db.session.commit()
+        token = u1.generate_token(new_email='david@example.net')
+        self.assertFalse(u2.confirm_new_email(token))
+        self.assertTrue(u2.email == 'susan@example.org')
+
+    def test_duplicate_email_change_token(self):
+        u1 = User(email='john@example.com', password='cat')
+        u2 = User(email='susan@example.org', password='dog')
+        db.session.add(u1)
+        db.session.add(u2)
+        db.session.commit()
+        token = u2.generate_token(new_email='john@example.com')
+        self.assertFalse(u2.confirm_new_email(token))
+        self.assertTrue(u2.email == 'susan@example.org')
+
+    def test_roles_and_permissions(self):
+        u = User(email='john@example.com', password='cat')
+        self.assertTrue(u.can(Permission.WRITE))
+        self.assertFalse(u.can(Permission.MODERATE))
+
+    def test_anonymous_user(self):
+        u = AnonymousUser()
+        self.assertFalse(u.can(Permission.READ))
