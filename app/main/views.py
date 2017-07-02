@@ -14,7 +14,8 @@ def index():
     # result = urllib2.urlopen('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cat').read()
     # json_data = loads(result)
     # gif_url = json_data['data']['image_original_url']
-    return render_template('index.html', gif_url=None)
+    gif_url = None
+    return render_template('index.html', gif_url=gif_url)
 
 
 @main.route('/user/<username>')
@@ -31,12 +32,14 @@ def edit_profile():
         current_user.name = form.name.data
         current_user.homeland = form.homeland.data
         current_user.about = form.about.data
+        current_user.avatar = form.avatar.data if form.avatar.data else current_user.gravatar()
         db.session.add(current_user)
         flash('Your profile has been updated.')
         return redirect(url_for('main.user', username=current_user.username))
     form.name.data = current_user.name
     form.homeland.data = current_user.homeland
     form.about.data = current_user.about
+    form.avatar.data = current_user.avatar
     return render_template('edit_profile.html', form=form)
 
 
@@ -54,6 +57,7 @@ def edit_profile_admin(id):
         user.name = form.name.data
         user.homeland = form.homeland.data
         user.about = form.about.data
+        user.avatar = form.avatar.data if form.avatar.data else user.gravatar()
         db.session.add(user)
         flash('The profile has been updated.')
         return redirect(url_for('main.user', username=user.username))
@@ -64,4 +68,5 @@ def edit_profile_admin(id):
     form.name.data = user.name
     form.homeland.data = user.homeland
     form.about.data = user.about
+    form.avatar.data = user.avatar
     return render_template('edit_profile.html', form=form, user=user)

@@ -15,6 +15,7 @@ class EditProfileForm(FlaskForm):
     name = StringField('Real name', validators=[Length(0, 64)])
     homeland = StringField('Homeland', validators=[Length(0, 64)])
     about = TextAreaField('About me')
+    avatar = StringField('Link to avatar', validators=[Length(0, 256)])
     submit = SubmitField('Submit')
 
 
@@ -29,6 +30,7 @@ class EditProfileAdminForm(FlaskForm):
     name = StringField('Real name', validators=[Length(0, 64)])
     homeland = StringField('Location', validators=[Length(0, 64)])
     about = TextAreaField('About me')
+    avatar = StringField('Link to avatar', validators=[Length(0, 256)])
     submit = SubmitField('Submit')
 
     def __init__(self, user, *args, **kwargs):

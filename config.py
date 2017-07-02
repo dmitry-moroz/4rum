@@ -18,6 +18,8 @@ class Config:
     APP_MAIL_SENDER = '4RUM Admin <name@example.com>'
     APP_ADMIN = os.environ.get('ADMIN_MAIL_USERNAME', '4rum_admin@example.com')
 
+    BASE_GRAVATAR_URL = 'https://secure.gravatar.com/avatar'
+
     @staticmethod
     def init_app(app):
         pass

@@ -1,4 +1,5 @@
 from datetime import datetime
+import hashlib
 
 from flask import current_app
 from flask_login import UserMixin, AnonymousUserMixin
@@ -61,6 +62,7 @@ class User(UserMixin, db.Model):
     about = db.Column(db.Text())
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
+    avatar = db.Column(db.String(256))
 
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
@@ -69,6 +71,8 @@ class User(UserMixin, db.Model):
                 self.role = Role.query.filter_by(permissions=0xff).first()
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
+        if self.avatar is None and self.email is not None:
+            self.avatar = self.gravatar()
 
     @property
     def password(self):
@@ -138,6 +142,11 @@ class User(UserMixin, db.Model):
     def ping(self):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
+
+    def gravatar(self, size=256, default='identicon', rating='g'):
+        hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
+        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+            url=current_app.config['BASE_GRAVATAR_URL'], hash=hash, size=size, default=default, rating=rating)
 
     def __repr__(self):
         return '<User %r>' % self.username
