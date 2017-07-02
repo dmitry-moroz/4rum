@@ -16,7 +16,7 @@ class Config:
 
     APP_MAIL_SUBJECT_PREFIX = '[4RUM]'
     APP_MAIL_SENDER = '4RUM Admin <name@example.com>'
-    APP_ADMIN = os.environ.get('4RUM_ADMIN', '4rum_admin@example.com')
+    APP_ADMIN = os.environ.get('ADMIN_MAIL_USERNAME', '4rum_admin@example.com')
 
     @staticmethod
     def init_app(app):
