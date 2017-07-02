@@ -19,6 +19,7 @@ class Config:
     APP_ADMIN = os.environ.get('ADMIN_MAIL_USERNAME', '4rum_admin@example.com')
 
     BASE_GRAVATAR_URL = 'https://secure.gravatar.com/avatar'
+    TOPIC_GROUP_PRIORITY = range(1, 11)
 
     @staticmethod
     def init_app(app):
@@ -48,3 +49,4 @@ config = {
     'production': ProductionConfig,
     'default': DevelopmentConfig
 }
+base_config = Config

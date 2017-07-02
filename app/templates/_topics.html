@@ -1,0 +1,16 @@
+<ul class="topics">
+    {% for topic in topics %}
+    <li class="topic">
+        <div class="topic-thumbnail">
+            <a href="{{ url_for('.user', username=topic.author.username) }}">
+                <img class="img-rounded profile-thumbnail" src="{{ topic.author.avatar }}" width="40" height="40">
+            </a>
+        </div>
+        <div class="topic-content">
+            <div class="topic-date">{{ moment(topic.created_at).fromNow() }}</div>
+            <div class="topic-author"><a href="{{ url_for('.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
+            <div class="topic-body">{{ topic.body }}</div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>

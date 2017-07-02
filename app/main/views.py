@@ -1,27 +1,30 @@
 from flask import render_template, redirect, url_for, abort, flash
 from flask_login import login_required, current_user
 from . import main
-from .forms import EditProfileForm, EditProfileAdminForm
+from .forms import EditProfileForm, EditProfileAdminForm, TopicForm
 from .. import db
-from ..models import Role, User
+from ..models import Permission, Role, User, Topic
 from ..decorators import admin_required
 
 
-@main.route('/')
+@main.route('/', methods=['GET', 'POST'])
 def index():
-    # import urllib2
-    # from json import loads
-    # result = urllib2.urlopen('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cat').read()
-    # json_data = loads(result)
-    # gif_url = json_data['data']['image_original_url']
-    gif_url = None
-    return render_template('index.html', gif_url=gif_url)
+    form = None
+    if current_user.can(Permission.WRITE):
+        form = TopicForm()
+        if form.validate_on_submit():
+            topic = Topic(body=form.body.data, author=current_user._get_current_object())
+            db.session.add(topic)
+            return redirect(url_for('main.index'))
+    topics = Topic.query.order_by(Topic.created_at.desc()).all()
+    return render_template('index.html', form=form, topics=topics)
 
 
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('user.html', user=user)
+    topics = user.topics.order_by(Topic.created_at.desc()).all()
+    return render_template('user.html', user=user, topics=topics)
 
 
 @main.route('/edit_profile', methods=['GET', 'POST'])

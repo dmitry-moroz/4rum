@@ -1,11 +1,12 @@
-from datetime import datetime
 import hashlib
+from datetime import datetime
 
 from flask import current_app
 from flask_login import UserMixin, AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from config import base_config
 from . import db, login_manager
 
 
@@ -55,13 +56,16 @@ class User(UserMixin, db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
+    topics = db.relationship('Topic', backref='author', lazy='dynamic')
+    topic_groups = db.relationship('TopicGroup', backref='author', lazy='dynamic')
 
     # Profile:
     name = db.Column(db.String(64))
     homeland = db.Column(db.String(64))
-    about = db.Column(db.Text())
-    member_since = db.Column(db.DateTime(), default=datetime.utcnow)
-    last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
+    about = db.Column(db.Text)
+    # TODO: rename member_since -> created_at
+    member_since = db.Column(db.DateTime, default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     avatar = db.Column(db.String(256))
 
     def __init__(self, *args, **kwargs):
@@ -169,3 +173,24 @@ login_manager.anonymous_user = AnonymousUser
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+class Topic(db.Model):
+    __tablename__ = 'topics'
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), default=0)
+
+
+class TopicGroup(db.Model):
+    __tablename__ = 'topic_groups'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    priority = db.Column(db.Integer, default=base_config.TOPIC_GROUP_PRIORITY[-1])
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), default=0)
+    topics = db.relationship('Topic', backref='group', lazy='dynamic')
+    topic_groups = db.relationship('TopicGroup', backref=db.backref('group', remote_side=id), lazy='dynamic')
