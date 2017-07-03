@@ -68,6 +68,28 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     avatar = db.Column(db.String(256))
 
+    @staticmethod
+    def generate_fake(count=100):
+        from sqlalchemy.exc import IntegrityError
+        from random import seed
+        import forgery_py
+
+        seed()
+        for i in range(count):
+            u = User(email=forgery_py.internet.email_address(),
+                     username=forgery_py.internet.user_name(True),
+                     password=forgery_py.lorem_ipsum.word(),
+                     confirmed=True,
+                     name=forgery_py.name.full_name(),
+                     homeland=forgery_py.address.city(),
+                     about=forgery_py.lorem_ipsum.sentence(),
+                     member_since=forgery_py.date.date(True))
+            db.session.add(u)
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
         if self.role is None:
@@ -183,6 +205,27 @@ class Topic(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), default=0)
 
+    @staticmethod
+    def generate_fake(count=100):
+        from random import seed, randint
+        import forgery_py
+
+        seed()
+        user_count = User.query.count()
+        group_count = TopicGroup.query.count()
+        for i in range(count):
+            u = User.query.offset(randint(0, user_count - 1)).first()
+            if group_count:
+                g = TopicGroup.query.offset(randint(0, group_count - 1)).first()
+            else:
+                g = None
+            p = Topic(body=forgery_py.lorem_ipsum.sentences(randint(1, 5)),
+                      created_at=forgery_py.date.date(True),
+                      author=u,
+                      group=g)
+            db.session.add(p)
+            db.session.commit()
+
 
 class TopicGroup(db.Model):
     __tablename__ = 'topic_groups'
@@ -194,3 +237,19 @@ class TopicGroup(db.Model):
     group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), default=0)
     topics = db.relationship('Topic', backref='group', lazy='dynamic')
     topic_groups = db.relationship('TopicGroup', backref=db.backref('group', remote_side=id), lazy='dynamic')
+
+    @staticmethod
+    def generate_fake(count=10):
+        from random import seed, randint, choice
+        import forgery_py
+
+        seed()
+        user_count = User.query.count()
+        for i in range(count):
+            u = User.query.offset(randint(0, user_count - 1)).first()
+            g = TopicGroup(name=forgery_py.lorem_ipsum.sentence(),
+                           priority=choice(base_config.TOPIC_GROUP_PRIORITY),
+                           created_at=forgery_py.date.date(True),
+                           author=u)
+            db.session.add(g)
+            db.session.commit()
