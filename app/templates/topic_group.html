@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}4RUM - {{ topic_group.name }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="profile-thumbnail" src="{{ url_for('static', filename='folder-icon.png') }}" width="40" height="40">
+    <div class="topic-group-title">
+        <h1>{{ topic_group.name }}</h1>
+    </div>
+</div>
+<div>
+    <div style="float:right">
+        {% if current_user.is_moderator() %}
+        <a class="btn btn-success" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">+Create topic group [Moderator]</a>
+        {% endif %}
+        <a class="btn btn-success" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">+Create topic</a>
+    </div>
+    <div>
+        <a class="btn btn-primary" href="{{ url_for('main.topic_group', topic_group_id=topic_group.group_id) }}">&#8617;Back</a>
+    </div>
+</div>
+{% include '_topic_groups.html' %}
+{% include '_topics.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, 'main.topic_group', topic_group_id=topic_group.id) }}
+</div>
+{% endif %}
+{% endblock %}

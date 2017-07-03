@@ -6,6 +6,7 @@
     min-height: 260px;
     margin-left: 280px;
 }
+
 ul.topics {
     list-style-type: none;
     padding: 0px;
@@ -32,9 +33,35 @@ div.topic-content {
     margin-left: 48px;
     min-height: 48px;
 }
+
 div.pagination {
     width: 100%;
     text-align: right;
     padding: 0px;
     margin: 0px;
+}
+
+ul.topic-groups {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+    border-top: 1px solid #e0e0e0;
+}
+ul.topic-groups li.topic-group {
+    padding: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+ul.topic-groups li.topic-group:hover {
+    background-color: #f0f0f0;
+}
+div.topic-group-thumbnail {
+    position: absolute;
+}
+div.topic-group-content {
+    margin-left: 28px;
+    min-height: 20px;
+    font-weight: bold;
+}
+div.topic-group-title {
+    margin-left: 48px;
 }
