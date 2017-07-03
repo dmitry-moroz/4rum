@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, abort, flash
+from flask import render_template, redirect, url_for, abort, flash, request, current_app
 from flask_login import login_required, current_user
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, TopicForm
@@ -16,15 +16,19 @@ def index():
             topic = Topic(body=form.body.data, author=current_user._get_current_object())
             db.session.add(topic)
             return redirect(url_for('main.index'))
-    topics = Topic.query.order_by(Topic.created_at.desc()).all()
-    return render_template('index.html', form=form, topics=topics)
+    page = request.args.get('page', 1, type=int)
+    pagination = Topic.query.order_by(Topic.created_at.desc()).paginate(
+        page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+    return render_template('index.html', form=form, topics=pagination.items, pagination=pagination)
 
 
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    topics = user.topics.order_by(Topic.created_at.desc()).all()
-    return render_template('user.html', user=user, topics=topics)
+    page = request.args.get('page', 1, type=int)
+    pagination = user.topics.order_by(Topic.created_at.desc()).paginate(
+        page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+    return render_template('user.html', user=user, topics=pagination.items, pagination=pagination)
 
 
 @main.route('/edit_profile', methods=['GET', 'POST'])
