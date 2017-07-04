@@ -235,6 +235,7 @@ class TopicGroup(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64))
     priority = db.Column(db.Integer, default=base_config.TOPIC_GROUP_PRIORITY[-1])
+    protected = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'))
@@ -259,14 +260,17 @@ class TopicGroup(db.Model):
 
     @staticmethod
     def insert_root_topic_group():
-        topic_group = TopicGroup(id=base_config.ROOT_TOPIC_GROUP,
-                                 title='root topic group',
-                                 priority=base_config.TOPIC_GROUP_PRIORITY[0])
+        topic_group = TopicGroup.query.get(base_config.ROOT_TOPIC_GROUP)
+        if topic_group:
+            topic_group.priority = base_config.TOPIC_GROUP_PRIORITY[0]
+            topic_group.protected = base_config.IS_PROTECTED_ROOT_TOPIC_GROUP
+        else:
+            topic_group = TopicGroup(id=base_config.ROOT_TOPIC_GROUP,
+                                     title='root topic group',
+                                     priority=base_config.TOPIC_GROUP_PRIORITY[0],
+                                     protected=base_config.IS_PROTECTED_ROOT_TOPIC_GROUP)
         db.session.add(topic_group)
         db.session.commit()
-
-    def is_protected(self):
-        return self.id in current_app.config['PROTECTED_TOPIC_GROUPS']
 
     def is_root_topic_group(self):
         return self.id == current_app.config['ROOT_TOPIC_GROUP']

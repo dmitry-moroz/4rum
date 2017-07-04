@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}4RUM - Create new topic group{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="profile-thumbnail" src="{{ url_for('static', filename='folder-add-icon.png') }}" width="40" height="40">
+    <div class="topic-group-title-header">
+        <h2>Create new topic group
+            {% if topic_group.is_root_topic_group() %}
+            on home page
+            {% else %}
+            in "{{ topic_group.title }}"
+            {% endif %}
+        </h2>
+    </div>
+</div>
+<div>
+    {{ wtf.quick_form(form, button_map={'submit':'success', 'cancel':'danger'}) }}
+</div>
+{% endblock %}

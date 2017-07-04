@@ -1,4 +1,4 @@
-from flask import url_for
+from flask import current_app
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField
 from wtforms import ValidationError
@@ -52,3 +52,15 @@ class TopicForm(FlaskForm):
     body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 20})
     submit = SubmitField('Submit')
     cancel = SubmitField('Cancel')
+
+
+class TopicGroupForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired(), Length(0, 64)])
+    priority = SelectField('Priority', coerce=int)
+    protected = BooleanField('Protected')
+    submit = SubmitField('Submit')
+    cancel = SubmitField('Cancel')
+
+    def __init__(self, *args, **kwargs):
+        super(TopicGroupForm, self).__init__(*args, **kwargs)
+        self.priority.choices = [(p, p) for p in current_app.config['TOPIC_GROUP_PRIORITY']]

@@ -22,7 +22,7 @@ class Config:
     TOPIC_GROUP_PRIORITY = range(1, 11)
     TOPICS_PER_PAGE = 20
     ROOT_TOPIC_GROUP = 0
-    PROTECTED_TOPIC_GROUPS = [ROOT_TOPIC_GROUP]
+    IS_PROTECTED_ROOT_TOPIC_GROUP = True
 
     @staticmethod
     def init_app(app):

@@ -1,10 +1,10 @@
-{% if (not topic_group.is_protected() and current_user.can(Permission.WRITE)) or not topic_group.is_root_topic_group() or current_user.is_moderator() %}
+{% if (not topic_group.protected and current_user.can(Permission.WRITE)) or not topic_group.is_root_topic_group() or current_user.is_moderator() %}
 <div class="create-buttons">
     <div style="float:right">
         {% if current_user.is_moderator() %}
-        <a class="btn btn-success" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">+Create topic group [Moderator]</a>
+        <a class="btn btn-success" href="{{ url_for('main.create_topic_group', topic_group_id=topic_group.id) }}">+Create topic group [Moderator]</a>
         {% endif %}
-        {% if not topic_group.is_protected() and current_user.can(Permission.WRITE) %}
+        {% if not topic_group.protected and current_user.can(Permission.WRITE) %}
         <a class="btn btn-success" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">+Create topic</a>
         {% elif current_user.is_moderator() %}
         <a class="btn btn-success" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">+Create topic [Moderator]</a>

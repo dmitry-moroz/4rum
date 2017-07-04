@@ -2,13 +2,13 @@ from flask import render_template, redirect, url_for, abort, flash, request, cur
 from flask_login import login_required, current_user
 
 from . import main
-from .forms import EditProfileForm, EditProfileAdminForm, TopicForm
+from .forms import EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm
 from .. import db
 from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup
 
 
-@main.route('/', methods=['GET', 'POST'])
+@main.route('/')
 def index():
     t_group = TopicGroup.query.get_or_404(current_app.config['ROOT_TOPIC_GROUP'])
     t_groups = t_group.topic_groups.order_by(TopicGroup.priority, TopicGroup.created_at.desc()).all()
@@ -24,9 +24,9 @@ def index():
 @permission_required(Permission.WRITE)
 def create_topic(topic_group_id):
     form = TopicForm()
-    if topic_group_id in current_app.config['PROTECTED_TOPIC_GROUPS'] and not current_user.is_moderator():
-        abort(403)
     t_group = TopicGroup.query.get_or_404(topic_group_id)
+    if t_group.protected and not current_user.is_moderator():
+        abort(403)
     if form.cancel.data:
         flash('Topic creation has been cancelled.')
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
@@ -49,6 +49,26 @@ def topic_group(topic_group_id):
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
     return render_template('topic_group.html', topic_group=t_group, topic_groups=t_groups,
                            topics=pagination.items, pagination=pagination)
+
+
+@main.route('/create_topic_group/<int:topic_group_id>', methods=['GET', 'POST'])
+@login_required
+@permission_required(Permission.MODERATE)
+def create_topic_group(topic_group_id):
+    form = TopicGroupForm()
+    t_group = TopicGroup.query.get_or_404(topic_group_id)
+    if form.cancel.data:
+        flash('Topic group creation has been cancelled.')
+        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
+    if form.submit.data and form.validate_on_submit():
+        if form.priority.data not in current_app.config['TOPIC_GROUP_PRIORITY']:
+            abort(404)
+        new_t_group = TopicGroup(title=form.title.data, priority=form.priority.data,
+                                 protected=form.protected.data, author=current_user._get_current_object(),
+                                 group=t_group)
+        db.session.add(new_t_group)
+        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
+    return render_template('create_topic_group.html', form=form, topic_group=t_group)
 
 
 @main.route('/user/<username>')
