@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import os
 
+from flask_dbshell import DbShell
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Shell
-from flask_dbshell import DbShell
 
 from app import create_app, db
 from app.models import User, Role, Permission, Topic, TopicGroup

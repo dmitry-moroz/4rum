@@ -10,43 +10,44 @@ from ..models import Permission, Role, User, Topic, TopicGroup
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    topic_groups = TopicGroup.query.filter_by(group_id=current_app.config['ROOT_TOPIC_GROUP']).order_by(
-        TopicGroup.priority, TopicGroup.created_at.desc()).all()
+    t_group = TopicGroup.query.get_or_404(current_app.config['ROOT_TOPIC_GROUP'])
+    t_groups = t_group.topic_groups.order_by(TopicGroup.priority, TopicGroup.created_at.desc()).all()
     page = request.args.get('page', 1, type=int)
-    pagination = Topic.query.filter_by(group_id=current_app.config['ROOT_TOPIC_GROUP']).order_by(
-        Topic.created_at.desc()).paginate(page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
-    return render_template('index.html', topic_group=topic_group, topic_groups=topic_groups,
+    pagination = t_group.topics.order_by(Topic.created_at.desc()).paginate(
+        page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+    return render_template('index.html', topic_group=t_group, topic_groups=t_groups,
                            topics=pagination.items, pagination=pagination)
 
 
-# TODO: Don't show 'create topic' button for read-only users
-@permission_required(Permission.WRITE)
 @main.route('/create_topic/<int:topic_group_id>', methods=['GET', 'POST'])
+@login_required
+@permission_required(Permission.WRITE)
 def create_topic(topic_group_id):
     form = TopicForm()
     if topic_group_id in current_app.config['PROTECTED_TOPIC_GROUPS'] and not current_user.is_moderator():
         abort(403)
-    if topic_group_id == current_app.config['ROOT_TOPIC_GROUP']:
-        topic_group = None
-    else:
-        topic_group = TopicGroup.query.get_or_404(topic_group_id)
-    if form.validate_on_submit():
-        topic = Topic(body=form.body.data, author=current_user._get_current_object(), group=topic_group)
+    t_group = TopicGroup.query.get_or_404(topic_group_id)
+    if form.cancel.data:
+        flash('Topic creation has been cancelled.')
+        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
+    if form.submit.data and form.validate_on_submit():
+        topic = Topic(title=form.title.data, body=form.body.data,
+                      author=current_user._get_current_object(), group=t_group)
         db.session.add(topic)
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
-    return render_template('create_topic.html', form=form, topic_group=topic_group)
+    return render_template('create_topic.html', form=form, topic_group=t_group)
 
 
 @main.route('/topic_group/<int:topic_group_id>')
 def topic_group(topic_group_id):
     if topic_group_id == current_app.config['ROOT_TOPIC_GROUP']:
         return redirect(url_for('main.index'))
-    topic_group = TopicGroup.query.get_or_404(topic_group_id)
-    topic_groups = topic_group.topic_groups.order_by(TopicGroup.priority, TopicGroup.created_at.desc()).all()
+    t_group = TopicGroup.query.get_or_404(topic_group_id)
+    t_groups = t_group.topic_groups.order_by(TopicGroup.priority, TopicGroup.created_at.desc()).all()
     page = request.args.get('page', 1, type=int)
-    pagination = topic_group.topics.order_by(Topic.created_at.desc()).paginate(
+    pagination = t_group.topics.order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
-    return render_template('topic_group.html', topic_group=topic_group, topic_groups=topic_groups,
+    return render_template('topic_group.html', topic_group=t_group, topic_groups=t_groups,
                            topics=pagination.items, pagination=pagination)
 
 

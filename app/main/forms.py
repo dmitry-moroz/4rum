@@ -1,13 +1,14 @@
+from flask import url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField
 from wtforms import ValidationError
-from wtforms.validators import Required, Length, Email, Regexp
+from wtforms.validators import DataRequired, Length, Email, Regexp
 
 from ..models import Role, User
 
 
 class NameForm(FlaskForm):
-    name = StringField('What is your name?', validators=[Required()])
+    name = StringField('What is your name?', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
@@ -20,11 +21,10 @@ class EditProfileForm(FlaskForm):
 
 
 class EditProfileAdminForm(FlaskForm):
-    email = StringField('Email', validators=[Required(), Length(1, 64), Email()])
+    email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
     username = StringField('Username', validators=[
-        Required(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
-                                          'Usernames must have only letters, '
-                                          'numbers, dots or underscores')])
+        DataRequired(), Length(1, 64),
+        Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0, 'Usernames must have only letters, numbers, dots or underscores')])
     confirmed = BooleanField('Confirmed')
     role = SelectField('Role', coerce=int)
     name = StringField('Real name', validators=[Length(0, 64)])
@@ -48,5 +48,7 @@ class EditProfileAdminForm(FlaskForm):
 
 
 class TopicForm(FlaskForm):
-    body = TextAreaField('What\'s on your mind?', validators=[Required()])
+    title = StringField('Title', validators=[DataRequired(), Length(0, 64)])
+    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 20})
     submit = SubmitField('Submit')
+    cancel = SubmitField('Cancel')

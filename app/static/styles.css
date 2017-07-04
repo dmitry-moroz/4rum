@@ -62,6 +62,10 @@ div.topic-group-content {
     min-height: 20px;
     font-weight: bold;
 }
-div.topic-group-title {
+div.topic-group-title-header {
     margin-left: 48px;
+}
+
+div.create-buttons {
+    min-height: 34px;
 }

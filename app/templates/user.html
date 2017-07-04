@@ -29,7 +29,7 @@
         </p>
         {% endif %}
         <p>
-            Member since: {{ moment(user.member_since).format('L') }}
+            Member since: {{ moment(user.created_at).format('L') }}
         </p>
         <p>
             Last seen: {{ moment(user.last_seen).fromNow() }}
@@ -39,10 +39,10 @@
         </p>
         <p>
             {% if user == current_user %}
-            <a class="btn btn-default" href="{{ url_for('main.edit_profile') }}">Edit Profile</a>
+            <a class="btn btn-default" href="{{ url_for('main.edit_profile') }}">Edit profile</a>
             {% endif %}
             {% if current_user.is_administrator() %}
-            <a class="btn btn-danger" href="{{ url_for('main.edit_profile_admin', user_id=user.id) }}">Edit Profile [Admin]</a>
+            <a class="btn btn-danger" href="{{ url_for('main.edit_profile_admin', user_id=user.id) }}">Edit profile [Admin]</a>
             {% endif %}
         </p>
     </div>

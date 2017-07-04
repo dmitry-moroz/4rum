@@ -10,7 +10,7 @@
         <div class="topic-content">
             <div class="topic-date">{{ moment(topic.created_at).fromNow() }}</div>
             <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
-            <div class="topic-body">{{ topic.body }}</div>
+            <div class="topic-title">{{ topic.title }}</div>
         </div>
     </li>
     {% endfor %}

@@ -17,6 +17,8 @@ login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 
 
+# TODO: Define text style for buttons
+# TODO: Edit index.html h1 header to get rid of "jumps" after topic_group.html
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])

@@ -6,6 +6,7 @@ from flask_login import UserMixin, AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from werkzeug.security import generate_password_hash, check_password_hash
 
+# TODO: remove base_config
 from config import base_config
 from . import db, login_manager
 
@@ -63,8 +64,8 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(64))
     homeland = db.Column(db.String(64))
     about = db.Column(db.Text)
-    # TODO: rename member_since -> created_at
-    member_since = db.Column(db.DateTime, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    # TODO: Add updated_at field
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     avatar = db.Column(db.String(256))
 
@@ -83,7 +84,7 @@ class User(UserMixin, db.Model):
                      name=forgery_py.name.full_name(),
                      homeland=forgery_py.address.city(),
                      about=forgery_py.lorem_ipsum.sentence(),
-                     member_since=forgery_py.date.date(True))
+                     created_at=forgery_py.date.date(True))
             db.session.add(u)
             try:
                 db.session.commit()
@@ -200,10 +201,11 @@ def load_user(user_id):
 class Topic(db.Model):
     __tablename__ = 'topics'
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(64))
     body = db.Column(db.Text)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), default=0)
+    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'))
 
     @staticmethod
     def generate_fake(count=100):
@@ -219,7 +221,8 @@ class Topic(db.Model):
                 g = TopicGroup.query.offset(randint(0, group_count - 1)).first()
             else:
                 g = None
-            p = Topic(body=forgery_py.lorem_ipsum.sentences(randint(1, 5)),
+            p = Topic(title=forgery_py.lorem_ipsum.sentence(),
+                      body=forgery_py.lorem_ipsum.sentences(randint(10, 20)),
                       created_at=forgery_py.date.date(True),
                       author=u,
                       group=g)
@@ -230,11 +233,11 @@ class Topic(db.Model):
 class TopicGroup(db.Model):
     __tablename__ = 'topic_groups'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64))
+    title = db.Column(db.String(64))
     priority = db.Column(db.Integer, default=base_config.TOPIC_GROUP_PRIORITY[-1])
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), default=0)
+    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'))
     topics = db.relationship('Topic', backref='group', lazy='dynamic')
     topic_groups = db.relationship('TopicGroup', backref=db.backref('group', remote_side=id), lazy='dynamic')
 
@@ -247,9 +250,23 @@ class TopicGroup(db.Model):
         user_count = User.query.count()
         for i in range(count):
             u = User.query.offset(randint(0, user_count - 1)).first()
-            g = TopicGroup(name=forgery_py.lorem_ipsum.sentence(),
+            g = TopicGroup(title=forgery_py.lorem_ipsum.sentence(),
                            priority=choice(base_config.TOPIC_GROUP_PRIORITY),
                            created_at=forgery_py.date.date(True),
                            author=u)
             db.session.add(g)
             db.session.commit()
+
+    @staticmethod
+    def insert_root_topic_group():
+        topic_group = TopicGroup(id=base_config.ROOT_TOPIC_GROUP,
+                                 title='root topic group',
+                                 priority=base_config.TOPIC_GROUP_PRIORITY[0])
+        db.session.add(topic_group)
+        db.session.commit()
+
+    def is_protected(self):
+        return self.id in current_app.config['PROTECTED_TOPIC_GROUPS']
+
+    def is_root_topic_group(self):
+        return self.id == current_app.config['ROOT_TOPIC_GROUP']

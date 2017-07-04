@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="topic-group-content">
-            <div class="topic-group-name"><a href="{{ url_for('main.topic_group', topic_group_id=topic_group.id) }}">{{ topic_group.name }}</a></div>
+            <div class="topic-group-title"><a href="{{ url_for('main.topic_group', topic_group_id=topic_group.id) }}">{{ topic_group.title }}</a></div>
         </div>
     </li>
     {% endfor %}
