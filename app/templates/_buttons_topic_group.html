@@ -1,5 +1,5 @@
 {% if (not topic_group.protected and current_user.can(Permission.WRITE)) or not topic_group.is_root_topic_group() or current_user.is_moderator() %}
-<div class="create-buttons">
+<div class="buttons-panel">
     <div style="float:right">
         {% if current_user.is_moderator() %}
         <a class="btn btn-success" href="{{ url_for('main.create_topic_group', topic_group_id=topic_group.id) }}">+Create topic group [Moderator]</a>

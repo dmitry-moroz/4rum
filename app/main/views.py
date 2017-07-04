@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, abort, flash, request, current_app
+from flask import render_template, redirect, url_for, abort, flash, request, current_app, session
 from flask_login import login_required, current_user
 
 from . import main
@@ -15,6 +15,7 @@ def index():
     page = request.args.get('page', 1, type=int)
     pagination = t_group.topics.order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+    session['back_url'] = request.url
     return render_template('index.html', topic_group=t_group, topic_groups=t_groups,
                            topics=pagination.items, pagination=pagination)
 
@@ -22,7 +23,8 @@ def index():
 @main.route('/topic/<int:topic_id>')
 def topic(topic_id):
     the_topic = Topic.query.get_or_404(topic_id)
-    return render_template('topic.html', topic=the_topic)
+    back_url = session.get('back_url', None)
+    return render_template('topic.html', topic=the_topic, back_url=back_url)
 
 
 @main.route('/create_topic/<int:topic_group_id>', methods=['GET', 'POST'])
@@ -55,6 +57,7 @@ def topic_group(topic_group_id):
     page = request.args.get('page', 1, type=int)
     pagination = t_group.topics.order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+    session['back_url'] = request.url
     return render_template('topic_group.html', topic_group=t_group, topic_groups=t_groups,
                            topics=pagination.items, pagination=pagination)
 
@@ -87,6 +90,7 @@ def user(username):
     page = request.args.get('page', 1, type=int)
     pagination = user.topics.order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+    session['back_url'] = request.url
     return render_template('user.html', user=user, topics=pagination.items, pagination=pagination)
 
 

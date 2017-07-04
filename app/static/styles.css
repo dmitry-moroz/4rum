@@ -67,7 +67,7 @@ div.topic-group-title-header {
     margin-left: 48px;
 }
 
-div.create-buttons {
+div.buttons-panel {
     min-height: 34px;
 }
 
@@ -77,6 +77,7 @@ div.topic-title-header {
 }
 div.topic-page {
     padding: 8px;
+    margin: 16px 0px 0px 0px;
     border-top: 4px solid #428BCA;
     border-bottom: 4px solid #428BCA;
 }
