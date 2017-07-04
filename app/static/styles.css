@@ -11,10 +11,10 @@ ul.topics {
     list-style-type: none;
     padding: 0px;
     margin: 16px 0px 0px 0px;
-    border-top: 1px solid #e0e0e0;
 }
 ul.topics li.topic {
     padding: 8px;
+    border-top: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
 }
 ul.topics li.topic:hover {
@@ -23,7 +23,7 @@ ul.topics li.topic:hover {
 div.topic-date {
     float: right;
 }
-div.topic-author {
+div.topic-title {
     font-weight: bold;
 }
 div.topic-thumbnail {
@@ -45,14 +45,15 @@ ul.topic-groups {
     list-style-type: none;
     padding: 0px;
     margin: 16px 0px 0px 0px;
-    border-top: 1px solid #e0e0e0;
 }
 ul.topic-groups li.topic-group {
     padding: 8px;
+    border-top: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
+    background-color: #f0f0f0;
 }
 ul.topic-groups li.topic-group:hover {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 div.topic-group-thumbnail {
     position: absolute;
@@ -68,4 +69,18 @@ div.topic-group-title-header {
 
 div.create-buttons {
     min-height: 34px;
+}
+
+
+div.topic-title-header {
+    margin-left: 48px;
+}
+div.topic-page {
+    padding: 8px;
+    border-top: 4px solid #428BCA;
+    border-bottom: 4px solid #428BCA;
+}
+div.topic-page-content {
+    margin-left: 56px;
+    min-height: 100px;
 }

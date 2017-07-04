@@ -1,7 +1,7 @@
 {% if topic_groups %}
 <ul class="topic-groups">
     {% for topic_group in topic_groups %}
-    <li class="topic-group">
+    <li class="topic-group img-rounded">
         <div class="topic-group-thumbnail">
             <a href="{{ url_for('main.topic_group', topic_group_id=topic_group.id) }}">
                 <img class="profile-thumbnail" src="{{ url_for('static', filename='folder-icon.png') }}" width="20" height="20">

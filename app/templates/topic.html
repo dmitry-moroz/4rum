@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}4RUM - {{ topic.title }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="profile-thumbnail" src="{{ url_for('static', filename='speech-icon.png') }}" width="40" height="40">
+    <div class="topic-title-header">
+        <h2>{{ topic.title }}</h2>
+    </div>
+</div>
+
+<div class="topic-page img-rounded">
+    <div class="topic-thumbnail">
+        <a href="{{ url_for('main.user', username=topic.author.username) }}">
+            <img class="img-rounded profile-thumbnail" src="{{ topic.author.avatar }}" width="40" height="40">
+        </a>
+    </div>
+    <div class="topic-page-content">
+        <div class="topic-date">Created: {{ moment(topic.created_at).fromNow() }}</div>
+        <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
+        {% if topic.author.name %}
+        <div class="topic-author">{{ topic.author.name }}</div>
+        {% else %}
+        <br>
+        {% endif %}
+        <br>
+        <div class="topic-body">{{ topic.body }}</div>
+        <br>
+    </div>
+</div>
+
+<div class="page-header">
+    <img class="profile-thumbnail" src="{{ url_for('static', filename='comments-icon.png') }}" width="40" height="40">
+    <div class="topic-title-header">
+        <h2>Comments:</h2>
+    </div>
+</div>
+{% endblock %}

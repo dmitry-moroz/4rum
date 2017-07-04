@@ -1,7 +1,7 @@
 {% if topics %}
 <ul class="topics">
     {% for topic in topics %}
-    <li class="topic">
+    <li class="topic img-rounded">
         <div class="topic-thumbnail">
             <a href="{{ url_for('main.user', username=topic.author.username) }}">
                 <img class="img-rounded profile-thumbnail" src="{{ topic.author.avatar }}" width="40" height="40">
@@ -10,7 +10,7 @@
         <div class="topic-content">
             <div class="topic-date">{{ moment(topic.created_at).fromNow() }}</div>
             <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
-            <div class="topic-title">{{ topic.title }}</div>
+            <div class="topic-title"><a href="{{ url_for('main.topic', topic_id=topic.id) }}">{{ topic.title }}</a></div>
         </div>
     </li>
     {% endfor %}

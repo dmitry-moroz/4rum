@@ -19,6 +19,12 @@ def index():
                            topics=pagination.items, pagination=pagination)
 
 
+@main.route('/topic/<int:topic_id>')
+def topic(topic_id):
+    the_topic = Topic.query.get_or_404(topic_id)
+    return render_template('topic.html', topic=the_topic)
+
+
 @main.route('/create_topic/<int:topic_group_id>', methods=['GET', 'POST'])
 @login_required
 @permission_required(Permission.WRITE)
@@ -31,10 +37,12 @@ def create_topic(topic_group_id):
         flash('Topic creation has been cancelled.')
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
     if form.submit.data and form.validate_on_submit():
-        topic = Topic(title=form.title.data, body=form.body.data,
-                      author=current_user._get_current_object(), group=t_group)
-        db.session.add(topic)
-        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
+        new_topic = Topic(title=form.title.data, body=form.body.data,
+                          author=current_user._get_current_object(), group=t_group)
+        db.session.add(new_topic)
+        db.session.commit()
+        flash('Topic has been created.')
+        return redirect(url_for('main.topic', topic_id=new_topic.id))
     return render_template('create_topic.html', form=form, topic_group=t_group)
 
 
@@ -67,7 +75,9 @@ def create_topic_group(topic_group_id):
                                  protected=form.protected.data, author=current_user._get_current_object(),
                                  group=t_group)
         db.session.add(new_t_group)
-        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
+        db.session.commit()
+        flash('Topic group has been created.')
+        return redirect(url_for('main.topic_group', topic_group_id=new_t_group.id))
     return render_template('create_topic_group.html', form=form, topic_group=t_group)
 
 
