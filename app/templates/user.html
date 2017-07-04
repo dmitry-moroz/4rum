@@ -29,7 +29,7 @@
         </p>
         {% endif %}
         <p>
-            Member since: {{ moment(user.created_at).format('L') }}
+            Member since: {{ moment(user.created_at).format('D MMMM YYYY') }}
         </p>
         <p>
             Last seen: {{ moment(user.last_seen).fromNow() }}
@@ -47,7 +47,7 @@
         </p>
     </div>
 </div>
-<h3>Topics by {{ user.username }}</h3>
+<h3>Topics by {{ user.username }}:</h3>
 {% include '_topics.html' %}
 {% if pagination %}
 <div class="pagination">

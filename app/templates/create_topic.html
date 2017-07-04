@@ -19,4 +19,9 @@
 <div>
     {{ wtf.quick_form(form, button_map={'submit':'success', 'cancel':'danger'}) }}
 </div>
+<br>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
 {% endblock %}

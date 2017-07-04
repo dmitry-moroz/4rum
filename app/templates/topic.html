@@ -18,7 +18,7 @@
         </a>
     </div>
     <div class="topic-page-content">
-        <div class="topic-date">Created: {{ moment(topic.created_at).fromNow() }}</div>
+        <div class="topic-date">Created: {{ moment(topic.created_at).format('D MMMM YYYY, H:mm:ss') }}</div>
         <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
         {% if topic.author.name %}
         <div class="topic-author">{{ topic.author.name }}</div>
@@ -26,7 +26,13 @@
         <br>
         {% endif %}
         <br>
-        <div class="topic-body">{{ topic.body }}</div>
+        <div class="topic-body">
+            {% if topic.body_html %}
+                {{ topic.body_html | safe }}
+            {% else %}
+                {{ topic.body }}
+            {% endif %}
+        </div>
         <br>
     </div>
 </div>
