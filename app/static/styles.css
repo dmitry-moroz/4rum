@@ -18,7 +18,7 @@ div.non-responsive {
 }
 
 /* CSS for index page */
-div.main-title-header {
+div.main-header {
     margin-left: 48px;
 }
 .common-thumbnail {
@@ -91,7 +91,7 @@ div.topic-group-content {
     min-height: 20px;
     font-weight: bold;
 }
-div.topic-group-title-header {
+div.topic-group-header {
     margin-left: 48px;
 }
 
@@ -104,20 +104,25 @@ div.right-buttons {
 }
 
 /* CSS for topic page */
-div.topic-title-header {
+div.topic-page-header {
     margin-left: 48px;
 }
 div.topic-page {
-    padding: 8px;
     margin: 16px 0px 0px 0px;
     border-top: 4px solid #428BCA;
     border-bottom: 4px solid #428BCA;
 }
-div.topic-page-content {
-    margin-left: 56px;
-    min-height: 100px;
+div.topic-page-title {
+    padding: 16px;
+    border-bottom: 1px solid #428BCA;
 }
-div.topic-body {
+div.topic-page-meta {
+    margin-left: 56px;
+}
+div.topic-page-content {
+    padding: 16px;
+    min-height: 100px;
+    overflow-x: auto;
 }
 
 /* CSS for markdown text support */
@@ -136,12 +141,12 @@ div.flask-pagedown-preview h2 {
 div.flask-pagedown-preview h3 {
     font-size: 120%;
 }
-.topic-body h1 {
+.topic-page-content h1 {
     font-size: 140%;
 }
-.topic-body h2 {
+.topic-page-content h2 {
     font-size: 130%;
 }
-.topic-body h3 {
+.topic-page-content h3 {
     font-size: 120%;
 }

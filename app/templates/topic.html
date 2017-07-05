@@ -5,41 +5,47 @@
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='speech-icon.png') }}" width="40" height="40">
-    <div class="topic-title-header">
+    <div class="topic-page-header">
         <h2>{{ topic.title }}</h2>
     </div>
 </div>
 {% include '_buttons_topic.html' %}
 
 <div class="topic-page img-rounded">
-    <div class="topic-thumbnail">
-        <a href="{{ url_for('main.user', username=topic.author.username) }}">
-            <img class="img-rounded common-thumbnail" src="{{ topic.author.avatar }}" width="40" height="40">
-        </a>
-    </div>
-    <div class="topic-page-content">
-        <div class="topic-date">Created: {{ moment(topic.created_at).format('D MMMM YYYY, H:mm:ss') }}</div>
-        <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
-        {% if topic.author.name %}
-        <div class="topic-author">{{ topic.author.name }}</div>
-        {% else %}
-        <br>
-        {% endif %}
-        <br>
-        <div class="topic-body">
-            {% if topic.body_html %}
-                {{ topic.body_html | safe }}
+
+    <div class="topic-page-title">
+
+        <div class="topic-thumbnail">
+            <a href="{{ url_for('main.user', username=topic.author.username) }}">
+                <img class="img-rounded common-thumbnail" src="{{ topic.author.avatar }}" width="40" height="40">
+            </a>
+        </div>
+
+        <div class="topic-page-meta">
+            <div class="topic-date">Created: {{ moment(topic.created_at).format('D MMMM YYYY, H:mm:ss') }}</div>
+            <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
+            {% if topic.author.name %}
+            <div class="topic-author">{{ topic.author.name }}</div>
             {% else %}
-                {{ topic.body }}
+            <br>
             {% endif %}
         </div>
-        <br>
+
     </div>
+
+    <div class="topic-page-content">
+        {% if topic.body_html %}
+            {{ topic.body_html | safe }}
+        {% else %}
+            {{ topic.body }}
+        {% endif %}
+    </div>
+
 </div>
 
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='comments-icon.png') }}" width="40" height="40">
-    <div class="topic-title-header">
+    <div class="topic-page-header">
         <h2>Comments:</h2>
     </div>
 </div>
