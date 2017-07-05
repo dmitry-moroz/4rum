@@ -1,6 +1,8 @@
 /* Fix for jumping scrollbar issue */
 html {
-    margin-left: calc(100vw - 100%);
+    /*margin-left: calc(100vw - 100%);
+    margin-right: 0;*/
+    overflow-y: scroll;
 }
 
 /* CSS to disable mobile version of the site */
@@ -24,7 +26,7 @@ div.main-title-header {
     object-fit: cover;
 }
 .navbar-profile-thumbnail {
-    position:static;
+    position: static;
     object-fit: cover;
 }
 
