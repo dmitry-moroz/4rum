@@ -5,7 +5,7 @@
 
 {% block page_content %}
 <div class="page-header">
-    <img class="profile-thumbnail" src="{{ url_for('static', filename='folder-add-icon.png') }}" width="40" height="40">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='folder-add-icon.png') }}" width="40" height="40">
     <div class="topic-group-title-header">
         <h2>Create new topic group
             {% if topic_group.is_root_topic_group() %}

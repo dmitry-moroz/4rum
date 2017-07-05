@@ -4,7 +4,7 @@
 
 {% block page_content %}
 <div class="page-header">
-    <img class="profile-thumbnail" src="{{ url_for('static', filename='speech-icon.png') }}" width="40" height="40">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='speech-icon.png') }}" width="40" height="40">
     <div class="topic-title-header">
         <h2>{{ topic.title }}</h2>
     </div>
@@ -14,7 +14,7 @@
 <div class="topic-page img-rounded">
     <div class="topic-thumbnail">
         <a href="{{ url_for('main.user', username=topic.author.username) }}">
-            <img class="img-rounded profile-thumbnail" src="{{ topic.author.avatar }}" width="40" height="40">
+            <img class="img-rounded common-thumbnail" src="{{ topic.author.avatar }}" width="40" height="40">
         </a>
     </div>
     <div class="topic-page-content">
@@ -38,7 +38,7 @@
 </div>
 
 <div class="page-header">
-    <img class="profile-thumbnail" src="{{ url_for('static', filename='comments-icon.png') }}" width="40" height="40">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='comments-icon.png') }}" width="40" height="40">
     <div class="topic-title-header">
         <h2>Comments:</h2>
     </div>

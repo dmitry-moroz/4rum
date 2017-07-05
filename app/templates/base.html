@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
+<div class="navbar navbar-inverse non-responsive" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -28,9 +28,9 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <img class="img-rounded profile-thumbnail" src="{{ current_user.avatar }}"
-                           width="18" height="18" style="position:static">
+                  <a href="#" class="dropdown-toggle " data-toggle="dropdown">
+                      <img class="img-rounded navbar-profile-thumbnail" src="{{ current_user.avatar }}"
+                           width="18" height="18">
                       Account <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">

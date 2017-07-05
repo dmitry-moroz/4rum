@@ -1,12 +1,34 @@
-.profile-thumbnail {
-    position: absolute;
-    object-fit: cover;
+/* Fix for jumping scrollbar issue */
+html {
+    margin-left: calc(100vw - 100%);
 }
+
+/* CSS to disable mobile version of the site */
+/* TODO: check this fix with mobile device */
+div.non-responsive {
+    min-width: 1170px;
+}
+
+/* CSS for account profile */
 .profile-header {
     min-height: 260px;
     margin-left: 280px;
 }
 
+/* CSS for index page */
+div.main-title-header {
+    margin-left: 48px;
+}
+.common-thumbnail {
+    position: absolute;
+    object-fit: cover;
+}
+.navbar-profile-thumbnail {
+    position:static;
+    object-fit: cover;
+}
+
+/* CSS for topics list */
 ul.topics {
     list-style-type: none;
     padding: 0px;
@@ -23,6 +45,8 @@ ul.topics li.topic:hover {
 div.topic-date {
     float: right;
 }
+div.topic-author {
+}
 div.topic-title {
     font-weight: bold;
 }
@@ -34,6 +58,7 @@ div.topic-content {
     min-height: 48px;
 }
 
+/* CSS for pagination */
 div.pagination {
     width: 100%;
     text-align: right;
@@ -41,6 +66,7 @@ div.pagination {
     margin: 0px;
 }
 
+/* CSS for topic group page and topic groups list */
 ul.topic-groups {
     list-style-type: none;
     padding: 0px;
@@ -67,11 +93,15 @@ div.topic-group-title-header {
     margin-left: 48px;
 }
 
+/* CSS for button panels */
 div.buttons-panel {
     min-height: 34px;
 }
+div.right-buttons {
+    float: right;
+}
 
-
+/* CSS for topic page */
 div.topic-title-header {
     margin-left: 48px;
 }
@@ -88,6 +118,7 @@ div.topic-page-content {
 div.topic-body {
 }
 
+/* CSS for markdown text support */
 div.flask-pagedown-preview {
     margin: 10px 0px 10px 0px;
     border: 1px solid #e0e0e0;

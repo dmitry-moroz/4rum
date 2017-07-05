@@ -1,5 +1,5 @@
 <div class="buttons-panel">
-    <div style="float:right">
+    <div class="right-buttons">
         {% if current_user.id==topic.author_id and current_user.can(Permission.WRITE) %}
         <a class="btn btn-warning" href="#">Edit</a>
         {% elif current_user.is_moderator() %}
