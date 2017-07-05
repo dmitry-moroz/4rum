@@ -22,19 +22,19 @@ def index():
 
 @main.route('/topic/<int:topic_id>')
 def topic(topic_id):
-    the_topic = Topic.query.get_or_404(topic_id)
+    tpc = Topic.query.get_or_404(topic_id)
     back_url = session.get('back_url', None)
-    return render_template('topic.html', topic=the_topic, back_url=back_url)
+    return render_template('topic.html', topic=tpc, back_url=back_url)
 
 
 @main.route('/create_topic/<int:topic_group_id>', methods=['GET', 'POST'])
 @login_required
 @permission_required(Permission.WRITE)
 def create_topic(topic_group_id):
-    form = TopicForm()
     t_group = TopicGroup.query.get_or_404(topic_group_id)
     if t_group.protected and not current_user.is_moderator():
         abort(403)
+    form = TopicForm()
     if form.cancel.data:
         flash('Topic creation has been cancelled.')
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
@@ -46,6 +46,28 @@ def create_topic(topic_group_id):
         flash('Topic has been created.')
         return redirect(url_for('main.topic', topic_id=new_topic.id))
     return render_template('create_topic.html', form=form, topic_group=t_group)
+
+
+@main.route('/edit/<int:topic_id>', methods=['GET', 'POST'])
+@login_required
+@permission_required(Permission.WRITE)
+def edit_topic(topic_id):
+    tpc = Topic.query.get_or_404(topic_id)
+    if current_user != tpc.author and not current_user.is_moderator():
+        abort(403)
+    form = TopicForm()
+    if form.cancel.data:
+        flash('Topic editing has been cancelled.')
+        return redirect(url_for('main.topic', topic_id=tpc.id))
+    if form.submit.data and form.validate_on_submit():
+        tpc.title = form.title.data
+        tpc.body = form.body.data
+        db.session.add(tpc)
+        flash('The topic has been updated.')
+        return redirect(url_for('main.topic', topic_id=tpc.id))
+    form.title.data = tpc.title
+    form.body.data = tpc.body
+    return render_template('edit_topic.html', form=form, topic=tpc)
 
 
 @main.route('/topic_group/<int:topic_group_id>')
@@ -66,8 +88,8 @@ def topic_group(topic_group_id):
 @login_required
 @permission_required(Permission.MODERATE)
 def create_topic_group(topic_group_id):
-    form = TopicGroupForm()
     t_group = TopicGroup.query.get_or_404(topic_group_id)
+    form = TopicGroupForm()
     if form.cancel.data:
         flash('Topic group creation has been cancelled.')
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
@@ -96,6 +118,7 @@ def user(username):
 
 @main.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
+@permission_required(Permission.WRITE)
 def edit_profile():
     form = EditProfileForm()
     if form.validate_on_submit():

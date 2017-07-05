@@ -22,7 +22,7 @@
         </div>
 
         <div class="topic-page-meta">
-            <div class="topic-date">Created: {{ moment(topic.created_at).format('D MMMM YYYY, H:mm:ss') }}</div>
+            <div class="topic-date">Created: {{ moment(topic.created_at).format('D MMMM YYYY, H:mm') }}</div>
             <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
             {% if topic.author.name %}
             <div class="topic-author">{{ topic.author.name }}</div>

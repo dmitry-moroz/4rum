@@ -46,6 +46,7 @@ ul.topics li.topic:hover {
 }
 div.topic-date {
     float: right;
+    font-size: small;
 }
 div.topic-author {
 }
