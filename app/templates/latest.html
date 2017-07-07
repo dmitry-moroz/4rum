@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}4RUM - Latest topics{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='timer-icon.png') }}" width="40" height="40">
+    <div class="main-header">
+        <h2>Latest topics</h2>
+    </div>
+</div>
+<div class="buttons-panel">
+    <a class="btn btn-primary"
+        {% if session['back_url'] %}
+        href="{{ session['back_url'] }}"
+        {% else %}
+        href="{{ url_for('main.index') }}"
+        {% endif %}
+    >&#8617;Back</a>
+</div>
+{% include '_topics.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, 'main.latest') }}
+</div>
+{% endif %}
+{% endblock %}

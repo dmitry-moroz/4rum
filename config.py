@@ -24,17 +24,13 @@ class Config:
     ROOT_TOPIC_GROUP = 0
     IS_PROTECTED_ROOT_TOPIC_GROUP = True
 
-    # TODO: Remove this functionality
-    MAX_WORD_LENGTH_FOR_TOPIC = 60
-    RAISE_ON_WORD_LENGTH_EXCEEDED = True
-
     @staticmethod
     def init_app(app):
         pass
 
 
 class DevelopmentConfig(Config):
-    DEBUG = False
+    DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     TESTING = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL',

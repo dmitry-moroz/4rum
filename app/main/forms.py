@@ -54,18 +54,6 @@ class TopicForm(FlaskForm):
     submit = SubmitField('Submit')
     cancel = SubmitField('Cancel')
 
-    def validate_body(self, field):
-        max_len = current_app.config['MAX_WORD_LENGTH_FOR_TOPIC']
-        parts = field.data.split(' ')
-        for part in parts:
-            if len(part) > max_len:
-                if current_app.config['RAISE_ON_WORD_LENGTH_EXCEEDED']:
-                    raise ValidationError('Maximum word length for topic exceeded [{0}].'.format(max_len))
-                new_subparts = [part[n * max_len: n * max_len + max_len] for n in xrange(len(part) // max_len)]
-                new_subparts.append(part[len(part) // max_len * max_len:])
-                new_part = ' '.join(new_subparts)
-                field.data = field.data.replace(part, new_part)
-
 
 class TopicGroupForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(0, 64)])

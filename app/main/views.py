@@ -8,6 +8,13 @@ from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup
 
 
+# TODO: Make common template for Back button
+@main.after_request
+def after_request(response):
+    session['back_url'] = request.url
+    return response
+
+
 @main.route('/')
 def index():
     t_group = TopicGroup.query.get_or_404(current_app.config['ROOT_TOPIC_GROUP'])
@@ -15,7 +22,6 @@ def index():
     page = request.args.get('page', 1, type=int)
     pagination = t_group.topics.order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
-    session['back_url'] = request.url
     return render_template('index.html', topic_group=t_group, topic_groups=t_groups,
                            topics=pagination.items, pagination=pagination)
 
@@ -23,8 +29,7 @@ def index():
 @main.route('/topic/<int:topic_id>')
 def topic(topic_id):
     tpc = Topic.query.get_or_404(topic_id)
-    back_url = session.get('back_url', None)
-    return render_template('topic.html', topic=tpc, back_url=back_url)
+    return render_template('topic.html', topic=tpc)
 
 
 @main.route('/create_topic/<int:topic_group_id>', methods=['GET', 'POST'])
@@ -79,7 +84,6 @@ def topic_group(topic_group_id):
     page = request.args.get('page', 1, type=int)
     pagination = t_group.topics.order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
-    session['back_url'] = request.url
     return render_template('topic_group.html', topic_group=t_group, topic_groups=t_groups,
                            topics=pagination.items, pagination=pagination)
 
@@ -112,7 +116,6 @@ def user(username):
     page = request.args.get('page', 1, type=int)
     pagination = user.topics.order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
-    session['back_url'] = request.url
     return render_template('user.html', user=user, topics=pagination.items, pagination=pagination)
 
 
@@ -163,3 +166,11 @@ def edit_profile_admin(user_id):
     form.about.data = user.about
     form.avatar.data = user.avatar
     return render_template('edit_profile.html', form=form, user=user)
+
+
+@main.route('/latest')
+def latest():
+    page = request.args.get('page', 1, type=int)
+    pagination = Topic.query.order_by(Topic.created_at.desc()).paginate(
+        page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+    return render_template('latest.html', topics=pagination.items, pagination=pagination)

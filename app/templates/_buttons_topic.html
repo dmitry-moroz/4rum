@@ -8,8 +8,8 @@
     </div>
     <div>
         <a class="btn btn-primary"
-            {% if back_url %}
-            href="{{ back_url }}"
+            {% if session['back_url'] %}
+            href="{{ session['back_url'] }}"
             {% else %}
             href="{{ url_for('main.topic_group', topic_group_id=topic.group_id) }}"
             {% endif %}
