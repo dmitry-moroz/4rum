@@ -1,5 +1,4 @@
 from flask import current_app
-from flask_pagedown.fields import PageDownField
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField
 from wtforms import ValidationError
@@ -50,7 +49,7 @@ class EditProfileAdminForm(FlaskForm):
 
 class TopicForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(0, 64)])
-    body = PageDownField('Text', validators=[DataRequired()], render_kw={'rows': 20})
+    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 20})
     submit = SubmitField('Submit')
     cancel = SubmitField('Cancel')
 

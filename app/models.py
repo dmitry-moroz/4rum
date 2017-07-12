@@ -6,6 +6,7 @@ from flask import current_app
 from flask_login import UserMixin, AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from markdown import markdown
+from markdown.extensions.tables import TableExtension
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # TODO: remove base_config
@@ -235,11 +236,8 @@ class Topic(db.Model):
 
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
-        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
-                        'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-                        'h1', 'h2', 'h3', 'p']
-        html = markdown(value, output_format='html')
-        clean_html = bleach.clean(html, tags=allowed_tags, strip=True)
+        html = markdown(value, extensions=[TableExtension()], output_format='html')
+        clean_html = bleach.clean(html, tags=current_app.config['TOPIC_ALLOWED_TAGS'], strip=True)
         target.body_html = bleach.linkify(clean_html)
 
 

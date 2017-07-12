@@ -129,11 +129,13 @@ div.topic-page-content {
 }
 
 /* CSS for markdown text support */
+/*
 div.flask-pagedown-preview {
     margin: 10px 0px 10px 0px;
     border: 1px solid #e0e0e0;
     padding: 4px;
     border-radius: 4px;
+    overflow-x: auto;
 }
 div.flask-pagedown-preview h1 {
     font-size: 140%;
@@ -144,6 +146,9 @@ div.flask-pagedown-preview h2 {
 div.flask-pagedown-preview h3 {
     font-size: 120%;
 }
+*/
+
+/* CSS for topic body */
 .topic-page-content h1 {
     font-size: 140%;
 }
@@ -152,4 +157,18 @@ div.flask-pagedown-preview h3 {
 }
 .topic-page-content h3 {
     font-size: 120%;
+}
+.topic-page-content table {
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+.topic-page-content th {
+    background: #ccc;
+    padding: 4px;
+    border: 1px solid;
+}
+.topic-page-content td {
+    padding: 4px;
+    border: 1px solid;
 }

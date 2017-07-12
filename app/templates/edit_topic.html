@@ -3,6 +3,12 @@
 
 {% block title %}4RUM - Edit topic{% endblock %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='simplemde.min.css') }}">
+<script src="{{ url_for('static', filename='simplemde.min.js') }}"></script>
+{% endblock %}
+
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='pen-icon.png') }}" width="40" height="40">
@@ -21,7 +27,10 @@
 </div>
 <br>
 {% endblock %}
+
 {% block scripts %}
 {{ super() }}
-{{ pagedown.include_pagedown() }}
+<script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("body") });
+</script>
 {% endblock %}
