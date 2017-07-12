@@ -38,6 +38,7 @@ ul.topics {
 }
 ul.topics li.topic {
     padding: 8px;
+    margin: -1px 0px 0px 0px;
     border-top: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
 }
@@ -77,6 +78,7 @@ ul.topic-groups {
 }
 ul.topic-groups li.topic-group {
     padding: 8px;
+    margin: -1px 0px 0px 0px;
     border-top: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
     background-color: #f0f0f0;

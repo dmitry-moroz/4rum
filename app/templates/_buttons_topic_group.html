@@ -2,17 +2,17 @@
 <div class="buttons-panel">
     <div class="right-buttons">
         {% if current_user.is_moderator() %}
-        <a class="btn btn-success" href="{{ url_for('main.create_topic_group', topic_group_id=topic_group.id) }}">+Create topic group [Moderator]</a>
+        <a class="btn btn-success" href="{{ url_for('main.create_topic_group', topic_group_id=topic_group.id) }}">&oplus;Create topic group [Moderator]</a>
         {% endif %}
         {% if not topic_group.protected and current_user.can(Permission.WRITE) %}
-        <a class="btn btn-success" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">+Create topic</a>
+        <a class="btn btn-success" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">&oplus;Create topic</a>
         {% elif current_user.is_moderator() %}
-        <a class="btn btn-success" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">+Create topic [Moderator]</a>
+        <a class="btn btn-success" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">&oplus;Create topic [Moderator]</a>
         {% endif %}
     </div>
     {% if not topic_group.is_root_topic_group() %}
     <div>
-        <a class="btn btn-primary" href="{{ url_for('main.topic_group', topic_group_id=topic_group.group_id) }}">&#8617;Back</a>
+        <a class="btn btn-primary" href="{{ url_for('main.topic_group', topic_group_id=topic_group.group_id) }}">&uArr;Up</a>
     </div>
     {% endif %}
 </div>

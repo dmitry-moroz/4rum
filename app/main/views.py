@@ -8,11 +8,11 @@ from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup
 
 
-# TODO: Make common template for Back button
-@main.after_request
-def after_request(response):
-    session['back_url'] = request.url
-    return response
+# TODO: Make common template for Back/Up button
+# @main.after_request
+# def after_request(response):
+#     session['back_url'] = request.url
+#     return response
 
 
 @main.route('/')
