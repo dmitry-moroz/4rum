@@ -209,6 +209,7 @@ class Topic(db.Model):
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'))
+    deleted = db.Column(db.Boolean, index=True, default=False)
 
     @staticmethod
     def generate_fake(count=100):

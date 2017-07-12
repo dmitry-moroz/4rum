@@ -55,6 +55,10 @@ class TopicForm(FlaskForm):
     cancel = SubmitField('Cancel')
 
 
+class TopicFormEdit(TopicForm):
+    delete = SubmitField('Delete')
+
+
 class TopicGroupForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired(), Length(0, 64)])
     priority = SelectField('Priority', coerce=int)

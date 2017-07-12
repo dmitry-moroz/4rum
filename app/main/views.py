@@ -1,18 +1,14 @@
-from flask import render_template, redirect, url_for, abort, flash, request, current_app, session
+from flask import render_template, redirect, url_for, abort, flash, request, current_app
 from flask_login import login_required, current_user
 
 from . import main
-from .forms import EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm
+from .forms import EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicFormEdit
 from .. import db
 from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup
 
 
-# TODO: Make common template for Back/Up button
-# @main.after_request
-# def after_request(response):
-#     session['back_url'] = request.url
-#     return response
+# TODO: Make common template for Up button?
 
 
 @main.route('/')
@@ -20,7 +16,7 @@ def index():
     t_group = TopicGroup.query.get_or_404(current_app.config['ROOT_TOPIC_GROUP'])
     t_groups = t_group.topic_groups.order_by(TopicGroup.priority, TopicGroup.created_at.desc()).all()
     page = request.args.get('page', 1, type=int)
-    pagination = t_group.topics.order_by(Topic.created_at.desc()).paginate(
+    pagination = t_group.topics.filter_by(deleted=False).order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
     return render_template('index.html', topic_group=t_group, topic_groups=t_groups,
                            topics=pagination.items, pagination=pagination)
@@ -28,7 +24,7 @@ def index():
 
 @main.route('/topic/<int:topic_id>')
 def topic(topic_id):
-    tpc = Topic.query.get_or_404(topic_id)
+    tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
     return render_template('topic.html', topic=tpc)
 
 
@@ -40,9 +36,6 @@ def create_topic(topic_group_id):
     if t_group.protected and not current_user.is_moderator():
         abort(403)
     form = TopicForm()
-    if form.cancel.data:
-        flash('Topic creation has been cancelled.')
-        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
     if form.submit.data and form.validate_on_submit():
         new_topic = Topic(title=form.title.data, body=form.body.data,
                           author=current_user._get_current_object(), group=t_group)
@@ -50,6 +43,9 @@ def create_topic(topic_group_id):
         db.session.commit()
         flash('Topic has been created.')
         return redirect(url_for('main.topic', topic_id=new_topic.id))
+    elif form.cancel.data:
+        flash('Topic creation has been cancelled.')
+        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
     return render_template('create_topic.html', form=form, topic_group=t_group)
 
 
@@ -57,19 +53,24 @@ def create_topic(topic_group_id):
 @login_required
 @permission_required(Permission.WRITE)
 def edit_topic(topic_id):
-    tpc = Topic.query.get_or_404(topic_id)
+    tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
     if current_user != tpc.author and not current_user.is_moderator():
         abort(403)
-    form = TopicForm()
-    if form.cancel.data:
-        flash('Topic editing has been cancelled.')
-        return redirect(url_for('main.topic', topic_id=tpc.id))
+    form = TopicFormEdit()
     if form.submit.data and form.validate_on_submit():
         tpc.title = form.title.data
         tpc.body = form.body.data
         db.session.add(tpc)
         flash('The topic has been updated.')
         return redirect(url_for('main.topic', topic_id=tpc.id))
+    elif form.cancel.data:
+        flash('Topic editing has been cancelled.')
+        return redirect(url_for('main.topic', topic_id=tpc.id))
+    elif form.delete.data:
+        tpc.deleted = True
+        db.session.add(tpc)
+        flash('The topic has been deleted.')
+        return redirect(url_for('main.topic_group', topic_group_id=tpc.group_id))
     form.title.data = tpc.title
     form.body.data = tpc.body
     return render_template('edit_topic.html', form=form, topic=tpc)
@@ -82,7 +83,7 @@ def topic_group(topic_group_id):
     t_group = TopicGroup.query.get_or_404(topic_group_id)
     t_groups = t_group.topic_groups.order_by(TopicGroup.priority, TopicGroup.created_at.desc()).all()
     page = request.args.get('page', 1, type=int)
-    pagination = t_group.topics.order_by(Topic.created_at.desc()).paginate(
+    pagination = t_group.topics.filter_by(deleted=False).order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
     return render_template('topic_group.html', topic_group=t_group, topic_groups=t_groups,
                            topics=pagination.items, pagination=pagination)
@@ -94,9 +95,6 @@ def topic_group(topic_group_id):
 def create_topic_group(topic_group_id):
     t_group = TopicGroup.query.get_or_404(topic_group_id)
     form = TopicGroupForm()
-    if form.cancel.data:
-        flash('Topic group creation has been cancelled.')
-        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
     if form.submit.data and form.validate_on_submit():
         if form.priority.data not in current_app.config['TOPIC_GROUP_PRIORITY']:
             abort(404)
@@ -107,6 +105,9 @@ def create_topic_group(topic_group_id):
         db.session.commit()
         flash('Topic group has been created.')
         return redirect(url_for('main.topic_group', topic_group_id=new_t_group.id))
+    elif form.cancel.data:
+        flash('Topic group creation has been cancelled.')
+        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
     return render_template('create_topic_group.html', form=form, topic_group=t_group)
 
 
@@ -114,7 +115,7 @@ def create_topic_group(topic_group_id):
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
-    pagination = user.topics.order_by(Topic.created_at.desc()).paginate(
+    pagination = user.topics.filter_by(deleted=False).order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
     return render_template('user.html', user=user, topics=pagination.items, pagination=pagination)
 
@@ -171,6 +172,6 @@ def edit_profile_admin(user_id):
 @main.route('/latest')
 def latest():
     page = request.args.get('page', 1, type=int)
-    pagination = Topic.query.order_by(Topic.created_at.desc()).paginate(
+    pagination = Topic.query.filter_by(deleted=False).order_by(Topic.created_at.desc()).paginate(
         page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
     return render_template('latest.html', topics=pagination.items, pagination=pagination)
