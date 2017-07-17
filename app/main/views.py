@@ -22,7 +22,7 @@ def index():
                            topics=pagination.items, pagination=pagination)
 
 
-# TODO: Check POST for anonimys
+# TODO: Check POST for anonymous
 @main.route('/topic/<int:topic_id>', methods=['GET', 'POST'])
 def topic(topic_id):
     tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
@@ -185,7 +185,16 @@ def edit_profile_admin(user_id):
 
 @main.route('/latest')
 def latest():
-    page = request.args.get('page', 1, type=int)
-    pagination = Topic.query.filter_by(deleted=False).order_by(Topic.created_at.desc()).paginate(
-        page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
-    return render_template('latest.html', topics=pagination.items, pagination=pagination)
+    target_map = {
+        'topics': (Topic, current_app.config['TOPICS_PER_PAGE']),
+        'comments': (Comment, current_app.config['COMMENTS_PER_PAGE'])
+    }
+    page_arg = request.args.get('page', 1, type=int)
+    target_arg = request.args.get('target', 'topics', type=str)
+    try:
+        target, per_page = target_map[target_arg]
+    except KeyError:
+        abort(400)
+    pagination = target.query.filter_by(deleted=False).order_by(target.created_at.desc()).paginate(
+        page_arg, per_page=per_page, error_out=False)
+    return render_template('latest.html', target=target_arg, items=pagination.items, pagination=pagination)

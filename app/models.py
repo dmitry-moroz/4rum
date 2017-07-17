@@ -229,12 +229,12 @@ class Topic(db.Model):
             else:
                 g = None
             p = Topic(title=forgery_py.lorem_ipsum.sentence(),
-                      body=forgery_py.lorem_ipsum.sentences(randint(10, 20)),
+                      body=forgery_py.lorem_ipsum.sentences(randint(20, 40)),
                       created_at=forgery_py.date.date(True),
                       author=u,
                       group=g)
             db.session.add(p)
-            db.session.commit()
+        db.session.commit()
 
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
@@ -272,7 +272,7 @@ class TopicGroup(db.Model):
                            created_at=forgery_py.date.date(True),
                            author=u)
             db.session.add(g)
-            db.session.commit()
+        db.session.commit()
 
     @staticmethod
     def insert_root_topic_group():
@@ -300,3 +300,24 @@ class Comment(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
     deleted = db.Column(db.Boolean, index=True, default=False)
+
+    @staticmethod
+    def generate_fake(count=1000):
+        from random import seed, randint
+        import forgery_py
+
+        seed()
+        user_count = User.query.count()
+        topic_count = Topic.query.count()
+        for i in range(count):
+            u = User.query.offset(randint(0, user_count - 1)).first()
+            if topic_count:
+                t = Topic.query.offset(randint(0, topic_count - 1)).first()
+            else:
+                t = None
+            c = Comment(body=forgery_py.lorem_ipsum.sentences(randint(10, 20)),
+                        created_at=forgery_py.date.date(True),
+                        author=u,
+                        topic=t)
+            db.session.add(c)
+        db.session.commit()

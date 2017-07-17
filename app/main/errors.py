@@ -3,6 +3,11 @@ from flask import render_template
 from . import main
 
 
+@main.app_errorhandler(400)
+def bad_request(e):
+    return render_template('errors/400.html'), 400
+
+
 @main.app_errorhandler(403)
 def forbidden(e):
     return render_template('errors/403.html'), 403

@@ -9,7 +9,12 @@
         </div>
         <div class="comment-content">
             <div class="comment-date">{{ moment(comment.created_at).format('D MMMM YYYY, H:mm') }}</div>
-            <div class="comment-author"><a href="{{ url_for('main.user', username=comment.author.username) }}">{{ comment.author.username }}</a></div>
+            <div class="comment-author">
+                <a href="{{ url_for('main.user', username=comment.author.username) }}">{{ comment.author.username }}</a>
+                {% if use_rich_comments %}
+                &nbsp;at &nbsp;<a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">"{{ comment.topic.title }}"</a>
+                {% endif %}
+            </div>
             <div class="comment-body">{{ comment.body }}</div>
         </div>
     </li>

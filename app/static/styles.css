@@ -64,6 +64,10 @@ div.topic-date {
     float: right;
     font-size: small;
 }
+div.topic-comments-info {
+    float: right;
+    font-size: small;
+}
 div.topic-author {
 }
 div.topic-title {

@@ -1,19 +1,30 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 
-{% block title %}4RUM - Latest topics{% endblock %}
+{% block title %}4RUM - Latest {{ target }}{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='timer-icon.png') }}">
     <div class="main-header">
-        <h2>Latest topics</h2>
+        <h2>Latest {{ target }}</h2>
     </div>
 </div>
-{% include '_topics.html' %}
+<ul class="nav nav-tabs">
+    <li {% if target=='topics' %}class="active"{% endif %}><a href="{{ url_for('main.latest', target='topics') }}">Topics</a></li>
+    <li {% if target=='comments' %}class="active"{% endif %}><a href="{{ url_for('main.latest', target='comments') }}">Comments</a></li>
+</ul>
+{% if target=='topics' %}
+    {% set topics = items %}
+    {% include '_topics.html' %}
+{% elif target=='comments' %}
+    {% set comments = items %}
+    {% set use_rich_comments = True %}
+    {% include '_comments.html' %}
+{% endif %}
 {% if pagination %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, 'main.latest') }}
+    {{ macros.pagination_widget(pagination, 'main.latest', target=target) }}
 </div>
 {% endif %}
 {% endblock %}

@@ -10,6 +10,7 @@
         <div class="topic-content">
             <div class="topic-date">{{ moment(topic.created_at).format('D MMMM YYYY') }}</div>
             <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
+            <div class="topic-comments-info">{{ topic.comments.count() }} comments</div>
             <div class="topic-title"><a href="{{ url_for('main.topic', topic_id=topic.id) }}">{{ topic.title }}</a></div>
         </div>
     </li>
