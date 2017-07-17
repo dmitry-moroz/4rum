@@ -81,6 +81,8 @@ def edit_topic(topic_id):
         flash('Topic editing has been cancelled.')
         return redirect(url_for('main.topic', topic_id=tpc.id))
     elif form.delete.data:
+        # TODO: Use bootstrap_modal for confirmation
+        tpc.comments.update(dict(deleted=True))
         tpc.deleted = True
         db.session.add(tpc)
         flash('The topic has been deleted.')

@@ -71,7 +71,7 @@ class TopicGroupForm(FlaskForm):
 
 
 class CommentForm(FlaskForm):
-    body = TextAreaField('Leave your message, {username}:', validators=[DataRequired()], render_kw={'rows': 2})
+    body = TextAreaField('Leave your message, {username}:', validators=[DataRequired()], render_kw={'rows': 4})
     submit = SubmitField('Submit')
 
     def __init__(self, user, *args, **kwargs):
