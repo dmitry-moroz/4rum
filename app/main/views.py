@@ -2,10 +2,10 @@ from flask import render_template, redirect, url_for, abort, flash, request, cur
 from flask_login import login_required, current_user
 
 from . import main
-from .forms import EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicFormEdit
+from .forms import EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm, CommentForm
 from .. import db
 from ..decorators import admin_required, permission_required
-from ..models import Permission, Role, User, Topic, TopicGroup
+from ..models import Permission, Role, User, Topic, TopicGroup, Comment
 
 
 # TODO: Make common template for Up button?
@@ -22,10 +22,24 @@ def index():
                            topics=pagination.items, pagination=pagination)
 
 
-@main.route('/topic/<int:topic_id>')
+# TODO: Check POST for anonimys
+@main.route('/topic/<int:topic_id>', methods=['GET', 'POST'])
 def topic(topic_id):
     tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
-    return render_template('topic.html', topic=tpc)
+    if current_user.can(Permission.PARTICIPATE):
+        form = CommentForm(current_user)
+    else:
+        form = None
+    if form and form.validate_on_submit():
+        new_comment = Comment(body=form.body.data, author=current_user._get_current_object(), topic=tpc)
+        db.session.add(new_comment)
+        flash('Message has been added.')
+        return redirect(url_for('main.topic', topic_id=topic_id))
+    page = request.args.get('page', 1, type=int)
+    pagination = tpc.comments.filter_by(deleted=False).order_by(Comment.created_at.desc()).paginate(
+        page, per_page=current_app.config['COMMENTS_PER_PAGE'], error_out=False)
+    return render_template('topic.html', topic=tpc, form=form, comments=pagination.items,
+                           pagination=pagination)
 
 
 @main.route('/create_topic/<int:topic_group_id>', methods=['GET', 'POST'])
@@ -56,7 +70,7 @@ def edit_topic(topic_id):
     tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
     if current_user != tpc.author and not current_user.is_moderator():
         abort(403)
-    form = TopicFormEdit()
+    form = TopicEditForm()
     if form.submit.data and form.validate_on_submit():
         tpc.title = form.title.data
         tpc.body = form.body.data

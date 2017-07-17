@@ -54,7 +54,7 @@ class TopicForm(FlaskForm):
     cancel = SubmitField('Cancel')
 
 
-class TopicFormEdit(TopicForm):
+class TopicEditForm(TopicForm):
     delete = SubmitField('Delete')
 
 
@@ -68,3 +68,12 @@ class TopicGroupForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(TopicGroupForm, self).__init__(*args, **kwargs)
         self.priority.choices = [(p, p) for p in current_app.config['TOPIC_GROUP_PRIORITY']]
+
+
+class CommentForm(FlaskForm):
+    body = TextAreaField('Leave your message, {username}:', validators=[DataRequired()], render_kw={'rows': 2})
+    submit = SubmitField('Submit')
+
+    def __init__(self, user, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.body.label.text = self.body.label.text.format(username=user.username)

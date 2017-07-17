@@ -62,6 +62,7 @@ class User(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     topics = db.relationship('Topic', backref='author', lazy='dynamic')
     topic_groups = db.relationship('TopicGroup', backref='author', lazy='dynamic')
+    comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
     # Profile:
     name = db.Column(db.String(64))
@@ -211,6 +212,7 @@ class Topic(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'))
     deleted = db.Column(db.Boolean, index=True, default=False)
+    comments = db.relationship('Comment', backref='topic', lazy='dynamic')
 
     @staticmethod
     def generate_fake(count=100):
@@ -288,3 +290,13 @@ class TopicGroup(db.Model):
 
     def is_root_topic_group(self):
         return self.id == current_app.config['ROOT_TOPIC_GROUP']
+
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
+    deleted = db.Column(db.Boolean, index=True, default=False)

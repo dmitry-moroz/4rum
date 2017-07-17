@@ -11,10 +11,21 @@ div.non-responsive {
     min-width: 1170px;
 }
 
+/* Common CSS */
+textarea.form-control {
+    max-width: 100%;
+}
+
 /* CSS for account profile */
 .profile-header {
     min-height: 260px;
     margin-left: 280px;
+}
+.profile-avatar {
+    position: absolute;
+    object-fit: cover;
+    width: 256px;
+    height: 256px;
 }
 
 /* CSS for index page */
@@ -24,10 +35,14 @@ div.main-header {
 .common-thumbnail {
     position: absolute;
     object-fit: cover;
+    width: 40px;
+    height: 40px;
 }
 .navbar-profile-thumbnail {
     position: static;
     object-fit: cover;
+    width: 18px;
+    height: 18px;
 }
 
 /* CSS for topics list */
@@ -53,9 +68,6 @@ div.topic-author {
 }
 div.topic-title {
     font-weight: bold;
-}
-div.topic-thumbnail {
-    position: absolute;
 }
 div.topic-content {
     margin-left: 48px;
@@ -86,8 +98,11 @@ ul.topic-groups li.topic-group {
 ul.topic-groups li.topic-group:hover {
     background-color: #ffffff;
 }
-div.topic-group-thumbnail {
+.topic-group-thumbnail {
     position: absolute;
+    object-fit: cover;
+    width: 20px;
+    height: 20px;
 }
 div.topic-group-content {
     margin-left: 28px;
@@ -171,4 +186,37 @@ div.flask-pagedown-preview h3 {
 .topic-page-content td {
     padding: 4px;
     border: 1px solid;
+}
+
+/* CSS for comment form */
+div.comments-form {
+    margin-left: 48px;
+}
+
+/* CSS for comments list */
+ul.comments {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+}
+ul.comments li.comment {
+    padding: 8px;
+    margin: -1px 0px 0px 0px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+}
+div.comment-date {
+    float: right;
+    font-size: small;
+}
+div.comment-author {
+}
+div.comment-body {
+    max-height: 600px;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+div.comment-content {
+    margin-left: 48px;
+    min-height: 48px;
 }

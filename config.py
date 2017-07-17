@@ -21,6 +21,7 @@ class Config:
     BASE_GRAVATAR_URL = 'https://secure.gravatar.com/avatar'
     TOPIC_GROUP_PRIORITY = range(1, 11)
     TOPICS_PER_PAGE = 20
+    COMMENTS_PER_PAGE = 20
     ROOT_TOPIC_GROUP = 0
     IS_PROTECTED_ROOT_TOPIC_GROUP = True
 

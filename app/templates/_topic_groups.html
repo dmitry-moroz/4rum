@@ -2,9 +2,9 @@
 <ul class="topic-groups">
     {% for topic_group in topic_groups %}
     <li class="topic-group img-rounded">
-        <div class="topic-group-thumbnail">
+        <div>
             <a href="{{ url_for('main.topic_group', topic_group_id=topic_group.id) }}">
-                <img class="common-thumbnail" src="{{ url_for('static', filename='folder-icon.png') }}" width="20" height="20">
+                <img class="topic-group-thumbnail" src="{{ url_for('static', filename='folder-icon.png') }}">
             </a>
         </div>
         <div class="topic-group-content">

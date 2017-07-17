@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block title %}4RUM - {{ topic.title }}{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-    <img class="common-thumbnail" src="{{ url_for('static', filename='speech-icon.png') }}" width="40" height="40">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='speech-icon.png') }}">
     <div class="topic-page-header">
         <h2>{{ topic.title }}</h2>
     </div>
@@ -15,9 +17,9 @@
 
     <div class="topic-page-title">
 
-        <div class="topic-thumbnail">
+        <div>
             <a href="{{ url_for('main.user', username=topic.author.username) }}">
-                <img class="img-rounded common-thumbnail" src="{{ topic.author.avatar }}" width="40" height="40">
+                <img class="img-rounded common-thumbnail" src="{{ topic.author.avatar }}">
             </a>
         </div>
 
@@ -44,9 +46,28 @@
 </div>
 
 <div class="page-header">
-    <img class="common-thumbnail" src="{{ url_for('static', filename='comments-icon.png') }}" width="40" height="40">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='comments-icon.png') }}">
     <div class="topic-page-header">
         <h2>Comments:</h2>
     </div>
 </div>
+
+{% if form %}
+    <div>
+        <a href="{{ url_for('main.user', username=current_user.username) }}">
+            <img class="img-rounded common-thumbnail" src="{{ current_user.avatar }}">
+        </a>
+    </div>
+    <div class="comments-form">
+        {{ wtf.quick_form(form, button_map={'submit':'success'}) }}
+    </div>
+{% endif %}
+
+{% include '_comments.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, 'main.topic', topic_id=topic.id) }}
+</div>
+{% endif %}
+
 {% endblock %}
