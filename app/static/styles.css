@@ -15,6 +15,9 @@ div.non-responsive {
 textarea.form-control {
     max-width: 100%;
 }
+a.no-underline {
+    text-decoration: none;
+}
 
 /* CSS for account profile */
 .profile-header {
@@ -66,7 +69,11 @@ div.topic-date {
 }
 div.topic-comments-info {
     float: right;
-    font-size: small;
+    /*font-size: small;*/
+}
+span.topic-comments-info {
+    min-width: 90px !important;
+    display: inline-block !important;
 }
 div.topic-author {
 }
@@ -112,6 +119,14 @@ div.topic-group-content {
     margin-left: 28px;
     min-height: 20px;
     font-weight: bold;
+}
+div.topic-group-topics-info {
+    float: right;
+    /*font-size: small;*/
+}
+span.topic-group-topics-info {
+    min-width: 70px !important;
+    display: inline-block !important;
 }
 div.topic-group-header {
     margin-left: 48px;
@@ -223,4 +238,12 @@ div.comment-body {
 div.comment-content {
     margin-left: 48px;
     min-height: 48px;
+}
+div.comment-buttons {
+    text-align: right;
+}
+
+/* CSS for comment page */
+div.comment-page-header {
+    margin-left: 48px;
 }

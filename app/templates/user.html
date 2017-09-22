@@ -35,7 +35,7 @@
             Last seen: {{ moment(user.last_seen).fromNow() }}
         </p>
         <p>
-            Forum activity: {{ user.topics.count() }} topics, {{ user.comments.count() }} comments
+            Forum activity: {{ user.topics.filter_by(deleted=False).count() }} topics, {{ user.comments.filter_by(deleted=False).count() }} comments
         </p>
         <p>
             {% if user == current_user %}
@@ -47,11 +47,11 @@
         </p>
     </div>
 </div>
-<h3>Topics by {{ user.username }}:</h3>
+<h3 id="user_topics">Topics by {{ user.username }}:</h3>
 {% include '_topics.html' %}
 {% if pagination %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, 'main.user', username=user.username) }}
+    {{ macros.pagination_widget(pagination, 'main.user', username=user.username, fragment='#user_topics') }}
 </div>
 {% endif %}
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}4RUM - Edit comment{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='pen-icon.png') }}">
+    <div class="comment-page-header">
+        <h2>Edit {{ comment.author.username }}'s comment</h2>
+    </div>
+</div>
+<div>
+    {{ wtf.quick_form(form, button_map={'submit':'success', 'cancel':'warning', 'delete':'danger'}) }}
+</div>
+<br>
+{% endblock %}
+

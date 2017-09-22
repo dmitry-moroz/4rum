@@ -45,7 +45,7 @@
 
 </div>
 
-<div class="page-header">
+<div id="comments" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='comments-icon.png') }}">
     <div class="topic-page-header">
         <h2>Comments:</h2>
@@ -66,7 +66,7 @@
 {% include '_comments.html' %}
 {% if pagination %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, 'main.topic', topic_id=topic.id) }}
+    {{ macros.pagination_widget(pagination, 'main.topic', topic_id=topic.id, fragment='#comments') }}
 </div>
 {% endif %}
 

@@ -4,7 +4,7 @@
 {% block title %}4RUM - {{ topic_group.title }}{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
+<div id="topic_group" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='folder-icon.png') }}">
     <div class="topic-group-header">
         <h2>{{ topic_group.title }}</h2>
@@ -15,7 +15,7 @@
 {% include '_topics.html' %}
 {% if pagination %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, 'main.topic_group', topic_group_id=topic_group.id) }}
+    {{ macros.pagination_widget(pagination, 'main.topic_group', topic_group_id=topic_group.id, fragment='#topic_group') }}
 </div>
 {% endif %}
 {% endblock %}

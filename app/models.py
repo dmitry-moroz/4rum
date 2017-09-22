@@ -63,6 +63,7 @@ class User(UserMixin, db.Model):
     topics = db.relationship('Topic', backref='author', lazy='dynamic')
     topic_groups = db.relationship('TopicGroup', backref='author', lazy='dynamic')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
+    poll_votes = db.relationship('PollVote', backref='author', lazy='dynamic')
 
     # Profile:
     name = db.Column(db.String(64))
@@ -205,7 +206,7 @@ def load_user(user_id):
 class Topic(db.Model):
     __tablename__ = 'topics'
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(64))
+    title = db.Column(db.String(128))
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -213,6 +214,9 @@ class Topic(db.Model):
     group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'))
     deleted = db.Column(db.Boolean, index=True, default=False)
     comments = db.relationship('Comment', backref='topic', lazy='dynamic')
+    poll = db.Column(db.String(256))
+    poll_answers = db.relationship('PollAnswer', backref='topic', lazy='dynamic')
+    poll_votes = db.relationship('PollVote', backref='topic', lazy='dynamic')
 
     @staticmethod
     def generate_fake(count=100):
@@ -321,3 +325,22 @@ class Comment(db.Model):
                         topic=t)
             db.session.add(c)
         db.session.commit()
+
+
+class PollAnswer(db.Model):
+    __tablename__ = 'polls_answers'
+    id = db.Column(db.Integer, primary_key=True)
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
+    body = db.Column(db.Text)
+    deleted = db.Column(db.Boolean, index=True, default=False)
+    poll_votes = db.relationship('PollVote', backref='poll_answer', lazy='dynamic')
+
+
+class PollVote(db.Model):
+    __tablename__ = 'polls_votes'
+    id = db.Column(db.Integer, primary_key=True)
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
+    poll_answer_id = db.Column(db.Integer, db.ForeignKey('polls_answers.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    deleted = db.Column(db.Boolean, index=True, default=False)

@@ -1,9 +1,9 @@
 <div class="buttons-panel">
     <div class="right-buttons">
         {% if current_user.id==topic.author_id and current_user.can(Permission.WRITE) %}
-        <a class="btn btn-warning" href="{{ url_for('main.edit_topic', topic_id=topic.id) }}">&#8859;Edit</a>
+        <a class="btn btn-warning" href="{{ url_for('main.edit_topic', topic_id=topic.id, next=request.referrer) }}">&#8859;Edit</a>
         {% elif current_user.is_moderator() %}
-        <a class="btn btn-warning" href="{{ url_for('main.edit_topic', topic_id=topic.id) }}">&#8859;Edit [Moderator]</a>
+        <a class="btn btn-warning" href="{{ url_for('main.edit_topic', topic_id=topic.id, next=request.referrer) }}">&#8859;Edit [Moderator]</a>
         {% endif %}
     </div>
     <div>

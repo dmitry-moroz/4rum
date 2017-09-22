@@ -48,13 +48,27 @@ class EditProfileAdminForm(FlaskForm):
 
 
 class TopicForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired(), Length(0, 64)])
+    title = StringField('Title', validators=[DataRequired(), Length(0, 128)])
     body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 20})
     submit = SubmitField('Submit')
+    add_poll = SubmitField('Add poll')
     cancel = SubmitField('Cancel')
 
 
 class TopicEditForm(TopicForm):
+    delete = SubmitField('Delete')
+
+
+class TopicWithPollForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired(), Length(0, 128)])
+    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 20})
+    poll_question = StringField('Poll question', validators=[DataRequired(), Length(0, 256)])
+    poll_answers = TextAreaField('Poll answers', validators=[DataRequired()], render_kw={'rows': 10})
+    submit = SubmitField('Submit')
+    cancel = SubmitField('Cancel')
+
+
+class TopicWithPollEditForm(TopicWithPollForm):
     delete = SubmitField('Delete')
 
 
@@ -77,3 +91,10 @@ class CommentForm(FlaskForm):
     def __init__(self, user, *args, **kwargs):
         super(CommentForm, self).__init__(*args, **kwargs)
         self.body.label.text = self.body.label.text.format(username=user.username)
+
+
+class CommentEditForm(FlaskForm):
+    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 4})
+    submit = SubmitField('Submit')
+    cancel = SubmitField('Cancel')
+    delete = SubmitField('Delete')
