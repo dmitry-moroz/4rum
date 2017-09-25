@@ -41,6 +41,37 @@
         {% else %}
             {{ topic.body }}
         {% endif %}
+
+    {% if topic.poll %}
+        <br>
+        <h4 id="poll">{{ topic.poll }}</h4>
+        {% if poll_results %}
+        <ul class="poll_answers_voted">
+            {% for answer, votes, percent in poll_results %}
+                <li class="poll_answer_voted img-rounded">
+                    {{ answer }}
+                    <div class="poll_percent_info">
+                        {{ percent }}% ({{ votes }} votes)
+                    </div>
+                    <div class="poll_progress img-rounded">
+                        <div class="poll_progress_bar img-rounded" style="width:{{ percent }}%;">&nbsp;</div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <ul class="poll_answers">
+            {% for answer in topic.poll_answers.filter_by(deleted=False) %}
+            <a class="no-underline" href="{{ url_for('main.vote', answer_id=answer.id, next=request.url) }}">
+                <li class="poll_answer img-rounded">
+                    {{ answer.body }}
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endif %}
+
     </div>
 
 </div>

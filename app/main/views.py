@@ -1,12 +1,13 @@
 from flask import render_template, redirect, url_for, abort, flash, request, current_app
 from flask_login import login_required, current_user
+from sqlalchemy import func, or_, and_
 
 from . import main
 from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm,
                     TopicWithPollForm, TopicWithPollEditForm, CommentForm, CommentEditForm)
 from .. import db
 from ..decorators import admin_required, permission_required
-from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer
+from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, PollVote
 
 
 # TODO: Make common template for Up button?
@@ -41,7 +42,17 @@ def topic(topic_id):
         page = (tpc.comments.filter_by(deleted=False).count() - 1) // current_app.config['COMMENTS_PER_PAGE'] + 1
     pagination = tpc.comments.filter_by(deleted=False).order_by(Comment.created_at.asc()).paginate(
         page, per_page=current_app.config['COMMENTS_PER_PAGE'], error_out=False)
-    return render_template('topic.html', topic=tpc, form=form, comments=pagination.items,
+    if tpc.poll and current_user.is_voted(tpc):
+        votes = db.session.query(PollAnswer.body, func.count(PollVote.id)).outerjoin(
+            PollVote, PollAnswer.id == PollVote.poll_answer_id).filter(
+            and_(PollAnswer.topic_id == tpc.id, PollAnswer.deleted == False)).filter(
+            or_(PollVote.deleted.is_(None), PollVote.deleted == False)).group_by(PollAnswer.body).all()
+        total_votes = float(sum([v[1] for v in votes]))
+        poll_results = [(v[0], v[1], round(float(v[1])/total_votes, 4)*100) for v in votes]
+        poll_results = sorted(poll_results, key=lambda v: v[1], reverse=True)
+    else:
+        poll_results = []
+    return render_template('topic.html', topic=tpc, form=form, comments=pagination.items, poll_results=poll_results,
                            pagination=pagination)
 
 
@@ -296,3 +307,16 @@ def edit_comment(comment_id):
         return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
     form.body.data = comment.body
     return render_template('edit_comment.html', form=form, comment=comment)
+
+
+@main.route('/vote/<int:answer_id>')
+@login_required
+@permission_required(Permission.PARTICIPATE)
+def vote(answer_id):
+    answer = PollAnswer.query.filter_by(id=answer_id, deleted=False).first_or_404()
+    if current_user.is_voted(answer.topic):
+        flash('You have already voted for this poll.')
+    else:
+        current_user.vote(answer)
+        flash('Your vote has been taken.')
+    return redirect(request.args.get('next') or url_for('main.topic', topic_id=answer.topic_id))

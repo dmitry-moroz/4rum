@@ -247,3 +247,51 @@ div.comment-buttons {
 div.comment-page-header {
     margin-left: 48px;
 }
+
+/* CSS for poll */
+ul.poll_answers {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+}
+ul.poll_answers li.poll_answer {
+    padding: 8px;
+    margin: 1px 0px 0px 0px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+    color: #428BCA;
+    font-weight: bold;
+}
+ul.poll_answers li.poll_answer:hover {
+    background-color: #428BCA;
+    color: #ffffff;
+}
+div.poll_progress {
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+}
+div.poll_progress_bar {
+    background-color: #428BCA;
+}
+ul.poll_answers_voted {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+}
+ul.poll_answers_voted li.poll_answer_voted {
+    padding: 8px;
+    margin: 1px 0px 0px 0px;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+    color: #428BCA;
+    font-weight: bold;
+}
+div.poll_percent_info {
+    float: right;
+}

@@ -180,6 +180,16 @@ class User(UserMixin, db.Model):
         return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
             url=current_app.config['BASE_GRAVATAR_URL'], hash=hash, size=size, default=default, rating=rating)
 
+    def is_voted(self, topic):
+        if self.id in [v.author_id for v in topic.poll_votes.filter_by(deleted=False)]:
+            return True
+        else:
+            return False
+
+    def vote(self, answer):
+        new_vote = PollVote(topic_id=answer.topic_id, poll_answer_id=answer.id, author_id=self.id)
+        db.session.add(new_vote)
+
     def __repr__(self):
         return '<User %r>' % self.username
 
