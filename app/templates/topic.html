@@ -42,12 +42,12 @@
             {{ topic.body }}
         {% endif %}
 
-    {% if topic.poll %}
+    {% if topic.poll and current_user.can(Permission.PARTICIPATE) %}
         <br>
         <h4 id="poll">{{ topic.poll }}</h4>
-        {% if poll_results %}
+        {% if is_voted %}
         <ul class="poll_answers_voted">
-            {% for answer, votes, percent in poll_results %}
+            {% for answer, votes, percent in poll_data %}
                 <li class="poll_answer_voted img-rounded">
                     {{ answer }}
                     <div class="poll_percent_info">
@@ -61,10 +61,10 @@
         </ul>
         {% else %}
         <ul class="poll_answers">
-            {% for answer in topic.poll_answers.filter_by(deleted=False) %}
-            <a class="no-underline" href="{{ url_for('main.vote', answer_id=answer.id, next=request.url) }}">
+            {% for answer_id, answer in poll_data %}
+            <a class="no-underline" href="{{ url_for('main.vote', answer_id=answer_id, next=request.url) }}">
                 <li class="poll_answer img-rounded">
-                    {{ answer.body }}
+                    {{ answer }}
                 </li>
             </a>
             {% endfor %}

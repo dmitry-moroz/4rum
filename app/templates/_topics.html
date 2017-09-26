@@ -1,10 +1,10 @@
 {% if topics %}
 <ul class="topics">
-    {% for topic in topics %}
+    {% for topic, author, comments_count in topics %}
     <li class="topic img-rounded">
         <div>
-            <a href="{{ url_for('main.user', username=topic.author.username) }}">
-                <img class="img-rounded common-thumbnail" src="{{ topic.author.avatar }}">
+            <a href="{{ url_for('main.user', username=author.username) }}">
+                <img class="img-rounded common-thumbnail" src="{{ author.avatar }}">
             </a>
         </div>
         <div class="topic-content">
@@ -12,13 +12,13 @@
                 {{ moment(topic.created_at).format('D MMMM YYYY') }}
             </div>
             <div class="topic-author">
-                <a href="{{ url_for('main.user', username=topic.author.username) }}">
-                    {{ topic.author.username }}
+                <a href="{{ url_for('main.user', username=author.username) }}">
+                    {{ author.username }}
                 </a>
             </div>
             <div class="topic-comments-info">
                 <a class="no-underline" href="{{ url_for('main.topic', topic_id=topic.id) }}#comments">
-                    <span class="label label-primary topic-comments-info">Comments: {{ topic.comments.filter_by(deleted=False).count() }}</span>
+                    <span class="label label-primary topic-comments-info">Comments: {{ comments_count }}</span>
                 </a>
             </div>
             <div class="topic-title">

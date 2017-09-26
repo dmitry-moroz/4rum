@@ -35,7 +35,7 @@
             Last seen: {{ moment(user.last_seen).fromNow() }}
         </p>
         <p>
-            Forum activity: {{ user.topics.filter_by(deleted=False).count() }} topics, {{ user.comments.filter_by(deleted=False).count() }} comments
+            Forum activity: {{ topics_count }} topics, {{ comments_count }} comments
         </p>
         <p>
             {% if user == current_user %}

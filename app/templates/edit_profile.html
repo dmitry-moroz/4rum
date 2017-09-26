@@ -5,7 +5,7 @@
 
 {% block page_content %}
 <div class="page-header">
-    <h1>Edit Your Profile</h1>
+    <h1>Edit {% if user %}{{ user.username }}'s{% else %}Your{% endif %} Profile</h1>
 </div>
 <div class="col-md-6">
     {{ wtf.quick_form(form, button_map={'submit':'primary'}) }}

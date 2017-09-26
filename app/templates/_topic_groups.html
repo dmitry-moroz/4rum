@@ -1,6 +1,6 @@
 {% if topic_groups %}
 <ul class="topic-groups">
-    {% for topic_group in topic_groups %}
+    {% for topic_group, topics_count in topic_groups %}
     <li class="topic-group img-rounded">
         <div>
             <a href="{{ url_for('main.topic_group', topic_group_id=topic_group.id) }}">
@@ -10,7 +10,7 @@
         <div class="topic-group-content">
             <div class="topic-group-topics-info">
                 <a class="no-underline" href="{{ url_for('main.topic_group', topic_group_id=topic_group.id) }}">
-                    <span class="label label-default topic-group-topics-info">Topics: {{ topic_group.topics.filter_by(deleted=False).count() }}</span>
+                    <span class="label label-default topic-group-topics-info">Topics: {{ topics_count }}</span>
                 </a>
             </div>
             <div class="topic-group-title">

@@ -1,10 +1,15 @@
 {% if comments %}
 <ul class="comments">
-    {% for comment in comments %}
+    {% for comment_data in comments %}
+    {% if use_rich_comments %}
+        {% set comment, author, topic = comment_data %}
+    {% else %}
+        {% set comment, author = comment_data %}
+    {% endif %}
     <li class="comment img-rounded">
         <div>
-            <a href="{{ url_for('main.user', username=comment.author.username) }}">
-                <img class="img-rounded common-thumbnail" src="{{ comment.author.avatar }}">
+            <a href="{{ url_for('main.user', username=author.username) }}">
+                <img class="img-rounded common-thumbnail" src="{{ author.avatar }}">
             </a>
         </div>
         <div class="comment-content">
@@ -12,13 +17,13 @@
                 {{ moment(comment.created_at).format('D MMMM YYYY, H:mm') }}
             </div>
             <div class="comment-author">
-                <a href="{{ url_for('main.user', username=comment.author.username) }}">
-                    {{ comment.author.username }}
+                <a href="{{ url_for('main.user', username=author.username) }}">
+                    {{ author.username }}
                 </a>
                 {% if use_rich_comments %}
                 &nbsp;at &nbsp;
                 <a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">
-                    "{{ comment.topic.title }}"
+                    "{{ topic.title }}"
                 </a>
                 {% endif %}
             </div>

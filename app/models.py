@@ -7,6 +7,7 @@ from flask_login import UserMixin, AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from markdown import markdown
 from markdown.extensions.tables import TableExtension
+from sqlalchemy import func, or_, and_
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # TODO: remove base_config
@@ -181,7 +182,7 @@ class User(UserMixin, db.Model):
             url=current_app.config['BASE_GRAVATAR_URL'], hash=hash, size=size, default=default, rating=rating)
 
     def is_voted(self, topic):
-        if self.id in [v.author_id for v in topic.poll_votes.filter_by(deleted=False)]:
+        if self.id in [v.author_id for v in topic.poll_votes.filter_by(deleted=False).all()]:
             return True
         else:
             return False
@@ -202,6 +203,9 @@ class AnonymousUser(AnonymousUserMixin):
         return False
 
     def is_moderator(self):
+        return False
+
+    def is_voted(self, topic):
         return False
 
 
@@ -227,6 +231,11 @@ class Topic(db.Model):
     poll = db.Column(db.String(256))
     poll_answers = db.relationship('PollAnswer', backref='topic', lazy='dynamic')
     poll_votes = db.relationship('PollVote', backref='topic', lazy='dynamic')
+
+    @property
+    def comments_count(self):
+        return db.session.query(
+            func.count(Comment.id)).filter(and_(Comment.topic_id == self.id, Comment.deleted == False)).scalar()
 
     @staticmethod
     def generate_fake(count=100):
@@ -255,6 +264,25 @@ class Topic(db.Model):
         html = markdown(value, extensions=[TableExtension()], output_format='html')
         clean_html = bleach.clean(html, tags=current_app.config['TOPIC_ALLOWED_TAGS'], strip=True)
         target.body_html = bleach.linkify(clean_html)
+
+    def get_poll_results(self):
+        votes = db.session.query(PollAnswer.body, func.count(PollVote.id)).outerjoin(
+            PollVote, PollAnswer.id == PollVote.poll_answer_id).filter(
+            and_(PollAnswer.topic_id == self.id, PollAnswer.deleted == False)).filter(
+            or_(PollVote.deleted.is_(None), PollVote.deleted == False)).group_by(PollAnswer.body).all()
+        total_votes = float(sum([v[1] for v in votes]))
+        poll_results = [(v[0], v[1], round(float(v[1])/total_votes, 4)*100) for v in votes]
+        return sorted(poll_results, key=lambda v: v[1], reverse=True)
+
+    def update_poll_answers(self, new_answers):
+        old_answers = self.poll_answers.all()
+        for answer in [a for a in old_answers if a.body not in new_answers]:
+            answer.poll_votes.update(dict(deleted=True))
+            answer.deleted = True
+            db.session.add(answer)
+        old_answers_bodies = [a.body for a in old_answers]
+        for answer in [a for a in new_answers if a not in old_answers_bodies]:
+            db.session.add(PollAnswer(topic_id=self.id, body=answer))
 
 
 db.event.listen(Topic.body, 'set', Topic.on_changed_body)
