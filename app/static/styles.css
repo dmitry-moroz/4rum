@@ -295,3 +295,16 @@ ul.poll_answers_voted li.poll_answer_voted {
 div.poll_percent_info {
     float: right;
 }
+
+/* CSS for messages */
+.table.messages tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+img.message_thumbnail {
+    width: 18px;
+    height: 18px;
+    object-fit: cover;
+}
+span.blue-badge {
+    background-color: #428BCA;
+}

@@ -53,6 +53,36 @@ class Role(db.Model):
         return '<Role %r>' % self.name
 
 
+class Message(db.Model):
+    __tablename__ = 'messages'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(128))
+    body = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), index=True)
+    receiver_id = db.Column(db.Integer, db.ForeignKey('users.id'), index=True)
+    author_deleted = db.Column(db.Boolean, index=True, default=False)
+    receiver_deleted = db.Column(db.Boolean, index=True, default=False)
+    unread = db.Column(db.Boolean, index=True, default=True)
+
+    @staticmethod
+    def generate_fake(count=1000):
+        from random import seed, randint
+        import forgery_py
+
+        seed()
+        user_count = User.query.count()
+        for i in range(count):
+            u1, u2 = User.query.order_by(func.random()).offset(randint(0, user_count - 2)).limit(2).all()
+            m = Message(title=forgery_py.lorem_ipsum.sentence(),
+                        body=forgery_py.lorem_ipsum.sentences(randint(10, 20)),
+                        created_at=forgery_py.date.date(True),
+                        author=u1,
+                        receiver=u2)
+            db.session.add(m)
+        db.session.commit()
+
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -65,6 +95,9 @@ class User(UserMixin, db.Model):
     topic_groups = db.relationship('TopicGroup', backref='author', lazy='dynamic')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
     poll_votes = db.relationship('PollVote', backref='author', lazy='dynamic')
+    sent_messages = db.relationship('Message', foreign_keys=[Message.author_id], backref='author', lazy='dynamic')
+    received_messages = db.relationship('Message', foreign_keys=[Message.receiver_id], backref='receiver',
+                                        lazy='dynamic')
 
     # Profile:
     name = db.Column(db.String(64))
@@ -187,6 +220,10 @@ class User(UserMixin, db.Model):
         else:
             return False
 
+    def get_unread_messages_count(self):
+        return db.session.query(func.count(Message.id)).filter(
+            and_(Message.receiver_id == self.id, Message.unread == True, Message.receiver_deleted == False,)).scalar()
+
     def __repr__(self):
         return '<User %r>' % self.username
 
@@ -221,7 +258,7 @@ class Topic(db.Model):
     body_html = db.Column(db.Text)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'))
+    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), index=True)
     deleted = db.Column(db.Boolean, index=True, default=False)
     comments = db.relationship('Comment', backref='topic', lazy='dynamic')
     poll = db.Column(db.String(256))
@@ -305,7 +342,7 @@ class TopicGroup(db.Model):
     protected = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'))
+    group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), index=True)
     topics = db.relationship('Topic', backref='group', lazy='dynamic')
     topic_groups = db.relationship('TopicGroup', backref=db.backref('group', remote_side=id), lazy='dynamic')
 
@@ -349,7 +386,7 @@ class Comment(db.Model):
     body = db.Column(db.Text)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'), index=True)
     deleted = db.Column(db.Boolean, index=True, default=False)
 
     @staticmethod
@@ -380,7 +417,7 @@ class Comment(db.Model):
 class PollAnswer(db.Model):
     __tablename__ = 'polls_answers'
     id = db.Column(db.Integer, primary_key=True)
-    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'), index=True)
     body = db.Column(db.Text)
     deleted = db.Column(db.Boolean, index=True, default=False)
     poll_votes = db.relationship('PollVote', backref='poll_answer', lazy='dynamic')
@@ -389,8 +426,8 @@ class PollAnswer(db.Model):
 class PollVote(db.Model):
     __tablename__ = 'polls_votes'
     id = db.Column(db.Integer, primary_key=True)
-    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
-    poll_answer_id = db.Column(db.Integer, db.ForeignKey('polls_answers.id'))
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'), index=True)
+    poll_answer_id = db.Column(db.Integer, db.ForeignKey('polls_answers.id'), index=True)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     deleted = db.Column(db.Boolean, index=True, default=False)

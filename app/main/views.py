@@ -9,7 +9,7 @@ from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroup
                     TopicWithPollForm, TopicWithPollEditForm, CommentForm, CommentEditForm)
 from .. import db
 from ..decorators import admin_required, permission_required
-from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer
+from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
 
 
 # TODO: Make common template for Up button?
@@ -390,3 +390,26 @@ def hot():
         page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
 
     return render_template('hot.html', period=period_arg, topics=pagination.items, pagination=pagination)
+
+
+@main.route('/messages')
+@login_required
+@permission_required(Permission.PARTICIPATE)
+def messages():
+    page = request.args.get('page', 1, type=int)
+    direction = request.args.get('direction', 'received', type=str)
+
+    if direction == 'received':
+        pagination = Message.query.with_entities(Message, User).join(
+            User, Message.author_id == User.id).filter(
+            and_(Message.receiver_id == current_user.id, Message.receiver_deleted == False)).order_by(
+            Message.created_at.desc()).paginate(page, per_page=current_app.config['MESSAGES_PER_PAGE'], error_out=False)
+    elif direction == 'sent':
+        pagination = Message.query.with_entities(Message, User).join(
+            User, Message.receiver_id == User.id).filter(
+            and_(Message.author_id == current_user.id, Message.author_deleted == False)).order_by(
+            Message.created_at.desc()).paginate(page, per_page=current_app.config['MESSAGES_PER_PAGE'], error_out=False)
+    else:
+        abort(400)
+
+    return render_template('messages.html', messages=pagination.items, pagination=pagination, direction=direction)

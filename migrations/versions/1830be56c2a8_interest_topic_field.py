@@ -1,4 +1,4 @@
-"""interest topic filed
+"""interest topic field
 
 Revision ID: 1830be56c2a8
 Revises: 99a6fa9f899c
