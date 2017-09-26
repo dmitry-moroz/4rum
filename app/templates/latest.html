@@ -12,8 +12,12 @@
 </div>
 <div>
     <ul class="nav nav-tabs">
-        <li {% if target=='topics' %}class="active"{% endif %}><a href="{{ url_for('main.latest', target='topics') }}">Topics</a></li>
-        <li {% if target=='comments' %}class="active"{% endif %}><a href="{{ url_for('main.latest', target='comments') }}">Comments</a></li>
+        <li {% if target=='topics' %}class="active"{% endif %}>
+            <a href="{{ url_for('main.latest', target='topics') }}">Topics</a>
+        </li>
+        <li {% if target=='comments' %}class="active"{% endif %}>
+            <a href="{{ url_for('main.latest', target='comments') }}">Comments</a>
+        </li>
     </ul>
 </div>
 {% if target=='topics' %}

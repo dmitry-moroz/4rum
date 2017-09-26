@@ -1,6 +1,8 @@
+from datetime import datetime, timedelta
+
 from flask import render_template, redirect, url_for, abort, flash, request, current_app
 from flask_login import login_required, current_user
-from sqlalchemy import func, case, and_
+from sqlalchemy import func, case, between, and_
 
 from . import main
 from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm,
@@ -50,8 +52,7 @@ def topic(topic_id):
         form = None
 
     if form and form.validate_on_submit():
-        new_comment = Comment(body=form.body.data, author=current_user._get_current_object(), topic=tpc)
-        db.session.add(new_comment)
+        tpc.add_comment(current_user, form.body.data)
         flash('Your message has been published.')
         return redirect(url_for('main.topic', topic_id=topic_id, page=-1))
 
@@ -362,6 +363,30 @@ def vote(answer_id):
     if current_user.is_voted(answer.topic):
         flash('You have already voted for this poll.')
     else:
-        current_user.vote(answer)
+        answer.topic.add_vote(current_user, answer)
         flash('Your vote has been taken.')
     return redirect(request.args.get('next') or url_for('main.topic', topic_id=answer.topic_id))
+
+
+@main.route('/hot')
+def hot():
+    page_arg = request.args.get('page', 1, type=int)
+    period_arg = request.args.get('period', 'day', type=str)
+
+    now = datetime.utcnow()
+    periods = {
+        'day': (now - timedelta(days=1), now),
+        'week': (now - timedelta(days=7), now),
+        'month': (now - timedelta(days=30), now),
+        'year': (now - timedelta(days=365), now),
+    }
+
+    pagination = Topic.query.with_entities(
+        Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
+        User, Topic.author_id == User.id).outerjoin(
+        Comment, Topic.id == Comment.topic_id).filter(
+        and_(Topic.deleted == False, between(Topic.created_at, periods[period_arg][0], periods[period_arg][1]))
+        ).group_by(Topic.id).order_by(Topic.interest.desc()).paginate(
+        page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+
+    return render_template('hot.html', period=period_arg, topics=pagination.items, pagination=pagination)

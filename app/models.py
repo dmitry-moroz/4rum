@@ -187,10 +187,6 @@ class User(UserMixin, db.Model):
         else:
             return False
 
-    def vote(self, answer):
-        new_vote = PollVote(topic_id=answer.topic_id, poll_answer_id=answer.id, author_id=self.id)
-        db.session.add(new_vote)
-
     def __repr__(self):
         return '<User %r>' % self.username
 
@@ -231,6 +227,7 @@ class Topic(db.Model):
     poll = db.Column(db.String(256))
     poll_answers = db.relationship('PollAnswer', backref='topic', lazy='dynamic')
     poll_votes = db.relationship('PollVote', backref='topic', lazy='dynamic')
+    interest = db.Column(db.Integer, default=0)
 
     @property
     def comments_count(self):
@@ -283,6 +280,18 @@ class Topic(db.Model):
         old_answers_bodies = [a.body for a in old_answers]
         for answer in [a for a in new_answers if a not in old_answers_bodies]:
             db.session.add(PollAnswer(topic_id=self.id, body=answer))
+
+    def add_vote(self, user, answer):
+        new_vote = PollVote(topic_id=self.id, poll_answer_id=answer.id, author_id=user.id)
+        db.session.add(new_vote)
+        self.interest += 1
+        db.session.add(self)
+
+    def add_comment(self, user, comment):
+        new_comment = Comment(body=comment, author_id=user.id, topic_id=self.id)
+        db.session.add(new_comment)
+        self.interest += 1
+        db.session.add(self)
 
 
 db.event.listen(Topic.body, 'set', Topic.on_changed_body)
@@ -362,6 +371,9 @@ class Comment(db.Model):
                         author=u,
                         topic=t)
             db.session.add(c)
+            if t:
+                t.interest += 1
+                db.session.add(t)
         db.session.commit()
 
 
