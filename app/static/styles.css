@@ -25,6 +25,12 @@ div.no-data-text {
     font-size: 150%;
     color: #e0e0e0;
 }
+span.blue-badge {
+    background-color: #428BCA;
+}
+td.nowrap-td {
+    white-space: nowrap;
+}
 
 /* CSS for account profile */
 .profile-header {
@@ -312,12 +318,6 @@ img.message_thumbnail {
     height: 18px;
     object-fit: cover;
 }
-span.blue-badge {
-    background-color: #428BCA;
-}
-td.nowrap-td {
-    white-space: nowrap;
-}
 
 /* CSS for message page */
 div.message-page-header {
@@ -340,4 +340,14 @@ div.message-page-content {
 div.message-date {
     float: right;
     font-size: small;
+}
+
+/* CSS for community */
+.table.community tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+img.community_thumbnail {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
 }

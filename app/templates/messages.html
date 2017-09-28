@@ -59,10 +59,10 @@
     <div class="no-data-text">Messages not found</div>
 {% endif %}
 
-
 {% if pagination %}
 <div class="pagination">
     {{ macros.pagination_widget(pagination, 'main.messages', direction=direction, fragment='#messages') }}
 </div>
 {% endif %}
+
 {% endblock %}

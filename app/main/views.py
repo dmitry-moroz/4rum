@@ -7,7 +7,7 @@ from sqlalchemy import func, case, between, and_, or_
 from . import main
 from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm,
                     TopicWithPollForm, TopicWithPollEditForm, CommentForm, CommentEditForm, MessageReplyForm,
-                    MessageSendForm)
+                    MessageSendForm, SearchForm)
 from .. import db
 from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
@@ -372,7 +372,7 @@ def vote(answer_id):
 @main.route('/hot')
 def hot():
     page_arg = request.args.get('page', 1, type=int)
-    period_arg = request.args.get('period', 'day', type=str)
+    period_arg = request.args.get('period', 'week', type=str)
 
     now = datetime.utcnow()
     periods = {
@@ -478,3 +478,21 @@ def send_message(username):
         return redirect(request.args.get('next') or url_for('main.messages'))
 
     return render_template('send_message.html', form=form, receiver=receiver)
+
+
+@main.route('/community', methods=['GET', 'POST'])
+@login_required
+def community():
+    form = SearchForm()
+    page = request.args.get('page', 1, type=int)
+
+    if form.validate_on_submit():
+        search_str = '%{}%'.format(form.text.data.lower())
+        pagination = User.query.order_by(User.id.asc()).filter(
+            or_(func.lower(User.username).like(search_str), func.lower(User.name).like(search_str))).paginate(
+            page, per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
+    else:
+        pagination = User.query.order_by(User.id.asc()).paginate(
+            page, per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
+
+    return render_template('community.html', form=form, users=pagination.items, pagination=pagination)

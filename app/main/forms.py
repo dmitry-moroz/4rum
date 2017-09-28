@@ -113,3 +113,8 @@ class MessageSendForm(FlaskForm):
     body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 4})
     send = SubmitField('Send')
     cancel = SubmitField('Cancel')
+
+
+class SearchForm(FlaskForm):
+    text = StringField('', validators=[DataRequired(), Length(1, 64)])
+    search = SubmitField('Search')

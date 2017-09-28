@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}4RUM - Community{% endblock %}
+
+{% block page_content %}
+<div id="community" class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='community-icon.png') }}">
+    <div class="main-header">
+        <h2>Forum's community</h2>
+    </div>
+</div>
+
+<div>
+    {{ wtf.quick_form(form, button_map={'search':'success'}, form_type='inline') }}
+</div>
+
+<table class="table table-hover community">
+    <thead>
+        <tr>
+            <th>Nick</th>
+            <th>Name</th>
+            <th>Member since</th>
+            <th>Last seen</th>
+        </tr>
+    </thead>
+    {% for user in users %}
+    <tr>
+        <td class="nowrap-td">
+            <a href="{{ url_for('main.user', username=user.username) }}">
+                <img class="img-rounded community_thumbnail" src="{{ user.avatar }}">
+                {{ user.username }}
+            </a>
+        </td>
+        <td>
+            {% if user.name %}{{ user.name }}{% endif %}
+        </td>
+        <td class="nowrap-td">
+            {{ moment(user.created_at).format('D MMMM YYYY, H:mm') }}
+        </td>
+        <td>
+            {{ moment(user.last_seen).fromNow() }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, 'main.community', fragment='#community') }}
+</div>
+{% endif %}
+
+{% endblock %}
