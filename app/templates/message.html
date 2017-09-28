@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}4RUM - Message{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='mail-read-icon.png') }}">
+    <div class="message-page-header">
+        <h2>
+            Message
+            {% if current_user.id == message.author_id %}
+            to {{ message.receiver.username }}
+            {% elif current_user.id == message.receiver_id %}
+            from {{ message.author.username }}
+            {% endif %}
+        </h2>
+    </div>
+</div>
+
+<div class="message-page img-rounded">
+
+    <div class="message-page-title">
+        <div class="message-date">
+            Sent: {{ moment(message.created_at).format('D MMMM YYYY, H:mm') }}
+        </div>
+        <div>
+            From:
+            <a href="{{ url_for('main.user', username=message.author.username) }}">
+                {% if message.author.name %}
+                    {{ message.author.name }}
+                {% else %}
+                    {{ message.author.username }}
+                {% endif %}
+            </a>
+        </div>
+        <div>
+            To:
+            <a href="{{ url_for('main.user', username=message.receiver.username) }}">
+                {% if message.receiver.name %}
+                    {{ message.receiver.name }}
+                {% else %}
+                    {{ message.receiver.username }}
+                {% endif %}
+            </a>
+        </div>
+        <div>
+            Subject: {{ message.title }}
+        </div>
+    </div>
+    <div class="message-page-content">
+        {{ message.body }}
+    </div>
+
+</div>
+
+{% if form %}
+    <div class="page-header">
+        <img class="common-thumbnail" src="{{ url_for('static', filename='mail-send-icon.png') }}">
+        <div class="topic-page-header">
+            <h2>Reply:</h2>
+        </div>
+    </div>
+    <div>
+        {{ wtf.quick_form(form, button_map={'send':'success', 'close':'warning', 'delete':'danger'}) }}
+    </div>
+{% endif %}
+<br>
+
+{% endblock %}

@@ -85,7 +85,7 @@ class TopicGroupForm(FlaskForm):
 
 
 class CommentForm(FlaskForm):
-    body = TextAreaField('Leave your message, {username}:', validators=[DataRequired()], render_kw={'rows': 4})
+    body = TextAreaField('Leave your comment, {username}:', validators=[DataRequired()], render_kw={'rows': 4})
     submit = SubmitField('Submit')
 
     def __init__(self, user, *args, **kwargs):
@@ -98,3 +98,18 @@ class CommentEditForm(FlaskForm):
     submit = SubmitField('Submit')
     cancel = SubmitField('Cancel')
     delete = SubmitField('Delete')
+
+
+class MessageReplyForm(FlaskForm):
+    title = StringField('Subject', validators=[DataRequired(), Length(0, 128)])
+    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 4})
+    send = SubmitField('Send')
+    close = SubmitField('Close')
+    delete = SubmitField('Delete')
+
+
+class MessageSendForm(FlaskForm):
+    title = StringField('Subject', validators=[DataRequired(), Length(0, 128)])
+    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 4})
+    send = SubmitField('Send')
+    cancel = SubmitField('Cancel')

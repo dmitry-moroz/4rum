@@ -2,11 +2,12 @@ from datetime import datetime, timedelta
 
 from flask import render_template, redirect, url_for, abort, flash, request, current_app
 from flask_login import login_required, current_user
-from sqlalchemy import func, case, between, and_
+from sqlalchemy import func, case, between, and_, or_
 
 from . import main
 from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm,
-                    TopicWithPollForm, TopicWithPollEditForm, CommentForm, CommentEditForm)
+                    TopicWithPollForm, TopicWithPollEditForm, CommentForm, CommentEditForm, MessageReplyForm,
+                    MessageSendForm)
 from .. import db
 from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
@@ -53,7 +54,7 @@ def topic(topic_id):
 
     if form and form.validate_on_submit():
         tpc.add_comment(current_user, form.body.data)
-        flash('Your message has been published.')
+        flash('Your comment has been published.')
         return redirect(url_for('main.topic', topic_id=topic_id, page=-1))
 
     page = request.args.get('page', 1, type=int)
@@ -116,7 +117,7 @@ def create_topic(topic_group_id):
             return redirect(url_for('main.create_topic', topic_group_id=topic_group_id, poll=1))
 
     elif form.cancel.data:
-        flash('Topic creation has been cancelled.')
+        flash('Topic creation was cancelled.')
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
 
     return render_template('create_topic.html', form=form, topic_group=t_group)
@@ -154,7 +155,7 @@ def edit_topic(topic_id):
         return redirect(url_for('main.edit_topic', topic_id=tpc.id, poll=1))
 
     elif form.cancel.data:
-        flash('Topic editing has been cancelled.')
+        flash('Topic editing was cancelled.')
         return redirect(url_for('main.topic', topic_id=tpc.id))
 
     elif form.delete.data:
@@ -204,7 +205,7 @@ def create_topic_group(topic_group_id):
         return redirect(url_for('main.topic_group', topic_group_id=new_t_group.id))
 
     elif form.cancel.data:
-        flash('Topic group creation has been cancelled.')
+        flash('Topic group creation was cancelled.')
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
 
     return render_template('create_topic_group.html', form=form, topic_group=t_group)
@@ -341,7 +342,7 @@ def edit_comment(comment_id):
         return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
     elif form.cancel.data:
-        flash('Comment editing has been cancelled.')
+        flash('Comment editing was cancelled.')
         return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
     elif form.delete.data:
@@ -394,7 +395,6 @@ def hot():
 
 @main.route('/messages')
 @login_required
-@permission_required(Permission.PARTICIPATE)
 def messages():
     page = request.args.get('page', 1, type=int)
     direction = request.args.get('direction', 'received', type=str)
@@ -413,3 +413,68 @@ def messages():
         abort(400)
 
     return render_template('messages.html', messages=pagination.items, pagination=pagination, direction=direction)
+
+
+@main.route('/message/<int:message_id>', methods=['GET', 'POST'])
+@login_required
+def message(message_id):
+    msg = Message.query.filter_by(id=message_id).filter(or_(
+        and_(Message.author_id == current_user.id, Message.author_deleted == False),
+        and_(Message.receiver_id == current_user.id, Message.receiver_deleted == False)
+    )).first_or_404()
+
+    if current_user.can(Permission.PARTICIPATE):
+        form = MessageReplyForm()
+    else:
+        form = None
+
+    if form:
+        if form.send.data and form.validate_on_submit():
+            receiver_id = msg.author_id if msg.author_id != current_user.id else msg.receiver_id
+            new_message = Message(title=form.title.data, body=form.body.data, author_id=current_user.id,
+                                  receiver_id=receiver_id)
+            flash('Your message has been sent.')
+            db.session.add(new_message)
+            return redirect(request.args.get('next') or url_for('main.messages'))
+        elif form.delete.data:
+            if msg.receiver_id == current_user.id:
+                msg.receiver_deleted = True
+            if msg.author_id == current_user.id:
+                msg.author_deleted = True
+            flash('The message has been deleted.')
+            db.session.add(msg)
+            return redirect(request.args.get('next') or url_for('main.messages'))
+        elif form.close.data:
+            return redirect(request.args.get('next') or url_for('main.messages'))
+
+    if msg.receiver_id == current_user.id and msg.unread:
+        msg.unread = False
+        db.session.add(msg)
+
+    if form:
+        form.title.data = msg.title
+
+    return render_template('message.html', message=msg, form=form)
+
+
+@main.route('/send_message/<username>', methods=['GET', 'POST'])
+@login_required
+@permission_required(Permission.PARTICIPATE)
+def send_message(username):
+    receiver = User.query.filter_by(username=username).first_or_404()
+    if receiver.id == current_user.id:
+        abort(400)
+
+    form = MessageSendForm()
+
+    if form.send.data and form.validate_on_submit():
+        new_message = Message(title=form.title.data, body=form.body.data, author_id=current_user.id,
+                              receiver_id=receiver.id)
+        flash('Your message has been sent.')
+        db.session.add(new_message)
+        return redirect(request.args.get('next') or url_for('main.messages'))
+    elif form.cancel.data:
+        flash('The message was cancelled.')
+        return redirect(request.args.get('next') or url_for('main.messages'))
+
+    return render_template('send_message.html', form=form, receiver=receiver)

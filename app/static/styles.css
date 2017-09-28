@@ -18,6 +18,13 @@ textarea.form-control {
 a.no-underline {
     text-decoration: none;
 }
+div.no-data-text {
+    padding: 16px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+    color: #e0e0e0;
+}
 
 /* CSS for account profile */
 .profile-header {
@@ -198,12 +205,12 @@ div.flask-pagedown-preview h3 {
     border-collapse: collapse;
 }
 .topic-page-content th {
-    background: #ccc;
-    padding: 4px;
+    background: #e0e0e0;
+    padding: 8px;
     border: 1px solid;
 }
 .topic-page-content td {
-    padding: 4px;
+    padding: 8px;
     border: 1px solid;
 }
 
@@ -307,4 +314,30 @@ img.message_thumbnail {
 }
 span.blue-badge {
     background-color: #428BCA;
+}
+td.nowrap-td {
+    white-space: nowrap;
+}
+
+/* CSS for message page */
+div.message-page-header {
+    margin-left: 48px;
+}
+div.message-page {
+    margin: 16px 0px 0px 0px;
+    border-top: 1px solid #428BCA;
+    border-bottom: 1px solid #428BCA;
+}
+div.message-page-title {
+    padding: 16px;
+    border-bottom: 1px solid #428BCA;
+}
+div.message-page-content {
+    padding: 16px;
+    min-height: 100px;
+    overflow-x: auto;
+}
+div.message-date {
+    float: right;
+    font-size: small;
 }

@@ -33,19 +33,21 @@
     </thead>
     {% for message, user in messages %}
     <tr>
-        <td>
-            <a href="{{ url_for('main.user', username = user.username) }}">
+        <td class="nowrap-td">
+            <a href="{{ url_for('main.user', username=user.username) }}">
                 <img class="img-rounded message_thumbnail" src="{{ user.avatar }}">
                 {{ user.username }}
             </a>
         </td>
         <td>
-            {{ message.title }}
+            <a href="{{ url_for('main.message', message_id=message.id, next=request.url) }}">
+                {{ message.title }}
+            </a>
         </td>
-        <td>
+        <td class="nowrap-td">
             {{ moment(message.created_at).format('D MMMM YYYY, H:mm') }}
         </td>
-        <td>
+        <td class="nowrap-td">
             {% if message.unread %}
             <span class="badge blue-badge">Unread</span>
             {% endif %}
@@ -53,6 +55,8 @@
     </tr>
     {% endfor %}
 </table>
+{% else %}
+    <div class="no-data-text">Messages not found</div>
 {% endif %}
 
 
