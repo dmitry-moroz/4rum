@@ -45,6 +45,9 @@
     </tr>
     {% endfor %}
 </table>
+{% if not users %}
+    <div class="no-data-text">Users not found</div>
+{% endif %}
 
 {% if pagination %}
 <div class="pagination">
