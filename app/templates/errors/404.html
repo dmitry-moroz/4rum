@@ -4,6 +4,9 @@
 
 {% block page_content %}
 <div class="page-header">
-    <h1>Not Found</h1>
+    <img class="common-thumbnail" src="{{ url_for('static', filename='error-icon.png') }}">
+    <div class="main-header">
+        <h1>Not Found</h1>
+    </div>
 </div>
 {% endblock %}
