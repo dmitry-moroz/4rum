@@ -10,7 +10,7 @@
         <div class="topic-group-content">
             <div class="topic-group-topics-info">
                 <a class="no-underline" href="{{ url_for('main.topic_group', topic_group_id=topic_group.id) }}">
-                    <span class="label label-default topic-group-topics-info">Topics: {{ topics_count }}</span>
+                    <span class="label label-default topic-group-topics-info">{{ _('Topics') }}: {{ topics_count }}</span>
                 </a>
             </div>
             <div class="topic-group-title">

@@ -14,14 +14,14 @@
         </div>
         <div class="comment-content">
             <div class="comment-date">
-                {{ moment(comment.created_at).format('D MMMM YYYY, H:mm') }}
+                {{ format_datetime(comment.created_at, 'd MMMM YYYY, H:mm') }}
             </div>
             <div class="comment-author">
                 <a href="{{ url_for('main.user', username=author.username) }}">
                     {{ author.username }}
                 </a>
                 {% if use_rich_comments %}
-                &nbsp;at&nbsp;
+                &nbsp;{{ _('at') }}&nbsp;
                 <a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">
                     "{{ topic.title }}"
                 </a>
@@ -32,11 +32,19 @@
             </div>
             <div class="comment-buttons">
                 {% if current_user.id==comment.author_id and current_user.can(Permission.WRITE) %}
-                <a class="btn btn-warning btn-xs" href="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}">Edit</a>
-                <a class="btn btn-danger btn-xs" href="{{ url_for('.delete_comment', comment_id=comment.id, next=request.url) }}">Delete</a>
+                <a class="btn btn-warning btn-xs" href="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}">
+                    {{ _('Edit') }}
+                </a>
+                <a class="btn btn-danger btn-xs" href="{{ url_for('.delete_comment', comment_id=comment.id, next=request.url) }}">
+                    {{ _('Delete') }}
+                </a>
                 {% elif current_user.is_moderator() %}
-                <a class="btn btn-warning btn-xs" href="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}">Edit [Moderator]</a>
-                <a class="btn btn-danger btn-xs" href="{{ url_for('.delete_comment', comment_id=comment.id, next=request.url) }}">Delete [Moderator]</a>
+                <a class="btn btn-warning btn-xs" href="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}">
+                    {{ _('Edit [Moderator]') }}
+                </a>
+                <a class="btn btn-danger btn-xs" href="{{ url_for('.delete_comment', comment_id=comment.id, next=request.url) }}">
+                    {{ _('Delete [Moderator]') }}
+                </a>
                 {% endif %}
             </div>
         </div>

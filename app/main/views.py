@@ -11,6 +11,7 @@ from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroup
 from .. import db
 from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
+from flask_babel import gettext
 
 
 # TODO: Make common template for Up button?

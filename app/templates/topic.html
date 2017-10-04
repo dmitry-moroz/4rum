@@ -24,7 +24,7 @@
         </div>
 
         <div class="topic-page-meta">
-            <div class="topic-date">Created: {{ moment(topic.created_at).format('D MMMM YYYY, H:mm') }}</div>
+            <div class="topic-date">{{ _('Created') }}: {{ format_datetime(topic.created_at, 'd MMMM YYYY, H:mm') }}</div>
             <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
             {% if topic.author.name %}
             <div class="topic-author">{{ topic.author.name }}</div>
@@ -51,7 +51,7 @@
                 <li class="poll_answer_voted img-rounded">
                     {{ answer }}
                     <div class="poll_percent_info">
-                        {{ percent }}% ({{ votes }} votes)
+                        {{ percent }}% ({{ votes }} {{ _('votes') }})
                     </div>
                     <div class="poll_progress img-rounded">
                         <div class="poll_progress_bar img-rounded" style="width:{{ percent }}%;">&nbsp;</div>
@@ -79,7 +79,7 @@
 <div id="comments" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='comments-icon.png') }}">
     <div class="topic-page-header">
-        <h2>Comments:</h2>
+        <h2>{{ _('Comments') }}:</h2>
     </div>
 </div>
 

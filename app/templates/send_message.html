@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}4RUM - New message{% endblock %}
+{% block title %}4RUM - {{ _('New message') }}{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='mail-send-icon.png') }}">
     <div class="message-page-header">
         <h2>
-            New message to {{ receiver.username }}
+            {{ _('New message to') }} {{ receiver.username }}
         </h2>
     </div>
 </div>
 
 
 <div>
-    From:
+    {{ _('From') }}:
     <a href="{{ url_for('main.user', username=current_user.username) }}">
         {% if current_user.name %}
             {{ current_user.name }}
@@ -25,7 +25,7 @@
     </a>
 </div>
 <div>
-    To:
+    {{ _('To') }}:
     <a href="{{ url_for('main.user', username=receiver.username) }}">
         {% if receiver.name %}
             {{ receiver.name }}
