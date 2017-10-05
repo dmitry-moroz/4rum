@@ -22,5 +22,6 @@ $ python manage.py shell
 $ export MAIL_USERNAME=4rum@example.com
 $ export MAIL_PASSWORD=password
 $ export ADMIN_MAIL_USERNAME=4rum_admin@example.com
+$ pybabel compile -d translations
 $ python manage.py runserver
 ```

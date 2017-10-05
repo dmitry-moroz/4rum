@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-05 17:29+0300\n"
-"PO-Revision-Date: 2017-10-05 17:34+0300\n"
+"POT-Creation-Date: 2017-10-05 17:43+0300\n"
+"PO-Revision-Date: 2017-10-05 17:44+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -276,12 +276,8 @@ msgid "Outgoing"
 msgstr "Исходящие"
 
 #: app/templates/messages.html:28
-msgid "From user"
-msgstr "От пользователя"
-
-#: app/templates/messages.html:28
-msgid "To user"
-msgstr "Пользователю"
+msgid "User"
+msgstr "Пользователь"
 
 #: app/templates/messages.html:29
 msgid "Title"
@@ -348,14 +344,5 @@ msgid "Edit profile [Admin]"
 msgstr "Редактировать профиль [Админ]"
 
 #: app/templates/user.html:53
-msgid "Topics by"
-msgstr "Темы от"
-
-#~ msgid "Home"
-#~ msgstr "Домой"
-
-#~ msgid "Received"
-#~ msgstr "Получено"
-
-#~ msgid "at"
-#~ msgstr "в"
+msgid "Topics on the forum"
+msgstr "Темы на форуме"
