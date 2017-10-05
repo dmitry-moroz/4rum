@@ -7,7 +7,13 @@
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='pen-icon.png') }}">
     <div class="comment-page-header">
-        <h2>{{ _('Edit') }} {{ comment.author.username }}{{ _('\'s comment') }}</h2>
+        <h2>
+            {% if current_user.username == comment.author.username %}
+            {{ _('Edit comment') }}
+            {% else %}
+            {{ _('Edit comment, author') }}: {{ comment.author.username }}
+            {% endif %}
+        </h2>
     </div>
 </div>
 <div>

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-05 17:43+0300\n"
-"PO-Revision-Date: 2017-10-05 17:44+0300\n"
+"POT-Creation-Date: 2017-10-05 17:57+0300\n"
+"PO-Revision-Date: 2017-10-05 17:59+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -21,7 +21,6 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: app/templates/_buttons_topic.html:5 app/templates/_comments.html:36
-#: app/templates/edit_comment.html:10 app/templates/edit_profile.html:10
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -159,25 +158,18 @@ msgstr "на домашней странице"
 msgid "Create new topic group"
 msgstr "Создать новую группу для тем"
 
-#: app/templates/edit_comment.html:4
+#: app/templates/edit_comment.html:4 app/templates/edit_comment.html:12
 msgid "Edit comment"
 msgstr "Редактировать комментарий"
 
-#: app/templates/edit_comment.html:10
-msgid "'s comment"
-msgstr " комментарий"
+#: app/templates/edit_comment.html:14
+msgid "Edit comment, author"
+msgstr "Редактировать комментарий, автор"
 
-#: app/templates/edit_profile.html:4 app/templates/user.html:43
+#: app/templates/edit_profile.html:4 app/templates/edit_profile.html:10
+#: app/templates/edit_profile.html:12 app/templates/user.html:43
 msgid "Edit profile"
 msgstr "Редактировать профиль"
-
-#: app/templates/edit_profile.html:10
-msgid "'s profile"
-msgstr " профиль"
-
-#: app/templates/edit_profile.html:12
-msgid "Edit your profile"
-msgstr "Редактировать свой профиль"
 
 #: app/templates/edit_topic.html:4 app/templates/edit_topic.html:16
 msgid "Edit topic"
@@ -265,7 +257,7 @@ msgstr "Тема"
 
 #: app/templates/message.html:61
 msgid "Reply"
-msgstr "Ответ"
+msgstr "Ответить"
 
 #: app/templates/messages.html:16
 msgid "Incoming"
