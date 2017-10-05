@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-05 17:57+0300\n"
+"POT-Creation-Date: 2017-10-05 18:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,7 +248,7 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: app/templates/message.html:48
+#: app/templates/message.html:48 app/templates/messages.html:29
 msgid "Subject"
 msgstr ""
 
@@ -266,10 +266,6 @@ msgstr ""
 
 #: app/templates/messages.html:28
 msgid "User"
-msgstr ""
-
-#: app/templates/messages.html:29
-msgid "Title"
 msgstr ""
 
 #: app/templates/messages.html:30
