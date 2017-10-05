@@ -21,7 +21,7 @@
                     {{ author.username }}
                 </a>
                 {% if use_rich_comments %}
-                &nbsp;{{ _('at') }}&nbsp;
+                &nbsp;{{ _('in') }}&nbsp;
                 <a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">
                     "{{ topic.title }}"
                 </a>

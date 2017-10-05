@@ -13,10 +13,10 @@
 <div>
     <ul class="nav nav-tabs">
         <li {% if direction=='received' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.messages', direction='received') }}">{{ _('Received') }}</a>
+            <a href="{{ url_for('main.messages', direction='received') }}">{{ _('Incoming') }}</a>
         </li>
         <li {% if direction=='sent' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.messages', direction='sent') }}">{{ _('Sent') }}</a>
+            <a href="{{ url_for('main.messages', direction='sent') }}">{{ _('Outgoing') }}</a>
         </li>
     </ul>
 </div>

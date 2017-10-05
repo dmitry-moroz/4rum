@@ -1,350 +1,361 @@
-# Translations template for PROJECT.
+# Russian translations for PROJECT.
 # Copyright (C) 2017 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2017-10-05 17:29+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2017-10-05 17:34+0300\n"
+"Last-Translator: \n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: app/templates/_buttons_topic.html:5 app/templates/_comments.html:36
 #: app/templates/edit_comment.html:10 app/templates/edit_profile.html:10
 msgid "Edit"
-msgstr ""
+msgstr "Редактировать"
 
 #: app/templates/_buttons_topic.html:9 app/templates/_comments.html:43
 msgid "Edit [Moderator]"
-msgstr ""
+msgstr "Редактировать [Модератор]"
 
 #: app/templates/_buttons_topic.html:15
 #: app/templates/_buttons_topic_group.html:22
 msgid "Up"
-msgstr ""
+msgstr "Вверх"
 
 #: app/templates/_buttons_topic_group.html:6
 msgid "Create topic group [Moderator]"
-msgstr ""
+msgstr "Создать группу для тем [Модератор]"
 
 #: app/templates/_buttons_topic_group.html:11
 msgid "Create topic"
-msgstr ""
+msgstr "Создать тему"
 
 #: app/templates/_buttons_topic_group.html:15
 msgid "Create topic [Moderator]"
-msgstr ""
+msgstr "Создать тему [Модератор]"
 
 #: app/templates/_comments.html:24 app/templates/create_topic.html:20
 #: app/templates/create_topic_group.html:14 app/templates/edit_topic.html:20
 msgid "in"
-msgstr ""
+msgstr "в"
 
 #: app/templates/_comments.html:39
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: app/templates/_comments.html:46
 msgid "Delete [Moderator]"
-msgstr ""
+msgstr "Удалить [Модератор]"
 
 #: app/templates/_topic_groups.html:13 app/templates/latest.html:16
 msgid "Topics"
-msgstr ""
+msgstr "Темы"
 
 #: app/templates/_topics.html:21 app/templates/latest.html:19
 #: app/templates/topic.html:82
 msgid "Comments"
-msgstr ""
+msgstr "Комментарии"
 
 #: app/templates/_topics.html:34
 msgid "Topics not found"
-msgstr ""
+msgstr "Темы не найдены"
 
 #: app/templates/base.html:25
 msgid "Forum"
-msgstr ""
+msgstr "Форум"
 
 #: app/templates/base.html:26 app/templates/latest.html:4
 msgid "Latest"
-msgstr ""
+msgstr "Свежее"
 
 #: app/templates/base.html:27
 msgid "Hot"
-msgstr ""
+msgstr "Горячее"
 
 #: app/templates/base.html:28 app/templates/community.html:5
 msgid "Community"
-msgstr ""
+msgstr "Сообщество"
 
 #: app/templates/base.html:39
 msgid "Account"
-msgstr ""
+msgstr "Аккаунт"
 
 #: app/templates/base.html:42
 msgid "Profile"
-msgstr ""
+msgstr "Профиль"
 
 #: app/templates/base.html:44 app/templates/messages.html:4
 #: app/templates/messages.html:10
 msgid "Messages"
-msgstr ""
+msgstr "Сообщения"
 
 #: app/templates/base.html:45
 msgid "Change password"
-msgstr ""
+msgstr "Изменить пароль"
 
 #: app/templates/base.html:46
 msgid "Change email"
-msgstr ""
+msgstr "Изменить e-mail"
 
 #: app/templates/base.html:47
 msgid "Log out"
-msgstr ""
+msgstr "Выйти"
 
 #: app/templates/base.html:51
 msgid "Log In"
-msgstr ""
+msgstr "Войти"
 
 #: app/templates/community.html:11
 msgid "Forum's community"
-msgstr ""
+msgstr "Сообщество форума"
 
 #: app/templates/community.html:22
 msgid "Nick"
-msgstr ""
+msgstr "Ник"
 
 #: app/templates/community.html:23 app/templates/user.html:13
 msgid "Name"
-msgstr ""
+msgstr "Имя"
 
 #: app/templates/community.html:24 app/templates/user.html:32
 msgid "Member since"
-msgstr ""
+msgstr "Участник с"
 
 #: app/templates/community.html:25 app/templates/user.html:35
 msgid "Last seen"
-msgstr ""
+msgstr "Последняя активность"
 
 #: app/templates/community.html:43 app/templates/user.html:35
 msgid "ago"
-msgstr ""
+msgstr "назад"
 
 #: app/templates/community.html:49
 msgid "Users not found"
-msgstr ""
+msgstr "Пользователи не найдены"
 
 #: app/templates/create_topic.html:4 app/templates/create_topic.html:16
 msgid "Create new topic"
-msgstr ""
+msgstr "Создать новую тему"
 
 #: app/templates/create_topic.html:18 app/templates/create_topic_group.html:12
 #: app/templates/edit_topic.html:18
 msgid "on home page"
-msgstr ""
+msgstr "на домашней странице"
 
 #: app/templates/create_topic_group.html:4
 #: app/templates/create_topic_group.html:10
 msgid "Create new topic group"
-msgstr ""
+msgstr "Создать новую группу для тем"
 
 #: app/templates/edit_comment.html:4
 msgid "Edit comment"
-msgstr ""
+msgstr "Редактировать комментарий"
 
 #: app/templates/edit_comment.html:10
 msgid "'s comment"
-msgstr ""
+msgstr " комментарий"
 
 #: app/templates/edit_profile.html:4 app/templates/user.html:43
 msgid "Edit profile"
-msgstr ""
+msgstr "Редактировать профиль"
 
 #: app/templates/edit_profile.html:10
 msgid "'s profile"
-msgstr ""
+msgstr " профиль"
 
 #: app/templates/edit_profile.html:12
 msgid "Edit your profile"
-msgstr ""
+msgstr "Редактировать свой профиль"
 
 #: app/templates/edit_topic.html:4 app/templates/edit_topic.html:16
 msgid "Edit topic"
-msgstr ""
+msgstr "Редактировать тему"
 
 #: app/templates/hot.html:4
 msgid "The most hot topics"
-msgstr ""
+msgstr "Самые горячие темы"
 
 #: app/templates/hot.html:10
 msgid "The most hot topics last"
-msgstr ""
+msgstr "Самые горячие темы за"
 
 #: app/templates/hot.html:10
 msgid "day"
-msgstr ""
+msgstr "день"
 
 #: app/templates/hot.html:10
 msgid "week"
-msgstr ""
+msgstr "неделю"
 
 #: app/templates/hot.html:10
 msgid "month"
-msgstr ""
+msgstr "месяц"
 
 #: app/templates/hot.html:10
 msgid "year"
-msgstr ""
+msgstr "год"
 
 #: app/templates/hot.html:16
 msgid "Day"
-msgstr ""
+msgstr "День"
 
 #: app/templates/hot.html:19
 msgid "Week"
-msgstr ""
+msgstr "Неделя"
 
 #: app/templates/hot.html:22
 msgid "Month"
-msgstr ""
+msgstr "Месяц"
 
 #: app/templates/hot.html:25
 msgid "Year"
-msgstr ""
+msgstr "Год"
 
 #: app/templates/index.html:11
 msgid "Welcome to"
-msgstr ""
+msgstr "Добро пожаловать на"
 
 #: app/templates/latest.html:10
 msgid "Latest topics"
-msgstr ""
+msgstr "Последние темы"
 
 #: app/templates/latest.html:10
 msgid "Latest comments"
-msgstr ""
+msgstr "Последние комментарии"
 
 #: app/templates/message.html:4 app/templates/message.html:11
 msgid "Message"
-msgstr ""
+msgstr "Сообщение"
 
 #: app/templates/message.html:13
 msgid "to"
-msgstr ""
+msgstr "для"
 
 #: app/templates/message.html:15
 msgid "from"
-msgstr ""
+msgstr "от"
 
 #: app/templates/message.html:25
 msgid "Sent"
-msgstr ""
+msgstr "Отправлено"
 
 #: app/templates/message.html:28 app/templates/send_message.html:18
 msgid "From"
-msgstr ""
+msgstr "От"
 
 #: app/templates/message.html:38 app/templates/send_message.html:28
 msgid "To"
-msgstr ""
+msgstr "Для"
 
 #: app/templates/message.html:48
 msgid "Subject"
-msgstr ""
+msgstr "Тема"
 
 #: app/templates/message.html:61
 msgid "Reply"
-msgstr ""
+msgstr "Ответ"
 
 #: app/templates/messages.html:16
 msgid "Incoming"
-msgstr ""
+msgstr "Входящие"
 
 #: app/templates/messages.html:19
 msgid "Outgoing"
-msgstr ""
+msgstr "Исходящие"
 
 #: app/templates/messages.html:28
 msgid "From user"
-msgstr ""
+msgstr "От пользователя"
 
 #: app/templates/messages.html:28
 msgid "To user"
-msgstr ""
+msgstr "Пользователю"
 
 #: app/templates/messages.html:29
 msgid "Title"
-msgstr ""
+msgstr "Заголовок"
 
 #: app/templates/messages.html:30
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #: app/templates/messages.html:52
 msgid "Unread"
-msgstr ""
+msgstr "Не прочитано"
 
 #: app/templates/messages.html:59
 msgid "Messages not found"
-msgstr ""
+msgstr "Сообщения не найдены"
 
 #: app/templates/send_message.html:4
 msgid "New message"
-msgstr ""
+msgstr "Новое сообщение"
 
 #: app/templates/send_message.html:11
 msgid "New message to"
-msgstr ""
+msgstr "Новое сообщение для"
 
 #: app/templates/topic.html:27
 msgid "Created"
-msgstr ""
+msgstr "Создано"
 
 #: app/templates/topic.html:54
 msgid "votes"
-msgstr ""
+msgstr "голоса"
 
 #: app/templates/user.html:18
 msgid "Homeland"
-msgstr ""
+msgstr "Родина"
 
 #: app/templates/user.html:23
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: app/templates/user.html:28
 msgid "About"
-msgstr ""
+msgstr "О себе"
 
 #: app/templates/user.html:39
 msgid "Forum activity"
-msgstr ""
+msgstr "Активность на форуме"
 
 #: app/templates/user.html:39
 msgid "topics"
-msgstr ""
+msgstr "темы"
 
 #: app/templates/user.html:39
 msgid "comments"
-msgstr ""
+msgstr "комментарии"
 
 #: app/templates/user.html:45
 msgid "Send message"
-msgstr ""
+msgstr "Отправить сообщение"
 
 #: app/templates/user.html:48
 msgid "Edit profile [Admin]"
-msgstr ""
+msgstr "Редактировать профиль [Админ]"
 
 #: app/templates/user.html:53
 msgid "Topics by"
-msgstr ""
+msgstr "Темы от"
 
+#~ msgid "Home"
+#~ msgstr "Домой"
+
+#~ msgid "Received"
+#~ msgstr "Получено"
+
+#~ msgid "at"
+#~ msgstr "в"

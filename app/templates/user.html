@@ -25,7 +25,7 @@
         {% endif %}
         {% if user.about %}
         <p>
-            {{ _('About') }} {{ user.username }}: {{ user.about }}
+            {{ _('About') }}: {{ user.about }}
         </p>
         {% endif %}
         <p>
@@ -35,7 +35,8 @@
             {{ _('Last seen') }}: {{ format_timedelta(user.last_seen) }} {{ _('ago') }}
         </p>
         <p>
-            {{ _('Forum activity') }}: {{ topics_count }} {{ _('topics') }}, {{ comments_count }} {{ _('comments') }}
+            /* TODO: Try ngettext(u'%(num)s Apple', u'%(num)s Apples', number_of_apples) */
+            {{ _('Forum activity') }}: {{ _('topics') }} {{ topics_count }}, {{ _('comments') }} {{ comments_count }}
         </p>
         <p>
             {% if user == current_user %}
