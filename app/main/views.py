@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
 
-from flask import render_template, redirect, url_for, abort, flash, request, current_app
+from flask import render_template, redirect, url_for, abort, flash, request, current_app, session
+from flask_babel import lazy_gettext
 from flask_login import login_required, current_user
 from sqlalchemy import func, case, between, and_, or_
 
+from app import babel
 from . import main
 from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm,
                     TopicWithPollForm, TopicWithPollEditForm, CommentForm, CommentEditForm, MessageReplyForm,
@@ -11,7 +13,6 @@ from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroup
 from .. import db
 from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
-from flask_babel import lazy_gettext
 
 
 # TODO: Make common template for Up button?
@@ -497,3 +498,18 @@ def community():
             page, per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
 
     return render_template('community.html', form=form, users=pagination.items, pagination=pagination)
+
+
+@main.route('/set_locale')
+def set_locale():
+    locale = request.args.get('locale', current_app.config['BABEL_DEFAULT_LOCALE'], type=str)
+    session['locale'] = locale
+    return redirect(request.args.get('next') or url_for('main.index'))
+
+
+@babel.localeselector
+def get_locale():
+    locale = session.get('locale', None)
+    if locale:
+        return locale
+    return request.accept_languages.best_match(current_app.config['SUPPORTED_LANGUAGES'].keys())

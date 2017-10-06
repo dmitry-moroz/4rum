@@ -32,7 +32,9 @@ class Config:
         'h1', 'h2', 'h3', 'p', 'table', 'thead', 'tbody', 'tr', 'th', 'td'
     ]
 
+    SUPPORTED_LANGUAGES = {'en': 'English', 'ru': 'Russian'}
     BABEL_DEFAULT_LOCALE = 'ru'
+    BABEL_DEFAULT_TIMEZONE = 'Europe/Minsk'
     BABEL_TRANSLATION_DIRECTORIES = '../translations'
 
     @staticmethod

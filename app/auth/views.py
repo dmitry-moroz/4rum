@@ -11,7 +11,7 @@ from ..models import User
 
 
 @auth.before_app_request
-def before_request():
+def check_confirmed():
     if current_user.is_authenticated:
         current_user.ping()
         if (not current_user.confirmed and request.endpoint and
