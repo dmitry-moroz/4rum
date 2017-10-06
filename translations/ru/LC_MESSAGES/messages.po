@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-06 11:13+0300\n"
-"PO-Revision-Date: 2017-10-06 11:27+0300\n"
+"POT-Creation-Date: 2017-10-06 11:45+0300\n"
+"PO-Revision-Date: 2017-10-06 11:46+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -87,10 +87,6 @@ msgstr "Горячее"
 msgid "Community"
 msgstr "Сообщество"
 
-#: app/templates/base.html:39
-msgid "Account"
-msgstr "Аккаунт"
-
 #: app/templates/base.html:42
 msgid "Profile"
 msgstr "Профиль"
@@ -168,7 +164,7 @@ msgid "Edit comment, author"
 msgstr "Редактировать комментарий, автор"
 
 #: app/templates/edit_profile.html:4 app/templates/edit_profile.html:10
-#: app/templates/edit_profile.html:12 app/templates/user.html:43
+#: app/templates/edit_profile.html:12 app/templates/user.html:42
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
@@ -308,27 +304,27 @@ msgstr "E-mail"
 msgid "About"
 msgstr "О себе"
 
-#: app/templates/user.html:39
+#: app/templates/user.html:38
 msgid "Forum activity"
 msgstr "Активность на форуме"
 
-#: app/templates/user.html:39
+#: app/templates/user.html:38
 msgid "topics"
 msgstr "темы"
 
-#: app/templates/user.html:39
+#: app/templates/user.html:38
 msgid "comments"
 msgstr "комментарии"
 
-#: app/templates/user.html:45
+#: app/templates/user.html:44
 msgid "Send message"
 msgstr "Отправить сообщение"
 
-#: app/templates/user.html:48
+#: app/templates/user.html:47
 msgid "Edit profile [Admin]"
 msgstr "Редактировать профиль [Админ]"
 
-#: app/templates/user.html:53
+#: app/templates/user.html:52
 msgid "Topics on the forum"
 msgstr "Темы на форуме"
 
@@ -405,7 +401,7 @@ msgstr "Неверный запрос"
 msgid "Forbidden"
 msgstr "Запрещено"
 
-#: app/templates/errors/404.html:9
+#: app/templates/errors/404.html:3 app/templates/errors/404.html:9
 msgid "Not Found"
 msgstr "Не найдено"
 
