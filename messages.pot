@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-06 12:07+0300\n"
+"POT-Creation-Date: 2017-10-06 12:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,190 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
 
-#: app/main/forms.py:12
+#: app/main/forms.py:12 app/main/forms.py:26
 msgid "Real name"
 msgstr ""
 
-#: app/main/forms.py:13 app/templates/user.html:18
+#: app/main/forms.py:13 app/main/forms.py:27 app/templates/user.html:18
 msgid "Homeland"
 msgstr ""
 
-#: app/main/forms.py:14
+#: app/main/forms.py:14 app/main/forms.py:28
 msgid "About me"
 msgstr ""
 
-#: app/main/forms.py:15
+#: app/main/forms.py:15 app/main/forms.py:29
 msgid "Link to avatar"
 msgstr ""
 
-#: app/main/forms.py:16
+#: app/main/forms.py:16 app/main/forms.py:30 app/main/forms.py:49
+#: app/main/forms.py:63 app/main/forms.py:75 app/main/forms.py:86
+#: app/main/forms.py:95
 msgid "Submit"
+msgstr ""
+
+#: app/main/forms.py:20 app/templates/user.html:23
+msgid "Email"
+msgstr ""
+
+#: app/main/forms.py:21
+msgid "Username"
+msgstr ""
+
+#: app/main/forms.py:22
+msgid "Usernames must have only letters, numbers, dots or underscores"
+msgstr ""
+
+#: app/main/forms.py:24
+msgid "Confirmed"
+msgstr ""
+
+#: app/main/forms.py:25
+msgid "Role"
+msgstr ""
+
+#: app/main/forms.py:39
+msgid "Email already registered."
+msgstr ""
+
+#: app/main/forms.py:43
+msgid "Username already in use."
+msgstr ""
+
+#: app/main/forms.py:47 app/main/forms.py:59 app/main/forms.py:72
+msgid "Title"
+msgstr ""
+
+#: app/main/forms.py:48 app/main/forms.py:60 app/main/forms.py:94
+#: app/main/forms.py:102 app/main/forms.py:110
+msgid "Text"
+msgstr ""
+
+#: app/main/forms.py:50
+msgid "Add poll"
+msgstr ""
+
+#: app/main/forms.py:51 app/main/forms.py:64 app/main/forms.py:76
+#: app/main/forms.py:96 app/main/forms.py:112
+msgid "Cancel"
+msgstr ""
+
+#: app/main/forms.py:55 app/main/forms.py:68 app/main/forms.py:97
+#: app/main/forms.py:105 app/templates/_comments.html:39
+msgid "Delete"
+msgstr ""
+
+#: app/main/forms.py:61
+msgid "Poll question"
+msgstr ""
+
+#: app/main/forms.py:62
+msgid "Poll answers"
+msgstr ""
+
+#: app/main/forms.py:73
+msgid "Priority"
+msgstr ""
+
+#: app/main/forms.py:74
+msgid "Protected"
+msgstr ""
+
+#: app/main/forms.py:84
+msgid "Leave your comment, {username}:"
+msgstr ""
+
+#: app/main/forms.py:101 app/main/forms.py:109 app/templates/message.html:48
+#: app/templates/messages.html:29
+msgid "Subject"
+msgstr ""
+
+#: app/main/forms.py:103 app/main/forms.py:111
+msgid "Send"
+msgstr ""
+
+#: app/main/forms.py:104
+msgid "Close"
+msgstr ""
+
+#: app/main/forms.py:117
+msgid "Search"
+msgstr ""
+
+#: app/main/views.py:58
+msgid "Your comment has been published."
+msgstr ""
+
+#: app/main/views.py:105
+msgid "Topic has been created."
+msgstr ""
+
+#: app/main/views.py:115 app/main/views.py:155
+msgid "Topic has been saved. Fill data for a poll."
+msgstr ""
+
+#: app/main/views.py:121
+msgid "Topic creation was cancelled."
+msgstr ""
+
+#: app/main/views.py:148
+msgid "The topic has been updated."
+msgstr ""
+
+#: app/main/views.py:159
+msgid "Topic editing was cancelled."
+msgstr ""
+
+#: app/main/views.py:169
+msgid "The topic has been deleted."
+msgstr ""
+
+#: app/main/views.py:205
+msgid "Topic group has been created."
+msgstr ""
+
+#: app/main/views.py:209
+msgid "Topic group creation was cancelled."
+msgstr ""
+
+#: app/main/views.py:249
+msgid "Your profile has been updated."
+msgstr ""
+
+#: app/main/views.py:277
+msgid "The profile has been updated."
+msgstr ""
+
+#: app/main/views.py:325 app/main/views.py:352
+msgid "The comment has been deleted."
+msgstr ""
+
+#: app/main/views.py:342
+msgid "The comment has been updated."
+msgstr ""
+
+#: app/main/views.py:346
+msgid "Comment editing was cancelled."
+msgstr ""
+
+#: app/main/views.py:366
+msgid "You have already voted for this poll."
+msgstr ""
+
+#: app/main/views.py:369
+msgid "Your vote has been taken."
+msgstr ""
+
+#: app/main/views.py:437 app/main/views.py:474
+msgid "Your message has been sent."
+msgstr ""
+
+#: app/main/views.py:445
+msgid "The message has been deleted."
+msgstr ""
+
+#: app/main/views.py:478
+msgid "The message was cancelled."
 msgstr ""
 
 #: app/templates/_buttons_topic.html:5 app/templates/_comments.html:36
@@ -65,10 +231,6 @@ msgstr ""
 #: app/templates/_comments.html:24 app/templates/create_topic.html:20
 #: app/templates/create_topic_group.html:14 app/templates/edit_topic.html:20
 msgid "in"
-msgstr ""
-
-#: app/templates/_comments.html:39
-msgid "Delete"
 msgstr ""
 
 #: app/templates/_comments.html:46
@@ -261,10 +423,6 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: app/templates/message.html:48 app/templates/messages.html:29
-msgid "Subject"
-msgstr ""
-
 #: app/templates/message.html:61
 msgid "Reply"
 msgstr ""
@@ -307,10 +465,6 @@ msgstr ""
 
 #: app/templates/topic.html:54
 msgid "votes"
-msgstr ""
-
-#: app/templates/user.html:23
-msgid "Email"
 msgstr ""
 
 #: app/templates/user.html:28

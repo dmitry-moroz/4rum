@@ -17,17 +17,17 @@ class EditProfileForm(FlaskForm):
 
 
 class EditProfileAdminForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Length(1, 64), Email()])
-    username = StringField('Username', validators=[
-        DataRequired(), Length(1, 32),
-        Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0, 'Usernames must have only letters, numbers, dots or underscores')])
-    confirmed = BooleanField('Confirmed')
-    role = SelectField('Role', coerce=int)
-    name = StringField('Real name', validators=[Length(0, 64)])
-    homeland = StringField('Location', validators=[Length(0, 64)])
-    about = TextAreaField('About me')
-    avatar = StringField('Link to avatar', validators=[Length(0, 256)])
-    submit = SubmitField('Submit')
+    email = StringField(lazy_gettext('Email'), validators=[DataRequired(), Length(1, 64), Email()])
+    username = StringField(lazy_gettext('Username'), validators=[
+        DataRequired(), Length(1, 32), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0, lazy_gettext(
+            'Usernames must have only letters, numbers, dots or underscores'))])
+    confirmed = BooleanField(lazy_gettext('Confirmed'))
+    role = SelectField(lazy_gettext('Role'), coerce=int)
+    name = StringField(lazy_gettext('Real name'), validators=[Length(0, 64)])
+    homeland = StringField(lazy_gettext('Homeland'), validators=[Length(0, 64)])
+    about = TextAreaField(lazy_gettext('About me'))
+    avatar = StringField(lazy_gettext('Link to avatar'), validators=[Length(0, 256)])
+    submit = SubmitField(lazy_gettext('Submit'))
 
     def __init__(self, user, *args, **kwargs):
         super(EditProfileAdminForm, self).__init__(*args, **kwargs)
@@ -36,44 +36,44 @@ class EditProfileAdminForm(FlaskForm):
 
     def validate_email(self, field):
         if field.data != self.user.email and User.query.filter_by(email=field.data).first():
-            raise ValidationError('Email already registered.')
+            raise ValidationError(lazy_gettext('Email already registered.'))
 
     def validate_username(self, field):
         if field.data != self.user.username and User.query.filter_by(username=field.data).first():
-            raise ValidationError('Username already in use.')
+            raise ValidationError(lazy_gettext('Username already in use.'))
 
 
 class TopicForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired(), Length(0, 128)])
-    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 20})
-    submit = SubmitField('Submit')
-    add_poll = SubmitField('Add poll')
-    cancel = SubmitField('Cancel')
+    title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
+    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
+    submit = SubmitField(lazy_gettext('Submit'))
+    add_poll = SubmitField(lazy_gettext('Add poll'))
+    cancel = SubmitField(lazy_gettext('Cancel'))
 
 
 class TopicEditForm(TopicForm):
-    delete = SubmitField('Delete')
+    delete = SubmitField(lazy_gettext('Delete'))
 
 
 class TopicWithPollForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired(), Length(0, 128)])
-    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 20})
-    poll_question = StringField('Poll question', validators=[DataRequired(), Length(0, 256)])
-    poll_answers = TextAreaField('Poll answers', validators=[DataRequired()], render_kw={'rows': 10})
-    submit = SubmitField('Submit')
-    cancel = SubmitField('Cancel')
+    title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
+    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
+    poll_question = StringField(lazy_gettext('Poll question'), validators=[DataRequired(), Length(0, 256)])
+    poll_answers = TextAreaField(lazy_gettext('Poll answers'), validators=[DataRequired()], render_kw={'rows': 10})
+    submit = SubmitField(lazy_gettext('Submit'))
+    cancel = SubmitField(lazy_gettext('Cancel'))
 
 
 class TopicWithPollEditForm(TopicWithPollForm):
-    delete = SubmitField('Delete')
+    delete = SubmitField(lazy_gettext('Delete'))
 
 
 class TopicGroupForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired(), Length(0, 64)])
-    priority = SelectField('Priority', coerce=int)
-    protected = BooleanField('Protected')
-    submit = SubmitField('Submit')
-    cancel = SubmitField('Cancel')
+    title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 64)])
+    priority = SelectField(lazy_gettext('Priority'), coerce=int)
+    protected = BooleanField(lazy_gettext('Protected'))
+    submit = SubmitField(lazy_gettext('Submit'))
+    cancel = SubmitField(lazy_gettext('Cancel'))
 
     def __init__(self, *args, **kwargs):
         super(TopicGroupForm, self).__init__(*args, **kwargs)
@@ -81,8 +81,9 @@ class TopicGroupForm(FlaskForm):
 
 
 class CommentForm(FlaskForm):
-    body = TextAreaField('Leave your comment, {username}:', validators=[DataRequired()], render_kw={'rows': 4})
-    submit = SubmitField('Submit')
+    body = TextAreaField(lazy_gettext('Leave your comment, {username}:'), validators=[DataRequired()],
+                         render_kw={'rows': 4})
+    submit = SubmitField(lazy_gettext('Submit'))
 
     def __init__(self, user, *args, **kwargs):
         super(CommentForm, self).__init__(*args, **kwargs)
@@ -90,27 +91,27 @@ class CommentForm(FlaskForm):
 
 
 class CommentEditForm(FlaskForm):
-    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 4})
-    submit = SubmitField('Submit')
-    cancel = SubmitField('Cancel')
-    delete = SubmitField('Delete')
+    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 4})
+    submit = SubmitField(lazy_gettext('Submit'))
+    cancel = SubmitField(lazy_gettext('Cancel'))
+    delete = SubmitField(lazy_gettext('Delete'))
 
 
 class MessageReplyForm(FlaskForm):
-    title = StringField('Subject', validators=[DataRequired(), Length(0, 128)])
-    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 4})
-    send = SubmitField('Send')
-    close = SubmitField('Close')
-    delete = SubmitField('Delete')
+    title = StringField(lazy_gettext('Subject'), validators=[DataRequired(), Length(0, 128)])
+    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 4})
+    send = SubmitField(lazy_gettext('Send'))
+    close = SubmitField(lazy_gettext('Close'))
+    delete = SubmitField(lazy_gettext('Delete'))
 
 
 class MessageSendForm(FlaskForm):
-    title = StringField('Subject', validators=[DataRequired(), Length(0, 128)])
-    body = TextAreaField('Text', validators=[DataRequired()], render_kw={'rows': 4})
-    send = SubmitField('Send')
-    cancel = SubmitField('Cancel')
+    title = StringField(lazy_gettext('Subject'), validators=[DataRequired(), Length(0, 128)])
+    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 4})
+    send = SubmitField(lazy_gettext('Send'))
+    cancel = SubmitField(lazy_gettext('Cancel'))
 
 
 class SearchForm(FlaskForm):
     text = StringField('', validators=[DataRequired(), Length(1, 64)])
-    search = SubmitField('Search')
+    search = SubmitField(lazy_gettext('Search'))
