@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-05 18:04+0300\n"
-"PO-Revision-Date: 2017-10-05 18:06+0300\n"
+"POT-Creation-Date: 2017-10-06 11:13+0300\n"
+"PO-Revision-Date: 2017-10-06 11:27+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -100,7 +100,8 @@ msgstr "Профиль"
 msgid "Messages"
 msgstr "Сообщения"
 
-#: app/templates/base.html:45
+#: app/templates/auth/change_password.html:4
+#: app/templates/auth/change_password.html:8 app/templates/base.html:45
 msgid "Change password"
 msgstr "Изменить пароль"
 
@@ -180,24 +181,20 @@ msgid "The most hot topics"
 msgstr "Самые горячие темы"
 
 #: app/templates/hot.html:10
-msgid "The most hot topics last"
-msgstr "Самые горячие темы за"
+msgid "The most hot topics last day"
+msgstr "Самые горячие темы за день"
 
 #: app/templates/hot.html:10
-msgid "day"
-msgstr "день"
+msgid "The most hot topics last week"
+msgstr "Самые горячие темы за неделю"
 
 #: app/templates/hot.html:10
-msgid "week"
-msgstr "неделю"
+msgid "The most hot topics last month"
+msgstr "Самые горячие темы за месяц"
 
 #: app/templates/hot.html:10
-msgid "month"
-msgstr "месяц"
-
-#: app/templates/hot.html:10
-msgid "year"
-msgstr "год"
+msgid "The most hot topics last year"
+msgstr "Самые горячие темы за год"
 
 #: app/templates/hot.html:16
 msgid "Day"
@@ -301,7 +298,7 @@ msgstr "голоса"
 
 #: app/templates/user.html:18
 msgid "Homeland"
-msgstr "Родина"
+msgstr "Родной город"
 
 #: app/templates/user.html:23
 msgid "Email"
@@ -334,3 +331,84 @@ msgstr "Редактировать профиль [Админ]"
 #: app/templates/user.html:53
 msgid "Topics on the forum"
 msgstr "Темы на форуме"
+
+#: app/templates/auth/change_email.html:4
+#: app/templates/auth/change_email.html:8
+msgid "Change email address"
+msgstr "Изменить адрес e-mail"
+
+#: app/templates/auth/login.html:4 app/templates/auth/login.html:8
+msgid "Login"
+msgstr "Войти"
+
+#: app/templates/auth/login.html:13
+msgid "New user?"
+msgstr "Новый пользователь?"
+
+#: app/templates/auth/login.html:13
+msgid "Click here to register"
+msgstr "Нажмите здесь, чтобы зарегистрироваться"
+
+#: app/templates/auth/login.html:14
+msgid "Forgot your password?"
+msgstr "Забыли пароль?"
+
+#: app/templates/auth/login.html:14
+msgid "Click here to reset it"
+msgstr "Нажмите здесь, чтобы сбросить его"
+
+#: app/templates/auth/register.html:4 app/templates/auth/register.html:8
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+#: app/templates/auth/reset_password.html:4
+#: app/templates/auth/reset_password.html:8
+msgid "Reset password"
+msgstr "Сбросить пароль"
+
+#: app/templates/auth/unconfirmed.html:3
+msgid "Confirm your account"
+msgstr "Подтвердите свою уче"
+
+#: app/templates/auth/unconfirmed.html:8
+msgid "Hello"
+msgstr "Здравствуйте"
+
+#: app/templates/auth/unconfirmed.html:10
+msgid "You have not confirmed your account yet."
+msgstr "Вы еще не подтвердили свой аккаунт."
+
+#: app/templates/auth/unconfirmed.html:12
+msgid ""
+"Before you can access this site you need to confirm your account.\n"
+"        Check your inbox, you should have received an email with a "
+"confirmation link."
+msgstr ""
+"Прежде чем Вы сможете получить доступ к этому сайту, Вам необходимо "
+"подтвердить свой аккаунт.\n"
+"        Проверьте свой почтовый ящик, Вы должны были получить электронное "
+"письмо со ссылкой на подтверждение."
+
+#: app/templates/auth/unconfirmed.html:16
+msgid "Need another confirmation email?"
+msgstr "Вам необходимо новое письмо со ссылкой на подтверждение?"
+
+#: app/templates/auth/unconfirmed.html:17
+msgid "Click here"
+msgstr "Нажмите здесь"
+
+#: app/templates/errors/400.html:3 app/templates/errors/400.html:9
+msgid "Bad Request"
+msgstr "Неверный запрос"
+
+#: app/templates/errors/403.html:3 app/templates/errors/403.html:9
+msgid "Forbidden"
+msgstr "Запрещено"
+
+#: app/templates/errors/404.html:9
+msgid "Not Found"
+msgstr "Не найдено"
+
+#: app/templates/errors/500.html:3 app/templates/errors/500.html:9
+msgid "Internal Server Error"
+msgstr "Внутренняя ошибка сервера"

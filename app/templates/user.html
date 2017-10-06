@@ -35,7 +35,6 @@
             {{ _('Last seen') }}: {{ format_timedelta(user.last_seen) }} {{ _('ago') }}
         </p>
         <p>
-            /* TODO: Try ngettext(u'%(num)s Apple', u'%(num)s Apples', number_of_apples) */
             {{ _('Forum activity') }}: {{ _('topics') }} {{ topics_count }}, {{ _('comments') }} {{ comments_count }}
         </p>
         <p>
