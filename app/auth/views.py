@@ -129,7 +129,7 @@ def reset_password_request():
         token = user.generate_token()
         send_email(user.email, lazy_gettext('Instructions To Reset Your Password'), 'auth/email/reset_password',
                    user=user, token=token)
-        flash(lazy_gettext('An email with instructions to reset password has been sent to email.'))
+        flash(lazy_gettext('An email with instructions to reset password has been sent to you by email.'))
         return redirect(request.args.get('next') or url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
 

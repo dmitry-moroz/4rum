@@ -168,7 +168,7 @@ msgid "Instructions To Reset Your Password"
 msgstr "Инструкции по сбросу пароля"
 
 #: app/auth/views.py:132
-msgid "An email with instructions to reset password has been sent to email."
+msgid "An email with instructions to reset password has been sent to you by email."
 msgstr ""
 "Электронное письмо с инструкциями по сбросу пароля отправлено Вам по "
 "электронной почте."
