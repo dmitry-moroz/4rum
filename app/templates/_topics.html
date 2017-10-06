@@ -9,7 +9,7 @@
         </div>
         <div class="topic-content">
             <div class="topic-date">
-                {{ moment(topic.created_at).format('D MMMM YYYY') }}
+                {{ format_datetime(topic.created_at, 'd MMMM YYYY') }}
             </div>
             <div class="topic-author">
                 <a href="{{ url_for('main.user', username=author.username) }}">
@@ -18,7 +18,7 @@
             </div>
             <div class="topic-comments-info">
                 <a class="no-underline" href="{{ url_for('main.topic', topic_id=topic.id) }}#comments">
-                    <span class="label label-primary topic-comments-info">Comments: {{ comments_count }}</span>
+                    <span class="label label-primary topic-comments-info">{{ _('Comments') }}: {{ comments_count }}</span>
                 </a>
             </div>
             <div class="topic-title">
@@ -31,5 +31,5 @@
     {% endfor %}
 </ul>
 {% else %}
-    <div class="no-data-text">Topics not found</div>
+    <div class="no-data-text">{{ _('Topics not found') }}</div>
 {% endif %}

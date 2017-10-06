@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}4RUM - Edit topic{% endblock %}
+{% block title %}4RUM - {{ _('Edit topic') }}{% endblock %}
 
 {% block head %}
 {{ super() }}
@@ -13,11 +13,11 @@
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='pen-icon.png') }}">
     <div class="topic-page-header">
-        <h2>Edit topic
+        <h2>{{ _('Edit topic') }}
             {% if topic.group.is_root_topic_group() %}
-            on home page
+            {{ _('on home page') }}
             {% else %}
-            in "{{ topic.group.title }}"
+            {{ _('in') }} "{{ topic.group.title }}"
             {% endif %}
         </h2>
     </div>

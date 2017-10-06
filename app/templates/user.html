@@ -10,46 +10,46 @@
         <h1>{{ user.username }}</h1>
         {% if user.name %}
         <p>
-            Name: {{ user.name }}
+            {{ _('Name') }}: {{ user.name }}
         </p>
         {% endif %}
         {% if user.homeland %}
         <p>
-            Homeland: <a href="http://maps.google.com/?q={{ user.homeland }}">{{ user.homeland }}</a>
+            {{ _('Homeland') }}: <a href="http://maps.google.com/?q={{ user.homeland }}">{{ user.homeland }}</a>
         </p>
         {% endif %}
         {% if current_user.is_administrator() %}
         <p>
-            Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+            {{ _('Email') }}: <a href="mailto:{{ user.email }}">{{ user.email }}</a>
         </p>
         {% endif %}
         {% if user.about %}
         <p>
-            About {{ user.username }}: {{ user.about }}
+            {{ _('About') }}: {{ user.about }}
         </p>
         {% endif %}
         <p>
-            Member since: {{ moment(user.created_at).format('D MMMM YYYY') }}
+            {{ _('Member since') }}: {{ format_datetime(user.created_at, 'd MMMM YYYY') }}
         </p>
         <p>
-            Last seen: {{ moment(user.last_seen).fromNow() }}
+            {{ _('Last seen') }}: {{ format_timedelta(user.last_seen) }} {{ _('ago') }}
         </p>
         <p>
-            Forum activity: {{ topics_count }} topics, {{ comments_count }} comments
+            {{ _('Forum activity') }}: {{ _('topics') }} {{ topics_count }}, {{ _('comments') }} {{ comments_count }}
         </p>
         <p>
             {% if user == current_user %}
-            <a class="btn btn-default" href="{{ url_for('main.edit_profile') }}">Edit profile</a>
+            <a class="btn btn-default" href="{{ url_for('main.edit_profile') }}">{{ _('Edit profile') }}</a>
             {% else %}
-            <a class="btn btn-primary" href="{{ url_for('main.send_message', username=user.username, next=request.url) }}">Send message</a>
+            <a class="btn btn-primary" href="{{ url_for('main.send_message', username=user.username, next=request.url) }}">{{ _('Send message') }}</a>
             {% endif %}
             {% if current_user.is_administrator() %}
-            <a class="btn btn-danger" href="{{ url_for('main.edit_profile_admin', user_id=user.id) }}">Edit profile [Admin]</a>
+            <a class="btn btn-danger" href="{{ url_for('main.edit_profile_admin', user_id=user.id) }}">{{ _('Edit profile [Admin]') }}</a>
             {% endif %}
         </p>
     </div>
 </div>
-<h3 id="user_topics">Topics by {{ user.username }}:</h3>
+<h3 id="user_topics">{{ _('Topics on the forum') }}:</h3>
 {% include '_topics.html' %}
 {% if pagination %}
 <div class="pagination">

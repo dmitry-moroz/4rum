@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 
-{% block title %}4RUM - Latest {{ target }}{% endblock %}
+{% block title %}4RUM - {{ _('Latest') }}{% endblock %}
 
 {% block page_content %}
 <div id="latest" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='timer-icon.png') }}">
     <div class="main-header">
-        <h2>Latest {{ target }}</h2>
+        <h2>{{ _('Latest ' + target) }}</h2>
     </div>
 </div>
 <div>
     <ul class="nav nav-tabs">
         <li {% if target=='topics' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.latest', target='topics') }}">Topics</a>
+            <a href="{{ url_for('main.latest', target='topics') }}">{{ _('Topics') }}</a>
         </li>
         <li {% if target=='comments' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.latest', target='comments') }}">Comments</a>
+            <a href="{{ url_for('main.latest', target='comments') }}">{{ _('Comments') }}</a>
         </li>
     </ul>
 </div>

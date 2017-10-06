@@ -1,0 +1,695 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-10-06 13:34+0300\n"
+"PO-Revision-Date: 2017-10-06 14:39+0300\n"
+"Last-Translator: \n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: app/auth/forms.py:12 app/auth/forms.py:19 app/auth/forms.py:70
+#: app/auth/forms.py:79 app/main/forms.py:20 app/templates/user.html:23
+msgid "Email"
+msgstr "E-mail"
+
+#: app/auth/forms.py:13 app/auth/forms.py:23 app/auth/forms.py:55
+msgid "Password"
+msgstr "Пароль"
+
+#: app/auth/forms.py:14
+msgid "Keep me logged in"
+msgstr "Запомнить меня"
+
+#: app/auth/forms.py:15 app/templates/base.html:51
+msgid "Log In"
+msgstr "Войти"
+
+#: app/auth/forms.py:20 app/main/forms.py:21
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: app/auth/forms.py:21 app/main/forms.py:22
+msgid "Usernames must have only letters, numbers, dots or underscores"
+msgstr ""
+"Имена пользователей должны содержать только буквы, цифры, точки или символы "
+"подчеркивания"
+
+#: app/auth/forms.py:24 app/auth/forms.py:40 app/auth/forms.py:81
+msgid "Passwords must match."
+msgstr "Пароли должны совпадать."
+
+#: app/auth/forms.py:25 app/auth/forms.py:82
+msgid "Confirm password"
+msgstr "Подтвердите пароль"
+
+#: app/auth/forms.py:26 app/templates/auth/register.html:4
+#: app/templates/auth/register.html:8
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+#: app/auth/forms.py:30 app/auth/forms.py:62 app/main/forms.py:39
+msgid "Email already registered."
+msgstr "E-mail уже зарегистрирован."
+
+#: app/auth/forms.py:34 app/main/forms.py:43
+msgid "Username already in use."
+msgstr "Имя пользователя уже используется."
+
+#: app/auth/forms.py:38
+msgid "Old password"
+msgstr "Старый пароль"
+
+#: app/auth/forms.py:39 app/auth/forms.py:80
+msgid "New password"
+msgstr "Новый пароль"
+
+#: app/auth/forms.py:41
+msgid "Confirm new password"
+msgstr "Подтвердите новый пароль"
+
+#: app/auth/forms.py:42 app/templates/auth/change_password.html:4
+#: app/templates/auth/change_password.html:8 app/templates/base.html:45
+msgid "Change password"
+msgstr "Изменить пароль"
+
+#: app/auth/forms.py:46
+msgid "Invalid old password."
+msgstr "Неверный старый пароль."
+
+#: app/auth/forms.py:50
+msgid "New password is the same as old password."
+msgstr "Новый пароль совпадает со старым паролем."
+
+#: app/auth/forms.py:54
+msgid "New email"
+msgstr "Новый e-mail"
+
+#: app/auth/forms.py:56 app/templates/base.html:46
+msgid "Change email"
+msgstr "Изменить e-mail"
+
+#: app/auth/forms.py:60
+msgid "This is your current email."
+msgstr "Это Ваш текущий e-mail."
+
+#: app/auth/forms.py:66
+msgid "Invalid password."
+msgstr "Неверный пароль."
+
+#: app/auth/forms.py:71 app/auth/forms.py:83
+#: app/templates/auth/reset_password.html:4
+#: app/templates/auth/reset_password.html:8
+msgid "Reset password"
+msgstr "Сбросить пароль"
+
+#: app/auth/forms.py:75 app/auth/forms.py:87
+msgid "Unknown email address."
+msgstr "Неизвестный e-mail адрес."
+
+#: app/auth/views.py:37
+msgid "Invalid username or password."
+msgstr "Неверное имя пользователя или пароль."
+
+#: app/auth/views.py:45
+msgid "You have been logged out."
+msgstr "Вы вышли из системы."
+
+#: app/auth/views.py:57 app/auth/views.py:81
+msgid "Confirm Your Account"
+msgstr "Подтвердите Ваш аккаунт"
+
+#: app/auth/views.py:58
+msgid "A confirmation email has been sent to you by email."
+msgstr "Письмо с подтверждением отправлено Вам по электронной почте."
+
+#: app/auth/views.py:69
+msgid "You have confirmed your account. Thanks!"
+msgstr "Вы подтвердили аккаунт. Спасибо!"
+
+#: app/auth/views.py:71 app/auth/views.py:118 app/auth/views.py:148
+msgid "The confirmation link is invalid or has expired."
+msgstr "Ссылка для подтверждения неверная или истекла."
+
+#: app/auth/views.py:83
+msgid "A new confirmation email has been sent to you by email."
+msgstr "Новое письмо с подтверждением отправлено Вам по электронной почте."
+
+#: app/auth/views.py:94
+msgid "Your password has been updated."
+msgstr "Ваш пароль был обновлен."
+
+#: app/auth/views.py:105
+msgid "Confirm Your New Email"
+msgstr "Подтвердите Ваш новый e-mail"
+
+#: app/auth/views.py:107
+msgid "A confirmation email has been sent to your new email."
+msgstr "Письмо с подтверждением отправлено на Ваш новый e-mail."
+
+#: app/auth/views.py:116
+msgid "You have confirmed your new email. Thanks!"
+msgstr "Вы подтвердили новый e-mail. Спасибо!"
+
+#: app/auth/views.py:130
+msgid "Instructions To Reset Your Password"
+msgstr "Инструкции по сбросу пароля"
+
+#: app/auth/views.py:132
+msgid "An email with instructions to reset password has been sent to you by email."
+msgstr ""
+"Электронное письмо с инструкциями по сбросу пароля отправлено Вам по "
+"электронной почте."
+
+#: app/auth/views.py:145
+msgid "You have reset your password to new."
+msgstr "Вы сбросили пароль на новый."
+
+#: app/main/forms.py:12 app/main/forms.py:26
+msgid "Real name"
+msgstr "Реальное имя"
+
+#: app/main/forms.py:13 app/main/forms.py:27 app/templates/user.html:18
+msgid "Homeland"
+msgstr "Родной город"
+
+#: app/main/forms.py:14 app/main/forms.py:28
+msgid "About me"
+msgstr "О себе"
+
+#: app/main/forms.py:15 app/main/forms.py:29
+msgid "Link to avatar"
+msgstr "Ссылка на аватар"
+
+#: app/main/forms.py:16 app/main/forms.py:30 app/main/forms.py:49
+#: app/main/forms.py:63 app/main/forms.py:75 app/main/forms.py:86
+#: app/main/forms.py:95
+msgid "Submit"
+msgstr "Отправить"
+
+#: app/main/forms.py:24
+msgid "Confirmed"
+msgstr "Подтвержденный"
+
+#: app/main/forms.py:25
+msgid "Role"
+msgstr "Роль"
+
+#: app/main/forms.py:47 app/main/forms.py:59 app/main/forms.py:72
+msgid "Title"
+msgstr "Заголовок"
+
+#: app/main/forms.py:48 app/main/forms.py:60 app/main/forms.py:94
+#: app/main/forms.py:102 app/main/forms.py:110
+msgid "Text"
+msgstr "Текст"
+
+#: app/main/forms.py:50
+msgid "Add poll"
+msgstr "Добавить голосование"
+
+#: app/main/forms.py:51 app/main/forms.py:64 app/main/forms.py:76
+#: app/main/forms.py:96 app/main/forms.py:112
+msgid "Cancel"
+msgstr "Отменить"
+
+#: app/main/forms.py:55 app/main/forms.py:68 app/main/forms.py:97
+#: app/main/forms.py:105 app/templates/_comments.html:39
+msgid "Delete"
+msgstr "Удалить"
+
+#: app/main/forms.py:61
+msgid "Poll question"
+msgstr "Вопрос для голосования"
+
+#: app/main/forms.py:62
+msgid "Poll answers"
+msgstr "Варианты ответов для голосования"
+
+#: app/main/forms.py:73
+msgid "Priority"
+msgstr "Приоритет"
+
+#: app/main/forms.py:74
+msgid "Moderators only"
+msgstr "Только для модераторов"
+
+#: app/main/forms.py:84
+msgid "Leave your comment, {username}:"
+msgstr "Оставьте свой комментарий, {username}:"
+
+#: app/main/forms.py:101 app/main/forms.py:109 app/templates/message.html:48
+#: app/templates/messages.html:29
+msgid "Subject"
+msgstr "Тема"
+
+#: app/main/forms.py:103 app/main/forms.py:111
+msgid "Send"
+msgstr "Отправить"
+
+#: app/main/forms.py:104
+msgid "Close"
+msgstr "Закрыть"
+
+#: app/main/forms.py:117
+msgid "Search"
+msgstr "Поиск"
+
+#: app/main/views.py:58
+msgid "Your comment has been published."
+msgstr "Ваш комментарий опубликован."
+
+#: app/main/views.py:105
+msgid "Topic has been created."
+msgstr "Тема создана."
+
+#: app/main/views.py:115 app/main/views.py:155
+msgid "Topic has been saved. Fill data for a poll."
+msgstr "Тема сохранена. Заполните данные для опроса."
+
+#: app/main/views.py:121
+msgid "Topic creation was cancelled."
+msgstr "Создание темы было отменено."
+
+#: app/main/views.py:148
+msgid "The topic has been updated."
+msgstr "Тема обновлена."
+
+#: app/main/views.py:159
+msgid "Topic editing was cancelled."
+msgstr "Редактирование темы было отменено."
+
+#: app/main/views.py:169
+msgid "The topic has been deleted."
+msgstr "Тема удалена."
+
+#: app/main/views.py:205
+msgid "Topic group has been created."
+msgstr "Группа для тем создана."
+
+#: app/main/views.py:209
+msgid "Topic group creation was cancelled."
+msgstr "Создание группы для тем было отменено."
+
+#: app/main/views.py:249
+msgid "Your profile has been updated."
+msgstr "Ваш профиль обновлен."
+
+#: app/main/views.py:277
+msgid "The profile has been updated."
+msgstr "Профиль обновлен."
+
+#: app/main/views.py:325 app/main/views.py:352
+msgid "The comment has been deleted."
+msgstr "Комментарий удален."
+
+#: app/main/views.py:342
+msgid "The comment has been updated."
+msgstr "Комментарий обновлен."
+
+#: app/main/views.py:346
+msgid "Comment editing was cancelled."
+msgstr "Редактирование комментария было отменено."
+
+#: app/main/views.py:366
+msgid "You have already voted for this poll."
+msgstr "Вы уже голосовали в этом опросе."
+
+#: app/main/views.py:369
+msgid "Your vote has been taken."
+msgstr "Ваш голос принят."
+
+#: app/main/views.py:437 app/main/views.py:474
+msgid "Your message has been sent."
+msgstr "Ваше сообщение отправлено."
+
+#: app/main/views.py:445
+msgid "The message has been deleted."
+msgstr "Сообщение удалено."
+
+#: app/main/views.py:478
+msgid "The message was cancelled."
+msgstr "Сообщение было отменено."
+
+#: app/templates/_buttons_topic.html:5 app/templates/_comments.html:36
+msgid "Edit"
+msgstr "Редактировать"
+
+#: app/templates/_buttons_topic.html:9 app/templates/_comments.html:43
+msgid "Edit [Moderator]"
+msgstr "Редактировать [Модератор]"
+
+#: app/templates/_buttons_topic.html:15
+#: app/templates/_buttons_topic_group.html:22
+msgid "Up"
+msgstr "Вверх"
+
+#: app/templates/_buttons_topic_group.html:6
+msgid "Create topic group [Moderator]"
+msgstr "Создать группу для тем [Модератор]"
+
+#: app/templates/_buttons_topic_group.html:11
+msgid "Create topic"
+msgstr "Создать тему"
+
+#: app/templates/_buttons_topic_group.html:15
+msgid "Create topic [Moderator]"
+msgstr "Создать тему [Модератор]"
+
+#: app/templates/_comments.html:24 app/templates/create_topic.html:20
+#: app/templates/create_topic_group.html:14 app/templates/edit_topic.html:20
+msgid "in"
+msgstr "в"
+
+#: app/templates/_comments.html:46
+msgid "Delete [Moderator]"
+msgstr "Удалить [Модератор]"
+
+#: app/templates/_topic_groups.html:13 app/templates/latest.html:16
+msgid "Topics"
+msgstr "Темы"
+
+#: app/templates/_topics.html:21 app/templates/latest.html:19
+#: app/templates/topic.html:82
+msgid "Comments"
+msgstr "Комментарии"
+
+#: app/templates/_topics.html:34
+msgid "Topics not found"
+msgstr "Темы не найдены"
+
+#: app/templates/base.html:25
+msgid "Forum"
+msgstr "Форум"
+
+#: app/templates/base.html:26 app/templates/latest.html:4
+msgid "Latest"
+msgstr "Свежее"
+
+#: app/templates/base.html:27
+msgid "Hot"
+msgstr "Горячее"
+
+#: app/templates/base.html:28 app/templates/community.html:5
+msgid "Community"
+msgstr "Сообщество"
+
+#: app/templates/base.html:42
+msgid "Profile"
+msgstr "Профиль"
+
+#: app/templates/base.html:44 app/templates/messages.html:4
+#: app/templates/messages.html:10
+msgid "Messages"
+msgstr "Сообщения"
+
+#: app/templates/base.html:47
+msgid "Log out"
+msgstr "Выйти"
+
+#: app/templates/community.html:11
+msgid "Forum's community"
+msgstr "Сообщество форума"
+
+#: app/templates/community.html:22
+msgid "Nick"
+msgstr "Ник"
+
+#: app/templates/community.html:23 app/templates/user.html:13
+msgid "Name"
+msgstr "Имя"
+
+#: app/templates/community.html:24 app/templates/user.html:32
+msgid "Member since"
+msgstr "Участник с"
+
+#: app/templates/community.html:25 app/templates/user.html:35
+msgid "Last seen"
+msgstr "Последняя активность"
+
+#: app/templates/community.html:43 app/templates/user.html:35
+msgid "ago"
+msgstr "назад"
+
+#: app/templates/community.html:49
+msgid "Users not found"
+msgstr "Пользователи не найдены"
+
+#: app/templates/create_topic.html:4 app/templates/create_topic.html:16
+msgid "Create new topic"
+msgstr "Создать новую тему"
+
+#: app/templates/create_topic.html:18 app/templates/create_topic_group.html:12
+#: app/templates/edit_topic.html:18
+msgid "on home page"
+msgstr "на домашней странице"
+
+#: app/templates/create_topic_group.html:4
+#: app/templates/create_topic_group.html:10
+msgid "Create new topic group"
+msgstr "Создать новую группу для тем"
+
+#: app/templates/edit_comment.html:4 app/templates/edit_comment.html:12
+msgid "Edit comment"
+msgstr "Редактировать комментарий"
+
+#: app/templates/edit_comment.html:14
+msgid "Edit comment, author"
+msgstr "Редактировать комментарий, автор"
+
+#: app/templates/edit_profile.html:4 app/templates/edit_profile.html:10
+#: app/templates/edit_profile.html:12 app/templates/user.html:42
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+#: app/templates/edit_topic.html:4 app/templates/edit_topic.html:16
+msgid "Edit topic"
+msgstr "Редактировать тему"
+
+#: app/templates/hot.html:4
+msgid "The most hot topics"
+msgstr "Самые горячие темы"
+
+#: app/templates/hot.html:10
+msgid "The most hot topics last day"
+msgstr "Самые горячие темы за день"
+
+#: app/templates/hot.html:10
+msgid "The most hot topics last week"
+msgstr "Самые горячие темы за неделю"
+
+#: app/templates/hot.html:10
+msgid "The most hot topics last month"
+msgstr "Самые горячие темы за месяц"
+
+#: app/templates/hot.html:10
+msgid "The most hot topics last year"
+msgstr "Самые горячие темы за год"
+
+#: app/templates/hot.html:16
+msgid "Day"
+msgstr "День"
+
+#: app/templates/hot.html:19
+msgid "Week"
+msgstr "Неделя"
+
+#: app/templates/hot.html:22
+msgid "Month"
+msgstr "Месяц"
+
+#: app/templates/hot.html:25
+msgid "Year"
+msgstr "Год"
+
+#: app/templates/index.html:11
+msgid "Welcome to"
+msgstr "Добро пожаловать на"
+
+#: app/templates/latest.html:10
+msgid "Latest topics"
+msgstr "Последние темы"
+
+#: app/templates/latest.html:10
+msgid "Latest comments"
+msgstr "Последние комментарии"
+
+#: app/templates/message.html:4 app/templates/message.html:11
+msgid "Message"
+msgstr "Сообщение"
+
+#: app/templates/message.html:13
+msgid "to"
+msgstr "для"
+
+#: app/templates/message.html:15
+msgid "from"
+msgstr "от"
+
+#: app/templates/message.html:25
+msgid "Sent"
+msgstr "Отправлено"
+
+#: app/templates/message.html:28 app/templates/send_message.html:18
+msgid "From"
+msgstr "От"
+
+#: app/templates/message.html:38 app/templates/send_message.html:28
+msgid "To"
+msgstr "Для"
+
+#: app/templates/message.html:61
+msgid "Reply"
+msgstr "Ответить"
+
+#: app/templates/messages.html:16
+msgid "Incoming"
+msgstr "Входящие"
+
+#: app/templates/messages.html:19
+msgid "Outgoing"
+msgstr "Исходящие"
+
+#: app/templates/messages.html:28
+msgid "User"
+msgstr "Пользователь"
+
+#: app/templates/messages.html:30
+msgid "Date"
+msgstr "Дата"
+
+#: app/templates/messages.html:52
+msgid "Unread"
+msgstr "Не прочитано"
+
+#: app/templates/messages.html:59
+msgid "Messages not found"
+msgstr "Сообщения не найдены"
+
+#: app/templates/send_message.html:4
+msgid "New message"
+msgstr "Новое сообщение"
+
+#: app/templates/send_message.html:11
+msgid "New message to"
+msgstr "Новое сообщение для"
+
+#: app/templates/topic.html:27
+msgid "Created"
+msgstr "Создано"
+
+#: app/templates/topic.html:54
+msgid "votes"
+msgstr "голоса"
+
+#: app/templates/user.html:28
+msgid "About"
+msgstr "О себе"
+
+#: app/templates/user.html:38
+msgid "Forum activity"
+msgstr "Активность на форуме"
+
+#: app/templates/user.html:38
+msgid "topics"
+msgstr "темы"
+
+#: app/templates/user.html:38
+msgid "comments"
+msgstr "комментарии"
+
+#: app/templates/user.html:44
+msgid "Send message"
+msgstr "Отправить сообщение"
+
+#: app/templates/user.html:47
+msgid "Edit profile [Admin]"
+msgstr "Редактировать профиль [Админ]"
+
+#: app/templates/user.html:52
+msgid "Topics on the forum"
+msgstr "Темы на форуме"
+
+#: app/templates/auth/change_email.html:4
+#: app/templates/auth/change_email.html:8
+msgid "Change email address"
+msgstr "Изменить адрес e-mail"
+
+#: app/templates/auth/login.html:4 app/templates/auth/login.html:8
+msgid "Login"
+msgstr "Войти"
+
+#: app/templates/auth/login.html:13
+msgid "New user?"
+msgstr "Новый пользователь?"
+
+#: app/templates/auth/login.html:13
+msgid "Click here to register"
+msgstr "Нажмите здесь, чтобы зарегистрироваться"
+
+#: app/templates/auth/login.html:14
+msgid "Forgot your password?"
+msgstr "Забыли пароль?"
+
+#: app/templates/auth/login.html:14
+msgid "Click here to reset it"
+msgstr "Нажмите здесь, чтобы сбросить его"
+
+#: app/templates/auth/unconfirmed.html:3
+msgid "Confirm your account"
+msgstr "Подтвердите аккаунт"
+
+#: app/templates/auth/unconfirmed.html:8
+msgid "Hello"
+msgstr "Здравствуйте"
+
+#: app/templates/auth/unconfirmed.html:10
+msgid "You have not confirmed your account yet."
+msgstr "Вы еще не подтвердили аккаунт."
+
+#: app/templates/auth/unconfirmed.html:12
+msgid ""
+"Before you can access this site you need to confirm your account.\n"
+"        Check your inbox, you should have received an email with a "
+"confirmation link."
+msgstr ""
+"Прежде чем Вы сможете получить доступ к этому сайту, Вам необходимо "
+"подтвердить аккаунт.\n"
+"        Проверьте свой почтовый ящик, Вы должны были получить электронное "
+"письмо со ссылкой на подтверждение."
+
+#: app/templates/auth/unconfirmed.html:16
+msgid "Need another confirmation email?"
+msgstr "Вам необходимо новое письмо со ссылкой на подтверждение?"
+
+#: app/templates/auth/unconfirmed.html:17
+msgid "Click here"
+msgstr "Нажмите здесь"
+
+#: app/templates/errors/400.html:3 app/templates/errors/400.html:9
+msgid "Bad Request"
+msgstr "Неверный запрос"
+
+#: app/templates/errors/403.html:3 app/templates/errors/403.html:9
+msgid "Forbidden"
+msgstr "Запрещено"
+
+#: app/templates/errors/404.html:3 app/templates/errors/404.html:9
+msgid "Not Found"
+msgstr "Не найдено"
+
+#: app/templates/errors/500.html:3 app/templates/errors/500.html:9
+msgid "Internal Server Error"
+msgstr "Внутренняя ошибка сервера"

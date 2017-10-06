@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 
-{% block title %}4RUM - Messages{% endblock %}
+{% block title %}4RUM - {{ _('Messages') }}{% endblock %}
 
 {% block page_content %}
 <div id="messages" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='mail-icon.png') }}">
     <div class="main-header">
-        <h2>Messages</h2>
+        <h2>{{ _('Messages') }}</h2>
     </div>
 </div>
 <div>
     <ul class="nav nav-tabs">
         <li {% if direction=='received' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.messages', direction='received') }}">Received</a>
+            <a href="{{ url_for('main.messages', direction='received') }}">{{ _('Incoming') }}</a>
         </li>
         <li {% if direction=='sent' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.messages', direction='sent') }}">Sent</a>
+            <a href="{{ url_for('main.messages', direction='sent') }}">{{ _('Outgoing') }}</a>
         </li>
     </ul>
 </div>
@@ -25,9 +25,9 @@
 <table class="table table-hover messages">
     <thead>
         <tr>
-            <th>{% if direction=='received' %}From user{% elif direction=='sent' %}To user{% endif %}</th>
-            <th>Title</th>
-            <th>Date</th>
+            <th>{{ _('User') }}</th>
+            <th>{{ _('Subject') }}</th>
+            <th>{{ _('Date') }}</th>
             <th></th>
         </tr>
     </thead>
@@ -45,18 +45,18 @@
             </a>
         </td>
         <td class="nowrap-td">
-            {{ moment(message.created_at).format('D MMMM YYYY, H:mm') }}
+            {{ format_datetime(message.created_at, 'd MMMM YYYY, H:mm') }}
         </td>
         <td class="nowrap-td">
             {% if message.unread %}
-            <span class="badge blue-badge">Unread</span>
+            <span class="badge blue-badge">{{ _('Unread') }}</span>
             {% endif %}
         </td>
     </tr>
     {% endfor %}
 </table>
 {% else %}
-    <div class="no-data-text">Messages not found</div>
+    <div class="no-data-text">{{ _('Messages not found') }}</div>
 {% endif %}
 
 {% if pagination %}

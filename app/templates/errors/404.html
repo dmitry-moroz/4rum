@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}4RUM - Page Not Found{% endblock %}
+{% block title %}4RUM - {{ _('Not Found') }}{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='error-icon.png') }}">
     <div class="main-header">
-        <h1>Not Found</h1>
+        <h1>{{ _('Not Found') }}</h1>
     </div>
 </div>
 {% endblock %}

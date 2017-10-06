@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}4RUM - Internal Server Error{% endblock %}
+{% block title %}4RUM - {{ _('Internal Server Error') }}{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='error-icon.png') }}">
     <div class="main-header">
-        <h1>Internal Server Error</h1>
+        <h1>{{ _('Internal Server Error') }}</h1>
     </div>
 </div>
 {% endblock %}

@@ -1,0 +1,685 @@
+# Translations template for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-10-06 13:34+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.1\n"
+
+#: app/auth/forms.py:12 app/auth/forms.py:19 app/auth/forms.py:70
+#: app/auth/forms.py:79 app/main/forms.py:20 app/templates/user.html:23
+msgid "Email"
+msgstr ""
+
+#: app/auth/forms.py:13 app/auth/forms.py:23 app/auth/forms.py:55
+msgid "Password"
+msgstr ""
+
+#: app/auth/forms.py:14
+msgid "Keep me logged in"
+msgstr ""
+
+#: app/auth/forms.py:15 app/templates/base.html:51
+msgid "Log In"
+msgstr ""
+
+#: app/auth/forms.py:20 app/main/forms.py:21
+msgid "Username"
+msgstr ""
+
+#: app/auth/forms.py:21 app/main/forms.py:22
+msgid "Usernames must have only letters, numbers, dots or underscores"
+msgstr ""
+
+#: app/auth/forms.py:24 app/auth/forms.py:40 app/auth/forms.py:81
+msgid "Passwords must match."
+msgstr ""
+
+#: app/auth/forms.py:25 app/auth/forms.py:82
+msgid "Confirm password"
+msgstr ""
+
+#: app/auth/forms.py:26 app/templates/auth/register.html:4
+#: app/templates/auth/register.html:8
+msgid "Register"
+msgstr ""
+
+#: app/auth/forms.py:30 app/auth/forms.py:62 app/main/forms.py:39
+msgid "Email already registered."
+msgstr ""
+
+#: app/auth/forms.py:34 app/main/forms.py:43
+msgid "Username already in use."
+msgstr ""
+
+#: app/auth/forms.py:38
+msgid "Old password"
+msgstr ""
+
+#: app/auth/forms.py:39 app/auth/forms.py:80
+msgid "New password"
+msgstr ""
+
+#: app/auth/forms.py:41
+msgid "Confirm new password"
+msgstr ""
+
+#: app/auth/forms.py:42 app/templates/auth/change_password.html:4
+#: app/templates/auth/change_password.html:8 app/templates/base.html:45
+msgid "Change password"
+msgstr ""
+
+#: app/auth/forms.py:46
+msgid "Invalid old password."
+msgstr ""
+
+#: app/auth/forms.py:50
+msgid "New password is the same as old password."
+msgstr ""
+
+#: app/auth/forms.py:54
+msgid "New email"
+msgstr ""
+
+#: app/auth/forms.py:56 app/templates/base.html:46
+msgid "Change email"
+msgstr ""
+
+#: app/auth/forms.py:60
+msgid "This is your current email."
+msgstr ""
+
+#: app/auth/forms.py:66
+msgid "Invalid password."
+msgstr ""
+
+#: app/auth/forms.py:71 app/auth/forms.py:83
+#: app/templates/auth/reset_password.html:4
+#: app/templates/auth/reset_password.html:8
+msgid "Reset password"
+msgstr ""
+
+#: app/auth/forms.py:75 app/auth/forms.py:87
+msgid "Unknown email address."
+msgstr ""
+
+#: app/auth/views.py:37
+msgid "Invalid username or password."
+msgstr ""
+
+#: app/auth/views.py:45
+msgid "You have been logged out."
+msgstr ""
+
+#: app/auth/views.py:57 app/auth/views.py:81
+msgid "Confirm Your Account"
+msgstr ""
+
+#: app/auth/views.py:58
+msgid "A confirmation email has been sent to you by email."
+msgstr ""
+
+#: app/auth/views.py:69
+msgid "You have confirmed your account. Thanks!"
+msgstr ""
+
+#: app/auth/views.py:71 app/auth/views.py:118 app/auth/views.py:148
+msgid "The confirmation link is invalid or has expired."
+msgstr ""
+
+#: app/auth/views.py:83
+msgid "A new confirmation email has been sent to you by email."
+msgstr ""
+
+#: app/auth/views.py:94
+msgid "Your password has been updated."
+msgstr ""
+
+#: app/auth/views.py:105
+msgid "Confirm Your New Email"
+msgstr ""
+
+#: app/auth/views.py:107
+msgid "A confirmation email has been sent to your new email."
+msgstr ""
+
+#: app/auth/views.py:116
+msgid "You have confirmed your new email. Thanks!"
+msgstr ""
+
+#: app/auth/views.py:130
+msgid "Instructions To Reset Your Password"
+msgstr ""
+
+#: app/auth/views.py:132
+msgid "An email with instructions to reset password has been sent to you by email."
+msgstr ""
+
+#: app/auth/views.py:145
+msgid "You have reset your password to new."
+msgstr ""
+
+#: app/main/forms.py:12 app/main/forms.py:26
+msgid "Real name"
+msgstr ""
+
+#: app/main/forms.py:13 app/main/forms.py:27 app/templates/user.html:18
+msgid "Homeland"
+msgstr ""
+
+#: app/main/forms.py:14 app/main/forms.py:28
+msgid "About me"
+msgstr ""
+
+#: app/main/forms.py:15 app/main/forms.py:29
+msgid "Link to avatar"
+msgstr ""
+
+#: app/main/forms.py:16 app/main/forms.py:30 app/main/forms.py:49
+#: app/main/forms.py:63 app/main/forms.py:75 app/main/forms.py:86
+#: app/main/forms.py:95
+msgid "Submit"
+msgstr ""
+
+#: app/main/forms.py:24
+msgid "Confirmed"
+msgstr ""
+
+#: app/main/forms.py:25
+msgid "Role"
+msgstr ""
+
+#: app/main/forms.py:47 app/main/forms.py:59 app/main/forms.py:72
+msgid "Title"
+msgstr ""
+
+#: app/main/forms.py:48 app/main/forms.py:60 app/main/forms.py:94
+#: app/main/forms.py:102 app/main/forms.py:110
+msgid "Text"
+msgstr ""
+
+#: app/main/forms.py:50
+msgid "Add poll"
+msgstr ""
+
+#: app/main/forms.py:51 app/main/forms.py:64 app/main/forms.py:76
+#: app/main/forms.py:96 app/main/forms.py:112
+msgid "Cancel"
+msgstr ""
+
+#: app/main/forms.py:55 app/main/forms.py:68 app/main/forms.py:97
+#: app/main/forms.py:105 app/templates/_comments.html:39
+msgid "Delete"
+msgstr ""
+
+#: app/main/forms.py:61
+msgid "Poll question"
+msgstr ""
+
+#: app/main/forms.py:62
+msgid "Poll answers"
+msgstr ""
+
+#: app/main/forms.py:73
+msgid "Priority"
+msgstr ""
+
+#: app/main/forms.py:74
+msgid "Moderators only"
+msgstr ""
+
+#: app/main/forms.py:84
+msgid "Leave your comment, {username}:"
+msgstr ""
+
+#: app/main/forms.py:101 app/main/forms.py:109 app/templates/message.html:48
+#: app/templates/messages.html:29
+msgid "Subject"
+msgstr ""
+
+#: app/main/forms.py:103 app/main/forms.py:111
+msgid "Send"
+msgstr ""
+
+#: app/main/forms.py:104
+msgid "Close"
+msgstr ""
+
+#: app/main/forms.py:117
+msgid "Search"
+msgstr ""
+
+#: app/main/views.py:58
+msgid "Your comment has been published."
+msgstr ""
+
+#: app/main/views.py:105
+msgid "Topic has been created."
+msgstr ""
+
+#: app/main/views.py:115 app/main/views.py:155
+msgid "Topic has been saved. Fill data for a poll."
+msgstr ""
+
+#: app/main/views.py:121
+msgid "Topic creation was cancelled."
+msgstr ""
+
+#: app/main/views.py:148
+msgid "The topic has been updated."
+msgstr ""
+
+#: app/main/views.py:159
+msgid "Topic editing was cancelled."
+msgstr ""
+
+#: app/main/views.py:169
+msgid "The topic has been deleted."
+msgstr ""
+
+#: app/main/views.py:205
+msgid "Topic group has been created."
+msgstr ""
+
+#: app/main/views.py:209
+msgid "Topic group creation was cancelled."
+msgstr ""
+
+#: app/main/views.py:249
+msgid "Your profile has been updated."
+msgstr ""
+
+#: app/main/views.py:277
+msgid "The profile has been updated."
+msgstr ""
+
+#: app/main/views.py:325 app/main/views.py:352
+msgid "The comment has been deleted."
+msgstr ""
+
+#: app/main/views.py:342
+msgid "The comment has been updated."
+msgstr ""
+
+#: app/main/views.py:346
+msgid "Comment editing was cancelled."
+msgstr ""
+
+#: app/main/views.py:366
+msgid "You have already voted for this poll."
+msgstr ""
+
+#: app/main/views.py:369
+msgid "Your vote has been taken."
+msgstr ""
+
+#: app/main/views.py:437 app/main/views.py:474
+msgid "Your message has been sent."
+msgstr ""
+
+#: app/main/views.py:445
+msgid "The message has been deleted."
+msgstr ""
+
+#: app/main/views.py:478
+msgid "The message was cancelled."
+msgstr ""
+
+#: app/templates/_buttons_topic.html:5 app/templates/_comments.html:36
+msgid "Edit"
+msgstr ""
+
+#: app/templates/_buttons_topic.html:9 app/templates/_comments.html:43
+msgid "Edit [Moderator]"
+msgstr ""
+
+#: app/templates/_buttons_topic.html:15
+#: app/templates/_buttons_topic_group.html:22
+msgid "Up"
+msgstr ""
+
+#: app/templates/_buttons_topic_group.html:6
+msgid "Create topic group [Moderator]"
+msgstr ""
+
+#: app/templates/_buttons_topic_group.html:11
+msgid "Create topic"
+msgstr ""
+
+#: app/templates/_buttons_topic_group.html:15
+msgid "Create topic [Moderator]"
+msgstr ""
+
+#: app/templates/_comments.html:24 app/templates/create_topic.html:20
+#: app/templates/create_topic_group.html:14 app/templates/edit_topic.html:20
+msgid "in"
+msgstr ""
+
+#: app/templates/_comments.html:46
+msgid "Delete [Moderator]"
+msgstr ""
+
+#: app/templates/_topic_groups.html:13 app/templates/latest.html:16
+msgid "Topics"
+msgstr ""
+
+#: app/templates/_topics.html:21 app/templates/latest.html:19
+#: app/templates/topic.html:82
+msgid "Comments"
+msgstr ""
+
+#: app/templates/_topics.html:34
+msgid "Topics not found"
+msgstr ""
+
+#: app/templates/base.html:25
+msgid "Forum"
+msgstr ""
+
+#: app/templates/base.html:26 app/templates/latest.html:4
+msgid "Latest"
+msgstr ""
+
+#: app/templates/base.html:27
+msgid "Hot"
+msgstr ""
+
+#: app/templates/base.html:28 app/templates/community.html:5
+msgid "Community"
+msgstr ""
+
+#: app/templates/base.html:42
+msgid "Profile"
+msgstr ""
+
+#: app/templates/base.html:44 app/templates/messages.html:4
+#: app/templates/messages.html:10
+msgid "Messages"
+msgstr ""
+
+#: app/templates/base.html:47
+msgid "Log out"
+msgstr ""
+
+#: app/templates/community.html:11
+msgid "Forum's community"
+msgstr ""
+
+#: app/templates/community.html:22
+msgid "Nick"
+msgstr ""
+
+#: app/templates/community.html:23 app/templates/user.html:13
+msgid "Name"
+msgstr ""
+
+#: app/templates/community.html:24 app/templates/user.html:32
+msgid "Member since"
+msgstr ""
+
+#: app/templates/community.html:25 app/templates/user.html:35
+msgid "Last seen"
+msgstr ""
+
+#: app/templates/community.html:43 app/templates/user.html:35
+msgid "ago"
+msgstr ""
+
+#: app/templates/community.html:49
+msgid "Users not found"
+msgstr ""
+
+#: app/templates/create_topic.html:4 app/templates/create_topic.html:16
+msgid "Create new topic"
+msgstr ""
+
+#: app/templates/create_topic.html:18 app/templates/create_topic_group.html:12
+#: app/templates/edit_topic.html:18
+msgid "on home page"
+msgstr ""
+
+#: app/templates/create_topic_group.html:4
+#: app/templates/create_topic_group.html:10
+msgid "Create new topic group"
+msgstr ""
+
+#: app/templates/edit_comment.html:4 app/templates/edit_comment.html:12
+msgid "Edit comment"
+msgstr ""
+
+#: app/templates/edit_comment.html:14
+msgid "Edit comment, author"
+msgstr ""
+
+#: app/templates/edit_profile.html:4 app/templates/edit_profile.html:10
+#: app/templates/edit_profile.html:12 app/templates/user.html:42
+msgid "Edit profile"
+msgstr ""
+
+#: app/templates/edit_topic.html:4 app/templates/edit_topic.html:16
+msgid "Edit topic"
+msgstr ""
+
+#: app/templates/hot.html:4
+msgid "The most hot topics"
+msgstr ""
+
+#: app/templates/hot.html:10
+msgid "The most hot topics last day"
+msgstr ""
+
+#: app/templates/hot.html:10
+msgid "The most hot topics last week"
+msgstr ""
+
+#: app/templates/hot.html:10
+msgid "The most hot topics last month"
+msgstr ""
+
+#: app/templates/hot.html:10
+msgid "The most hot topics last year"
+msgstr ""
+
+#: app/templates/hot.html:16
+msgid "Day"
+msgstr ""
+
+#: app/templates/hot.html:19
+msgid "Week"
+msgstr ""
+
+#: app/templates/hot.html:22
+msgid "Month"
+msgstr ""
+
+#: app/templates/hot.html:25
+msgid "Year"
+msgstr ""
+
+#: app/templates/index.html:11
+msgid "Welcome to"
+msgstr ""
+
+#: app/templates/latest.html:10
+msgid "Latest topics"
+msgstr ""
+
+#: app/templates/latest.html:10
+msgid "Latest comments"
+msgstr ""
+
+#: app/templates/message.html:4 app/templates/message.html:11
+msgid "Message"
+msgstr ""
+
+#: app/templates/message.html:13
+msgid "to"
+msgstr ""
+
+#: app/templates/message.html:15
+msgid "from"
+msgstr ""
+
+#: app/templates/message.html:25
+msgid "Sent"
+msgstr ""
+
+#: app/templates/message.html:28 app/templates/send_message.html:18
+msgid "From"
+msgstr ""
+
+#: app/templates/message.html:38 app/templates/send_message.html:28
+msgid "To"
+msgstr ""
+
+#: app/templates/message.html:61
+msgid "Reply"
+msgstr ""
+
+#: app/templates/messages.html:16
+msgid "Incoming"
+msgstr ""
+
+#: app/templates/messages.html:19
+msgid "Outgoing"
+msgstr ""
+
+#: app/templates/messages.html:28
+msgid "User"
+msgstr ""
+
+#: app/templates/messages.html:30
+msgid "Date"
+msgstr ""
+
+#: app/templates/messages.html:52
+msgid "Unread"
+msgstr ""
+
+#: app/templates/messages.html:59
+msgid "Messages not found"
+msgstr ""
+
+#: app/templates/send_message.html:4
+msgid "New message"
+msgstr ""
+
+#: app/templates/send_message.html:11
+msgid "New message to"
+msgstr ""
+
+#: app/templates/topic.html:27
+msgid "Created"
+msgstr ""
+
+#: app/templates/topic.html:54
+msgid "votes"
+msgstr ""
+
+#: app/templates/user.html:28
+msgid "About"
+msgstr ""
+
+#: app/templates/user.html:38
+msgid "Forum activity"
+msgstr ""
+
+#: app/templates/user.html:38
+msgid "topics"
+msgstr ""
+
+#: app/templates/user.html:38
+msgid "comments"
+msgstr ""
+
+#: app/templates/user.html:44
+msgid "Send message"
+msgstr ""
+
+#: app/templates/user.html:47
+msgid "Edit profile [Admin]"
+msgstr ""
+
+#: app/templates/user.html:52
+msgid "Topics on the forum"
+msgstr ""
+
+#: app/templates/auth/change_email.html:4
+#: app/templates/auth/change_email.html:8
+msgid "Change email address"
+msgstr ""
+
+#: app/templates/auth/login.html:4 app/templates/auth/login.html:8
+msgid "Login"
+msgstr ""
+
+#: app/templates/auth/login.html:13
+msgid "New user?"
+msgstr ""
+
+#: app/templates/auth/login.html:13
+msgid "Click here to register"
+msgstr ""
+
+#: app/templates/auth/login.html:14
+msgid "Forgot your password?"
+msgstr ""
+
+#: app/templates/auth/login.html:14
+msgid "Click here to reset it"
+msgstr ""
+
+#: app/templates/auth/unconfirmed.html:3
+msgid "Confirm your account"
+msgstr ""
+
+#: app/templates/auth/unconfirmed.html:8
+msgid "Hello"
+msgstr ""
+
+#: app/templates/auth/unconfirmed.html:10
+msgid "You have not confirmed your account yet."
+msgstr ""
+
+#: app/templates/auth/unconfirmed.html:12
+msgid ""
+"Before you can access this site you need to confirm your account.\n"
+"        Check your inbox, you should have received an email with a "
+"confirmation link."
+msgstr ""
+
+#: app/templates/auth/unconfirmed.html:16
+msgid "Need another confirmation email?"
+msgstr ""
+
+#: app/templates/auth/unconfirmed.html:17
+msgid "Click here"
+msgstr ""
+
+#: app/templates/errors/400.html:3 app/templates/errors/400.html:9
+msgid "Bad Request"
+msgstr ""
+
+#: app/templates/errors/403.html:3 app/templates/errors/403.html:9
+msgid "Forbidden"
+msgstr ""
+
+#: app/templates/errors/404.html:3 app/templates/errors/404.html:9
+msgid "Not Found"
+msgstr ""
+
+#: app/templates/errors/500.html:3 app/templates/errors/500.html:9
+msgid "Internal Server Error"
+msgstr ""
+

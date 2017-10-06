@@ -1,28 +1,28 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 
-{% block title %}4RUM - The most hot topics{% endblock %}
+{% block title %}4RUM - {{ _('The most hot topics') }}{% endblock %}
 
 {% block page_content %}
 <div id="hot" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='fire-icon.png') }}">
     <div class="main-header">
-        <h2>The most hot topics last {{ period }}</h2>
+        <h2>{{ _('The most hot topics last ' + period) }}</h2>
     </div>
 </div>
 <div>
     <ul class="nav nav-tabs">
         <li {% if period=='day' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.hot', period='day') }}">Day</a>
+            <a href="{{ url_for('main.hot', period='day') }}">{{ _('Day') }}</a>
         </li>
         <li {% if period=='week' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.hot', period='week') }}">Week</a>
+            <a href="{{ url_for('main.hot', period='week') }}">{{ _('Week') }}</a>
         </li>
         <li {% if period=='month' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.hot', period='month') }}">Month</a>
+            <a href="{{ url_for('main.hot', period='month') }}">{{ _('Month') }}</a>
         </li>
         <li {% if period=='year' %}class="active"{% endif %}>
-            <a href="{{ url_for('main.hot', period='year') }}">Year</a>
+            <a href="{{ url_for('main.hot', period='year') }}">{{ _('Year') }}</a>
         </li>
     </ul>
 </div>

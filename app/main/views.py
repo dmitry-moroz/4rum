@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
 
-from flask import render_template, redirect, url_for, abort, flash, request, current_app
+from flask import render_template, redirect, url_for, abort, flash, request, current_app, session
+from flask_babel import lazy_gettext
 from flask_login import login_required, current_user
 from sqlalchemy import func, case, between, and_, or_
 
+from app import babel
 from . import main
 from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm,
                     TopicWithPollForm, TopicWithPollEditForm, CommentForm, CommentEditForm, MessageReplyForm,
@@ -54,7 +56,7 @@ def topic(topic_id):
 
     if form and form.validate_on_submit():
         tpc.add_comment(current_user, form.body.data)
-        flash('Your comment has been published.')
+        flash(lazy_gettext('Your comment has been published.'))
         return redirect(url_for('main.topic', topic_id=topic_id, page=-1))
 
     page = request.args.get('page', 1, type=int)
@@ -101,7 +103,7 @@ def create_topic(topic_group_id):
         if with_poll:
             for answer in form.poll_answers.data.strip().splitlines():
                 db.session.add(PollAnswer(topic_id=new_topic.id, body=answer))
-        flash('Topic has been created.')
+        flash(lazy_gettext('Topic has been created.'))
         return redirect(url_for('main.topic', topic_id=new_topic.id))
 
     elif not with_poll and form.add_poll.data:
@@ -111,13 +113,13 @@ def create_topic(topic_group_id):
                                   author=current_user._get_current_object())
                 db.session.add(new_topic)
                 db.session.commit()
-                flash('Topic has been saved. Fill data for a poll.')
+                flash(lazy_gettext('Topic has been saved. Fill data for a poll.'))
                 return redirect(url_for('main.edit_topic', topic_id=new_topic.id, poll=1))
         else:
             return redirect(url_for('main.create_topic', topic_group_id=topic_group_id, poll=1))
 
     elif form.cancel.data:
-        flash('Topic creation was cancelled.')
+        flash(lazy_gettext('Topic creation was cancelled.'))
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
 
     return render_template('create_topic.html', form=form, topic_group=t_group)
@@ -144,18 +146,18 @@ def edit_topic(topic_id):
             tpc.poll = form.poll_question.data
             tpc.update_poll_answers(form.poll_answers.data.strip().splitlines())
         db.session.add(tpc)
-        flash('The topic has been updated.')
+        flash(lazy_gettext('The topic has been updated.'))
         return redirect(url_for('main.topic', topic_id=tpc.id))
 
     elif not with_poll and form.add_poll.data and form.validate_on_submit():
         tpc.title = form.title.data
         tpc.body = form.body.data
         db.session.add(tpc)
-        flash('Topic has been saved. Fill data for a poll.')
+        flash(lazy_gettext('Topic has been saved. Fill data for a poll.'))
         return redirect(url_for('main.edit_topic', topic_id=tpc.id, poll=1))
 
     elif form.cancel.data:
-        flash('Topic editing was cancelled.')
+        flash(lazy_gettext('Topic editing was cancelled.'))
         return redirect(url_for('main.topic', topic_id=tpc.id))
 
     elif form.delete.data:
@@ -165,7 +167,7 @@ def edit_topic(topic_id):
         tpc.poll_votes.update(dict(deleted=True))
         tpc.deleted = True
         db.session.add(tpc)
-        flash('The topic has been deleted.')
+        flash(lazy_gettext('The topic has been deleted.'))
         return redirect(request.args.get('next') or url_for('main.topic_group', topic_group_id=tpc.group_id))
 
     form.title.data = tpc.title
@@ -201,11 +203,11 @@ def create_topic_group(topic_group_id):
                                  author=current_user._get_current_object(), group=t_group)
         db.session.add(new_t_group)
         db.session.commit()
-        flash('Topic group has been created.')
+        flash(lazy_gettext('Topic group has been created.'))
         return redirect(url_for('main.topic_group', topic_group_id=new_t_group.id))
 
     elif form.cancel.data:
-        flash('Topic group creation was cancelled.')
+        flash(lazy_gettext('Topic group creation was cancelled.'))
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
 
     return render_template('create_topic_group.html', form=form, topic_group=t_group)
@@ -245,7 +247,7 @@ def edit_profile():
         current_user.about = form.about.data
         current_user.avatar = form.avatar.data if form.avatar.data else current_user.gravatar()
         db.session.add(current_user)
-        flash('Your profile has been updated.')
+        flash(lazy_gettext('Your profile has been updated.'))
         return redirect(url_for('main.user', username=current_user.username))
 
     form.name.data = current_user.name
@@ -273,7 +275,7 @@ def edit_profile_admin(user_id):
         user.about = form.about.data
         user.avatar = form.avatar.data if form.avatar.data else user.gravatar()
         db.session.add(user)
-        flash('The profile has been updated.')
+        flash(lazy_gettext('The profile has been updated.'))
         return redirect(url_for('main.user', username=user.username))
 
     form.email.data = user.email
@@ -321,7 +323,7 @@ def delete_comment(comment_id):
         abort(403)
     comment.deleted = True
     db.session.add(comment)
-    flash('The comment has been deleted.')
+    flash(lazy_gettext('The comment has been deleted.'))
     return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
 
@@ -338,17 +340,17 @@ def edit_comment(comment_id):
     if form.submit.data and form.validate_on_submit():
         comment.body = form.body.data
         db.session.add(comment)
-        flash('The comment has been updated.')
+        flash(lazy_gettext('The comment has been updated.'))
         return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
     elif form.cancel.data:
-        flash('Comment editing was cancelled.')
+        flash(lazy_gettext('Comment editing was cancelled.'))
         return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
     elif form.delete.data:
         comment.deleted = True
         db.session.add(comment)
-        flash('The comment has been deleted.')
+        flash(lazy_gettext('The comment has been deleted.'))
         return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
     form.body.data = comment.body
@@ -362,10 +364,10 @@ def edit_comment(comment_id):
 def vote(answer_id):
     answer = PollAnswer.query.filter_by(id=answer_id, deleted=False).first_or_404()
     if current_user.is_voted(answer.topic):
-        flash('You have already voted for this poll.')
+        flash(lazy_gettext('You have already voted for this poll.'))
     else:
         answer.topic.add_vote(current_user, answer)
-        flash('Your vote has been taken.')
+        flash(lazy_gettext('Your vote has been taken.'))
     return redirect(request.args.get('next') or url_for('main.topic', topic_id=answer.topic_id))
 
 
@@ -433,7 +435,7 @@ def message(message_id):
             receiver_id = msg.author_id if msg.author_id != current_user.id else msg.receiver_id
             new_message = Message(title=form.title.data, body=form.body.data, author_id=current_user.id,
                                   receiver_id=receiver_id)
-            flash('Your message has been sent.')
+            flash(lazy_gettext('Your message has been sent.'))
             db.session.add(new_message)
             return redirect(request.args.get('next') or url_for('main.messages'))
         elif form.delete.data:
@@ -441,7 +443,7 @@ def message(message_id):
                 msg.receiver_deleted = True
             if msg.author_id == current_user.id:
                 msg.author_deleted = True
-            flash('The message has been deleted.')
+            flash(lazy_gettext('The message has been deleted.'))
             db.session.add(msg)
             return redirect(request.args.get('next') or url_for('main.messages'))
         elif form.close.data:
@@ -470,11 +472,11 @@ def send_message(username):
     if form.send.data and form.validate_on_submit():
         new_message = Message(title=form.title.data, body=form.body.data, author_id=current_user.id,
                               receiver_id=receiver.id)
-        flash('Your message has been sent.')
+        flash(lazy_gettext('Your message has been sent.'))
         db.session.add(new_message)
         return redirect(request.args.get('next') or url_for('main.messages'))
     elif form.cancel.data:
-        flash('The message was cancelled.')
+        flash(lazy_gettext('The message was cancelled.'))
         return redirect(request.args.get('next') or url_for('main.messages'))
 
     return render_template('send_message.html', form=form, receiver=receiver)
@@ -496,3 +498,18 @@ def community():
             page, per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
 
     return render_template('community.html', form=form, users=pagination.items, pagination=pagination)
+
+
+@main.route('/set_locale')
+def set_locale():
+    locale = request.args.get('locale', current_app.config['BABEL_DEFAULT_LOCALE'], type=str)
+    session['locale'] = locale
+    return redirect(request.args.get('next') or url_for('main.index'))
+
+
+@babel.localeselector
+def get_locale():
+    locale = session.get('locale', None)
+    if locale:
+        return locale
+    return request.accept_languages.best_match(current_app.config['SUPPORTED_LANGUAGES'].keys())

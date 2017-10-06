@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}4RUM - Create new topic{% endblock %}
+{% block title %}4RUM - {{ _('Create new topic') }}{% endblock %}
 
 {% block head %}
 {{ super() }}
@@ -13,11 +13,11 @@
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='add-icon.png') }}">
     <div class="topic-page-header">
-        <h2>Create new topic
+        <h2>{{ _('Create new topic') }}
             {% if topic_group.is_root_topic_group() %}
-            on home page
+            {{ _('on home page') }}
             {% else %}
-            in "{{ topic_group.title }}"
+            {{ _('in') }} "{{ topic_group.title }}"
             {% endif %}
         </h2>
     </div>

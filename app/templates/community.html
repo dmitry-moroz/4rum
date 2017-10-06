@@ -2,13 +2,13 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% import "_macros.html" as macros %}
 
-{% block title %}4RUM - Community{% endblock %}
+{% block title %}4RUM - {{ _('Community') }}{% endblock %}
 
 {% block page_content %}
 <div id="community" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='community-icon.png') }}">
     <div class="main-header">
-        <h2>Forum's community</h2>
+        <h2>{{ _('Forum\'s community') }}</h2>
     </div>
 </div>
 
@@ -19,10 +19,10 @@
 <table class="table table-hover community">
     <thead>
         <tr>
-            <th>Nick</th>
-            <th>Name</th>
-            <th>Member since</th>
-            <th>Last seen</th>
+            <th>{{ _('Nick') }}</th>
+            <th>{{ _('Name') }}</th>
+            <th>{{ _('Member since') }}</th>
+            <th>{{ _('Last seen') }}</th>
         </tr>
     </thead>
     {% for user in users %}
@@ -37,16 +37,16 @@
             {% if user.name %}{{ user.name }}{% endif %}
         </td>
         <td class="nowrap-td">
-            {{ moment(user.created_at).format('D MMMM YYYY, H:mm') }}
+            {{ format_datetime(user.created_at, 'd MMMM YYYY') }}
         </td>
         <td>
-            {{ moment(user.last_seen).fromNow() }}
+            {{ format_timedelta(user.last_seen) }} {{ _('ago') }}
         </td>
     </tr>
     {% endfor %}
 </table>
 {% if not users %}
-    <div class="no-data-text">Users not found</div>
+    <div class="no-data-text">{{ _('Users not found') }}</div>
 {% endif %}
 
 {% if pagination %}
