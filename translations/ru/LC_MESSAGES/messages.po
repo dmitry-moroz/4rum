@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-06 11:45+0300\n"
-"PO-Revision-Date: 2017-10-06 11:46+0300\n"
+"POT-Creation-Date: 2017-10-06 12:07+0300\n"
+"PO-Revision-Date: 2017-10-06 12:13+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -19,6 +19,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.1\n"
 "X-Generator: Poedit 1.8.7.1\n"
+
+#: app/main/forms.py:12
+msgid "Real name"
+msgstr "Реальное имя"
+
+#: app/main/forms.py:13 app/templates/user.html:18
+msgid "Homeland"
+msgstr "Родной город"
+
+#: app/main/forms.py:14
+msgid "About me"
+msgstr "О себе"
+
+#: app/main/forms.py:15
+msgid "Link to avatar"
+msgstr "Ссылка на аватар"
+
+#: app/main/forms.py:16
+msgid "Submit"
+msgstr "Отправить"
 
 #: app/templates/_buttons_topic.html:5 app/templates/_comments.html:36
 msgid "Edit"
@@ -291,10 +311,6 @@ msgstr "Создано"
 #: app/templates/topic.html:54
 msgid "votes"
 msgstr "голоса"
-
-#: app/templates/user.html:18
-msgid "Homeland"
-msgstr "Родной город"
 
 #: app/templates/user.html:23
 msgid "Email"

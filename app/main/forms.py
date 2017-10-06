@@ -3,21 +3,17 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, Length, Email, Regexp
+from flask_babel import lazy_gettext
 
 from ..models import Role, User
 
 
-class NameForm(FlaskForm):
-    name = StringField('What is your name?', validators=[DataRequired()])
-    submit = SubmitField('Submit')
-
-
 class EditProfileForm(FlaskForm):
-    name = StringField('Real name', validators=[Length(0, 64)])
-    homeland = StringField('Homeland', validators=[Length(0, 64)])
-    about = TextAreaField('About me')
-    avatar = StringField('Link to avatar', validators=[Length(0, 256)])
-    submit = SubmitField('Submit')
+    name = StringField(lazy_gettext('Real name'), validators=[Length(0, 64)])
+    homeland = StringField(lazy_gettext('Homeland'), validators=[Length(0, 64)])
+    about = TextAreaField(lazy_gettext('About me'))
+    avatar = StringField(lazy_gettext('Link to avatar'), validators=[Length(0, 256)])
+    submit = SubmitField(lazy_gettext('Submit'))
 
 
 class EditProfileAdminForm(FlaskForm):
