@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-06 12:31+0300\n"
-"PO-Revision-Date: 2017-10-06 12:46+0300\n"
+"POT-Creation-Date: 2017-10-06 12:50+0300\n"
+"PO-Revision-Date: 2017-10-06 12:52+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -108,8 +108,8 @@ msgid "Priority"
 msgstr "Приоритет"
 
 #: app/main/forms.py:74
-msgid "Protected"
-msgstr "Защищенный"
+msgid "Moderators only"
+msgstr "Только для модераторов"
 
 #: app/main/forms.py:84
 msgid "Leave your comment, {username}:"

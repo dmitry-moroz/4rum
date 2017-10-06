@@ -71,7 +71,7 @@ class TopicWithPollEditForm(TopicWithPollForm):
 class TopicGroupForm(FlaskForm):
     title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 64)])
     priority = SelectField(lazy_gettext('Priority'), coerce=int)
-    protected = BooleanField(lazy_gettext('Protected'))
+    protected = BooleanField(lazy_gettext('Moderators only'))
     submit = SubmitField(lazy_gettext('Submit'))
     cancel = SubmitField(lazy_gettext('Cancel'))
 
