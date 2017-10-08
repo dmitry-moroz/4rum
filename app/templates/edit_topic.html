@@ -31,6 +31,10 @@
 {% block scripts %}
 {{ super() }}
 <script>
-    var simplemde = new SimpleMDE({ element: document.getElementById("body") });
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("body"),
+        spellChecker: false,
+        status: false
+    });
 </script>
 {% endblock %}

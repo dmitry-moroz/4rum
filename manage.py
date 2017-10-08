@@ -7,6 +7,7 @@ from flask_script import Manager, Shell
 
 from app import create_app, db
 from app.models import User, Role, Permission, Topic, TopicGroup, Comment, PollVote, PollAnswer, Message
+from utils import data_generator
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 manager = Manager(app)
@@ -35,6 +36,25 @@ def test():
     import unittest
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
+
+
+@manager.command
+def insert_initial_data():
+    """Adds initial data to database."""
+    Role.insert_roles()
+    TopicGroup.insert_root_topic_group()
+
+
+@manager.command
+def insert_fake_data():
+    """Adds fake data to database."""
+    data_generator.generate_fake_users()
+    data_generator.generate_fake_topic_groups()
+    data_generator.generate_fake_topics()
+    data_generator.generate_fake_comments()
+    data_generator.generate_fake_messages()
+    data_generator.generate_fake_polls()
+    data_generator.generate_fake_votes()
 
 
 if __name__ == '__main__':

@@ -35,7 +35,7 @@ class Config:
     SUPPORTED_LANGUAGES = {'en': 'English', 'ru': 'Russian'}
     BABEL_DEFAULT_LOCALE = 'ru'
     BABEL_DEFAULT_TIMEZONE = 'Europe/Minsk'
-    BABEL_TRANSLATION_DIRECTORIES = '../translations'
+    BABEL_TRANSLATION_DIRECTORIES = 'translations'
 
     @staticmethod
     def init_app(app):

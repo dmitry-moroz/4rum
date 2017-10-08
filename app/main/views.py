@@ -486,14 +486,15 @@ def send_message(username):
 @login_required
 def community():
     form = SearchForm()
-    page = request.args.get('page', 1, type=int)
 
     if form.validate_on_submit():
+        page = 1
         search_str = '%{}%'.format(form.text.data.lower())
         pagination = User.query.order_by(User.id.asc()).filter(
             or_(func.lower(User.username).like(search_str), func.lower(User.name).like(search_str))).paginate(
             page, per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
     else:
+        page = request.args.get('page', 1, type=int)
         pagination = User.query.order_by(User.id.asc()).paginate(
             page, per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
 
