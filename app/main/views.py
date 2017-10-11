@@ -31,7 +31,7 @@ def _topic_group(topic_group_id):
         Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
         User, Topic.author_id == User.id).outerjoin(
         Comment, Topic.id == Comment.topic_id).filter(
-        and_(Topic.group_id == t_group.id, Topic.deleted == False)).group_by(Topic.id).order_by(
+        and_(Topic.group_id == t_group.id, Topic.deleted == False)).group_by(Topic.id, User.id).order_by(
         Topic.created_at.desc()).paginate(page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
 
     return t_group, t_groups, pagination
@@ -223,7 +223,7 @@ def user(username):
         Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
         User, Topic.author_id == User.id).outerjoin(
         Comment, Topic.id == Comment.topic_id).filter(
-        and_(Topic.author_id == user.id, Topic.deleted == False)).group_by(Topic.id).order_by(
+        and_(Topic.author_id == user.id, Topic.deleted == False)).group_by(Topic.id, User.id).order_by(
         Topic.created_at.desc()).paginate(page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
 
     topics_count = db.session.query(func.count(Topic.id)).filter(
@@ -299,7 +299,7 @@ def latest():
         pagination = Topic.query.with_entities(
             Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
             User, Topic.author_id == User.id).outerjoin(
-            Comment, Topic.id == Comment.topic_id).filter(Topic.deleted == False).group_by(Topic.id).order_by(
+            Comment, Topic.id == Comment.topic_id).filter(Topic.deleted == False).group_by(Topic.id, User.id).order_by(
             Topic.created_at.desc()).paginate(
             page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
     elif target_arg == 'comments':
@@ -389,7 +389,7 @@ def hot():
         User, Topic.author_id == User.id).outerjoin(
         Comment, Topic.id == Comment.topic_id).filter(
         and_(Topic.deleted == False, between(Topic.created_at, periods[period_arg][0], periods[period_arg][1]))
-        ).group_by(Topic.id).order_by(Topic.interest.desc()).paginate(
+        ).group_by(Topic.id, User.id).order_by(Topic.interest.desc()).paginate(
         page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
 
     return render_template('hot.html', period=period_arg, topics=pagination.items, pagination=pagination)

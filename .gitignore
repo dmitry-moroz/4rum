@@ -88,3 +88,6 @@ ENV/
 .ropeproject
 
 .idea/
+
+# Files with environment variables
+*.env

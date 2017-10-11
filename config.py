@@ -4,9 +4,23 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY', '<hard-to-guess-string>')
+    SESSION_PROTECTION = 'basic'
+
+    DEBUG = True
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
+    TESTING = False
 
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    DB_USER = os.environ.get('DB_USER', 'postgres')
+    DB_PASSWORD = os.environ.get('DB_PASSWORD', 'password')
+    DB_HOST = os.environ.get('DB_HOST', 'pg')
+    DB_PORT = os.environ.get('DB_PORT', '5432')
+    DB_NAME = os.environ.get('DB_NAME', 'forum')
+    PG_DATABASE_URI = 'postgresql://{user}:{password}@{hostname}:{port}/{db_name}'.format(
+        user=DB_USER, password=DB_PASSWORD, hostname=DB_HOST, port=DB_PORT, db_name=DB_NAME
+    )
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI', PG_DATABASE_URI)
 
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
@@ -42,32 +56,4 @@ class Config:
         pass
 
 
-class DevelopmentConfig(Config):
-    DEBUG = True
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
-    TESTING = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL',
-                                             'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite'))
-
-
-class TestingConfig(Config):
-    DEBUG = False
-    TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL',
-                                             'sqlite:///' + os.path.join(basedir, 'data-test.sqlite'))
-
-
-class ProductionConfig(Config):
-    DEBUG = False
-    TESTING = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL',
-                                             'sqlite:///' + os.path.join(basedir, 'data.sqlite'))
-
-
-config = {
-    'development': DevelopmentConfig,
-    'testing': TestingConfig,
-    'production': ProductionConfig,
-    'default': DevelopmentConfig
-}
-base_config = Config
+config = Config()

@@ -6,15 +6,14 @@ from sqlalchemy.exc import IntegrityError
 
 from app import db
 from app.models import User, Topic, TopicGroup, Comment, Message, PollAnswer, PollVote
-from config import base_config
+from config import config
 
 
-# TODO: remove base_config
 def generate_fake_messages(count=1000):
     seed()
     for i in range(count):
         u1, u2 = User.query.order_by(func.random()).limit(2).all()
-        m = Message(title=forgery_py.lorem_ipsum.sentence(),
+        m = Message(title=forgery_py.lorem_ipsum.title()[:128],
                     body=forgery_py.lorem_ipsum.sentences(randint(10, 20)),
                     created_at=forgery_py.date.date(True),
                     author=u1,
@@ -27,11 +26,11 @@ def generate_fake_users(count=100):
     seed()
     for i in range(count):
         u = User(email=forgery_py.internet.email_address(),
-                 username=forgery_py.internet.user_name(True),
+                 username=forgery_py.internet.user_name(True)[:32],
                  password=forgery_py.lorem_ipsum.word(),
                  confirmed=True,
-                 name=forgery_py.name.full_name(),
-                 homeland=forgery_py.address.city(),
+                 name=forgery_py.name.full_name()[:64],
+                 homeland=forgery_py.address.city()[:64],
                  about=forgery_py.lorem_ipsum.sentence(),
                  created_at=forgery_py.date.date(True))
         db.session.add(u)
@@ -51,7 +50,7 @@ def generate_fake_topics(count=100):
             g = TopicGroup.query.offset(randint(0, group_count - 1)).first()
         else:
             g = None
-        p = Topic(title=forgery_py.lorem_ipsum.sentence(),
+        p = Topic(title=forgery_py.lorem_ipsum.title()[:128],
                   body=forgery_py.lorem_ipsum.sentences(randint(20, 40)),
                   created_at=forgery_py.date.date(True),
                   author=u,
@@ -65,8 +64,8 @@ def generate_fake_topic_groups(count=10, parent_group_id=0):
     user_count = db.session.query(func.count(User.id)).scalar()
     for i in range(count):
         u = User.query.offset(randint(0, user_count - 1)).first()
-        g = TopicGroup(title=forgery_py.lorem_ipsum.sentence(),
-                       priority=choice(base_config.TOPIC_GROUP_PRIORITY),
+        g = TopicGroup(title=forgery_py.lorem_ipsum.title()[:64],
+                       priority=choice(config.TOPIC_GROUP_PRIORITY),
                        created_at=forgery_py.date.date(True),
                        author=u,
                        group_id=parent_group_id)
@@ -95,7 +94,7 @@ def generate_fake_polls(polls_count=40, answers_per_poll=4):
     seed()
     for i in range(polls_count):
         t = Topic.query.filter_by(poll=None).order_by(func.random()).first()
-        t.poll = forgery_py.lorem_ipsum.sentence()[:-1] + '?'
+        t.poll = forgery_py.lorem_ipsum.sentence()[:256][:-1] + '?'
         for j in range(answers_per_poll):
             pa = PollAnswer(topic_id=t.id,
                             body=forgery_py.lorem_ipsum.sentence())

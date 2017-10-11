@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import os
 
 from flask_dbshell import DbShell
 from flask_migrate import Migrate, MigrateCommand
@@ -9,7 +8,7 @@ from app import create_app, db
 from app.models import User, Role, Permission, Topic, TopicGroup, Comment, PollVote, PollAnswer, Message
 from utils import data_generator
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+app = create_app()
 manager = Manager(app)
 migrate = Migrate(app, db)
 
@@ -26,6 +25,7 @@ manager.add_command('db', MigrateCommand)
 @manager.command
 def dbshell():
     """Run DB shell."""
+    # ~/.pgpass should exist
     shell = DbShell(url=app.config['SQLALCHEMY_DATABASE_URI'])
     shell.run_shell()
 

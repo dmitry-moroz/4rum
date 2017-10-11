@@ -1,0 +1,16 @@
+version: "2"
+services:
+  pg:
+    container_name: 4rum-pg
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    env_file:
+        - pg.env
+  web:
+    container_name: 4rum-web
+    image: m0r0z/4rum
+    ports:
+      - "8000:8000"
+    env_file:
+        - web.env

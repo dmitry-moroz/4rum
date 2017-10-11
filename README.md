@@ -6,14 +6,22 @@ An Internet forum, is an online discussion site where people can hold conversati
 
 The application implemented with Python WEB framework <b>Flask</b>.
 
-To run application for development:
+To run application:
 ```
+# Prepare all needed environment variables for WEB application
 $ python manage.py db upgrade
 $ python manage.py insert_initial_data
 $ python manage.py insert_fake_data
-$ export MAIL_USERNAME=4rum@example.com
-$ export MAIL_PASSWORD=password
-$ export ADMIN_MAIL_USERNAME=4rum_admin@example.com
 $ pybabel compile -d translations
 $ python manage.py runserver
+```
+
+To run application using docker and docker-compose:
+```
+# Prepare pg.env file with environment variables for DB
+# Prepare web.env file with environment variables for WEB application
+$ docker-compose up -d
+$ docker-compose exec web python manage.py db upgrade
+$ docker-compose exec web python manage.py insert_initial_dat
+$ docker-compose exec web python manage.py insert_fake_data
 ```

@@ -10,8 +10,7 @@ from markdown.extensions.tables import TableExtension
 from sqlalchemy import func, or_, and_
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# TODO: remove base_config
-from config import base_config
+from config import config
 from . import db, login_manager
 
 
@@ -277,7 +276,7 @@ class TopicGroup(db.Model):
     __tablename__ = 'topic_groups'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64))
-    priority = db.Column(db.Integer, default=base_config.TOPIC_GROUP_PRIORITY[-1])
+    priority = db.Column(db.Integer, default=config.TOPIC_GROUP_PRIORITY[-1])
     protected = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -287,15 +286,15 @@ class TopicGroup(db.Model):
 
     @staticmethod
     def insert_root_topic_group():
-        topic_group = TopicGroup.query.get(base_config.ROOT_TOPIC_GROUP)
+        topic_group = TopicGroup.query.get(config.ROOT_TOPIC_GROUP)
         if topic_group:
-            topic_group.priority = base_config.TOPIC_GROUP_PRIORITY[0]
-            topic_group.protected = base_config.IS_PROTECTED_ROOT_TOPIC_GROUP
+            topic_group.priority = config.TOPIC_GROUP_PRIORITY[0]
+            topic_group.protected = config.IS_PROTECTED_ROOT_TOPIC_GROUP
         else:
-            topic_group = TopicGroup(id=base_config.ROOT_TOPIC_GROUP,
+            topic_group = TopicGroup(id=config.ROOT_TOPIC_GROUP,
                                      title='root topic group',
-                                     priority=base_config.TOPIC_GROUP_PRIORITY[0],
-                                     protected=base_config.IS_PROTECTED_ROOT_TOPIC_GROUP)
+                                     priority=config.TOPIC_GROUP_PRIORITY[0],
+                                     protected=config.IS_PROTECTED_ROOT_TOPIC_GROUP)
         db.session.add(topic_group)
         db.session.commit()
 
