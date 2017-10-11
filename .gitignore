@@ -91,3 +91,6 @@ ENV/
 
 # Files with environment variables
 *.env
+
+# Sqlite DB files
+*.sqlite
