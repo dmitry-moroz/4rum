@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-13 20:37+0300\n"
+"POT-Creation-Date: 2017-10-13 21:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,9 @@ msgid "Instructions To Reset Your Password"
 msgstr ""
 
 #: app/auth/views.py:132
-msgid "An email with instructions to reset password has been sent to you by email."
+msgid ""
+"An email with instructions to reset password has been sent to you by "
+"email."
 msgstr ""
 
 #: app/auth/views.py:145
@@ -365,13 +367,12 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: app/templates/_comments.html:24 app/templates/create_topic.html:20
-#: app/templates/create_topic_group.html:14 app/templates/edit_topic.html:20
-msgid "in"
+#: app/templates/_comments.html:26 app/templates/topic.html:30
+msgid "Updated"
 msgstr ""
 
-#: app/templates/_comments.html:32 app/templates/topic.html:30
-msgid "Updated"
+#: app/templates/_comments.html:35
+msgid "Topic"
 msgstr ""
 
 #: app/templates/_comments.html:56
@@ -455,6 +456,11 @@ msgstr ""
 #: app/templates/create_topic.html:18 app/templates/create_topic_group.html:12
 #: app/templates/edit_topic.html:18
 msgid "on home page"
+msgstr ""
+
+#: app/templates/create_topic.html:20 app/templates/create_topic_group.html:14
+#: app/templates/edit_topic.html:20
+msgid "in"
 msgstr ""
 
 #: app/templates/create_topic_group.html:4

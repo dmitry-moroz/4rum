@@ -20,22 +20,22 @@
                 <a href="{{ url_for('main.user', username=author.username) }}">
                     {{ author.username }}
                 </a>
-                {% if use_rich_comments %}
-                &nbsp;{{ _('in') }}&nbsp;
-                <a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">
-                    "{{ topic.title }}"
-                </a>
-                {% endif %}
             </div>
             {% if comment.created_at != comment.updated_at %}
             <div class="comment-date">
-                {{ _('Updated') }}: {{ format_datetime(comment.created_at, 'd MMMM YYYY, H:mm') }}
+                {{ _('Updated') }}: {{ format_datetime(comment.updated_at, 'd MMMM YYYY, H:mm') }}
             </div>
             {% endif %}
             {% if comment.author.name %}
             <div class="comment-author">{{ comment.author.name }}</div>
             {% else %}
             <br>
+            {% endif %}
+            {% if use_rich_comments %}
+            {{ _('Topic') }}:
+            <a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">
+                {{ topic.title }}
+            </a>
             {% endif %}
             <div class="comment-body">
                 {{ comment.body }}
