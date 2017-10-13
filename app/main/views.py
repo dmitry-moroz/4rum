@@ -145,6 +145,7 @@ def edit_topic(topic_id):
         if with_poll:
             tpc.poll = form.poll_question.data
             tpc.update_poll_answers(form.poll_answers.data.strip().splitlines())
+        tpc.updated_at = datetime.utcnow()
         db.session.add(tpc)
         flash(lazy_gettext('The topic has been updated.'))
         return redirect(url_for('main.topic', topic_id=tpc.id))
@@ -152,6 +153,7 @@ def edit_topic(topic_id):
     elif not with_poll and form.add_poll.data and form.validate_on_submit():
         tpc.title = form.title.data
         tpc.body = form.body.data
+        tpc.updated_at = datetime.utcnow()
         db.session.add(tpc)
         flash(lazy_gettext('Topic has been saved. Fill data for a poll.'))
         return redirect(url_for('main.edit_topic', topic_id=tpc.id, poll=1))
@@ -166,6 +168,7 @@ def edit_topic(topic_id):
         tpc.poll_answers.update(dict(deleted=True))
         tpc.poll_votes.update(dict(deleted=True))
         tpc.deleted = True
+        tpc.updated_at = datetime.utcnow()
         db.session.add(tpc)
         flash(lazy_gettext('The topic has been deleted.'))
         return redirect(request.args.get('next') or url_for('main.topic_group', topic_group_id=tpc.group_id))
@@ -322,6 +325,7 @@ def delete_comment(comment_id):
     if current_user != comment.author and not current_user.is_moderator():
         abort(403)
     comment.deleted = True
+    comment.updated_at = datetime.utcnow()
     db.session.add(comment)
     flash(lazy_gettext('The comment has been deleted.'))
     return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
@@ -339,6 +343,7 @@ def edit_comment(comment_id):
 
     if form.submit.data and form.validate_on_submit():
         comment.body = form.body.data
+        comment.updated_at = datetime.utcnow()
         db.session.add(comment)
         flash(lazy_gettext('The comment has been updated.'))
         return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
@@ -349,6 +354,7 @@ def edit_comment(comment_id):
 
     elif form.delete.data:
         comment.deleted = True
+        comment.updated_at = datetime.utcnow()
         db.session.add(comment)
         flash(lazy_gettext('The comment has been deleted.'))
         return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))

@@ -91,7 +91,7 @@ class CommentForm(FlaskForm):
 
 
 class CommentEditForm(FlaskForm):
-    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 4})
+    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 8})
     submit = SubmitField(lazy_gettext('Submit'))
     cancel = SubmitField(lazy_gettext('Cancel'))
     delete = SubmitField(lazy_gettext('Delete'))

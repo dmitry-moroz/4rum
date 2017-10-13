@@ -255,6 +255,8 @@ div.comment-body {
     max-height: 600px;
     overflow-x: auto;
     overflow-y: auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
 }
 div.comment-content {
     margin-left: 48px;

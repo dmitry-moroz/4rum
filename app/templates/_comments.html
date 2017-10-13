@@ -14,7 +14,7 @@
         </div>
         <div class="comment-content">
             <div class="comment-date">
-                {{ format_datetime(comment.created_at, 'd MMMM YYYY, H:mm') }}
+                {{ _('Created') }}: {{ format_datetime(comment.created_at, 'd MMMM YYYY, H:mm') }}
             </div>
             <div class="comment-author">
                 <a href="{{ url_for('main.user', username=author.username) }}">
@@ -27,6 +27,16 @@
                 </a>
                 {% endif %}
             </div>
+            {% if comment.created_at != comment.updated_at %}
+            <div class="comment-date">
+                {{ _('Updated') }}: {{ format_datetime(comment.created_at, 'd MMMM YYYY, H:mm') }}
+            </div>
+            {% endif %}
+            {% if comment.author.name %}
+            <div class="comment-author">{{ comment.author.name }}</div>
+            {% else %}
+            <br>
+            {% endif %}
             <div class="comment-body">
                 {{ comment.body }}
             </div>

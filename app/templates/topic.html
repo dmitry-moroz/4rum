@@ -26,6 +26,9 @@
         <div class="topic-page-meta">
             <div class="topic-date">{{ _('Created') }}: {{ format_datetime(topic.created_at, 'd MMMM YYYY, H:mm') }}</div>
             <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
+            {% if topic.created_at != topic.updated_at %}
+            <div class="topic-date">{{ _('Updated') }}: {{ format_datetime(topic.updated_at, 'd MMMM YYYY, H:mm') }}</div>
+            {% endif %}
             {% if topic.author.name %}
             <div class="topic-author">{{ topic.author.name }}</div>
             {% else %}

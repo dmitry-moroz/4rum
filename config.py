@@ -43,7 +43,7 @@ class Config:
     IS_PROTECTED_ROOT_TOPIC_GROUP = True
 
     TOPIC_ALLOWED_TAGS = [
-        'a', 'abbr', 'acronym', 'b', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+        'a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
         'h1', 'h2', 'h3', 'p', 'table', 'thead', 'tbody', 'tr', 'th', 'td'
     ]
 

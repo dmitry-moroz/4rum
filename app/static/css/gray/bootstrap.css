@@ -1089,12 +1089,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #2c3e50;
+  color: #2874a8;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #2c3e50;
+  color: #2874a8;
   text-decoration: underline;
 }
 a:focus {
@@ -3388,7 +3388,7 @@ fieldset[disabled] .btn-danger.focus {
   background-color: #ffffff;
 }
 .btn-link {
-  color: #2c3e50;
+  color: #2874a8;
   font-weight: normal;
   border-radius: 0;
 }
@@ -3409,7 +3409,7 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #2c3e50;
+  color: #2874a8;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -3989,7 +3989,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a:hover,
 .nav .open > a:focus {
   background-color: #ecf0f1;
-  border-color: #2c3e50;
+  border-color: #2874a8;
 }
 .nav .nav-divider {
   height: 1px;
@@ -5000,7 +5000,7 @@ a.badge:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-  border-color: #2c3e50;
+  border-color: #2874a8;
 }
 .thumbnail .caption {
   padding: 9px;

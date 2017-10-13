@@ -50,9 +50,11 @@ def generate_fake_topics(count=100):
             g = TopicGroup.query.offset(randint(0, group_count - 1)).first()
         else:
             g = None
+        now = forgery_py.date.date(True)
         p = Topic(title=forgery_py.lorem_ipsum.title()[:128],
                   body=forgery_py.lorem_ipsum.sentences(randint(20, 40)),
-                  created_at=forgery_py.date.date(True),
+                  created_at=now,
+                  updated_at=now,
                   author=u,
                   group=g)
         db.session.add(p)
@@ -80,8 +82,10 @@ def generate_fake_comments(count=1000):
     for i in range(count):
         u = User.query.offset(randint(0, user_count - 1)).first()
         t = Topic.query.offset(randint(0, topic_count - 1)).first()
+        now = forgery_py.date.date(True)
         c = Comment(body=forgery_py.lorem_ipsum.sentences(randint(10, 20)),
-                    created_at=forgery_py.date.date(True),
+                    created_at=now,
+                    updated_at=now,
                     author=u,
                     topic=t)
         db.session.add(c)
