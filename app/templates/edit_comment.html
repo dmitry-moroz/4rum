@@ -6,7 +6,7 @@
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='pen-icon.png') }}">
-    <div class="comment-page-header">
+    <div class="common-header">
         <h2>
             {% if current_user.username == comment.author.username %}
             {{ _('Edit comment') }}
@@ -19,5 +19,4 @@
 <div>
     {{ wtf.quick_form(form, button_map={'submit':'success', 'cancel':'warning', 'delete':'danger'}) }}
 </div>
-<br>
 {% endblock %}

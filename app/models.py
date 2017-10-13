@@ -10,8 +10,7 @@ from markdown.extensions.tables import TableExtension
 from sqlalchemy import func, or_, and_
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# TODO: remove base_config
-from config import base_config
+from config import config
 from . import db, login_manager
 
 
@@ -65,23 +64,6 @@ class Message(db.Model):
     receiver_deleted = db.Column(db.Boolean, index=True, default=False)
     unread = db.Column(db.Boolean, index=True, default=True)
 
-    @staticmethod
-    def generate_fake(count=1000):
-        from random import seed, randint
-        import forgery_py
-
-        seed()
-        user_count = User.query.count()
-        for i in range(count):
-            u1, u2 = User.query.order_by(func.random()).offset(randint(0, user_count - 2)).limit(2).all()
-            m = Message(title=forgery_py.lorem_ipsum.sentence(),
-                        body=forgery_py.lorem_ipsum.sentences(randint(10, 20)),
-                        created_at=forgery_py.date.date(True),
-                        author=u1,
-                        receiver=u2)
-            db.session.add(m)
-        db.session.commit()
-
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -107,28 +89,6 @@ class User(UserMixin, db.Model):
     # TODO: Add updated_at field
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     avatar = db.Column(db.String(256))
-
-    @staticmethod
-    def generate_fake(count=100):
-        from sqlalchemy.exc import IntegrityError
-        from random import seed
-        import forgery_py
-
-        seed()
-        for i in range(count):
-            u = User(email=forgery_py.internet.email_address(),
-                     username=forgery_py.internet.user_name(True),
-                     password=forgery_py.lorem_ipsum.word(),
-                     confirmed=True,
-                     name=forgery_py.name.full_name(),
-                     homeland=forgery_py.address.city(),
-                     about=forgery_py.lorem_ipsum.sentence(),
-                     created_at=forgery_py.date.date(True))
-            db.session.add(u)
-            try:
-                db.session.commit()
-            except IntegrityError:
-                db.session.rollback()
 
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
@@ -272,28 +232,6 @@ class Topic(db.Model):
             func.count(Comment.id)).filter(and_(Comment.topic_id == self.id, Comment.deleted == False)).scalar()
 
     @staticmethod
-    def generate_fake(count=100):
-        from random import seed, randint
-        import forgery_py
-
-        seed()
-        user_count = User.query.count()
-        group_count = TopicGroup.query.count()
-        for i in range(count):
-            u = User.query.offset(randint(0, user_count - 1)).first()
-            if group_count:
-                g = TopicGroup.query.offset(randint(0, group_count - 1)).first()
-            else:
-                g = None
-            p = Topic(title=forgery_py.lorem_ipsum.sentence(),
-                      body=forgery_py.lorem_ipsum.sentences(randint(20, 40)),
-                      created_at=forgery_py.date.date(True),
-                      author=u,
-                      group=g)
-            db.session.add(p)
-        db.session.commit()
-
-    @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
         html = markdown(value, extensions=[TableExtension()], output_format='html')
         clean_html = bleach.clean(html, tags=current_app.config['TOPIC_ALLOWED_TAGS'], strip=True)
@@ -338,7 +276,7 @@ class TopicGroup(db.Model):
     __tablename__ = 'topic_groups'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64))
-    priority = db.Column(db.Integer, default=base_config.TOPIC_GROUP_PRIORITY[-1])
+    priority = db.Column(db.Integer, default=config.TOPIC_GROUP_PRIORITY[-1])
     protected = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -347,32 +285,16 @@ class TopicGroup(db.Model):
     topic_groups = db.relationship('TopicGroup', backref=db.backref('group', remote_side=id), lazy='dynamic')
 
     @staticmethod
-    def generate_fake(count=10):
-        from random import seed, randint, choice
-        import forgery_py
-
-        seed()
-        user_count = User.query.count()
-        for i in range(count):
-            u = User.query.offset(randint(0, user_count - 1)).first()
-            g = TopicGroup(title=forgery_py.lorem_ipsum.sentence(),
-                           priority=choice(base_config.TOPIC_GROUP_PRIORITY),
-                           created_at=forgery_py.date.date(True),
-                           author=u)
-            db.session.add(g)
-        db.session.commit()
-
-    @staticmethod
     def insert_root_topic_group():
-        topic_group = TopicGroup.query.get(base_config.ROOT_TOPIC_GROUP)
+        topic_group = TopicGroup.query.get(config.ROOT_TOPIC_GROUP)
         if topic_group:
-            topic_group.priority = base_config.TOPIC_GROUP_PRIORITY[0]
-            topic_group.protected = base_config.IS_PROTECTED_ROOT_TOPIC_GROUP
+            topic_group.priority = config.TOPIC_GROUP_PRIORITY[0]
+            topic_group.protected = config.IS_PROTECTED_ROOT_TOPIC_GROUP
         else:
-            topic_group = TopicGroup(id=base_config.ROOT_TOPIC_GROUP,
+            topic_group = TopicGroup(id=config.ROOT_TOPIC_GROUP,
                                      title='root topic group',
-                                     priority=base_config.TOPIC_GROUP_PRIORITY[0],
-                                     protected=base_config.IS_PROTECTED_ROOT_TOPIC_GROUP)
+                                     priority=config.TOPIC_GROUP_PRIORITY[0],
+                                     protected=config.IS_PROTECTED_ROOT_TOPIC_GROUP)
         db.session.add(topic_group)
         db.session.commit()
 
@@ -388,30 +310,6 @@ class Comment(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'), index=True)
     deleted = db.Column(db.Boolean, index=True, default=False)
-
-    @staticmethod
-    def generate_fake(count=1000):
-        from random import seed, randint
-        import forgery_py
-
-        seed()
-        user_count = User.query.count()
-        topic_count = Topic.query.count()
-        for i in range(count):
-            u = User.query.offset(randint(0, user_count - 1)).first()
-            if topic_count:
-                t = Topic.query.offset(randint(0, topic_count - 1)).first()
-            else:
-                t = None
-            c = Comment(body=forgery_py.lorem_ipsum.sentences(randint(10, 20)),
-                        created_at=forgery_py.date.date(True),
-                        author=u,
-                        topic=t)
-            db.session.add(c)
-            if t:
-                t.interest += 1
-                db.session.add(t)
-        db.session.commit()
 
 
 class PollAnswer(db.Model):

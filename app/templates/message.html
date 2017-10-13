@@ -6,7 +6,7 @@
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='mail-read-icon.png') }}">
-    <div class="message-page-header">
+    <div class="common-header">
         <h2>
             {{ _('Message') }}
             {% if current_user.id == message.author_id %}
@@ -57,7 +57,7 @@
 {% if form %}
     <div class="page-header">
         <img class="common-thumbnail" src="{{ url_for('static', filename='mail-send-icon.png') }}">
-        <div class="topic-page-header">
+        <div class="common-header">
             <h2>{{ _('Reply') }}:</h2>
         </div>
     </div>
@@ -65,6 +65,5 @@
         {{ wtf.quick_form(form, button_map={'send':'success', 'close':'warning', 'delete':'danger'}) }}
     </div>
 {% endif %}
-<br>
 
 {% endblock %}

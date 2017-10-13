@@ -7,7 +7,7 @@
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='speech-icon.png') }}">
-    <div class="topic-page-header">
+    <div class="common-header">
         <h2>{{ topic.title }}</h2>
     </div>
 </div>
@@ -53,8 +53,8 @@
                     <div class="poll_percent_info">
                         {{ percent }}% ({{ _('votes') }}: {{ votes }})
                     </div>
-                    <div class="poll_progress img-rounded">
-                        <div class="poll_progress_bar img-rounded" style="width:{{ percent }}%;">&nbsp;</div>
+                    <div class="progress progress_margin">
+                        <div class="progress-bar progress-bar-success progress_margin" style="width:{{ percent }}%;"></div>
                     </div>
                 </li>
             {% endfor %}
@@ -78,7 +78,7 @@
 
 <div id="comments" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='comments-icon.png') }}">
-    <div class="topic-page-header">
+    <div class="common-header">
         <h2>{{ _('Comments') }}:</h2>
     </div>
 </div>
@@ -95,10 +95,6 @@
 {% endif %}
 
 {% include '_comments.html' %}
-{% if pagination %}
-<div class="pagination">
-    {{ macros.pagination_widget(pagination, 'main.topic', topic_id=topic.id, fragment='#comments') }}
-</div>
-{% endif %}
+{{ macros.pagination_widget(pagination, 'main.topic', topic_id=topic.id, fragment='#comments') }}
 
 {% endblock %}

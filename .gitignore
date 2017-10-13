@@ -88,3 +88,12 @@ ENV/
 .ropeproject
 
 .idea/
+
+# Files with environment variables
+*.env
+
+# Sqlite DB files
+*.sqlite
+
+# Local docker-compose file
+docker-compose-local.yml

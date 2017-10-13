@@ -6,7 +6,7 @@
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='mail-send-icon.png') }}">
-    <div class="message-page-header">
+    <div class="common-header">
         <h2>
             {{ _('New message to') }} {{ receiver.username }}
         </h2>
@@ -39,6 +39,5 @@
 <div>
     {{ wtf.quick_form(form, button_map={'send':'success', 'cancel':'warning'}) }}
 </div>
-<br>
 
 {% endblock %}

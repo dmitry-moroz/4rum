@@ -6,22 +6,38 @@ An Internet forum, is an online discussion site where people can hold conversati
 
 The application implemented with Python WEB framework <b>Flask</b>.
 
-To run application for development:
+To run application:
 ```
-$ python manage.py db upgrade
-$ python manage.py shell
-
->>> Role.insert_roles()
->>> TopicGroup.insert_root_topic_group()
->>> User.generate_fake()
->>> TopicGroup.generate_fake()
->>> Topic.generate_fake()
->>> Comment.generate_fake()
->>> Message.generate_fake()
-
+# Prepare virtual environment
+$ mkvirtualenv 4rum --python=/usr/bin/python2.7
+$ pip install -r requirements/dev.txt
+# Prepare all needed environment variables for WEB application
 $ export MAIL_USERNAME=4rum@example.com
-$ export MAIL_PASSWORD=password
+$ export MAIL_PASSWORD=secret1
 $ export ADMIN_MAIL_USERNAME=4rum_admin@example.com
+$ export DB_USER=forum_app
+$ export DB_NAME=forum
+$ export DB_PASSWORD=secret2
+$ export DB_HOST=pg
+# Prepare DB
+$ python manage.py db upgrade
+$ python manage.py insert_initial_data
+$ python manage.py insert_fake_data
+# Compile translations
 $ pybabel compile -d translations
-$ python manage.py runserver
+# Run server
+$ python manage.py runserver -h 0.0.0.0 -p 8000
 ```
+
+To run application using docker and docker-compose:
+```
+# Install docker and docker-compose
+# Prepare pg.env file with environment variables for DB
+# Prepare web.env file with environment variables for WEB application
+$ docker-compose up -d
+$ docker-compose exec web python manage.py db upgrade
+$ docker-compose exec web python manage.py insert_initial_data
+$ docker-compose exec web python manage.py insert_fake_data
+```
+
+Go to http://127.0.0.1:8000/

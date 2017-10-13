@@ -6,7 +6,7 @@
 {% block page_content %}
 <div id="hot" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='fire-icon.png') }}">
-    <div class="main-header">
+    <div class="common-header">
         <h2>{{ _('The most hot topics last ' + period) }}</h2>
     </div>
 </div>
@@ -27,9 +27,5 @@
     </ul>
 </div>
 {% include '_topics.html' %}
-{% if pagination %}
-<div class="pagination">
-    {{ macros.pagination_widget(pagination, 'main.hot', period=period, fragment='#hot') }}
-</div>
-{% endif %}
+{{ macros.pagination_widget(pagination, 'main.hot', period=period, fragment='#hot') }}
 {% endblock %}
