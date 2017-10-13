@@ -4,13 +4,13 @@
 
 {% block head %}
 {{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon-{0}.ico'.format(config['THEME'])) }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon-{0}.ico'.format(config['THEME'])) }}" type="image/x-icon">
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/{0}/bootstrap.css'.format(config['THEME'])) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/{0}/styles.css'.format(config['THEME'])) }}">
 {% endblock %}
 
 {% block navbar %}
