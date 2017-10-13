@@ -6,7 +6,7 @@
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='folder-add-icon.png') }}">
-    <div class="topic-group-header">
+    <div class="common-header">
         <h2>{{ _('Create new topic group') }}
             {% if topic_group.is_root_topic_group() %}
             {{ _('on home page') }}
@@ -19,5 +19,4 @@
 <div>
     {{ wtf.quick_form(form, button_map={'submit':'success', 'cancel':'danger'}) }}
 </div>
-<br>
 {% endblock %}

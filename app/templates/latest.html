@@ -6,7 +6,7 @@
 {% block page_content %}
 <div id="latest" class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='timer-icon.png') }}">
-    <div class="main-header">
+    <div class="common-header">
         <h2>{{ _('Latest ' + target) }}</h2>
     </div>
 </div>
@@ -28,9 +28,5 @@
     {% set use_rich_comments = True %}
     {% include '_comments.html' %}
 {% endif %}
-{% if pagination %}
-<div class="pagination">
-    {{ macros.pagination_widget(pagination, 'main.latest', target=target, fragment='#latest') }}
-</div>
-{% endif %}
+{{ macros.pagination_widget(pagination, 'main.latest', target=target, fragment='#latest') }}
 {% endblock %}

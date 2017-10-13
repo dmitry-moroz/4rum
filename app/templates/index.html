@@ -6,7 +6,7 @@
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='forum-icon.png') }}">
-    <div class="main-header">
+    <div class="common-header">
         <h2>
             {{ _('Welcome to') }} 4RUM{% if current_user.is_authenticated %}, {{ current_user.username }}{% endif %}
         </h2>
@@ -15,9 +15,5 @@
 {% include '_buttons_topic_group.html' %}
 {% include '_topic_groups.html' %}
 {% include '_topics.html' %}
-{% if pagination %}
-<div class="pagination">
-    {{ macros.pagination_widget(pagination, 'main.index') }}
-</div>
-{% endif %}
+{{ macros.pagination_widget(pagination, 'main.index') }}
 {% endblock %}
