@@ -94,3 +94,6 @@ ENV/
 
 # Sqlite DB files
 *.sqlite
+
+# Local docker-compose file
+docker-compose-local.yml
