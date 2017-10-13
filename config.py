@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY', '<hard-to-guess-string>')
     SESSION_PROTECTION = 'basic'
-    THEME = os.environ.get('THEME', 'violet')
+    THEME = os.environ.get('THEME', 'gray')
 
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
