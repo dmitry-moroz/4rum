@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-16 16:26+0300\n"
-"PO-Revision-Date: 2017-10-16 16:27+0300\n"
+"POT-Creation-Date: 2017-10-16 17:39+0300\n"
+"PO-Revision-Date: 2017-10-16 17:41+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -129,7 +129,8 @@ msgid "You have been logged out."
 msgstr "Вы вышли из системы."
 
 #: app/auth/views.py:57 app/auth/views.py:81
-msgid "Confirm Your Account"
+#: app/templates/auth/unconfirmed.html:3
+msgid "Confirm your account"
 msgstr "Подтвердите Ваш аккаунт"
 
 #: app/auth/views.py:58
@@ -153,7 +154,7 @@ msgid "Your password has been updated."
 msgstr "Ваш пароль был обновлен."
 
 #: app/auth/views.py:105
-msgid "Confirm Your New Email"
+msgid "Confirm your new email"
 msgstr "Подтвердите Ваш новый e-mail"
 
 #: app/auth/views.py:107
@@ -165,7 +166,7 @@ msgid "You have confirmed your new email. Thanks!"
 msgstr "Вы подтвердили новый e-mail. Спасибо!"
 
 #: app/auth/views.py:130
-msgid "Instructions To Reset Your Password"
+msgid "Instructions to reset your password"
 msgstr "Инструкции по сбросу пароля"
 
 #: app/auth/views.py:132
@@ -656,10 +657,6 @@ msgstr "Забыли пароль?"
 #: app/templates/auth/login.html:14
 msgid "Click here to reset it"
 msgstr "Нажмите здесь, чтобы сбросить его"
-
-#: app/templates/auth/unconfirmed.html:3
-msgid "Confirm your account"
-msgstr "Подтвердите аккаунт"
 
 #: app/templates/auth/unconfirmed.html:8
 msgid "Hello"

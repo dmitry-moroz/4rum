@@ -54,7 +54,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         token = user.generate_token()
-        send_email(user.email, lazy_gettext('Confirm Your Account'), 'auth/email/confirm', user=user, token=token)
+        send_email(user.email, lazy_gettext('Confirm your account'), 'auth/email/confirm', user=user, token=token)
         flash(lazy_gettext('A confirmation email has been sent to you by email.'))
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
@@ -78,7 +78,7 @@ def resend_confirmation():
     if current_user.confirmed:
         return redirect(url_for('main.index'))
     token = current_user.generate_token()
-    send_email(current_user.email, lazy_gettext('Confirm Your Account'), 'auth/email/confirm', user=current_user,
+    send_email(current_user.email, lazy_gettext('Confirm your account'), 'auth/email/confirm', user=current_user,
                token=token)
     flash(lazy_gettext('A new confirmation email has been sent to you by email.'))
     return redirect(url_for('main.index'))
@@ -102,7 +102,7 @@ def change_email():
     form = ChangeEmailForm()
     if form.validate_on_submit():
         token = current_user.generate_token(new_email=form.new_email.data)
-        send_email(form.new_email.data, lazy_gettext('Confirm Your New Email'), 'auth/email/confirm_new_email',
+        send_email(form.new_email.data, lazy_gettext('Confirm your new email'), 'auth/email/confirm_new_email',
                    user=current_user, token=token)
         flash(lazy_gettext('A confirmation email has been sent to your new email.'))
         return redirect(request.args.get('next') or url_for('main.index'))
@@ -127,7 +127,7 @@ def reset_password_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         token = user.generate_token()
-        send_email(user.email, lazy_gettext('Instructions To Reset Your Password'), 'auth/email/reset_password',
+        send_email(user.email, lazy_gettext('Instructions to reset your password'), 'auth/email/reset_password',
                    user=user, token=token)
         flash(lazy_gettext('An email with instructions to reset password has been sent to you by email.'))
         return redirect(request.args.get('next') or url_for('auth.login'))
