@@ -68,15 +68,14 @@ def topic(topic_id):
         and_(Comment.topic_id == tpc.id, Comment.deleted == False)).order_by(
         Comment.created_at.asc()).paginate(page, per_page=current_app.config['COMMENTS_PER_PAGE'], error_out=False)
 
-    if tpc.poll and current_user.is_voted(tpc):
-        is_voted = True
+    user_vote = current_user.get_vote(tpc)
+    if tpc.poll and user_vote:
         poll_data = tpc.get_poll_results()
     else:
-        is_voted = False
         poll_data = [(a.id, a.body) for a in tpc.poll_answers.filter_by(deleted=False).all()]
 
     return render_template('topic.html', topic=tpc, form=form, comments=pagination.items, pagination=pagination,
-                           is_voted=is_voted, poll_data=poll_data)
+                           user_vote=user_vote, poll_data=poll_data)
 
 
 @main.route('/create_topic/<int:topic_group_id>', methods=['GET', 'POST'])
@@ -369,7 +368,7 @@ def edit_comment(comment_id):
 @permission_required(Permission.PARTICIPATE)
 def vote(answer_id):
     answer = PollAnswer.query.filter_by(id=answer_id, deleted=False).first_or_404()
-    if current_user.is_voted(answer.topic):
+    if current_user.get_vote(answer.topic):
         flash(lazy_gettext('You have already voted for this poll.'))
     else:
         answer.topic.add_vote(current_user, answer)

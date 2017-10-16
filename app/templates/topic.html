@@ -48,7 +48,7 @@
     {% if topic.poll and current_user.can(Permission.PARTICIPATE) %}
         <br>
         <h4 id="poll">{{ topic.poll }}</h4>
-        {% if is_voted %}
+        {% if user_vote %}
         <ul class="poll_answers_voted">
             {% for answer, votes, percent in poll_data %}
                 <li class="poll_answer_voted img-rounded">
@@ -62,6 +62,7 @@
                 </li>
             {% endfor %}
         </ul>
+        <h5>{{ _('You chosen') }} "{{ user_vote[0] }}"</h5>
         {% else %}
         <ul class="poll_answers">
             {% for answer_id, answer in poll_data %}

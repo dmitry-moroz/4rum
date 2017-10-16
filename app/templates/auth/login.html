@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}4RUM - {{ _('Login') }}{% endblock %}
+{% block title %}4RUM - {{ _('Log in') }}{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-    <h1>{{ _('Login') }}</h1>
+    <h1>{{ _('Log in') }}</h1>
 </div>
 <div class="col-md-6">
     {{ wtf.quick_form(form, button_map={'submit':'success'}) }}

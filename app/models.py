@@ -174,11 +174,11 @@ class User(UserMixin, db.Model):
         return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
             url=current_app.config['BASE_GRAVATAR_URL'], hash=hash, size=size, default=default, rating=rating)
 
-    def is_voted(self, topic):
-        if self.id in [v.author_id for v in topic.poll_votes.filter_by(deleted=False).all()]:
-            return True
-        else:
-            return False
+    def get_vote(self, topic):
+        vote = PollAnswer.query.with_entities(PollAnswer.body, PollVote.id).join(
+            PollVote, PollAnswer.id == PollVote.poll_answer_id).filter(
+            and_(PollAnswer.topic_id == topic.id, PollVote.author_id == self.id)).first()
+        return vote
 
     def get_unread_messages_count(self):
         return db.session.query(func.count(Message.id)).filter(

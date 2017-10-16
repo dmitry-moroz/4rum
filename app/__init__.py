@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_babel import Babel
+from flask_babel import lazy_gettext
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -12,6 +13,7 @@ mail = Mail()
 db = SQLAlchemy()
 babel = Babel()
 login_manager = LoginManager()
+login_manager.localize_callback = lazy_gettext
 login_manager.login_view = 'auth.login'
 
 

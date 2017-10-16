@@ -37,6 +37,7 @@ class EditProfileAdminForm(FlaskForm):
     def validate_email(self, field):
         if field.data != self.user.email and User.query.filter_by(email=field.data).first():
             raise ValidationError(lazy_gettext('Email already registered.'))
+        field.data = field.data.lower()
 
     def validate_username(self, field):
         if field.data != self.user.username and User.query.filter_by(username=field.data).first():

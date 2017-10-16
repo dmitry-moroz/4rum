@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-13 21:01+0300\n"
-"PO-Revision-Date: 2017-10-13 21:03+0300\n"
+"POT-Creation-Date: 2017-10-16 14:40+0300\n"
+"PO-Revision-Date: 2017-10-16 14:47+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -20,12 +20,12 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: app/auth/forms.py:12 app/auth/forms.py:19 app/auth/forms.py:70
-#: app/auth/forms.py:79 app/main/forms.py:20 app/templates/user.html:23
+#: app/auth/forms.py:12 app/auth/forms.py:22 app/auth/forms.py:75
+#: app/auth/forms.py:85 app/main/forms.py:20 app/templates/user.html:23
 msgid "Email"
 msgstr "E-mail"
 
-#: app/auth/forms.py:13 app/auth/forms.py:23 app/auth/forms.py:55
+#: app/auth/forms.py:13 app/auth/forms.py:26 app/auth/forms.py:59
 msgid "Password"
 msgstr "Пароль"
 
@@ -33,89 +33,90 @@ msgstr "Пароль"
 msgid "Keep me logged in"
 msgstr "Запомнить меня"
 
-#: app/auth/forms.py:15 app/templates/base.html:56
-msgid "Log In"
+#: app/auth/forms.py:15 app/templates/auth/login.html:4
+#: app/templates/auth/login.html:8 app/templates/base.html:56
+msgid "Log in"
 msgstr "Войти"
 
-#: app/auth/forms.py:20 app/main/forms.py:21
+#: app/auth/forms.py:23 app/main/forms.py:21
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: app/auth/forms.py:21 app/main/forms.py:22
+#: app/auth/forms.py:24 app/main/forms.py:22
 msgid "Usernames must have only letters, numbers, dots or underscores"
 msgstr ""
 "Имена пользователей должны содержать только буквы, цифры, точки или символы "
 "подчеркивания"
 
-#: app/auth/forms.py:24 app/auth/forms.py:40 app/auth/forms.py:81
+#: app/auth/forms.py:27 app/auth/forms.py:44 app/auth/forms.py:87
 msgid "Passwords must match."
 msgstr "Пароли должны совпадать."
 
-#: app/auth/forms.py:25 app/auth/forms.py:82
+#: app/auth/forms.py:28 app/auth/forms.py:88
 msgid "Confirm password"
 msgstr "Подтвердите пароль"
 
-#: app/auth/forms.py:26 app/templates/auth/register.html:4
+#: app/auth/forms.py:29 app/templates/auth/register.html:4
 #: app/templates/auth/register.html:8
 msgid "Register"
 msgstr "Зарегистрироваться"
 
-#: app/auth/forms.py:30 app/auth/forms.py:62 app/main/forms.py:39
+#: app/auth/forms.py:33 app/auth/forms.py:66 app/main/forms.py:39
 msgid "Email already registered."
 msgstr "E-mail уже зарегистрирован."
 
-#: app/auth/forms.py:34 app/main/forms.py:43
+#: app/auth/forms.py:38 app/main/forms.py:44
 msgid "Username already in use."
 msgstr "Имя пользователя уже используется."
 
-#: app/auth/forms.py:38
+#: app/auth/forms.py:42
 msgid "Old password"
 msgstr "Старый пароль"
 
-#: app/auth/forms.py:39 app/auth/forms.py:80
+#: app/auth/forms.py:43 app/auth/forms.py:86
 msgid "New password"
 msgstr "Новый пароль"
 
-#: app/auth/forms.py:41
+#: app/auth/forms.py:45
 msgid "Confirm new password"
 msgstr "Подтвердите новый пароль"
 
-#: app/auth/forms.py:42 app/templates/auth/change_password.html:4
+#: app/auth/forms.py:46 app/templates/auth/change_password.html:4
 #: app/templates/auth/change_password.html:8 app/templates/base.html:50
 msgid "Change password"
 msgstr "Изменить пароль"
 
-#: app/auth/forms.py:46
+#: app/auth/forms.py:50
 msgid "Invalid old password."
 msgstr "Неверный старый пароль."
 
-#: app/auth/forms.py:50
+#: app/auth/forms.py:54
 msgid "New password is the same as old password."
 msgstr "Новый пароль совпадает со старым паролем."
 
-#: app/auth/forms.py:54
+#: app/auth/forms.py:58
 msgid "New email"
 msgstr "Новый e-mail"
 
-#: app/auth/forms.py:56 app/templates/base.html:51
+#: app/auth/forms.py:60 app/templates/base.html:51
 msgid "Change email"
 msgstr "Изменить e-mail"
 
-#: app/auth/forms.py:60
+#: app/auth/forms.py:64
 msgid "This is your current email."
 msgstr "Это Ваш текущий e-mail."
 
-#: app/auth/forms.py:66
+#: app/auth/forms.py:71
 msgid "Invalid password."
 msgstr "Неверный пароль."
 
-#: app/auth/forms.py:71 app/auth/forms.py:83
+#: app/auth/forms.py:76 app/auth/forms.py:89
 #: app/templates/auth/reset_password.html:4
 #: app/templates/auth/reset_password.html:8
 msgid "Reset password"
 msgstr "Сбросить пароль"
 
-#: app/auth/forms.py:75 app/auth/forms.py:87
+#: app/auth/forms.py:80 app/auth/forms.py:93
 msgid "Unknown email address."
 msgstr "Неизвестный e-mail адрес."
 
@@ -194,9 +195,9 @@ msgstr "О себе"
 msgid "Link to avatar"
 msgstr "Ссылка на аватар"
 
-#: app/main/forms.py:16 app/main/forms.py:30 app/main/forms.py:49
-#: app/main/forms.py:63 app/main/forms.py:75 app/main/forms.py:86
-#: app/main/forms.py:95
+#: app/main/forms.py:16 app/main/forms.py:30 app/main/forms.py:50
+#: app/main/forms.py:64 app/main/forms.py:76 app/main/forms.py:87
+#: app/main/forms.py:96
 msgid "Submit"
 msgstr "Отправить"
 
@@ -208,63 +209,63 @@ msgstr "Подтвержденный"
 msgid "Role"
 msgstr "Роль"
 
-#: app/main/forms.py:47 app/main/forms.py:59 app/main/forms.py:72
+#: app/main/forms.py:48 app/main/forms.py:60 app/main/forms.py:73
 msgid "Title"
 msgstr "Заголовок"
 
-#: app/main/forms.py:48 app/main/forms.py:60 app/main/forms.py:94
-#: app/main/forms.py:102 app/main/forms.py:110
+#: app/main/forms.py:49 app/main/forms.py:61 app/main/forms.py:95
+#: app/main/forms.py:103 app/main/forms.py:111
 msgid "Text"
 msgstr "Текст"
 
-#: app/main/forms.py:50
+#: app/main/forms.py:51
 msgid "Add poll"
 msgstr "Добавить голосование"
 
-#: app/main/forms.py:51 app/main/forms.py:64 app/main/forms.py:76
-#: app/main/forms.py:96 app/main/forms.py:112
+#: app/main/forms.py:52 app/main/forms.py:65 app/main/forms.py:77
+#: app/main/forms.py:97 app/main/forms.py:113
 msgid "Cancel"
 msgstr "Отменить"
 
-#: app/main/forms.py:55 app/main/forms.py:68 app/main/forms.py:97
-#: app/main/forms.py:105 app/templates/_comments.html:49
+#: app/main/forms.py:56 app/main/forms.py:69 app/main/forms.py:98
+#: app/main/forms.py:106 app/templates/_comments.html:49
 msgid "Delete"
 msgstr "Удалить"
 
-#: app/main/forms.py:61
+#: app/main/forms.py:62
 msgid "Poll question"
 msgstr "Вопрос для голосования"
 
-#: app/main/forms.py:62
+#: app/main/forms.py:63
 msgid "Poll answers"
 msgstr "Варианты ответов для голосования"
 
-#: app/main/forms.py:73
+#: app/main/forms.py:74
 msgid "Priority"
 msgstr "Приоритет"
 
-#: app/main/forms.py:74
+#: app/main/forms.py:75
 msgid "Moderators only"
 msgstr "Только для модераторов"
 
-#: app/main/forms.py:84
+#: app/main/forms.py:85
 msgid "Leave your comment, {username}:"
 msgstr "Оставьте свой комментарий, {username}:"
 
-#: app/main/forms.py:101 app/main/forms.py:109 app/templates/message.html:48
+#: app/main/forms.py:102 app/main/forms.py:110 app/templates/message.html:48
 #: app/templates/messages.html:29
 msgid "Subject"
 msgstr "Тема"
 
-#: app/main/forms.py:103 app/main/forms.py:111
+#: app/main/forms.py:104 app/main/forms.py:112
 msgid "Send"
 msgstr "Отправить"
 
-#: app/main/forms.py:104
+#: app/main/forms.py:105
 msgid "Close"
 msgstr "Закрыть"
 
-#: app/main/forms.py:117
+#: app/main/forms.py:118
 msgid "Search"
 msgstr "Поиск"
 
@@ -636,10 +637,6 @@ msgstr "Темы на форуме"
 msgid "Change email address"
 msgstr "Изменить адрес e-mail"
 
-#: app/templates/auth/login.html:4 app/templates/auth/login.html:8
-msgid "Login"
-msgstr "Войти"
-
 #: app/templates/auth/login.html:13
 msgid "New user?"
 msgstr "Новый пользователь?"
@@ -702,3 +699,7 @@ msgstr "Не найдено"
 #: app/templates/errors/500.html:3 app/templates/errors/500.html:9
 msgid "Internal Server Error"
 msgstr "Внутренняя ошибка сервера"
+
+#: LoginManager
+msgid "Please log in to access this page."
+msgstr "Пожалуйста, войдите, чтобы открыть эту страницу."
