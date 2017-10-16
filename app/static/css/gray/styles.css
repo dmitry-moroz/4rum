@@ -205,10 +205,10 @@ div.topic-page-content {
 
 /* CSS for topic body */
 div.topic-page-content h1 {
-    font-size: 140%;
+    font-size: 160%;
 }
 div.topic-page-content h2 {
-    font-size: 130%;
+    font-size: 140%;
 }
 div.topic-page-content h3 {
     font-size: 120%;
@@ -226,6 +226,13 @@ div.topic-page-content th {
 div.topic-page-content td {
     padding: 8px;
     border: 1px solid;
+}
+div.topic-page-content img {
+    max-width: 100%;
+    max-height: 600px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
 }
 
 /* CSS for comment form */

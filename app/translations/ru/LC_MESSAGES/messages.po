@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-16 14:40+0300\n"
-"PO-Revision-Date: 2017-10-16 14:47+0300\n"
+"POT-Creation-Date: 2017-10-16 16:26+0300\n"
+"PO-Revision-Date: 2017-10-16 16:27+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -273,75 +273,75 @@ msgstr "Поиск"
 msgid "Your comment has been published."
 msgstr "Ваш комментарий опубликован."
 
-#: app/main/views.py:106
+#: app/main/views.py:105
 msgid "Topic has been created."
 msgstr "Тема создана."
 
-#: app/main/views.py:116 app/main/views.py:158
+#: app/main/views.py:115 app/main/views.py:157
 msgid "Topic has been saved. Fill data for a poll."
 msgstr "Тема сохранена. Заполните данные для опроса."
 
-#: app/main/views.py:122
+#: app/main/views.py:121
 msgid "Topic creation was cancelled."
 msgstr "Создание темы было отменено."
 
-#: app/main/views.py:150
+#: app/main/views.py:149
 msgid "The topic has been updated."
 msgstr "Тема обновлена."
 
-#: app/main/views.py:162
+#: app/main/views.py:161
 msgid "Topic editing was cancelled."
 msgstr "Редактирование темы было отменено."
 
-#: app/main/views.py:173
+#: app/main/views.py:172
 msgid "The topic has been deleted."
 msgstr "Тема удалена."
 
-#: app/main/views.py:209
+#: app/main/views.py:208
 msgid "Topic group has been created."
 msgstr "Группа для тем создана."
 
-#: app/main/views.py:213
+#: app/main/views.py:212
 msgid "Topic group creation was cancelled."
 msgstr "Создание группы для тем было отменено."
 
-#: app/main/views.py:253
+#: app/main/views.py:252
 msgid "Your profile has been updated."
 msgstr "Ваш профиль обновлен."
 
-#: app/main/views.py:281
+#: app/main/views.py:280
 msgid "The profile has been updated."
 msgstr "Профиль обновлен."
 
-#: app/main/views.py:330 app/main/views.py:359
+#: app/main/views.py:329 app/main/views.py:358
 msgid "The comment has been deleted."
 msgstr "Комментарий удален."
 
-#: app/main/views.py:348
+#: app/main/views.py:347
 msgid "The comment has been updated."
 msgstr "Комментарий обновлен."
 
-#: app/main/views.py:352
+#: app/main/views.py:351
 msgid "Comment editing was cancelled."
 msgstr "Редактирование комментария было отменено."
 
-#: app/main/views.py:373
+#: app/main/views.py:372
 msgid "You have already voted for this poll."
 msgstr "Вы уже голосовали в этом опросе."
 
-#: app/main/views.py:376
+#: app/main/views.py:375
 msgid "Your vote has been taken."
 msgstr "Ваш голос принят."
 
-#: app/main/views.py:444 app/main/views.py:481
+#: app/main/views.py:443 app/main/views.py:480
 msgid "Your message has been sent."
 msgstr "Ваше сообщение отправлено."
 
-#: app/main/views.py:452
+#: app/main/views.py:451
 msgid "The message has been deleted."
 msgstr "Сообщение удалено."
 
-#: app/main/views.py:485
+#: app/main/views.py:484
 msgid "The message was cancelled."
 msgstr "Сообщение было отменено."
 
@@ -391,7 +391,7 @@ msgid "Topics"
 msgstr "Темы"
 
 #: app/templates/_topics.html:21 app/templates/latest.html:19
-#: app/templates/topic.html:85
+#: app/templates/topic.html:86
 msgid "Comments"
 msgstr "Комментарии"
 
@@ -603,6 +603,10 @@ msgstr "Новое сообщение для"
 #: app/templates/topic.html:57
 msgid "votes"
 msgstr "голоса"
+
+#: app/templates/topic.html:65
+msgid "You chosen"
+msgstr "Вы выбрали"
 
 #: app/templates/user.html:28
 msgid "About"

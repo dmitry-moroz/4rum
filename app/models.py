@@ -235,7 +235,9 @@ class Topic(db.Model):
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
         html = markdown(value, extensions=[TableExtension()], output_format='html')
-        clean_html = bleach.clean(html, tags=current_app.config['TOPIC_ALLOWED_TAGS'], strip=True)
+        clean_html = bleach.clean(html, tags=current_app.config['ALLOWED_TAGS'],
+                                  attributes=current_app.config['ALLOWED_ATTRIBUTES'],
+                                  strip=True)
         target.body_html = bleach.linkify(clean_html)
 
     def get_poll_results(self):

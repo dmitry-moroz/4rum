@@ -42,10 +42,16 @@ class Config:
     ROOT_TOPIC_GROUP = 0
     IS_PROTECTED_ROOT_TOPIC_GROUP = True
 
-    TOPIC_ALLOWED_TAGS = [
-        'a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code', 'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+    ALLOWED_TAGS = [
+        'a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code', 'em', 'i', 'img', 'li', 'ol', 'pre', 'strong', 'ul',
         'h1', 'h2', 'h3', 'p', 'table', 'thead', 'tbody', 'tr', 'th', 'td'
     ]
+    ALLOWED_ATTRIBUTES = {
+        'a': ['href', 'title'],
+        'abbr': ['title'],
+        'acronym': ['title'],
+        'img': ['alt', 'src', 'width', 'height'],
+    }
 
     SUPPORTED_LANGUAGES = {'en': 'English', 'ru': 'Russian'}
     BABEL_DEFAULT_LOCALE = 'ru'

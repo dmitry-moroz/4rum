@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-16 14:40+0300\n"
+"POT-Creation-Date: 2017-10-16 16:26+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -267,75 +267,75 @@ msgstr ""
 msgid "Your comment has been published."
 msgstr ""
 
-#: app/main/views.py:106
+#: app/main/views.py:105
 msgid "Topic has been created."
 msgstr ""
 
-#: app/main/views.py:116 app/main/views.py:158
+#: app/main/views.py:115 app/main/views.py:157
 msgid "Topic has been saved. Fill data for a poll."
 msgstr ""
 
-#: app/main/views.py:122
+#: app/main/views.py:121
 msgid "Topic creation was cancelled."
 msgstr ""
 
-#: app/main/views.py:150
+#: app/main/views.py:149
 msgid "The topic has been updated."
 msgstr ""
 
-#: app/main/views.py:162
+#: app/main/views.py:161
 msgid "Topic editing was cancelled."
 msgstr ""
 
-#: app/main/views.py:173
+#: app/main/views.py:172
 msgid "The topic has been deleted."
 msgstr ""
 
-#: app/main/views.py:209
+#: app/main/views.py:208
 msgid "Topic group has been created."
 msgstr ""
 
-#: app/main/views.py:213
+#: app/main/views.py:212
 msgid "Topic group creation was cancelled."
 msgstr ""
 
-#: app/main/views.py:253
+#: app/main/views.py:252
 msgid "Your profile has been updated."
 msgstr ""
 
-#: app/main/views.py:281
+#: app/main/views.py:280
 msgid "The profile has been updated."
 msgstr ""
 
-#: app/main/views.py:330 app/main/views.py:359
+#: app/main/views.py:329 app/main/views.py:358
 msgid "The comment has been deleted."
 msgstr ""
 
-#: app/main/views.py:348
+#: app/main/views.py:347
 msgid "The comment has been updated."
 msgstr ""
 
-#: app/main/views.py:352
+#: app/main/views.py:351
 msgid "Comment editing was cancelled."
 msgstr ""
 
-#: app/main/views.py:373
+#: app/main/views.py:372
 msgid "You have already voted for this poll."
 msgstr ""
 
-#: app/main/views.py:376
+#: app/main/views.py:375
 msgid "Your vote has been taken."
 msgstr ""
 
-#: app/main/views.py:444 app/main/views.py:481
+#: app/main/views.py:443 app/main/views.py:480
 msgid "Your message has been sent."
 msgstr ""
 
-#: app/main/views.py:452
+#: app/main/views.py:451
 msgid "The message has been deleted."
 msgstr ""
 
-#: app/main/views.py:485
+#: app/main/views.py:484
 msgid "The message was cancelled."
 msgstr ""
 
@@ -385,7 +385,7 @@ msgid "Topics"
 msgstr ""
 
 #: app/templates/_topics.html:21 app/templates/latest.html:19
-#: app/templates/topic.html:85
+#: app/templates/topic.html:86
 msgid "Comments"
 msgstr ""
 
@@ -596,6 +596,10 @@ msgstr ""
 
 #: app/templates/topic.html:57
 msgid "votes"
+msgstr ""
+
+#: app/templates/topic.html:65
+msgid "You chosen"
 msgstr ""
 
 #: app/templates/user.html:28
