@@ -198,7 +198,7 @@ class AnonymousUser(AnonymousUserMixin):
     def is_moderator(self):
         return False
 
-    def is_voted(self, topic):
+    def get_vote(self, topic):
         return False
 
 
