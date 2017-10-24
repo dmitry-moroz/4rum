@@ -1,7 +1,8 @@
 FROM python:2
 
-EXPOSE 8000
 MAINTAINER Dmitry Moroz "mds.freeman@gmail.com"
+
+EXPOSE 8000
 
 ADD app /app/src/app
 ADD migrations /app/src/migrations
