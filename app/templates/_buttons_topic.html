@@ -2,17 +2,17 @@
     <div class="right-buttons">
         {% if current_user.id==topic.author_id and current_user.can(Permission.WRITE) %}
         <a class="btn btn-warning btn-sm" href="{{ url_for('main.edit_topic', topic_id=topic.id, next=request.referrer) }}">
-            &#8859;{{ _('Edit') }}
+            <span class="glyphicon glyphicon-edit"></span> {{ _('Edit') }}
         </a>
         {% elif current_user.is_moderator() %}
         <a class="btn btn-warning btn-sm" href="{{ url_for('main.edit_topic', topic_id=topic.id, next=request.referrer) }}">
-            &#8859;{{ _('Edit [Moderator]') }}
+            <span class="glyphicon glyphicon-edit"></span> {{ _('Edit [Moderator]') }}
         </a>
         {% endif %}
     </div>
     <div>
         <a class="btn btn-primary btn-sm" href="{{ url_for('main.topic_group', topic_group_id=topic.group_id) }}">
-            &uArr;{{ _('Up') }}
+            <span class="glyphicon glyphicon-level-up"></span> {{ _('Up') }}
         </a>
     </div>
 </div>
