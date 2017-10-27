@@ -7,7 +7,7 @@ class Config:
     SESSION_PROTECTION = 'basic'
     THEME = os.environ.get('THEME', 'gray')
 
-    DEBUG = True
+    DEBUG = bool(os.environ.get('DEBUG', ''))
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     TESTING = False
 
