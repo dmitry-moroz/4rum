@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-16 17:39+0300\n"
+"POT-Creation-Date: 2017-10-27 16:32+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: app/auth/forms.py:12 app/auth/forms.py:22 app/auth/forms.py:75
-#: app/auth/forms.py:85 app/main/forms.py:20 app/templates/user.html:23
+#: app/auth/forms.py:85 app/main/forms.py:32 app/templates/user.html:23
 msgid "Email"
 msgstr ""
 
@@ -35,11 +35,11 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: app/auth/forms.py:23 app/main/forms.py:21
+#: app/auth/forms.py:23 app/main/forms.py:33
 msgid "Username"
 msgstr ""
 
-#: app/auth/forms.py:24 app/main/forms.py:22
+#: app/auth/forms.py:24 app/main/forms.py:34
 msgid "Usernames must have only letters, numbers, dots or underscores"
 msgstr ""
 
@@ -56,11 +56,11 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: app/auth/forms.py:33 app/auth/forms.py:66 app/main/forms.py:39
+#: app/auth/forms.py:33 app/auth/forms.py:66 app/main/forms.py:51
 msgid "Email already registered."
 msgstr ""
 
-#: app/auth/forms.py:38 app/main/forms.py:44
+#: app/auth/forms.py:38 app/main/forms.py:56
 msgid "Username already in use."
 msgstr ""
 
@@ -174,177 +174,177 @@ msgstr ""
 msgid "You have reset your password to new."
 msgstr ""
 
-#: app/main/forms.py:12 app/main/forms.py:26
+#: app/main/forms.py:24 app/main/forms.py:38
 msgid "Real name"
 msgstr ""
 
-#: app/main/forms.py:13 app/main/forms.py:27 app/templates/user.html:18
+#: app/main/forms.py:25 app/main/forms.py:39 app/templates/user.html:18
 msgid "Homeland"
 msgstr ""
 
-#: app/main/forms.py:14 app/main/forms.py:28
+#: app/main/forms.py:26 app/main/forms.py:40
 msgid "About me"
 msgstr ""
 
-#: app/main/forms.py:15 app/main/forms.py:29
+#: app/main/forms.py:27 app/main/forms.py:41
 msgid "Link to avatar"
 msgstr ""
 
-#: app/main/forms.py:16 app/main/forms.py:30 app/main/forms.py:50
-#: app/main/forms.py:64 app/main/forms.py:76 app/main/forms.py:87
-#: app/main/forms.py:96
+#: app/main/forms.py:28 app/main/forms.py:42 app/main/forms.py:62
+#: app/main/forms.py:76 app/main/forms.py:88 app/main/forms.py:99
+#: app/main/forms.py:108
 msgid "Submit"
 msgstr ""
 
-#: app/main/forms.py:24
+#: app/main/forms.py:36
 msgid "Confirmed"
 msgstr ""
 
-#: app/main/forms.py:25
+#: app/main/forms.py:37
 msgid "Role"
 msgstr ""
 
-#: app/main/forms.py:48 app/main/forms.py:60 app/main/forms.py:73
+#: app/main/forms.py:60 app/main/forms.py:72 app/main/forms.py:85
 msgid "Title"
 msgstr ""
 
-#: app/main/forms.py:49 app/main/forms.py:61 app/main/forms.py:95
-#: app/main/forms.py:103 app/main/forms.py:111
+#: app/main/forms.py:61 app/main/forms.py:73 app/main/forms.py:107
+#: app/main/forms.py:115 app/main/forms.py:123
 msgid "Text"
 msgstr ""
 
-#: app/main/forms.py:51
+#: app/main/forms.py:63
 msgid "Add poll"
 msgstr ""
 
-#: app/main/forms.py:52 app/main/forms.py:65 app/main/forms.py:77
-#: app/main/forms.py:97 app/main/forms.py:113
+#: app/main/forms.py:64 app/main/forms.py:77 app/main/forms.py:89
+#: app/main/forms.py:109 app/main/forms.py:125
 msgid "Cancel"
 msgstr ""
 
-#: app/main/forms.py:56 app/main/forms.py:69 app/main/forms.py:98
-#: app/main/forms.py:106 app/templates/_comments.html:49
+#: app/main/forms.py:68 app/main/forms.py:81 app/main/forms.py:110
+#: app/main/forms.py:118
 msgid "Delete"
 msgstr ""
 
-#: app/main/forms.py:62
+#: app/main/forms.py:74
 msgid "Poll question"
 msgstr ""
 
-#: app/main/forms.py:63
+#: app/main/forms.py:75
 msgid "Poll answers"
 msgstr ""
 
-#: app/main/forms.py:74
+#: app/main/forms.py:86
 msgid "Priority"
 msgstr ""
 
-#: app/main/forms.py:75
+#: app/main/forms.py:87
 msgid "Moderators only"
 msgstr ""
 
-#: app/main/forms.py:85
+#: app/main/forms.py:97
 msgid "Leave your comment, {username}:"
 msgstr ""
 
-#: app/main/forms.py:102 app/main/forms.py:110 app/templates/message.html:48
+#: app/main/forms.py:114 app/main/forms.py:122 app/templates/message.html:48
 #: app/templates/messages.html:29
 msgid "Subject"
 msgstr ""
 
-#: app/main/forms.py:104 app/main/forms.py:112
+#: app/main/forms.py:116 app/main/forms.py:124
 msgid "Send"
 msgstr ""
 
-#: app/main/forms.py:105
+#: app/main/forms.py:117
 msgid "Close"
 msgstr ""
 
-#: app/main/forms.py:118
+#: app/main/forms.py:130
 msgid "Search"
 msgstr ""
 
-#: app/main/views.py:59
+#: app/main/views.py:56
 msgid "Your comment has been published."
 msgstr ""
 
-#: app/main/views.py:105
+#: app/main/views.py:109
 msgid "Topic has been created."
 msgstr ""
 
-#: app/main/views.py:115 app/main/views.py:157
+#: app/main/views.py:119 app/main/views.py:161
 msgid "Topic has been saved. Fill data for a poll."
 msgstr ""
 
-#: app/main/views.py:121
+#: app/main/views.py:125
 msgid "Topic creation was cancelled."
 msgstr ""
 
-#: app/main/views.py:149
+#: app/main/views.py:153
 msgid "The topic has been updated."
 msgstr ""
 
-#: app/main/views.py:161
+#: app/main/views.py:165
 msgid "Topic editing was cancelled."
 msgstr ""
 
-#: app/main/views.py:172
+#: app/main/views.py:176
 msgid "The topic has been deleted."
 msgstr ""
 
-#: app/main/views.py:208
+#: app/main/views.py:212
 msgid "Topic group has been created."
 msgstr ""
 
-#: app/main/views.py:212
+#: app/main/views.py:216
 msgid "Topic group creation was cancelled."
 msgstr ""
 
-#: app/main/views.py:252
+#: app/main/views.py:256
 msgid "Your profile has been updated."
 msgstr ""
 
-#: app/main/views.py:280
+#: app/main/views.py:284
 msgid "The profile has been updated."
 msgstr ""
 
-#: app/main/views.py:329 app/main/views.py:358
-msgid "The comment has been deleted."
-msgstr ""
-
-#: app/main/views.py:347
+#: app/main/views.py:343
 msgid "The comment has been updated."
 msgstr ""
 
-#: app/main/views.py:351
+#: app/main/views.py:347
 msgid "Comment editing was cancelled."
 msgstr ""
 
-#: app/main/views.py:372
+#: app/main/views.py:354
+msgid "The comment has been deleted."
+msgstr ""
+
+#: app/main/views.py:366
 msgid "You have already voted for this poll."
 msgstr ""
 
-#: app/main/views.py:375
+#: app/main/views.py:369
 msgid "Your vote has been taken."
 msgstr ""
 
-#: app/main/views.py:443 app/main/views.py:480
+#: app/main/views.py:437 app/main/views.py:474
 msgid "Your message has been sent."
 msgstr ""
 
-#: app/main/views.py:451
+#: app/main/views.py:445
 msgid "The message has been deleted."
 msgstr ""
 
-#: app/main/views.py:484
+#: app/main/views.py:478
 msgid "The message was cancelled."
 msgstr ""
 
-#: app/templates/_buttons_topic.html:5 app/templates/_comments.html:46
+#: app/templates/_buttons_topic.html:5 app/templates/_comments.html:51
 msgid "Edit"
 msgstr ""
 
-#: app/templates/_buttons_topic.html:9 app/templates/_comments.html:53
+#: app/templates/_buttons_topic.html:9 app/templates/_comments.html:59
 msgid "Edit [Moderator]"
 msgstr ""
 
@@ -365,20 +365,21 @@ msgstr ""
 msgid "Create topic [Moderator]"
 msgstr ""
 
-#: app/templates/_comments.html:17 app/templates/topic.html:27
+#: app/templates/_comments.html:18 app/templates/topic.html:27
 msgid "Created"
 msgstr ""
 
-#: app/templates/_comments.html:26 app/templates/topic.html:30
+#: app/templates/_comments.html:25
+msgid "in topic"
+msgstr ""
+
+#: app/templates/_comments.html:33 app/templates/topic.html:30
 msgid "Updated"
 msgstr ""
 
-#: app/templates/_comments.html:35
-msgid "Topic"
-msgstr ""
-
-#: app/templates/_comments.html:56
-msgid "Delete [Moderator]"
+#: app/templates/_comments.html:77 app/templates/edit_comment.html:4
+#: app/templates/edit_comment.html:12
+msgid "Edit comment"
 msgstr ""
 
 #: app/templates/_topic_groups.html:13 app/templates/latest.html:16
@@ -443,11 +444,11 @@ msgstr ""
 msgid "Last seen"
 msgstr ""
 
-#: app/templates/community.html:45 app/templates/user.html:35
+#: app/templates/community.html:49 app/templates/user.html:35
 msgid "ago"
 msgstr ""
 
-#: app/templates/community.html:52
+#: app/templates/community.html:56
 msgid "Users not found"
 msgstr ""
 
@@ -470,16 +471,12 @@ msgstr ""
 msgid "Create new topic group"
 msgstr ""
 
-#: app/templates/edit_comment.html:4 app/templates/edit_comment.html:12
-msgid "Edit comment"
-msgstr ""
-
 #: app/templates/edit_comment.html:14
 msgid "Edit comment, author"
 msgstr ""
 
 #: app/templates/edit_profile.html:4 app/templates/edit_profile.html:10
-#: app/templates/edit_profile.html:12 app/templates/user.html:42
+#: app/templates/edit_profile.html:12 app/templates/user.html:43
 msgid "Edit profile"
 msgstr ""
 
@@ -619,15 +616,15 @@ msgstr ""
 msgid "comments"
 msgstr ""
 
-#: app/templates/user.html:44
+#: app/templates/user.html:47
 msgid "Send message"
 msgstr ""
 
-#: app/templates/user.html:47
+#: app/templates/user.html:52
 msgid "Edit profile [Admin]"
 msgstr ""
 
-#: app/templates/user.html:52
+#: app/templates/user.html:58
 msgid "Topics on the forum"
 msgstr ""
 

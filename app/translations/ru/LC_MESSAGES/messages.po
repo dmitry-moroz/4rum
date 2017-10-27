@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-16 17:39+0300\n"
-"PO-Revision-Date: 2017-10-16 17:41+0300\n"
+"POT-Creation-Date: 2017-10-27 16:32+0300\n"
+"PO-Revision-Date: 2017-10-27 16:36+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: app/auth/forms.py:12 app/auth/forms.py:22 app/auth/forms.py:75
-#: app/auth/forms.py:85 app/main/forms.py:20 app/templates/user.html:23
+#: app/auth/forms.py:85 app/main/forms.py:32 app/templates/user.html:23
 msgid "Email"
 msgstr "E-mail"
 
@@ -38,11 +38,11 @@ msgstr "Запомнить меня"
 msgid "Log in"
 msgstr "Войти"
 
-#: app/auth/forms.py:23 app/main/forms.py:21
+#: app/auth/forms.py:23 app/main/forms.py:33
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: app/auth/forms.py:24 app/main/forms.py:22
+#: app/auth/forms.py:24 app/main/forms.py:34
 msgid "Usernames must have only letters, numbers, dots or underscores"
 msgstr ""
 "Имена пользователей должны содержать только буквы, цифры, точки или символы "
@@ -61,11 +61,11 @@ msgstr "Подтвердите пароль"
 msgid "Register"
 msgstr "Зарегистрироваться"
 
-#: app/auth/forms.py:33 app/auth/forms.py:66 app/main/forms.py:39
+#: app/auth/forms.py:33 app/auth/forms.py:66 app/main/forms.py:51
 msgid "Email already registered."
 msgstr "E-mail уже зарегистрирован."
 
-#: app/auth/forms.py:38 app/main/forms.py:44
+#: app/auth/forms.py:38 app/main/forms.py:56
 msgid "Username already in use."
 msgstr "Имя пользователя уже используется."
 
@@ -180,177 +180,177 @@ msgstr ""
 msgid "You have reset your password to new."
 msgstr "Вы сбросили пароль на новый."
 
-#: app/main/forms.py:12 app/main/forms.py:26
+#: app/main/forms.py:24 app/main/forms.py:38
 msgid "Real name"
 msgstr "Реальное имя"
 
-#: app/main/forms.py:13 app/main/forms.py:27 app/templates/user.html:18
+#: app/main/forms.py:25 app/main/forms.py:39 app/templates/user.html:18
 msgid "Homeland"
 msgstr "Родной город"
 
-#: app/main/forms.py:14 app/main/forms.py:28
+#: app/main/forms.py:26 app/main/forms.py:40
 msgid "About me"
 msgstr "О себе"
 
-#: app/main/forms.py:15 app/main/forms.py:29
+#: app/main/forms.py:27 app/main/forms.py:41
 msgid "Link to avatar"
 msgstr "Ссылка на аватар"
 
-#: app/main/forms.py:16 app/main/forms.py:30 app/main/forms.py:50
-#: app/main/forms.py:64 app/main/forms.py:76 app/main/forms.py:87
-#: app/main/forms.py:96
+#: app/main/forms.py:28 app/main/forms.py:42 app/main/forms.py:62
+#: app/main/forms.py:76 app/main/forms.py:88 app/main/forms.py:99
+#: app/main/forms.py:108
 msgid "Submit"
 msgstr "Отправить"
 
-#: app/main/forms.py:24
+#: app/main/forms.py:36
 msgid "Confirmed"
 msgstr "Подтвержденный"
 
-#: app/main/forms.py:25
+#: app/main/forms.py:37
 msgid "Role"
 msgstr "Роль"
 
-#: app/main/forms.py:48 app/main/forms.py:60 app/main/forms.py:73
+#: app/main/forms.py:60 app/main/forms.py:72 app/main/forms.py:85
 msgid "Title"
 msgstr "Заголовок"
 
-#: app/main/forms.py:49 app/main/forms.py:61 app/main/forms.py:95
-#: app/main/forms.py:103 app/main/forms.py:111
+#: app/main/forms.py:61 app/main/forms.py:73 app/main/forms.py:107
+#: app/main/forms.py:115 app/main/forms.py:123
 msgid "Text"
 msgstr "Текст"
 
-#: app/main/forms.py:51
+#: app/main/forms.py:63
 msgid "Add poll"
 msgstr "Добавить голосование"
 
-#: app/main/forms.py:52 app/main/forms.py:65 app/main/forms.py:77
-#: app/main/forms.py:97 app/main/forms.py:113
+#: app/main/forms.py:64 app/main/forms.py:77 app/main/forms.py:89
+#: app/main/forms.py:109 app/main/forms.py:125
 msgid "Cancel"
 msgstr "Отменить"
 
-#: app/main/forms.py:56 app/main/forms.py:69 app/main/forms.py:98
-#: app/main/forms.py:106 app/templates/_comments.html:49
+#: app/main/forms.py:68 app/main/forms.py:81 app/main/forms.py:110
+#: app/main/forms.py:118
 msgid "Delete"
 msgstr "Удалить"
 
-#: app/main/forms.py:62
+#: app/main/forms.py:74
 msgid "Poll question"
 msgstr "Вопрос для голосования"
 
-#: app/main/forms.py:63
+#: app/main/forms.py:75
 msgid "Poll answers"
 msgstr "Варианты ответов для голосования"
 
-#: app/main/forms.py:74
+#: app/main/forms.py:86
 msgid "Priority"
 msgstr "Приоритет"
 
-#: app/main/forms.py:75
+#: app/main/forms.py:87
 msgid "Moderators only"
 msgstr "Только для модераторов"
 
-#: app/main/forms.py:85
+#: app/main/forms.py:97
 msgid "Leave your comment, {username}:"
 msgstr "Оставьте свой комментарий, {username}:"
 
-#: app/main/forms.py:102 app/main/forms.py:110 app/templates/message.html:48
+#: app/main/forms.py:114 app/main/forms.py:122 app/templates/message.html:48
 #: app/templates/messages.html:29
 msgid "Subject"
 msgstr "Тема"
 
-#: app/main/forms.py:104 app/main/forms.py:112
+#: app/main/forms.py:116 app/main/forms.py:124
 msgid "Send"
 msgstr "Отправить"
 
-#: app/main/forms.py:105
+#: app/main/forms.py:117
 msgid "Close"
 msgstr "Закрыть"
 
-#: app/main/forms.py:118
+#: app/main/forms.py:130
 msgid "Search"
 msgstr "Поиск"
 
-#: app/main/views.py:59
+#: app/main/views.py:56
 msgid "Your comment has been published."
 msgstr "Ваш комментарий опубликован."
 
-#: app/main/views.py:105
+#: app/main/views.py:109
 msgid "Topic has been created."
 msgstr "Тема создана."
 
-#: app/main/views.py:115 app/main/views.py:157
+#: app/main/views.py:119 app/main/views.py:161
 msgid "Topic has been saved. Fill data for a poll."
 msgstr "Тема сохранена. Заполните данные для опроса."
 
-#: app/main/views.py:121
+#: app/main/views.py:125
 msgid "Topic creation was cancelled."
 msgstr "Создание темы было отменено."
 
-#: app/main/views.py:149
+#: app/main/views.py:153
 msgid "The topic has been updated."
 msgstr "Тема обновлена."
 
-#: app/main/views.py:161
+#: app/main/views.py:165
 msgid "Topic editing was cancelled."
 msgstr "Редактирование темы было отменено."
 
-#: app/main/views.py:172
+#: app/main/views.py:176
 msgid "The topic has been deleted."
 msgstr "Тема удалена."
 
-#: app/main/views.py:208
+#: app/main/views.py:212
 msgid "Topic group has been created."
 msgstr "Группа для тем создана."
 
-#: app/main/views.py:212
+#: app/main/views.py:216
 msgid "Topic group creation was cancelled."
 msgstr "Создание группы для тем было отменено."
 
-#: app/main/views.py:252
+#: app/main/views.py:256
 msgid "Your profile has been updated."
 msgstr "Ваш профиль обновлен."
 
-#: app/main/views.py:280
+#: app/main/views.py:284
 msgid "The profile has been updated."
 msgstr "Профиль обновлен."
 
-#: app/main/views.py:329 app/main/views.py:358
-msgid "The comment has been deleted."
-msgstr "Комментарий удален."
-
-#: app/main/views.py:347
+#: app/main/views.py:343
 msgid "The comment has been updated."
 msgstr "Комментарий обновлен."
 
-#: app/main/views.py:351
+#: app/main/views.py:347
 msgid "Comment editing was cancelled."
 msgstr "Редактирование комментария было отменено."
 
-#: app/main/views.py:372
+#: app/main/views.py:354
+msgid "The comment has been deleted."
+msgstr "Комментарий удален."
+
+#: app/main/views.py:366
 msgid "You have already voted for this poll."
 msgstr "Вы уже голосовали в этом опросе."
 
-#: app/main/views.py:375
+#: app/main/views.py:369
 msgid "Your vote has been taken."
 msgstr "Ваш голос принят."
 
-#: app/main/views.py:443 app/main/views.py:480
+#: app/main/views.py:437 app/main/views.py:474
 msgid "Your message has been sent."
 msgstr "Ваше сообщение отправлено."
 
-#: app/main/views.py:451
+#: app/main/views.py:445
 msgid "The message has been deleted."
 msgstr "Сообщение удалено."
 
-#: app/main/views.py:484
+#: app/main/views.py:478
 msgid "The message was cancelled."
 msgstr "Сообщение было отменено."
 
-#: app/templates/_buttons_topic.html:5 app/templates/_comments.html:46
+#: app/templates/_buttons_topic.html:5 app/templates/_comments.html:51
 msgid "Edit"
 msgstr "Редактировать"
 
-#: app/templates/_buttons_topic.html:9 app/templates/_comments.html:53
+#: app/templates/_buttons_topic.html:9 app/templates/_comments.html:59
 msgid "Edit [Moderator]"
 msgstr "Редактировать [Модератор]"
 
@@ -371,21 +371,22 @@ msgstr "Создать тему"
 msgid "Create topic [Moderator]"
 msgstr "Создать тему [Модератор]"
 
-#: app/templates/_comments.html:17 app/templates/topic.html:27
+#: app/templates/_comments.html:18 app/templates/topic.html:27
 msgid "Created"
 msgstr "Создано"
 
-#: app/templates/_comments.html:26 app/templates/topic.html:30
+#: app/templates/_comments.html:25
+msgid "in topic"
+msgstr "в теме"
+
+#: app/templates/_comments.html:33 app/templates/topic.html:30
 msgid "Updated"
 msgstr "Обновлено"
 
-#: app/templates/_comments.html:35
-msgid "Topic"
-msgstr "Тема"
-
-#: app/templates/_comments.html:56
-msgid "Delete [Moderator]"
-msgstr "Удалить [Модератор]"
+#: app/templates/_comments.html:77 app/templates/edit_comment.html:4
+#: app/templates/edit_comment.html:12
+msgid "Edit comment"
+msgstr "Редактировать комментарий"
 
 #: app/templates/_topic_groups.html:13 app/templates/latest.html:16
 msgid "Topics"
@@ -449,11 +450,11 @@ msgstr "Участник с"
 msgid "Last seen"
 msgstr "Последняя активность"
 
-#: app/templates/community.html:45 app/templates/user.html:35
+#: app/templates/community.html:49 app/templates/user.html:35
 msgid "ago"
 msgstr "назад"
 
-#: app/templates/community.html:52
+#: app/templates/community.html:56
 msgid "Users not found"
 msgstr "Пользователи не найдены"
 
@@ -476,16 +477,12 @@ msgstr "в"
 msgid "Create new topic group"
 msgstr "Создать новую группу для тем"
 
-#: app/templates/edit_comment.html:4 app/templates/edit_comment.html:12
-msgid "Edit comment"
-msgstr "Редактировать комментарий"
-
 #: app/templates/edit_comment.html:14
 msgid "Edit comment, author"
 msgstr "Редактировать комментарий, автор"
 
 #: app/templates/edit_profile.html:4 app/templates/edit_profile.html:10
-#: app/templates/edit_profile.html:12 app/templates/user.html:42
+#: app/templates/edit_profile.html:12 app/templates/user.html:43
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
@@ -625,15 +622,15 @@ msgstr "темы"
 msgid "comments"
 msgstr "комментарии"
 
-#: app/templates/user.html:44
+#: app/templates/user.html:47
 msgid "Send message"
 msgstr "Отправить сообщение"
 
-#: app/templates/user.html:47
+#: app/templates/user.html:52
 msgid "Edit profile [Admin]"
 msgstr "Редактировать профиль [Админ]"
 
-#: app/templates/user.html:52
+#: app/templates/user.html:58
 msgid "Topics on the forum"
 msgstr "Темы на форуме"
 

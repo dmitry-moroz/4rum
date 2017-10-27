@@ -74,14 +74,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit comment</h4>
+        <h4 class="modal-title">{{ _('Edit comment') }}</h4>
       </div>
       <div class="modal-body">
         {{
-           wtf.quick_form(
-             edit_comment_form,
-             button_map={'edit-comment-submit':'success', 'edit-comment-cancel':'warning', 'edit-comment-delete':'danger'},
-             novalidate=True,
+          wtf.quick_form(
+            edit_comment_form,
+            button_map={'edit-comment-submit':'success', 'edit-comment-cancel':'warning', 'edit-comment-delete':'danger'},
+            novalidate=True,
           )
         }}
       </div>
