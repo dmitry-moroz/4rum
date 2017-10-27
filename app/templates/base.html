@@ -4,8 +4,8 @@
 
 {% block head %}
 {{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon-{0}.ico'.format(config['THEME'])) }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='img/favicon-{0}.ico'.format(config['THEME'])) }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ url_for('static', filename='img/{0}/favicon.ico'.format(config['THEME'])) }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='img/{0}/favicon.ico'.format(config['THEME'])) }}" type="image/x-icon">
 {% endblock %}
 
 {% block styles %}
