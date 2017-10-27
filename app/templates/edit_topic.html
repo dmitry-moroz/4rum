@@ -23,7 +23,9 @@
     </div>
 </div>
 <div>
-    {{ wtf.quick_form(form, button_map={'submit':'success', 'add_poll':'primary', 'cancel':'warning', 'delete':'danger'}) }}
+    {{ wtf.quick_form(form,
+                      button_map={'submit':'success', 'add_poll':'primary', 'cancel':'warning', 'delete':'danger'},
+                      novalidate=True) }}
 </div>
 {% endblock %}
 

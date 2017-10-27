@@ -1,4 +1,5 @@
 {% if comments %}
+
 <ul class="comments">
     {% for comment_data in comments %}
     {% if use_rich_comments %}
@@ -6,7 +7,7 @@
     {% else %}
         {% set comment, author = comment_data %}
     {% endif %}
-    <li class="comment img-rounded">
+    <li id="comment{{ comment.id }}" class="comment img-rounded">
         <div>
             <a href="{{ url_for('main.user', username=author.username) }}">
                 <img class="img-rounded common-thumbnail" src="{{ author.avatar }}">
@@ -20,6 +21,12 @@
                 <a href="{{ url_for('main.user', username=author.username) }}">
                     {{ author.username }}
                 </a>
+                {% if use_rich_comments %}
+                    {{ _('in topic') }}
+                    <a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">
+                        "{{ topic.title }}"
+                    </a>
+                {% endif %}
             </div>
             {% if comment.created_at != comment.updated_at %}
             <div class="comment-date">
@@ -31,29 +38,25 @@
             {% else %}
             <br>
             {% endif %}
-            {% if use_rich_comments %}
-            {{ _('Topic') }}:
-            <a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">
-                {{ topic.title }}
-            </a>
-            {% endif %}
             <div class="comment-body">
                 {{ comment.body }}
             </div>
             <div class="comment-buttons">
                 {% if current_user.id==comment.author_id and current_user.can(Permission.WRITE) %}
-                <a class="btn btn-warning btn-xs" href="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}">
+                <a class="open-editCommentModal btn btn-warning btn-xs"
+                   data-toggle="modal"
+                   data-body="{{ comment.body }}"
+                   data-act="{{ url_for('.topic', topic_id=comment.topic_id, comment_id=comment.id, next=request.url) }}"
+                   href="#editCommentModal">
                     {{ _('Edit') }}
                 </a>
-                <a class="btn btn-danger btn-xs" href="{{ url_for('.delete_comment', comment_id=comment.id, next=request.url) }}">
-                    {{ _('Delete') }}
-                </a>
                 {% elif current_user.is_moderator() %}
-                <a class="btn btn-warning btn-xs" href="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}">
+                <a class="open-editCommentModal btn btn-warning btn-xs"
+                   data-toggle="modal"
+                   data-body="{{ comment.body }}"
+                   data-act="{{ url_for('.topic', topic_id=comment.topic_id, comment_id=comment.id, next=request.url) }}"
+                   href="#editCommentModal">
                     {{ _('Edit [Moderator]') }}
-                </a>
-                <a class="btn btn-danger btn-xs" href="{{ url_for('.delete_comment', comment_id=comment.id, next=request.url) }}">
-                    {{ _('Delete [Moderator]') }}
                 </a>
                 {% endif %}
             </div>
@@ -61,4 +64,31 @@
     </li>
     {% endfor %}
 </ul>
+
+{% if edit_comment_form %}
+{% import "bootstrap/wtf.html" as wtf %}
+<!-- Edit Comment Modal -->
+<div id="editCommentModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit comment</h4>
+      </div>
+      <div class="modal-body">
+        {{
+           wtf.quick_form(
+             edit_comment_form,
+             button_map={'edit-comment-submit':'success', 'edit-comment-cancel':'warning', 'edit-comment-delete':'danger'},
+             novalidate=True,
+          )
+        }}
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
 {% endif %}

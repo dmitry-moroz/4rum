@@ -102,3 +102,30 @@
 {{ macros.pagination_widget(pagination, 'main.topic', topic_id=topic.id, fragment='#comments') }}
 
 {% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<script>
+    $(document).ready(function() {
+        var formErrors = {% if edit_comment_form.errors %}true{% else %}false{% endif %};
+        if (formErrors) {
+            $('#editCommentModal').modal();
+        }
+    });
+    $('#editCommentModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var commentBody = button.data('body');
+        var commentAct = button.data('act');
+        var modal = $(this);
+        if(typeof commentBody !== "undefined")
+        {
+            modal.find('.modal-body #edit-comment-body').val(commentBody);
+        }
+        if(typeof commentAct !== "undefined")
+        {
+            modal.find('.form').attr('action', commentAct);
+        }
+    });
+</script>
+{% endblock %}

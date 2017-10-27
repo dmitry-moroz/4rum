@@ -8,6 +8,18 @@ from wtforms.validators import DataRequired, Length, Email, Regexp
 from ..models import Role, User
 
 
+class FormHelpersMixIn(object):
+
+    @property
+    def submit_fields(self):
+        return [getattr(self, field) for field, field_type in self._fields.items()
+                if isinstance(field_type, SubmitField)]
+
+    @staticmethod
+    def is_has_data(*fields):
+        return any([field.data for field in fields])
+
+
 class EditProfileForm(FlaskForm):
     name = StringField(lazy_gettext('Real name'), validators=[Length(0, 64)])
     homeland = StringField(lazy_gettext('Homeland'), validators=[Length(0, 64)])
@@ -81,7 +93,7 @@ class TopicGroupForm(FlaskForm):
         self.priority.choices = [(p, p) for p in current_app.config['TOPIC_GROUP_PRIORITY']]
 
 
-class CommentForm(FlaskForm):
+class CommentForm(FlaskForm, FormHelpersMixIn):
     body = TextAreaField(lazy_gettext('Leave your comment, {username}:'), validators=[DataRequired()],
                          render_kw={'rows': 4})
     submit = SubmitField(lazy_gettext('Submit'))
@@ -91,7 +103,7 @@ class CommentForm(FlaskForm):
         self.body.label.text = self.body.label.text.format(username=user.username)
 
 
-class CommentEditForm(FlaskForm):
+class CommentEditForm(FlaskForm, FormHelpersMixIn):
     body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 8})
     submit = SubmitField(lazy_gettext('Submit'))
     cancel = SubmitField(lazy_gettext('Cancel'))

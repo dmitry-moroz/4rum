@@ -50,14 +50,17 @@ def topic(topic_id):
     tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
 
     if current_user.can(Permission.PARTICIPATE):
-        form = CommentForm(current_user)
+        new_comment_form = CommentForm(current_user)
+        if new_comment_form.is_has_data(*new_comment_form.submit_fields) and new_comment_form.validate_on_submit():
+            tpc.add_comment(current_user, new_comment_form.body.data)
+            flash(lazy_gettext('Your comment has been published.'))
+            return redirect(url_for('main.topic', topic_id=topic_id, page=-1))
     else:
-        form = None
+        new_comment_form = None
 
-    if form and form.validate_on_submit():
-        tpc.add_comment(current_user, form.body.data)
-        flash(lazy_gettext('Your comment has been published.'))
-        return redirect(url_for('main.topic', topic_id=topic_id, page=-1))
+    redirect_to, edit_comment_form = _edit_comment()
+    if redirect_to:
+        return redirect_to
 
     page = request.args.get('page', 1, type=int)
     if page == -1:
@@ -74,8 +77,9 @@ def topic(topic_id):
     else:
         poll_data = [(a.id, a.body) for a in tpc.poll_answers.filter_by(deleted=False).all()]
 
-    return render_template('topic.html', topic=tpc, form=form, comments=pagination.items, pagination=pagination,
-                           user_vote=user_vote, poll_data=poll_data)
+    return render_template('topic.html', topic=tpc,
+                           form=new_comment_form, edit_comment_form=edit_comment_form,
+                           comments=pagination.items, pagination=pagination, user_vote=user_vote, poll_data=poll_data)
 
 
 @main.route('/create_topic/<int:topic_group_id>', methods=['GET', 'POST'])
@@ -316,51 +320,41 @@ def latest():
     return render_template('latest.html', target=target_arg, items=pagination.items, pagination=pagination)
 
 
-@main.route('/delete_comment/<int:comment_id>')
-@login_required
-@permission_required(Permission.WRITE)
-def delete_comment(comment_id):
-    comment = Comment.query.filter_by(id=comment_id, deleted=False).first_or_404()
-    if current_user != comment.author and not current_user.is_moderator():
-        abort(403)
-    comment.deleted = True
-    comment.updated_at = datetime.utcnow()
-    db.session.add(comment)
-    flash(lazy_gettext('The comment has been deleted.'))
-    return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
+def _edit_comment():
+    if current_user.can(Permission.WRITE):
+        redirect_to = None
+        form = CommentEditForm(prefix='edit-comment')
+    else:
+        return None, None
 
+    if form.is_submitted() and form.is_has_data(*form.submit_fields):
+        comment_id = request.args.get('comment_id', 0, type=int)
+        if not comment_id:
+            abort(400)
 
-@main.route('/edit_comment/<int:comment_id>', methods=['GET', 'POST'])
-@login_required
-@permission_required(Permission.WRITE)
-def edit_comment(comment_id):
-    comment = Comment.query.filter_by(id=comment_id, deleted=False).first_or_404()
-    if current_user != comment.author and not current_user.is_moderator():
-        abort(403)
+        comment = Comment.query.filter_by(id=comment_id, deleted=False).first_or_404()
+        if current_user != comment.author and not current_user.is_moderator():
+            abort(403)
 
-    form = CommentEditForm()
+        if form.submit.data and form.validate_on_submit():
+            comment.body = form.body.data
+            comment.updated_at = datetime.utcnow()
+            db.session.add(comment)
+            flash(lazy_gettext('The comment has been updated.'))
+            redirect_to = redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
-    if form.submit.data and form.validate_on_submit():
-        comment.body = form.body.data
-        comment.updated_at = datetime.utcnow()
-        db.session.add(comment)
-        flash(lazy_gettext('The comment has been updated.'))
-        return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
+        elif form.cancel.data:
+            flash(lazy_gettext('Comment editing was cancelled.'))
+            redirect_to = redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
-    elif form.cancel.data:
-        flash(lazy_gettext('Comment editing was cancelled.'))
-        return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
+        elif form.delete.data:
+            comment.deleted = True
+            comment.updated_at = datetime.utcnow()
+            db.session.add(comment)
+            flash(lazy_gettext('The comment has been deleted.'))
+            redirect_to = redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
-    elif form.delete.data:
-        comment.deleted = True
-        comment.updated_at = datetime.utcnow()
-        db.session.add(comment)
-        flash(lazy_gettext('The comment has been deleted.'))
-        return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
-
-    form.body.data = comment.body
-
-    return render_template('edit_comment.html', form=form, comment=comment)
+    return redirect_to, form
 
 
 @main.route('/vote/<int:answer_id>')
