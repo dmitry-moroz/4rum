@@ -39,12 +39,18 @@
         </p>
         <p>
             {% if user == current_user %}
-            <a class="btn btn-default btn-sm" href="{{ url_for('main.edit_profile') }}">{{ _('Edit profile') }}</a>
+            <a class="btn btn-default btn-sm" href="{{ url_for('main.edit_profile') }}">
+                 <span class="glyphicon glyphicon-edit"></span> {{ _('Edit profile') }}
+            </a>
             {% else %}
-            <a class="btn btn-primary btn-sm" href="{{ url_for('main.send_message', username=user.username, next=request.url) }}">{{ _('Send message') }}</a>
+            <a class="btn btn-primary btn-sm" href="{{ url_for('main.send_message', username=user.username, next=request.url) }}">
+                <span class="glyphicon glyphicon-envelope"></span> {{ _('Send message') }}
+            </a>
             {% endif %}
             {% if current_user.is_administrator() %}
-            <a class="btn btn-danger btn-sm" href="{{ url_for('main.edit_profile_admin', user_id=user.id) }}">{{ _('Edit profile [Admin]') }}</a>
+            <a class="btn btn-danger btn-sm" href="{{ url_for('main.edit_profile_admin', user_id=user.id) }}">
+                 <span class="glyphicon glyphicon-edit"></span> {{ _('Edit profile [Admin]') }}
+            </a>
             {% endif %}
         </p>
     </div>

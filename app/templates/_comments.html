@@ -43,17 +43,17 @@
             <div class="comment-buttons">
                 {% if current_user.id==comment.author_id and current_user.can(Permission.WRITE) %}
                 <a class="btn btn-warning btn-xs" href="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}">
-                    {{ _('Edit') }}
+                    <span class="glyphicon glyphicon-edit"></span> {{ _('Edit') }}
                 </a>
                 <a class="btn btn-danger btn-xs" href="{{ url_for('.delete_comment', comment_id=comment.id, next=request.url) }}">
-                    {{ _('Delete') }}
+                    <span class="glyphicon glyphicon-remove"></span> {{ _('Delete') }}
                 </a>
                 {% elif current_user.is_moderator() %}
                 <a class="btn btn-warning btn-xs" href="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}">
-                    {{ _('Edit [Moderator]') }}
+                    <span class="glyphicon glyphicon-edit"></span> {{ _('Edit [Moderator]') }}
                 </a>
                 <a class="btn btn-danger btn-xs" href="{{ url_for('.delete_comment', comment_id=comment.id, next=request.url) }}">
-                    {{ _('Delete [Moderator]') }}
+                    <span class="glyphicon glyphicon-remove"></span> {{ _('Delete [Moderator]') }}
                 </a>
                 {% endif %}
             </div>
