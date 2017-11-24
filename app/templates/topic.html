@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 {% import "_macros.html" as macros %}
 
 {% block title %}4RUM - {{ topic.title }}{% endblock %}
@@ -88,13 +87,14 @@
 </div>
 
 {% if form %}
+    {% import "bootstrap/wtf.html" as wtf %}
     <div>
         <a href="{{ url_for('main.user', username=current_user.username) }}">
             <img class="img-rounded common-thumbnail" src="{{ current_user.avatar }}">
         </a>
     </div>
     <div class="comments-form">
-        {{ wtf.quick_form(form, button_map={'submit':'success'}) }}
+        {{ wtf.quick_form(form, button_map={'submit':'success'}, novalidate=True) }}
     </div>
 {% endif %}
 
@@ -103,29 +103,7 @@
 
 {% endblock %}
 
-
 {% block scripts %}
 {{ super() }}
-<script>
-    $(document).ready(function() {
-        var formErrors = {% if edit_comment_form.errors %}true{% else %}false{% endif %};
-        if (formErrors) {
-            $('#editCommentModal').modal();
-        }
-    });
-    $('#editCommentModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var commentBody = button.data('body');
-        var commentAct = button.data('act');
-        var modal = $(this);
-        if(typeof commentBody !== "undefined")
-        {
-            modal.find('.modal-body #edit-comment-body').val(commentBody);
-        }
-        if(typeof commentAct !== "undefined")
-        {
-            modal.find('.form').attr('action', commentAct);
-        }
-    });
-</script>
+<script src="{{ url_for('static', filename='modal.js') }}"></script>
 {% endblock %}

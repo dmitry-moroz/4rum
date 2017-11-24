@@ -30,3 +30,8 @@
 {% endif %}
 {{ macros.pagination_widget(pagination, 'main.latest', target=target, fragment='#latest') }}
 {% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='modal.js') }}"></script>
+{% endblock %}

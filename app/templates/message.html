@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}4RUM - {{ _('Message') }}{% endblock %}
 
@@ -55,6 +54,7 @@
 </div>
 
 {% if form %}
+    {% import "bootstrap/wtf.html" as wtf %}
     <div class="page-header">
         <img class="common-thumbnail" src="{{ url_for('static', filename='img/mail-send-icon.png') }}">
         <div class="common-header">
@@ -62,7 +62,7 @@
         </div>
     </div>
     <div>
-        {{ wtf.quick_form(form, button_map={'send':'success', 'close':'warning', 'delete':'danger'}) }}
+        {{ wtf.quick_form(form, button_map={'send':'success', 'close':'warning', 'delete':'danger'}, novalidate=True) }}
     </div>
 {% endif %}
 

@@ -37,7 +37,7 @@
 <br>
 
 <div>
-    {{ wtf.quick_form(form, button_map={'send':'success', 'cancel':'warning'}) }}
+    {{ wtf.quick_form(form, button_map={'send':'success', 'cancel':'warning'}, novalidate=True) }}
 </div>
 
 {% endblock %}

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2017-10-27 16:32+0300\n"
-"PO-Revision-Date: 2017-10-27 16:36+0300\n"
+"PO-Revision-Date: 2017-11-24 18:37+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: app/auth/forms.py:12 app/auth/forms.py:22 app/auth/forms.py:75
 #: app/auth/forms.py:85 app/main/forms.py:32 app/templates/user.html:23
 msgid "Email"
-msgstr "E-mail"
+msgstr "Email"
 
 #: app/auth/forms.py:13 app/auth/forms.py:26 app/auth/forms.py:59
 msgid "Password"
@@ -63,7 +63,7 @@ msgstr "Зарегистрироваться"
 
 #: app/auth/forms.py:33 app/auth/forms.py:66 app/main/forms.py:51
 msgid "Email already registered."
-msgstr "E-mail уже зарегистрирован."
+msgstr "Email уже зарегистрирован."
 
 #: app/auth/forms.py:38 app/main/forms.py:56
 msgid "Username already in use."
@@ -96,15 +96,15 @@ msgstr "Новый пароль совпадает со старым парол�
 
 #: app/auth/forms.py:58
 msgid "New email"
-msgstr "Новый e-mail"
+msgstr "Новый email"
 
 #: app/auth/forms.py:60 app/templates/base.html:51
 msgid "Change email"
-msgstr "Изменить e-mail"
+msgstr "Изменить email"
 
 #: app/auth/forms.py:64
 msgid "This is your current email."
-msgstr "Это Ваш текущий e-mail."
+msgstr "Это Ваш текущий email."
 
 #: app/auth/forms.py:71
 msgid "Invalid password."
@@ -118,7 +118,7 @@ msgstr "Сбросить пароль"
 
 #: app/auth/forms.py:80 app/auth/forms.py:93
 msgid "Unknown email address."
-msgstr "Неизвестный e-mail адрес."
+msgstr "Неизвестный email адрес."
 
 #: app/auth/views.py:37
 msgid "Invalid username or password."
@@ -155,15 +155,15 @@ msgstr "Ваш пароль был обновлен."
 
 #: app/auth/views.py:105
 msgid "Confirm your new email"
-msgstr "Подтвердите Ваш новый e-mail"
+msgstr "Подтвердите Ваш новый email"
 
 #: app/auth/views.py:107
 msgid "A confirmation email has been sent to your new email."
-msgstr "Письмо с подтверждением отправлено на Ваш новый e-mail."
+msgstr "Письмо с подтверждением отправлено на Ваш новый email."
 
 #: app/auth/views.py:116
 msgid "You have confirmed your new email. Thanks!"
-msgstr "Вы подтвердили новый e-mail. Спасибо!"
+msgstr "Вы подтвердили новый email. Спасибо!"
 
 #: app/auth/views.py:130
 msgid "Instructions to reset your password"
@@ -637,7 +637,7 @@ msgstr "Темы на форуме"
 #: app/templates/auth/change_email.html:4
 #: app/templates/auth/change_email.html:8
 msgid "Change email address"
-msgstr "Изменить адрес e-mail"
+msgstr "Изменить адрес email"
 
 #: app/templates/auth/login.html:13
 msgid "New user?"

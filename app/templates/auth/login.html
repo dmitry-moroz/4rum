@@ -8,7 +8,7 @@
     <h1>{{ _('Log in') }}</h1>
 </div>
 <div class="col-md-6">
-    {{ wtf.quick_form(form, button_map={'submit':'success'}) }}
+    {{ wtf.quick_form(form, button_map={'submit':'success'}, novalidate=True) }}
     <br>
     <p>{{ _('New user?') }} <a href="{{ url_for('auth.register') }}">{{ _('Click here to register') }}</a>.</p>
     <p>{{ _('Forgot your password?') }} <a href="{{ url_for('auth.reset_password_request') }}">{{ _('Click here to reset it') }}</a>.</p>

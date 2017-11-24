@@ -301,6 +301,10 @@ def latest():
     page_arg = request.args.get('page', 1, type=int)
     target_arg = request.args.get('target', 'topics', type=str)
 
+    redirect_to, edit_comment_form = _edit_comment()
+    if redirect_to:
+        return redirect_to
+
     if target_arg == 'topics':
         pagination = Topic.query.with_entities(
             Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
@@ -317,7 +321,8 @@ def latest():
     else:
         abort(400)
 
-    return render_template('latest.html', target=target_arg, items=pagination.items, pagination=pagination)
+    return render_template('latest.html', edit_comment_form=edit_comment_form, target=target_arg,
+                           items=pagination.items, pagination=pagination)
 
 
 def _edit_comment():

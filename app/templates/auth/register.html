@@ -8,6 +8,6 @@
     <h1>{{ _('Register') }}</h1>
 </div>
 <div class="col-md-6">
-    {{ wtf.quick_form(form, button_map={'submit':'success'}) }}
+    {{ wtf.quick_form(form, button_map={'submit':'success'}, novalidate=True) }}
 </div>
 {% endblock %}
