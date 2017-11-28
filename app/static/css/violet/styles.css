@@ -1,8 +1,10 @@
-/* Fix for jumping scrollbar issue */
-html {
-    /*margin-left: calc(100vw - 100%);
-    margin-right: 0;*/
-    overflow-y: scroll;
+/* Fix for jumping scrollbar issue
+   https://aykevl.nl/2014/09/fix-jumping-scrollbar
+   https://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page
+   https://stackoverflow.com/questions/9538868/prevent-body-from-scrolling-when-a-modal-is-opened
+*/
+body {
+    overflow-y: scroll !important;
 }
 
 /* CSS to disable mobile version of the site */
@@ -19,12 +21,12 @@ div.non-responsive {
 html, body {
    height: 100%;
 }
-div.body_content {
+div.body-content {
    min-height: 100%;
    position: relative;
    padding-bottom: 60px;
 }
-div.footer_grad {
+div.footer-grad {
     min-height: 30px;
     background: -moz-linear-gradient(top, transparent, #2c3e50);
     width: 100%;
@@ -47,10 +49,10 @@ textarea.form-control {
 a.no-underline {
     text-decoration: none !important;
 }
-a.underline_on_hover {
+a.underline-on-hover {
     text-decoration: none !important;
 }
-a.underline_on_hover:hover {
+a.underline-on-hover:hover {
     text-decoration: underline !important;
 }
 div.no-data-text {
@@ -66,6 +68,9 @@ span.gray-badge {
 }
 td.nowrap-td {
     white-space: nowrap;
+}
+td.width-100 {
+    width: 100%;
 }
 
 /* CSS for pagination */
@@ -105,6 +110,15 @@ img.common-thumbnail {
     object-fit: cover;
     width: 40px;
     height: 40px;
+}
+div.common-header-modal {
+    margin-left: 36px;
+}
+img.common-thumbnail-modal {
+    position: absolute;
+    object-fit: cover;
+    width: 30px;
+    height: 30px;
 }
 img.navbar-profile-thumbnail {
     position: static;
@@ -275,38 +289,38 @@ div.comment-buttons {
 }
 
 /* CSS for poll */
-ul.poll_answers {
+ul.poll-answers {
     list-style-type: none;
     padding: 0px;
     margin: 16px 0px 0px 0px;
 }
-ul.poll_answers li.poll_answer {
+ul.poll-answers li.poll-answer {
     padding: 8px;
     margin: 1px 0px 0px 0px;
     border: 1px solid #b4bcc2;
     color: #3C032C;
     font-weight: bold;
 }
-ul.poll_answers li.poll_answer:hover {
+ul.poll-answers li.poll-answer:hover {
     background-color: #3C032C;
     color: #ffffff;
 }
-div.progress_margin {
+div.progress-margin {
     margin: 0;
 }
-ul.poll_answers_voted {
+ul.poll-answers-voted {
     list-style-type: none;
     padding: 0px;
     margin: 16px 0px 0px 0px;
 }
-ul.poll_answers_voted li.poll_answer_voted {
+ul.poll-answers-voted li.poll-answer-voted {
     padding: 8px;
     margin: 1px 0px 0px 0px;
     border: 1px solid #b4bcc2;
     color: #3C032C;
     font-weight: bold;
 }
-div.poll_percent_info {
+div.poll-percent-info {
     float: right;
 }
 
@@ -314,10 +328,15 @@ div.poll_percent_info {
 table.messages tr {
     border-bottom: 1px solid #dee2e2;
 }
-img.message_thumbnail {
+img.message-thumbnail {
     width: 18px;
     height: 18px;
     object-fit: cover;
+}
+div.message-title {
+    height: 100%;
+    width: 100%;
+    font-weight: bold;
 }
 
 /* CSS for message page */
@@ -345,7 +364,7 @@ div.message-date {
 table.community tr {
     border-bottom: 1px solid #dee2e2;
 }
-img.community_thumbnail {
+img.community-thumbnail {
     width: 32px;
     height: 32px;
     object-fit: cover;

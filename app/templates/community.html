@@ -29,15 +29,15 @@
     <tr>
         <td class="nowrap-td">
             <a class="no-underline" href="{{ url_for('main.user', username=user.username) }}">
-                <img class="img-rounded community_thumbnail" src="{{ user.avatar }}">
+                <img class="img-rounded community-thumbnail" src="{{ user.avatar }}">
             </a>
-            <a class="underline_on_hover" href="{{ url_for('main.user', username=user.username) }}">
+            <a class="underline-on-hover" href="{{ url_for('main.user', username=user.username) }}">
                 {{ user.username }}
             </a>
         </td>
         <td>
             {% if user.name %}
-                <a class="underline_on_hover" href="{{ url_for('main.user', username=user.username) }}">
+                <a class="underline-on-hover" href="{{ url_for('main.user', username=user.username) }}">
                     {{ user.name }}
                 </a>
             {% endif %}

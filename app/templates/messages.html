@@ -35,15 +35,17 @@
     <tr>
         <td class="nowrap-td">
             <a class="no-underline" href="{{ url_for('main.user', username=user.username) }}">
-                <img class="img-rounded message_thumbnail" src="{{ user.avatar }}">
+                <img class="img-rounded message-thumbnail" src="{{ user.avatar }}">
             </a>
-            <a class="underline_on_hover" href="{{ url_for('main.user', username=user.username) }}">
+            <a class="underline-on-hover" href="{{ url_for('main.user', username=user.username) }}">
                 {{ user.username }}
             </a>
         </td>
-        <td>
-            <a class="underline_on_hover" href="{{ url_for('main.message', message_id=message.id, next=request.url) }}">
-                <b>{{ message.title }}</b>
+        <td class="width-100">
+            <a class="underline-on-hover" href="{{ url_for('main.message', message_id=message.id, next=request.url) }}">
+                <div class="message-title">
+                    {{ message.title }}
+                </div>
             </a>
         </td>
         <td class="nowrap-td">
