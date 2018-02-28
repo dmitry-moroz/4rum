@@ -5,12 +5,10 @@ from flask_babel import lazy_gettext
 from flask_login import login_required, current_user
 from sqlalchemy import func, case, between, and_, or_
 
-from app import babel
 from . import main
-from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm,
-                    TopicWithPollForm, TopicWithPollEditForm, CommentForm, CommentEditForm, MessageReplyForm,
-                    MessageSendForm, SearchForm)
-from .. import db
+from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm, TopicWithPollForm,
+                    TopicWithPollEditForm, CommentForm, CommentEditForm, MessageReplyForm, MessageSendForm, SearchForm)
+from ..app import babel, db
 from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
 

@@ -6,7 +6,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 
-from config import config
+from .config import config
 
 bootstrap = Bootstrap()
 mail = Mail()
@@ -17,7 +17,6 @@ login_manager.localize_callback = lazy_gettext
 login_manager.login_view = 'auth.login'
 
 
-# TODO: Define text style for buttons
 def create_app():
     app = Flask(__name__)
     app.config.from_object(config)

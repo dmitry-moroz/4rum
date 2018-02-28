@@ -4,8 +4,8 @@ from flask_dbshell import DbShell
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Shell
 
-from app import create_app, db
-from app.models import User, Role, Permission, Topic, TopicGroup, Comment, PollVote, PollAnswer, Message
+from forum.app import create_app, db
+from forum.models import User, Role, Permission, Topic, TopicGroup, Comment, PollVote, PollAnswer, Message
 from utils import data_generator
 
 app = create_app()

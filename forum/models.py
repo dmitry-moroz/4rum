@@ -10,8 +10,8 @@ from markdown.extensions.tables import TableExtension
 from sqlalchemy import func, or_, and_
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from config import config
-from . import db, login_manager
+from .config import config
+from .app import db, login_manager
 
 
 class Permission:

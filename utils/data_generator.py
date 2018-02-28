@@ -4,9 +4,9 @@ import forgery_py
 from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
 
-from app import db
-from app.models import User, Topic, TopicGroup, Comment, Message, PollAnswer, PollVote
-from config import config
+from forum.config import config
+from forum.app import db
+from forum.models import User, Topic, TopicGroup, Comment, Message, PollAnswer, PollVote
 
 
 def generate_fake_messages(count=1000):
