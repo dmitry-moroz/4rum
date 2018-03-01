@@ -46,7 +46,7 @@
                 <a class="open-editCommentModal btn btn-warning btn-xs"
                    data-toggle="modal"
                    data-body="{{ comment.body }}"
-                   data-act="{{ url_for('.topic', topic_id=comment.topic_id, comment_id=comment.id, next=request.url) }}"
+                   data-act="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}"
                    href="#editCommentModal">
                     {{ _('Edit') }}
                 </a>
@@ -54,7 +54,7 @@
                 <a class="open-editCommentModal btn btn-warning btn-xs"
                    data-toggle="modal"
                    data-body="{{ comment.body }}"
-                   data-act="{{ url_for('.topic', topic_id=comment.topic_id, comment_id=comment.id, next=request.url) }}"
+                   data-act="{{ url_for('.edit_comment', comment_id=comment.id, next=request.url) }}"
                    href="#editCommentModal">
                     {{ _('Edit [Moderator]') }}
                 </a>

@@ -13,10 +13,7 @@ from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
 
 
-# TODO: Make common template for Up button?
-
-
-def _topic_group(topic_group_id):
+def get_topic_group(topic_group_id):
     t_group = TopicGroup.query.get_or_404(topic_group_id)
     t_groups = TopicGroup.query.with_entities(
         TopicGroup, func.sum(case([(Topic.deleted == False, 1)], else_=0))).outerjoin(
@@ -37,12 +34,11 @@ def _topic_group(topic_group_id):
 
 @main.route('/')
 def index():
-    t_group, t_groups, pagination = _topic_group(current_app.config['ROOT_TOPIC_GROUP'])
+    t_group, t_groups, pagination = get_topic_group(current_app.config['ROOT_TOPIC_GROUP'])
     return render_template('index.html', topic_group=t_group, topic_groups=t_groups, topics=pagination.items,
                            pagination=pagination)
 
 
-# TODO: Check POST for anonymous
 @main.route('/topic/<int:topic_id>', methods=['GET', 'POST'])
 def topic(topic_id):
     tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
@@ -56,9 +52,7 @@ def topic(topic_id):
     else:
         new_comment_form = None
 
-    redirect_to, edit_comment_form = _edit_comment()
-    if redirect_to:
-        return redirect_to
+    edit_comment_form = CommentEditForm(prefix='edit-comment') if current_user.can(Permission.WRITE) else None
 
     page = request.args.get('page', 1, type=int)
     if page == -1:
@@ -89,10 +83,7 @@ def create_topic(topic_group_id):
         abort(403)
 
     with_poll = request.args.get('poll', 0, type=int)
-    if with_poll:
-        form = TopicWithPollForm()
-    else:
-        form = TopicForm()
+    form = TopicWithPollForm() if with_poll else TopicForm()
 
     if form.submit.data and form.validate_on_submit():
         new_topic = Topic(title=form.title.data, body=form.body.data, group=t_group,
@@ -102,8 +93,8 @@ def create_topic(topic_group_id):
         db.session.add(new_topic)
         db.session.commit()
         if with_poll:
-            for answer in form.poll_answers.data.strip().splitlines():
-                db.session.add(PollAnswer(topic_id=new_topic.id, body=answer))
+            poll_answers = form.poll_answers.data.strip().splitlines()
+            new_topic.update_poll_answers(poll_answers)
         flash(lazy_gettext('Topic has been created.'))
         return redirect(url_for('main.topic', topic_id=new_topic.id))
 
@@ -135,12 +126,12 @@ def edit_topic(topic_id):
         abort(403)
 
     with_poll = request.args.get('poll', 0, type=int) or tpc.poll
-    if with_poll:
-        form = TopicWithPollEditForm()
-    else:
-        form = TopicEditForm()
+    form = TopicWithPollEditForm() if with_poll else TopicEditForm()
+    form.group_id.render_kw['disabled'] = False if current_user.is_moderator() else True
 
     if form.submit.data and form.validate_on_submit():
+        if current_user.is_moderator():
+            tpc.group_id = form.group_id.data
         tpc.title = form.title.data
         tpc.body = form.body.data
         if with_poll:
@@ -152,6 +143,8 @@ def edit_topic(topic_id):
         return redirect(url_for('main.topic', topic_id=tpc.id))
 
     elif not with_poll and form.add_poll.data and form.validate_on_submit():
+        if current_user.is_moderator():
+            tpc.group_id = form.group_id.data
         tpc.title = form.title.data
         tpc.body = form.body.data
         tpc.updated_at = datetime.utcnow()
@@ -164,7 +157,6 @@ def edit_topic(topic_id):
         return redirect(url_for('main.topic', topic_id=tpc.id))
 
     elif form.delete.data:
-        # TODO: Use bootstrap_modal for confirmation
         tpc.comments.update(dict(deleted=True))
         tpc.poll_answers.update(dict(deleted=True))
         tpc.poll_votes.update(dict(deleted=True))
@@ -176,6 +168,7 @@ def edit_topic(topic_id):
 
     form.title.data = tpc.title
     form.body.data = tpc.body
+    form.group_id.data = tpc.group_id
     if tpc.poll:
         form.poll_question.data = tpc.poll
         form.poll_answers.data = '\n'.join([a.body for a in tpc.poll_answers.filter_by(deleted=False).all()])
@@ -187,7 +180,7 @@ def edit_topic(topic_id):
 def topic_group(topic_group_id):
     if topic_group_id == current_app.config['ROOT_TOPIC_GROUP']:
         return redirect(url_for('main.index'))
-    t_group, t_groups, pagination = _topic_group(topic_group_id)
+    t_group, t_groups, pagination = get_topic_group(topic_group_id)
     return render_template('topic_group.html', topic_group=t_group, topic_groups=t_groups, topics=pagination.items,
                            pagination=pagination)
 
@@ -299,9 +292,7 @@ def latest():
     page_arg = request.args.get('page', 1, type=int)
     target_arg = request.args.get('target', 'topics', type=str)
 
-    redirect_to, edit_comment_form = _edit_comment()
-    if redirect_to:
-        return redirect_to
+    edit_comment_form = CommentEditForm(prefix='edit-comment') if current_user.can(Permission.WRITE) else None
 
     if target_arg == 'topics':
         pagination = Topic.query.with_entities(
@@ -323,18 +314,12 @@ def latest():
                            items=pagination.items, pagination=pagination)
 
 
-def _edit_comment():
-    if current_user.can(Permission.WRITE):
-        redirect_to = None
-        form = CommentEditForm(prefix='edit-comment')
-    else:
-        return None, None
-
-    if form.is_submitted() and form.is_has_data(*form.submit_fields):
-        comment_id = request.args.get('comment_id', 0, type=int)
-        if not comment_id:
-            abort(400)
-
+@main.route('/edit_comment/<int:comment_id>', methods=['POST'])
+@login_required
+@permission_required(Permission.WRITE)
+def edit_comment(comment_id):
+    form = CommentEditForm(prefix='edit-comment')
+    if form.is_has_data(*form.submit_fields):
         comment = Comment.query.filter_by(id=comment_id, deleted=False).first_or_404()
         if current_user != comment.author and not current_user.is_moderator():
             abort(403)
@@ -344,20 +329,18 @@ def _edit_comment():
             comment.updated_at = datetime.utcnow()
             db.session.add(comment)
             flash(lazy_gettext('The comment has been updated.'))
-            redirect_to = redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
+            return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
         elif form.cancel.data:
             flash(lazy_gettext('Comment editing was cancelled.'))
-            redirect_to = redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
+            return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
         elif form.delete.data:
             comment.deleted = True
             comment.updated_at = datetime.utcnow()
             db.session.add(comment)
             flash(lazy_gettext('The comment has been deleted.'))
-            redirect_to = redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
-
-    return redirect_to, form
+            return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
 
 @main.route('/vote/<int:answer_id>')
@@ -427,10 +410,7 @@ def message(message_id):
         and_(Message.receiver_id == current_user.id, Message.receiver_deleted == False)
     )).first_or_404()
 
-    if current_user.can(Permission.PARTICIPATE):
-        form = MessageReplyForm()
-    else:
-        form = None
+    form = MessageReplyForm() if current_user.can(Permission.PARTICIPATE) else None
 
     if form:
         if form.send.data and form.validate_on_submit():

@@ -1,11 +1,11 @@
 from flask import current_app
 from flask_babel import lazy_gettext
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField
+from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField, IntegerField
 from wtforms import ValidationError
 from wtforms.validators import DataRequired, Length, Email, Regexp
 
-from ..models import Role, User
+from ..models import Role, User, TopicGroup
 
 
 class FormHelpersMixIn(object):
@@ -64,8 +64,18 @@ class TopicForm(FlaskForm):
     cancel = SubmitField(lazy_gettext('Cancel'))
 
 
-class TopicEditForm(TopicForm):
+class TopicEditForm(FlaskForm):
+    title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
+    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[DataRequired()], render_kw={'disabled': True})
+    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
+    submit = SubmitField(lazy_gettext('Submit'))
+    add_poll = SubmitField(lazy_gettext('Add poll'))
+    cancel = SubmitField(lazy_gettext('Cancel'))
     delete = SubmitField(lazy_gettext('Delete'))
+
+    def validate_group_id(self, field):
+        if not TopicGroup.query.filter_by(id=field.data).first():
+            raise ValidationError(lazy_gettext('Topic group with such ID is not exist.'))
 
 
 class TopicWithPollForm(FlaskForm):
@@ -77,8 +87,19 @@ class TopicWithPollForm(FlaskForm):
     cancel = SubmitField(lazy_gettext('Cancel'))
 
 
-class TopicWithPollEditForm(TopicWithPollForm):
+class TopicWithPollEditForm(FlaskForm):
+    title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
+    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[DataRequired()], render_kw={'disabled': True})
+    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
+    poll_question = StringField(lazy_gettext('Poll question'), validators=[DataRequired(), Length(0, 256)])
+    poll_answers = TextAreaField(lazy_gettext('Poll answers'), validators=[DataRequired()], render_kw={'rows': 10})
+    submit = SubmitField(lazy_gettext('Submit'))
+    cancel = SubmitField(lazy_gettext('Cancel'))
     delete = SubmitField(lazy_gettext('Delete'))
+
+    def validate_group_id(self, field):
+        if not TopicGroup.query.filter_by(id=field.data).first():
+            raise ValidationError(lazy_gettext('Topic group with such ID is not exist.'))
 
 
 class TopicGroupForm(FlaskForm):
