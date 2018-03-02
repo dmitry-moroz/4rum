@@ -1,4 +1,4 @@
-from flask import current_app
+from flask import current_app, session
 from flask_babel import lazy_gettext
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField, IntegerField
@@ -18,6 +18,17 @@ class FormHelpersMixIn(object):
     @staticmethod
     def is_has_data(*fields):
         return any([field.data for field in fields])
+
+    def get_flashed_errors(self):
+        errors = session.pop('_form_errors') if '_form_errors' in session else {}
+        self.errors.update(errors)
+        for field, errors in errors.items():
+            if hasattr(self, field):
+                form_field = getattr(self, field)
+                if form_field.errors:
+                    form_field.errors.extend(errors)
+                else:
+                    form_field.errors = errors
 
 
 class EditProfileForm(FlaskForm):

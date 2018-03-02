@@ -13,6 +13,10 @@ from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
 
 
+def flash_form_errors(errors):
+    session['_form_errors'] = errors
+
+
 def get_topic_group(topic_group_id):
     t_group = TopicGroup.query.get_or_404(topic_group_id)
     t_groups = TopicGroup.query.with_entities(
@@ -53,6 +57,8 @@ def topic(topic_id):
         new_comment_form = None
 
     edit_comment_form = CommentEditForm(prefix='edit-comment') if current_user.can(Permission.WRITE) else None
+    if edit_comment_form:
+        edit_comment_form.get_flashed_errors()
 
     page = request.args.get('page', 1, type=int)
     if page == -1:
@@ -293,6 +299,8 @@ def latest():
     target_arg = request.args.get('target', 'topics', type=str)
 
     edit_comment_form = CommentEditForm(prefix='edit-comment') if current_user.can(Permission.WRITE) else None
+    if edit_comment_form:
+        edit_comment_form.get_flashed_errors()
 
     if target_arg == 'topics':
         pagination = Topic.query.with_entities(
@@ -340,6 +348,10 @@ def edit_comment(comment_id):
             comment.updated_at = datetime.utcnow()
             db.session.add(comment)
             flash(lazy_gettext('The comment has been deleted.'))
+            return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
+
+        else:
+            flash_form_errors(form.errors)
             return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
 
