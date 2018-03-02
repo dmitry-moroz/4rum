@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-03-01 13:36+0300\n"
+"POT-Creation-Date: 2018-03-02 18:24+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 
 #: forum/auth/forms.py:12 forum/auth/forms.py:22 forum/auth/forms.py:75
-#: forum/auth/forms.py:85 forum/main/forms.py:32 forum/templates/user.html:23
+#: forum/auth/forms.py:85 forum/main/forms.py:43 forum/templates/user.html:23
 msgid "Email"
 msgstr ""
 
@@ -31,15 +31,15 @@ msgid "Keep me logged in"
 msgstr ""
 
 #: forum/auth/forms.py:15 forum/templates/auth/login.html:4
-#: forum/templates/auth/login.html:8 forum/templates/base.html:56
+#: forum/templates/auth/login.html:10 forum/templates/base.html:56
 msgid "Log in"
 msgstr ""
 
-#: forum/auth/forms.py:23 forum/main/forms.py:33
+#: forum/auth/forms.py:23 forum/main/forms.py:44
 msgid "Username"
 msgstr ""
 
-#: forum/auth/forms.py:24 forum/main/forms.py:34
+#: forum/auth/forms.py:24 forum/main/forms.py:45
 msgid "Usernames must have only letters, numbers, dots or underscores"
 msgstr ""
 
@@ -52,15 +52,15 @@ msgid "Confirm password"
 msgstr ""
 
 #: forum/auth/forms.py:29 forum/templates/auth/register.html:4
-#: forum/templates/auth/register.html:8
+#: forum/templates/auth/register.html:10
 msgid "Register"
 msgstr ""
 
-#: forum/auth/forms.py:33 forum/auth/forms.py:66 forum/main/forms.py:51
+#: forum/auth/forms.py:33 forum/auth/forms.py:66 forum/main/forms.py:62
 msgid "Email already registered."
 msgstr ""
 
-#: forum/auth/forms.py:38 forum/main/forms.py:56
+#: forum/auth/forms.py:38 forum/main/forms.py:67
 msgid "Username already in use."
 msgstr ""
 
@@ -77,7 +77,7 @@ msgid "Confirm new password"
 msgstr ""
 
 #: forum/auth/forms.py:46 forum/templates/auth/change_password.html:4
-#: forum/templates/auth/change_password.html:8 forum/templates/base.html:50
+#: forum/templates/auth/change_password.html:10 forum/templates/base.html:50
 msgid "Change password"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgstr ""
 
 #: forum/auth/forms.py:76 forum/auth/forms.py:89
 #: forum/templates/auth/reset_password.html:4
-#: forum/templates/auth/reset_password.html:8
+#: forum/templates/auth/reset_password.html:10
 msgid "Reset password"
 msgstr ""
 
@@ -174,188 +174,188 @@ msgstr ""
 msgid "You have reset your password to new."
 msgstr ""
 
-#: forum/main/forms.py:24 forum/main/forms.py:38
+#: forum/main/forms.py:35 forum/main/forms.py:49
 msgid "Real name"
 msgstr ""
 
-#: forum/main/forms.py:25 forum/main/forms.py:39 forum/templates/user.html:18
+#: forum/main/forms.py:36 forum/main/forms.py:50 forum/templates/user.html:18
 msgid "Homeland"
 msgstr ""
 
-#: forum/main/forms.py:26 forum/main/forms.py:40
+#: forum/main/forms.py:37 forum/main/forms.py:51
 msgid "About me"
 msgstr ""
 
-#: forum/main/forms.py:27 forum/main/forms.py:41
+#: forum/main/forms.py:38 forum/main/forms.py:52
 msgid "Link to avatar"
 msgstr ""
 
-#: forum/main/forms.py:28 forum/main/forms.py:42 forum/main/forms.py:62
-#: forum/main/forms.py:71 forum/main/forms.py:86 forum/main/forms.py:96
-#: forum/main/forms.py:109 forum/main/forms.py:120 forum/main/forms.py:129
+#: forum/main/forms.py:39 forum/main/forms.py:53 forum/main/forms.py:73
+#: forum/main/forms.py:82 forum/main/forms.py:97 forum/main/forms.py:107
+#: forum/main/forms.py:120 forum/main/forms.py:131 forum/main/forms.py:140
 msgid "Submit"
 msgstr ""
 
-#: forum/main/forms.py:36
+#: forum/main/forms.py:47
 msgid "Confirmed"
 msgstr ""
 
-#: forum/main/forms.py:37
+#: forum/main/forms.py:48
 msgid "Role"
 msgstr ""
 
-#: forum/main/forms.py:60 forum/main/forms.py:68 forum/main/forms.py:82
-#: forum/main/forms.py:91 forum/main/forms.py:106
+#: forum/main/forms.py:71 forum/main/forms.py:79 forum/main/forms.py:93
+#: forum/main/forms.py:102 forum/main/forms.py:117
 msgid "Title"
 msgstr ""
 
-#: forum/main/forms.py:61 forum/main/forms.py:70 forum/main/forms.py:83
-#: forum/main/forms.py:93 forum/main/forms.py:128 forum/main/forms.py:136
-#: forum/main/forms.py:144
+#: forum/main/forms.py:72 forum/main/forms.py:81 forum/main/forms.py:94
+#: forum/main/forms.py:104 forum/main/forms.py:139 forum/main/forms.py:147
+#: forum/main/forms.py:155
 msgid "Text"
 msgstr ""
 
-#: forum/main/forms.py:63 forum/main/forms.py:72
+#: forum/main/forms.py:74 forum/main/forms.py:83
 msgid "Add poll"
 msgstr ""
 
-#: forum/main/forms.py:64 forum/main/forms.py:73 forum/main/forms.py:87
-#: forum/main/forms.py:97 forum/main/forms.py:110 forum/main/forms.py:130
-#: forum/main/forms.py:146
+#: forum/main/forms.py:75 forum/main/forms.py:84 forum/main/forms.py:98
+#: forum/main/forms.py:108 forum/main/forms.py:121 forum/main/forms.py:141
+#: forum/main/forms.py:157
 msgid "Cancel"
 msgstr ""
 
-#: forum/main/forms.py:69 forum/main/forms.py:92
+#: forum/main/forms.py:80 forum/main/forms.py:103
 msgid "Topic group ID"
 msgstr ""
 
-#: forum/main/forms.py:74 forum/main/forms.py:98 forum/main/forms.py:131
-#: forum/main/forms.py:139
+#: forum/main/forms.py:85 forum/main/forms.py:109 forum/main/forms.py:142
+#: forum/main/forms.py:150
 msgid "Delete"
 msgstr ""
 
-#: forum/main/forms.py:78 forum/main/forms.py:102
+#: forum/main/forms.py:89 forum/main/forms.py:113
 msgid "Topic group with such ID is not exist."
 msgstr ""
 
-#: forum/main/forms.py:84 forum/main/forms.py:94
+#: forum/main/forms.py:95 forum/main/forms.py:105
 msgid "Poll question"
 msgstr ""
 
-#: forum/main/forms.py:85 forum/main/forms.py:95
+#: forum/main/forms.py:96 forum/main/forms.py:106
 msgid "Poll answers"
 msgstr ""
 
-#: forum/main/forms.py:107
+#: forum/main/forms.py:118
 msgid "Priority"
 msgstr ""
 
-#: forum/main/forms.py:108
+#: forum/main/forms.py:119
 msgid "Moderators only"
 msgstr ""
 
-#: forum/main/forms.py:118
+#: forum/main/forms.py:129
 msgid "Leave your comment, {username}:"
 msgstr ""
 
-#: forum/main/forms.py:135 forum/main/forms.py:143
+#: forum/main/forms.py:146 forum/main/forms.py:154
 #: forum/templates/message.html:47 forum/templates/messages.html:29
 msgid "Subject"
 msgstr ""
 
-#: forum/main/forms.py:137 forum/main/forms.py:145
+#: forum/main/forms.py:148 forum/main/forms.py:156
 msgid "Send"
 msgstr ""
 
-#: forum/main/forms.py:138
+#: forum/main/forms.py:149
 msgid "Close"
 msgstr ""
 
-#: forum/main/forms.py:151
+#: forum/main/forms.py:162
 msgid "Search"
 msgstr ""
 
-#: forum/main/views.py:50
+#: forum/main/views.py:49
 msgid "Your comment has been published."
 msgstr ""
 
-#: forum/main/views.py:98
+#: forum/main/views.py:92
 msgid "Topic has been created."
 msgstr ""
 
-#: forum/main/views.py:108 forum/main/views.py:152
+#: forum/main/views.py:102 forum/main/views.py:146
 msgid "Topic has been saved. Fill data for a poll."
 msgstr ""
 
-#: forum/main/views.py:114
+#: forum/main/views.py:108
 msgid "Topic creation was cancelled."
 msgstr ""
 
-#: forum/main/views.py:142
+#: forum/main/views.py:136
 msgid "The topic has been updated."
 msgstr ""
 
-#: forum/main/views.py:156
+#: forum/main/views.py:150
 msgid "Topic editing was cancelled."
 msgstr ""
 
-#: forum/main/views.py:166
+#: forum/main/views.py:160
 msgid "The topic has been deleted."
 msgstr ""
 
-#: forum/main/views.py:203
+#: forum/main/views.py:197
 msgid "Topic group has been created."
 msgstr ""
 
-#: forum/main/views.py:207
+#: forum/main/views.py:201
 msgid "Topic group creation was cancelled."
 msgstr ""
 
-#: forum/main/views.py:247
+#: forum/main/views.py:241
 msgid "Your profile has been updated."
 msgstr ""
 
-#: forum/main/views.py:275
+#: forum/main/views.py:269
 msgid "The profile has been updated."
 msgstr ""
 
-#: forum/main/views.py:331
+#: forum/main/views.py:322
 msgid "The comment has been updated."
 msgstr ""
 
-#: forum/main/views.py:335
+#: forum/main/views.py:326
 msgid "Comment editing was cancelled."
 msgstr ""
 
-#: forum/main/views.py:342
+#: forum/main/views.py:333
 msgid "The comment has been deleted."
 msgstr ""
 
-#: forum/main/views.py:352
+#: forum/main/views.py:347
 msgid "You have already voted for this poll."
 msgstr ""
 
-#: forum/main/views.py:355
+#: forum/main/views.py:350
 msgid "Your vote has been taken."
 msgstr ""
 
-#: forum/main/views.py:420 forum/main/views.py:457
+#: forum/main/views.py:415 forum/main/views.py:452
 msgid "Your message has been sent."
 msgstr ""
 
-#: forum/main/views.py:428
+#: forum/main/views.py:423
 msgid "The message has been deleted."
 msgstr ""
 
-#: forum/main/views.py:461
+#: forum/main/views.py:456
 msgid "The message was cancelled."
 msgstr ""
 
-#: forum/templates/_buttons_topic.html:5 forum/templates/_comments.html:51
+#: forum/templates/_buttons_topic.html:5 forum/templates/_comments.html:47
 msgid "Edit"
 msgstr ""
 
-#: forum/templates/_buttons_topic.html:9 forum/templates/_comments.html:59
+#: forum/templates/_buttons_topic.html:9 forum/templates/_comments.html:51
 msgid "Edit [Moderator]"
 msgstr ""
 
@@ -388,11 +388,6 @@ msgstr ""
 msgid "Updated"
 msgstr ""
 
-#: forum/templates/_comments.html:79 forum/templates/edit_comment.html:4
-#: forum/templates/edit_comment.html:12
-msgid "Edit comment"
-msgstr ""
-
 #: forum/templates/_topic_groups.html:13 forum/templates/latest.html:16
 msgid "Topics"
 msgstr ""
@@ -406,7 +401,8 @@ msgstr ""
 msgid "Topics not found"
 msgstr ""
 
-#: forum/templates/base.html:29
+#: forum/templates/base.html:3 forum/templates/base.html:29
+#: forum/templates/index.html:4
 msgid "Forum"
 msgstr ""
 
@@ -484,6 +480,10 @@ msgstr ""
 msgid "Create new topic group"
 msgstr ""
 
+#: forum/templates/edit_comment.html:4 forum/templates/edit_comment.html:12
+msgid "Edit comment"
+msgstr ""
+
 #: forum/templates/edit_comment.html:14
 msgid "Edit comment, author"
 msgstr ""
@@ -534,7 +534,7 @@ msgid "Year"
 msgstr ""
 
 #: forum/templates/index.html:11
-msgid "Welcome to"
+msgid "Housing complex D3 - Forum"
 msgstr ""
 
 #: forum/templates/latest.html:10
@@ -642,23 +642,23 @@ msgid "Topics on the forum"
 msgstr ""
 
 #: forum/templates/auth/change_email.html:4
-#: forum/templates/auth/change_email.html:8
+#: forum/templates/auth/change_email.html:10
 msgid "Change email address"
 msgstr ""
 
-#: forum/templates/auth/login.html:13
+#: forum/templates/auth/login.html:16
 msgid "New user?"
 msgstr ""
 
-#: forum/templates/auth/login.html:13
+#: forum/templates/auth/login.html:16
 msgid "Click here to register"
 msgstr ""
 
-#: forum/templates/auth/login.html:14
+#: forum/templates/auth/login.html:17
 msgid "Forgot your password?"
 msgstr ""
 
-#: forum/templates/auth/login.html:14
+#: forum/templates/auth/login.html:17
 msgid "Click here to reset it"
 msgstr ""
 
