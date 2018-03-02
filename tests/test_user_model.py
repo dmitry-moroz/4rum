@@ -2,8 +2,8 @@ import time
 import unittest
 from datetime import datetime
 
-from app import create_app, db
-from app.models import User, AnonymousUser, Role, Permission
+from forum.app import create_app, db
+from forum.models import User, AnonymousUser, Role, Permission
 
 
 class UserModelTestCase(unittest.TestCase):

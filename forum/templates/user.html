@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}4RUM - {{ user.username }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="img-rounded profile-avatar" src="{{ user.avatar }}">
+    <div class="profile-header">
+        <h1>{{ user.username }}</h1>
+        {% if user.name %}
+        <p>
+            {{ _('Name') }}: {{ user.name }}
+        </p>
+        {% endif %}
+        {% if user.homeland %}
+        <p>
+            {{ _('Homeland') }}: <a href="http://maps.google.com/?q={{ user.homeland }}">{{ user.homeland }}</a>
+        </p>
+        {% endif %}
+        {% if current_user.is_administrator() %}
+        <p>
+            {{ _('Email') }}: <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+        </p>
+        {% endif %}
+        {% if user.about %}
+        <p>
+            {{ _('About') }}: {{ user.about }}
+        </p>
+        {% endif %}
+        <p>
+            {{ _('Member since') }}: {{ format_datetime(user.created_at, 'd MMMM YYYY') }}
+        </p>
+        <p>
+            {{ _('Last seen') }}: {{ format_timedelta(user.last_seen) }} {{ _('ago') }}
+        </p>
+        <p>
+            {{ _('Forum activity') }}: {{ _('topics') }} {{ topics_count }}, {{ _('comments') }} {{ comments_count }}
+        </p>
+        <p>
+            {% if user == current_user %}
+            <a class="btn btn-primary btn-sm" href="{{ url_for('main.edit_profile') }}">
+                 <span class="glyphicon glyphicon-edit"></span> {{ _('Edit profile') }}
+            </a>
+            {% else %}
+            <a class="btn btn-primary btn-sm" href="{{ url_for('main.send_message', username=user.username, next=request.url) }}">
+                <span class="glyphicon glyphicon-envelope"></span> {{ _('Send message') }}
+            </a>
+            {% endif %}
+            {% if current_user.is_administrator() %}
+            <a class="btn btn-danger btn-sm" href="{{ url_for('main.edit_profile_admin', user_id=user.id) }}">
+                 <span class="glyphicon glyphicon-edit"></span> {{ _('Edit profile [Admin]') }}
+            </a>
+            {% endif %}
+        </p>
+    </div>
+</div>
+<h3 id="user_topics">{{ _('Topics on the forum') }}:</h3>
+{% include '_topics.html' %}
+{{ macros.pagination_widget(pagination, 'main.user', username=user.username, fragment='#user_topics') }}
+{% endblock %}

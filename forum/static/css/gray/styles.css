@@ -1,0 +1,362 @@
+/* Fix for jumping scrollbar issue
+   https://aykevl.nl/2014/09/fix-jumping-scrollbar
+   https://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page
+   https://stackoverflow.com/questions/9538868/prevent-body-from-scrolling-when-a-modal-is-opened
+*/
+body {
+    overflow-y: scroll !important;
+}
+
+/* CSS to disable mobile version of the site */
+/* TODO: check this fix with mobile device */
+div.non-responsive {
+    min-width: 1170px;
+}
+
+
+/* ### Reviewed: ### */
+
+
+/* CSS for page */
+html, body {
+   height: 100%;
+}
+div.body-content {
+   min-height: 100%;
+   position: relative;
+   padding-bottom: 60px;
+}
+div.footer-grad {
+    min-height: 30px;
+    background: -moz-linear-gradient(top, transparent, #2c3e50);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+div.footer {
+    min-height: 30px;
+    background: #2c3e50;
+    color: #ffffff;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+/* Common CSS */
+textarea.form-control {
+    max-width: 100%;
+}
+a.no-underline {
+    text-decoration: none !important;
+}
+a.underline-on-hover {
+    text-decoration: none !important;
+}
+a.underline-on-hover:hover {
+    text-decoration: underline !important;
+}
+div.no-data-text {
+    padding: 16px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+    color: #ecf0f1;
+}
+span.gray-badge {
+    color: #ffffff !important;
+    background-color: #18bc9c !important;
+}
+td.nowrap-td {
+    white-space: nowrap;
+}
+td.width-100 {
+    width: 100%;
+}
+
+/* CSS for pagination */
+div.pagination {
+    width: 100%;
+    text-align: right;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* CSS for button panels */
+div.buttons-panel {
+    min-height: 34px;
+}
+div.right-buttons {
+    float: right;
+}
+
+/* CSS for account profile */
+div.profile-header {
+    min-height: 260px;
+    margin-left: 280px;
+}
+img.profile-avatar {
+    position: absolute;
+    object-fit: cover;
+    width: 256px;
+    height: 256px;
+}
+
+/* CSS for index page */
+div.common-header {
+    margin-left: 48px;
+}
+img.common-thumbnail {
+    position: absolute;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+}
+img.navbar-profile-thumbnail {
+    position: static;
+    object-fit: cover;
+    width: 18px;
+    height: 18px;
+}
+
+/* CSS for topics list */
+ul.topics {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+}
+ul.topics li.topic {
+    padding: 8px;
+    margin: -1px 0px 0px 0px;
+    border-top: 1px solid #dee2e2;
+    border-bottom: 1px solid #dee2e2;
+}
+ul.topics li.topic:hover {
+    background-color: #ecf0f1;
+}
+div.topic-date {
+    float: right;
+    font-size: small;
+}
+div.topic-comments-info {
+    float: right;
+}
+span.topic-comments-info {
+    min-width: 120px !important;
+    display: inline-block !important;
+}
+div.topic-author {
+}
+div.topic-title {
+    font-weight: bold;
+}
+div.topic-content {
+    margin-left: 48px;
+    min-height: 48px;
+}
+
+/* CSS for topic group page and topic groups list */
+ul.topic-groups {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+}
+ul.topic-groups li.topic-group {
+    padding: 8px;
+    margin: -1px 0px 0px 0px;
+    border-top: 1px solid #dee2e2;
+    border-bottom: 1px solid #dee2e2;
+    background-color: #ecf0f1;
+}
+ul.topic-groups li.topic-group:hover {
+    background-color: #ffffff;
+}
+img.topic-group-thumbnail-small {
+    position: absolute;
+    object-fit: cover;
+    width: 20px;
+    height: 20px;
+}
+div.topic-group-content {
+    margin-left: 28px;
+    min-height: 20px;
+    font-weight: bold;
+}
+div.topic-group-topics-info {
+    float: right;
+}
+span.topic-group-topics-info {
+    min-width: 70px !important;
+    display: inline-block !important;
+}
+
+/* CSS for topic page */
+div.topic-page {
+    margin: 16px 0px 0px 0px;
+    border-top: 4px solid #2c3e50;
+    border-bottom: 4px solid #2c3e50;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+div.topic-page-title {
+    padding: 16px;
+    border-bottom: 1px solid #2c3e50;
+}
+div.topic-page-meta {
+    margin-left: 56px;
+}
+div.topic-page-content {
+    padding: 16px;
+    min-height: 100px;
+    overflow-x: auto;
+}
+
+/* CSS for topic body */
+div.topic-page-content h1 {
+    font-size: 160%;
+}
+div.topic-page-content h2 {
+    font-size: 140%;
+}
+div.topic-page-content h3 {
+    font-size: 120%;
+}
+div.topic-page-content table {
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+div.topic-page-content th {
+    background: #b4bcc2;
+    padding: 8px;
+    border: 1px solid;
+}
+div.topic-page-content td {
+    padding: 8px;
+    border: 1px solid;
+}
+div.topic-page-content img {
+    max-width: 100%;
+    max-height: 600px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+/* CSS for comment form */
+div.comments-form {
+    margin-left: 48px;
+}
+
+/* CSS for comments list */
+ul.comments {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+}
+ul.comments li.comment {
+    padding: 8px;
+    margin: -1px 0px 0px 0px;
+    border-top: 1px solid #dee2e2;
+    border-bottom: 1px solid #dee2e2;
+}
+div.comment-date {
+    float: right;
+    font-size: small;
+}
+div.comment-author {
+}
+div.comment-body {
+    max-height: 600px;
+    overflow-x: auto;
+    overflow-y: auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+div.comment-content {
+    margin-left: 48px;
+    min-height: 48px;
+}
+div.comment-buttons {
+    text-align: right;
+}
+
+/* CSS for poll */
+ul.poll-answers {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+}
+ul.poll-answers li.poll-answer {
+    padding: 8px;
+    margin: 1px 0px 0px 0px;
+    border: 1px solid #b4bcc2;
+    color: #2c3e50;
+    font-weight: bold;
+}
+ul.poll-answers li.poll-answer:hover {
+    background-color: #2c3e50;
+    color: #ffffff;
+}
+div.progress-margin {
+    margin: 0;
+}
+ul.poll-answers-voted {
+    list-style-type: none;
+    padding: 0px;
+    margin: 16px 0px 0px 0px;
+}
+ul.poll-answers-voted li.poll-answer-voted {
+    padding: 8px;
+    margin: 1px 0px 0px 0px;
+    border: 1px solid #b4bcc2;
+    color: #2c3e50;
+    font-weight: bold;
+}
+div.poll-percent-info {
+    float: right;
+}
+
+/* CSS for messages */
+table.messages tr {
+    border-bottom: 1px solid #dee2e2;
+}
+img.message-thumbnail {
+    width: 18px;
+    height: 18px;
+    object-fit: cover;
+}
+div.message-title {
+    height: 100%;
+    width: 100%;
+    font-weight: bold;
+}
+
+/* CSS for message page */
+div.message-page {
+    margin: 16px 0px 0px 0px;
+    border-top: 1px solid #2c3e50;
+    border-bottom: 1px solid #2c3e50;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+div.message-page-title {
+    padding: 16px;
+    border-bottom: 1px solid #2c3e50;
+}
+div.message-page-content {
+    padding: 16px;
+    min-height: 100px;
+    overflow-x: auto;
+}
+div.message-date {
+    float: right;
+    font-size: small;
+}
+
+/* CSS for community */
+table.community tr {
+    border-bottom: 1px solid #dee2e2;
+}
+img.community-thumbnail {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+}

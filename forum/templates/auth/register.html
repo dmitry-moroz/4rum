@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}4RUM - {{ _('Register') }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/key-icon.png') }}">
+    <div class="common-header">
+        <h1>{{ _('Register') }}</h1>
+    </div>
+</div>
+<div class="col-md-6">
+    {{ wtf.quick_form(form, button_map={'submit':'success'}, novalidate=True) }}
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}4RUM - {{ topic.title }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/speech-icon.png') }}">
+    <div class="common-header">
+        <h2>{{ topic.title }}</h2>
+    </div>
+</div>
+{% include '_buttons_topic.html' %}
+
+<div class="topic-page img-rounded">
+
+    <div class="topic-page-title">
+
+        <div>
+            <a href="{{ url_for('main.user', username=topic.author.username) }}">
+                <img class="img-rounded common-thumbnail" src="{{ topic.author.avatar }}">
+            </a>
+        </div>
+
+        <div class="topic-page-meta">
+            <div class="topic-date">{{ _('Created') }}: {{ format_datetime(topic.created_at, 'd MMMM YYYY, H:mm') }}</div>
+            <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
+            {% if topic.created_at != topic.updated_at %}
+            <div class="topic-date">{{ _('Updated') }}: {{ format_datetime(topic.updated_at, 'd MMMM YYYY, H:mm') }}</div>
+            {% endif %}
+            {% if topic.author.name %}
+            <div class="topic-author">{{ topic.author.name }}</div>
+            {% else %}
+            <br>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="topic-page-content">
+        {% if topic.body_html %}
+            {{ topic.body_html | safe }}
+        {% else %}
+            {{ topic.body }}
+        {% endif %}
+
+    {% if topic.poll and current_user.can(Permission.PARTICIPATE) %}
+        <br>
+        <h4 id="poll">{{ topic.poll }}</h4>
+        {% if user_vote %}
+        <ul class="poll-answers-voted">
+            {% for answer, votes, percent in poll_data %}
+                <li class="poll-answer-voted img-rounded">
+                    {{ answer }}
+                    <div class="poll-percent-info">
+                        {{ percent }}% ({{ _('votes') }}: {{ votes }})
+                    </div>
+                    <div class="progress progress-margin">
+                        <div class="progress-bar progress-bar-success progress-margin" style="width:{{ percent }}%;"></div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <h5>{{ _('You chosen') }} "{{ user_vote[0] }}"</h5>
+        {% else %}
+        <ul class="poll-answers">
+            {% for answer_id, answer in poll_data %}
+            <a class="no-underline" href="{{ url_for('main.vote', answer_id=answer_id, next=request.url) }}">
+                <li class="poll-answer img-rounded">
+                    {{ answer }}
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endif %}
+
+    </div>
+
+</div>
+
+<div id="comments" class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/comments-icon.png') }}">
+    <div class="common-header">
+        <h2>{{ _('Comments') }}:</h2>
+    </div>
+</div>
+
+{% if form %}
+    {% import "bootstrap/wtf.html" as wtf %}
+    <div>
+        <a href="{{ url_for('main.user', username=current_user.username) }}">
+            <img class="img-rounded common-thumbnail" src="{{ current_user.avatar }}">
+        </a>
+    </div>
+    <div class="comments-form">
+        {{ wtf.quick_form(form, button_map={'submit':'success'}, novalidate=True) }}
+    </div>
+{% endif %}
+
+{% include '_comments.html' %}
+{{ macros.pagination_widget(pagination, 'main.topic', topic_id=topic.id, fragment='#comments') }}
+
+{% endblock %}

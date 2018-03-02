@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}4RUM - {{ _('Community') }}{% endblock %}
+
+{% block page_content %}
+<div id="community" class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/community-icon.png') }}">
+    <div class="common-header">
+        <h2>{{ _('Forum\'s community') }}</h2>
+    </div>
+</div>
+
+<div>
+    {{ wtf.quick_form(form, button_map={'search':'success'}, form_type='inline', novalidate=True) }}
+</div>
+
+<table class="table table-hover community">
+    <thead>
+        <tr>
+            <th>{{ _('Nick') }}</th>
+            <th>{{ _('Name') }}</th>
+            <th>{{ _('Member since') }}</th>
+            <th>{{ _('Last seen') }}</th>
+        </tr>
+    </thead>
+    {% for user in users %}
+    <tr>
+        <td class="nowrap-td">
+            <a class="no-underline" href="{{ url_for('main.user', username=user.username) }}">
+                <img class="img-rounded community-thumbnail" src="{{ user.avatar }}">
+            </a>
+            <a class="underline-on-hover" href="{{ url_for('main.user', username=user.username) }}">
+                {{ user.username }}
+            </a>
+        </td>
+        <td>
+            {% if user.name %}
+                <a class="underline-on-hover" href="{{ url_for('main.user', username=user.username) }}">
+                    {{ user.name }}
+                </a>
+            {% endif %}
+        </td>
+        <td class="nowrap-td">
+            {{ format_datetime(user.created_at, 'd MMMM YYYY') }}
+        </td>
+        <td>
+            {{ format_timedelta(user.last_seen) }} {{ _('ago') }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if not users %}
+    <div class="no-data-text">{{ _('Users not found') }}</div>
+{% endif %}
+
+{{ macros.pagination_widget(pagination, 'main.community', fragment='#community') }}
+
+{% endblock %}

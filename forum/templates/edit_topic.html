@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}4RUM - {{ _('Edit topic') }}{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='simplemde.min.css') }}">
+<script src="{{ url_for('static', filename='simplemde.min.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/pen-icon.png') }}">
+    <div class="common-header">
+        <h2>{{ _('Edit topic') }}
+            {% if topic.group.is_root_topic_group() %}
+            {{ _('on home page') }}
+            {% else %}
+            {{ _('in') }} "{{ topic.group.title }}"
+            {% endif %}
+        </h2>
+    </div>
+</div>
+<div>
+    {{ wtf.quick_form(form,
+                      button_map={'submit':'success', 'add_poll':'primary', 'cancel':'warning', 'delete':'danger'},
+                      novalidate=True) }}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("body"),
+        spellChecker: false,
+        status: false
+    });
+</script>
+{% endblock %}
