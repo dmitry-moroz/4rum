@@ -125,7 +125,7 @@ class TopicGroupForm(FlaskForm):
         self.priority.choices = [(p, p) for p in current_app.config['TOPIC_GROUP_PRIORITY']]
 
 
-class CommentForm(FlaskForm, FormHelpersMixIn):
+class CommentForm(FlaskForm):
     body = TextAreaField(lazy_gettext('Leave your comment, {username}:'), validators=[DataRequired()],
                          render_kw={'rows': 4})
     submit = SubmitField(lazy_gettext('Submit'))
@@ -135,7 +135,7 @@ class CommentForm(FlaskForm, FormHelpersMixIn):
         self.body.label.text = self.body.label.text.format(username=user.username)
 
 
-class CommentEditForm(FlaskForm, FormHelpersMixIn):
+class CommentEditForm(FlaskForm):
     body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 8})
     submit = SubmitField(lazy_gettext('Submit'))
     cancel = SubmitField(lazy_gettext('Cancel'))

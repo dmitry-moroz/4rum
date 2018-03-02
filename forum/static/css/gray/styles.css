@@ -111,15 +111,6 @@ img.common-thumbnail {
     width: 40px;
     height: 40px;
 }
-div.common-header-modal {
-    margin-left: 36px;
-}
-img.common-thumbnail-modal {
-    position: absolute;
-    object-fit: cover;
-    width: 30px;
-    height: 30px;
-}
 img.navbar-profile-thumbnail {
     position: static;
     object-fit: cover;
