@@ -1,11 +1,11 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}4RUM{% endblock %}
+{% block title %}D3 - {{ _('Forum') }}{% endblock %}
 
 {% block head %}
 {{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='img/{0}/favicon.ico'.format(config['THEME'])) }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='img/{0}/favicon.ico'.format(config['THEME'])) }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
 {% endblock %}
 
 {% block styles %}
@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">4RUM</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">D3</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

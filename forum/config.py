@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY', '<hard-to-guess-string>')
     SESSION_PROTECTION = 'basic'
-    THEME = os.environ.get('THEME', 'gray')
+    THEME = os.environ.get('THEME', 'violet')
 
     DEBUG = bool(os.environ.get('DEBUG', ''))
     DEBUG_TB_INTERCEPT_REDIRECTS = False
@@ -26,12 +26,12 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME', '4rum@example.com')
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME', 'd3forum@example.com')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', 'password')
 
-    APP_MAIL_SUBJECT_PREFIX = '[4RUM]'
-    APP_MAIL_SENDER = '4RUM Admin <name@example.com>'
-    APP_ADMIN = os.environ.get('ADMIN_MAIL_USERNAME', '4rum_admin@example.com')
+    APP_MAIL_SUBJECT_PREFIX = '[D3-Forum]'
+    APP_MAIL_SENDER = 'D3-Forum Admin <name@example.com>'
+    APP_ADMIN = os.environ.get('ADMIN_MAIL_USERNAME', 'd3forum_admin@example.com')
 
     BASE_GRAVATAR_URL = 'https://secure.gravatar.com/avatar'
     TOPIC_GROUP_PRIORITY = range(1, 11)

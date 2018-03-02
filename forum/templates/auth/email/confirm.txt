@@ -1,6 +1,6 @@
 Dear {{ user.username }},
 
-Welcome to 4RUM!
+Welcome to D3-Forum!
 
 To confirm your account please click on the following link:
 
@@ -8,6 +8,6 @@ To confirm your account please click on the following link:
 
 Sincerely,
 
-The 4RUM Team
+The D3-Forum Team
 
 Note: replies to this email address are not monitored.

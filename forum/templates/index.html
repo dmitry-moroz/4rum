@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 
-{% block title %}4RUM{% endblock %}
+{% block title %}D3 - {{ _('Forum') }}{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-    <img class="common-thumbnail" src="{{ url_for('static', filename='img/forum-icon.png') }}">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/d3-violet.png') }}">
     <div class="common-header">
         <h2>
-            {{ _('Welcome to') }} 4RUM{% if current_user.is_authenticated %}, {{ current_user.username }}{% endif %}
+            {{ _('Housing complex D3 - Forum') }}
         </h2>
     </div>
 </div>
