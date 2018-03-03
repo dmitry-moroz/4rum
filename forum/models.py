@@ -69,7 +69,8 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
-    username = db.Column(db.String(32), unique=True, index=True)
+    username = db.Column(db.String(32))
+    username_normalized = db.Column(db.String(32), unique=True, index=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
@@ -86,7 +87,7 @@ class User(UserMixin, db.Model):
     homeland = db.Column(db.String(64))
     about = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=func.now())
-    # TODO: Add updated_at field
+    updated_at = db.Column(db.DateTime, default=func.now())
     last_seen = db.Column(db.DateTime, default=func.now())
     avatar = db.Column(db.String(256))
 
@@ -284,7 +285,7 @@ class TopicGroup(db.Model):
     created_at = db.Column(db.DateTime, index=True, default=func.now())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), index=True)
-    # TODO: Add deleted field
+    # TODO: Add deleted, updated_at fields
     topics = db.relationship('Topic', backref='group', lazy='dynamic')
     topic_groups = db.relationship('TopicGroup', backref=db.backref('group', remote_side=id), lazy='dynamic')
 

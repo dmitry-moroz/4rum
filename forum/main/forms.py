@@ -58,31 +58,28 @@ class EditProfileAdminForm(FlaskForm):
         self.user = user
 
     def validate_email(self, field):
-        if field.data != self.user.email and User.query.filter_by(email=field.data).first():
+        if (field.data.lower() != self.user.email
+                and User.query.filter_by(email=field.data.lower()).first()):
             raise ValidationError(lazy_gettext('Email already registered.'))
-        field.data = field.data.lower()
 
     def validate_username(self, field):
-        if field.data != self.user.username and User.query.filter_by(username=field.data).first():
+        if (field.data.lower() != self.user.username_normalized
+                and User.query.filter_by(username_normalized=field.data.lower()).first()):
             raise ValidationError(lazy_gettext('Username already in use.'))
 
 
 class TopicForm(FlaskForm):
     title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
-    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
-    submit = SubmitField(lazy_gettext('Submit'))
-    add_poll = SubmitField(lazy_gettext('Add poll'))
-    cancel = SubmitField(lazy_gettext('Cancel'))
-
-
-class TopicEditForm(FlaskForm):
-    title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
-    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[DataRequired()], render_kw={'disabled': True})
+    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[DataRequired()])
     body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
     submit = SubmitField(lazy_gettext('Submit'))
     add_poll = SubmitField(lazy_gettext('Add poll'))
     cancel = SubmitField(lazy_gettext('Cancel'))
     delete = SubmitField(lazy_gettext('Delete'))
+
+    def remove_edit_fields(self):
+        del self.group_id
+        del self.delete
 
     def validate_group_id(self, field):
         if not TopicGroup.query.filter_by(id=field.data).first():
@@ -91,22 +88,17 @@ class TopicEditForm(FlaskForm):
 
 class TopicWithPollForm(FlaskForm):
     title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
-    body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
-    poll_question = StringField(lazy_gettext('Poll question'), validators=[DataRequired(), Length(0, 256)])
-    poll_answers = TextAreaField(lazy_gettext('Poll answers'), validators=[DataRequired()], render_kw={'rows': 10})
-    submit = SubmitField(lazy_gettext('Submit'))
-    cancel = SubmitField(lazy_gettext('Cancel'))
-
-
-class TopicWithPollEditForm(FlaskForm):
-    title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
-    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[DataRequired()], render_kw={'disabled': True})
+    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[DataRequired()])
     body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
     poll_question = StringField(lazy_gettext('Poll question'), validators=[DataRequired(), Length(0, 256)])
     poll_answers = TextAreaField(lazy_gettext('Poll answers'), validators=[DataRequired()], render_kw={'rows': 10})
     submit = SubmitField(lazy_gettext('Submit'))
     cancel = SubmitField(lazy_gettext('Cancel'))
     delete = SubmitField(lazy_gettext('Delete'))
+
+    def remove_edit_fields(self):
+        del self.group_id
+        del self.delete
 
     def validate_group_id(self, field):
         if not TopicGroup.query.filter_by(id=field.data).first():

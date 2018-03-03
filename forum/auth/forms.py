@@ -14,9 +14,6 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField(lazy_gettext('Keep me logged in'))
     submit = SubmitField(lazy_gettext('Log in'))
 
-    def validate_email(self, field):
-        field.data = field.data.lower()
-
 
 class RegistrationForm(FlaskForm):
     email = StringField(lazy_gettext('Email'), validators=[DataRequired(), Length(1, 64), Email()])
@@ -29,12 +26,11 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField(lazy_gettext('Register'))
 
     def validate_email(self, field):
-        if User.query.filter_by(email=field.data).first():
+        if User.query.filter_by(email=field.data.lower()).first():
             raise ValidationError(lazy_gettext('Email already registered.'))
-        field.data = field.data.lower()
 
     def validate_username(self, field):
-        if User.query.filter_by(username=field.data).first():
+        if User.query.filter_by(username_normalized=field.data.lower()).first():
             raise ValidationError(lazy_gettext('Username already in use.'))
 
 
@@ -60,11 +56,10 @@ class ChangeEmailForm(FlaskForm):
     submit = SubmitField(lazy_gettext('Change email'))
 
     def validate_new_email(self, field):
-        if current_user.email == field.data:
+        if current_user.email == field.data.lower():
             raise ValidationError(lazy_gettext('This is your current email.'))
-        if User.query.filter_by(email=field.data).first():
+        if User.query.filter_by(email=field.data.lower()).first():
             raise ValidationError(lazy_gettext('Email already registered.'))
-        field.data = field.data.lower()
 
     def validate_password(self, field):
         if not current_user.verify_password(field.data):
@@ -76,9 +71,8 @@ class ResetPasswordRequestForm(FlaskForm):
     submit = SubmitField(lazy_gettext('Reset password'))
 
     def validate_email(self, field):
-        if User.query.filter_by(email=field.data).first() is None:
+        if User.query.filter_by(email=field.data.lower()).first() is None:
             raise ValidationError(lazy_gettext('Unknown email address.'))
-        field.data = field.data.lower()
 
 
 class ResetPasswordForm(FlaskForm):
@@ -89,6 +83,5 @@ class ResetPasswordForm(FlaskForm):
     submit = SubmitField(lazy_gettext('Reset password'))
 
     def validate_email(self, field):
-        if User.query.filter_by(email=field.data).first() is None:
+        if User.query.filter_by(email=field.data.lower()).first() is None:
             raise ValidationError(lazy_gettext('Unknown email address.'))
-        field.data = field.data.lower()

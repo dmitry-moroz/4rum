@@ -1,11 +1,11 @@
 <div class="buttons-panel">
     <div class="right-buttons">
         {% if current_user.id==topic.author_id and current_user.can(Permission.WRITE) %}
-        <a class="btn btn-warning btn-sm" href="{{ url_for('main.edit_topic', topic_id=topic.id, next=request.referrer) }}">
+        <a class="btn btn-warning btn-sm" href="{{ url_for('main.edit_topic', topic_id=topic.id) }}">
             <span class="glyphicon glyphicon-edit"></span> {{ _('Edit') }}
         </a>
         {% elif current_user.is_moderator() %}
-        <a class="btn btn-warning btn-sm" href="{{ url_for('main.edit_topic', topic_id=topic.id, next=request.referrer) }}">
+        <a class="btn btn-warning btn-sm" href="{{ url_for('main.edit_topic', topic_id=topic.id) }}">
             <span class="glyphicon glyphicon-edit"></span> {{ _('Edit [Moderator]') }}
         </a>
         {% endif %}
