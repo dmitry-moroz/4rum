@@ -6,8 +6,8 @@ from flask_login import login_required, current_user
 from sqlalchemy import func, case, between, and_, or_
 
 from . import main
-from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicEditForm, TopicWithPollForm,
-                    TopicWithPollEditForm, CommentForm, CommentEditForm, MessageReplyForm, MessageSendForm, SearchForm)
+from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroupForm, TopicWithPollForm,
+                    CommentForm, CommentEditForm, MessageReplyForm, MessageSendForm, SearchForm)
 from ..app import babel, db
 from ..decorators import admin_required, permission_required
 from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
@@ -78,6 +78,7 @@ def create_topic(topic_group_id):
 
     with_poll = request.args.get('poll', 0, type=int)
     form = TopicWithPollForm() if with_poll else TopicForm()
+    form.remove_edit_fields()
 
     if form.submit.data and form.validate_on_submit():
         new_topic = Topic(title=form.title.data, body=form.body.data, group=t_group,
@@ -120,8 +121,9 @@ def edit_topic(topic_id):
         abort(403)
 
     with_poll = request.args.get('poll', 0, type=int) or tpc.poll
-    form = TopicWithPollEditForm() if with_poll else TopicEditForm()
-    form.group_id.render_kw['disabled'] = False if current_user.is_moderator() else True
+    form = TopicWithPollForm() if with_poll else TopicForm()
+    if not current_user.is_moderator():
+        del form.group_id
 
     if form.submit.data and form.validate_on_submit():
         if current_user.is_moderator():
@@ -158,11 +160,12 @@ def edit_topic(topic_id):
         tpc.updated_at = datetime.utcnow()
         db.session.add(tpc)
         flash(lazy_gettext('The topic has been deleted.'))
-        return redirect(request.args.get('next') or url_for('main.topic_group', topic_group_id=tpc.group_id))
+        return redirect(url_for('main.topic_group', topic_group_id=tpc.group_id))
 
     form.title.data = tpc.title
     form.body.data = tpc.body
-    form.group_id.data = tpc.group_id
+    if form.group_id:
+        form.group_id.data = tpc.group_id
     if tpc.poll:
         form.poll_question.data = tpc.poll
         form.poll_answers.data = '\n'.join([a.body for a in tpc.poll_answers.filter_by(deleted=False).all()])
@@ -207,7 +210,7 @@ def create_topic_group(topic_group_id):
 @main.route('/user/<username>')
 @login_required
 def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
+    user = User.query.filter_by(username_normalized=username.lower()).first_or_404()
 
     page = request.args.get('page', 1, type=int)
     pagination = Topic.query.with_entities(
@@ -237,6 +240,7 @@ def edit_profile():
         current_user.homeland = form.homeland.data
         current_user.about = form.about.data
         current_user.avatar = form.avatar.data if form.avatar.data else current_user.gravatar()
+        current_user.updated_at = datetime.utcnow()
         db.session.add(current_user)
         flash(lazy_gettext('Your profile has been updated.'))
         return redirect(url_for('main.user', username=current_user.username))
@@ -259,12 +263,14 @@ def edit_profile_admin(user_id):
     if form.validate_on_submit():
         user.email = form.email.data
         user.username = form.username.data
+        user.username_normalized = form.username.data.lower()
         user.confirmed = form.confirmed.data
         user.role = Role.query.get(form.role.data)
         user.name = form.name.data
         user.homeland = form.homeland.data
         user.about = form.about.data
         user.avatar = form.avatar.data if form.avatar.data else user.gravatar()
+        user.updated_at = datetime.utcnow()
         db.session.add(user)
         flash(lazy_gettext('The profile has been updated.'))
         return redirect(url_for('main.user', username=user.username))
@@ -440,7 +446,7 @@ def message(message_id):
 @login_required
 @permission_required(Permission.PARTICIPATE)
 def send_message(username):
-    receiver = User.query.filter_by(username=username).first_or_404()
+    receiver = User.query.filter_by(username_normalized=username.lower()).first_or_404()
     if receiver.id == current_user.id:
         abort(400)
 
@@ -468,7 +474,7 @@ def community():
         page = 1
         search_str = '%{}%'.format(form.text.data.lower())
         pagination = User.query.order_by(User.id.asc()).filter(
-            or_(func.lower(User.username).like(search_str), func.lower(User.name).like(search_str))).paginate(
+            or_(User.username_normalized.like(search_str), func.lower(User.name).like(search_str))).paginate(
             page, per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
     else:
         page = request.args.get('page', 1, type=int)

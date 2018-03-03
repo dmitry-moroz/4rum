@@ -25,8 +25,10 @@ def generate_fake_messages(count=1000):
 def generate_fake_users(count=100):
     seed()
     for i in range(count):
+        user_name = forgery_py.internet.user_name(True)[:32]
         u = User(email=forgery_py.internet.email_address(),
-                 username=forgery_py.internet.user_name(True)[:32],
+                 username=user_name,
+                 username_normalized=user_name.lower(),
                  password=forgery_py.lorem_ipsum.word(),
                  confirmed=True,
                  name=forgery_py.name.full_name()[:64],

@@ -30,7 +30,7 @@ def unconfirmed():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             return redirect(request.args.get('next') or url_for('main.index'))
@@ -50,7 +50,12 @@ def logout():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(email=form.email.data, username=form.username.data, password=form.password.data)
+        user = User(
+            email=form.email.data.lower(),
+            username=form.username.data,
+            username_normalized=form.username.data.lower(),
+            password=form.password.data
+        )
         db.session.add(user)
         db.session.commit()
         token = user.generate_token()
@@ -101,8 +106,9 @@ def change_password():
 def change_email():
     form = ChangeEmailForm()
     if form.validate_on_submit():
-        token = current_user.generate_token(new_email=form.new_email.data)
-        send_email(form.new_email.data, lazy_gettext('Confirm your new email'), 'auth/email/confirm_new_email',
+        new_email = form.new_email.data.lower()
+        token = current_user.generate_token(new_email=new_email)
+        send_email(new_email, lazy_gettext('Confirm your new email'), 'auth/email/confirm_new_email',
                    user=current_user, token=token)
         flash(lazy_gettext('A confirmation email has been sent to your new email.'))
         return redirect(request.args.get('next') or url_for('main.index'))
@@ -125,7 +131,7 @@ def reset_password_request():
         return redirect(url_for('main.index'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         token = user.generate_token()
         send_email(user.email, lazy_gettext('Instructions to reset your password'), 'auth/email/reset_password',
                    user=user, token=token)
@@ -140,7 +146,7 @@ def reset_password(token):
         return redirect(url_for('main.index'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         if user.confirm_reset(token, form.password.data):
             flash(lazy_gettext('You have reset your password to new.'))
             return redirect(request.args.get('next') or url_for('auth.login'))
