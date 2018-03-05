@@ -285,7 +285,8 @@ class TopicGroup(db.Model):
     created_at = db.Column(db.DateTime, index=True, default=func.now())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     group_id = db.Column(db.Integer, db.ForeignKey('topic_groups.id'), index=True)
-    # TODO: Add deleted, updated_at fields
+    updated_at = db.Column(db.DateTime, default=func.now())
+    deleted = db.Column(db.Boolean, index=True, default=False)
     topics = db.relationship('Topic', backref='group', lazy='dynamic')
     topic_groups = db.relationship('TopicGroup', backref=db.backref('group', remote_side=id), lazy='dynamic')
 

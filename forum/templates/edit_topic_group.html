@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}4RUM - {{ _('Edit topic group') }}{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/folder-edit-icon.png') }}">
+    <div class="common-header">
+        <h2>{% if topic_group.is_root_topic_group() %}
+            {{ _('Edit home page') }}
+            {% else %}
+            {{ _('Edit topic group') }} "{{ topic_group.title }}"
+            {% endif %}
+        </h2>
+    </div>
+</div>
+<div>
+    {{ wtf.quick_form(form, button_map={'submit':'success', 'cancel':'warning', 'delete':'danger'}, novalidate=True) }}
+</div>
+{% endblock %}
