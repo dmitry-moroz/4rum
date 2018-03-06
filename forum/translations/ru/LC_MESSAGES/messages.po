@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-03-05 19:56+0300\n"
-"PO-Revision-Date: 2018-03-05 20:06+0300\n"
+"POT-Creation-Date: 2018-03-06 13:15+0300\n"
+"PO-Revision-Date: 2018-03-06 13:19+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -45,8 +45,8 @@ msgstr "Имя пользователя"
 #: forum/auth/forms.py:21 forum/main/forms.py:45
 msgid "Usernames must have only letters, numbers, dots or underscores"
 msgstr ""
-"Имена пользователей должны содержать только буквы, цифры, точки или "
-"символы подчеркивания"
+"Имена пользователей должны содержать только буквы, цифры, точки или символы "
+"подчеркивания"
 
 #: forum/auth/forms.py:24 forum/auth/forms.py:40 forum/auth/forms.py:81
 msgid "Passwords must match."
@@ -287,11 +287,11 @@ msgid "Your comment has been published."
 msgstr "Ваш комментарий опубликован."
 
 #: forum/main/views.py:93
-msgid "Topic has been created."
+msgid "The topic has been created."
 msgstr "Тема создана."
 
 #: forum/main/views.py:103 forum/main/views.py:148
-msgid "Topic has been saved. Fill data for a poll."
+msgid "The topic has been saved. Fill data for a poll."
 msgstr "Тема сохранена. Заполните данные для опроса."
 
 #: forum/main/views.py:109
@@ -311,7 +311,7 @@ msgid "The topic has been deleted."
 msgstr "Тема удалена."
 
 #: forum/main/views.py:202
-msgid "Topic group has been created."
+msgid "The topic group has been created."
 msgstr "Группа для тем создана."
 
 #: forum/main/views.py:206
@@ -319,7 +319,7 @@ msgid "Topic group creation was cancelled."
 msgstr "Создание группы для тем было отменено."
 
 #: forum/main/views.py:237
-msgid "Topic group has been updated."
+msgid "The topic group has been updated."
 msgstr "Группа для тем обновлена."
 
 #: forum/main/views.py:241
@@ -327,57 +327,58 @@ msgid "Topic group editing was cancelled."
 msgstr "Редактирование группы для тем было отменено."
 
 #: forum/main/views.py:246
-msgid "Topic group is not deleted. Only empty topic group can be deleted."
+msgid "The topic group is not deleted. Only empty topic group can be deleted."
 msgstr ""
 "Группа для тем не удалена. Только пустая группа для тем может быть удалена."
 
-#: forum/main/views.py:301
+#: forum/main/views.py:252
+msgid "The topic group has been deleted."
+msgstr "Группа для тем удалена."
+
+#: forum/main/views.py:302
 msgid "Your profile has been updated."
 msgstr "Ваш профиль обновлен."
 
-#: forum/main/views.py:332
+#: forum/main/views.py:333
 msgid "The profile has been updated."
 msgstr "Профиль обновлен."
 
-#: forum/main/views.py:386
+#: forum/main/views.py:387
 msgid "The comment has been updated."
 msgstr "Комментарий обновлен."
 
-#: forum/main/views.py:390
+#: forum/main/views.py:391
 msgid "Comment editing was cancelled."
 msgstr "Редактирование комментария было отменено."
 
-#: forum/main/views.py:397
+#: forum/main/views.py:398
 msgid "The comment has been deleted."
 msgstr "Комментарий удален."
 
-#: forum/main/views.py:412
+#: forum/main/views.py:413
 msgid "You have already voted for this poll."
 msgstr "Вы уже голосовали в этом опросе."
 
-#: forum/main/views.py:415
+#: forum/main/views.py:416
 msgid "Your vote has been taken."
 msgstr "Ваш голос принят."
 
-#: forum/main/views.py:480 forum/main/views.py:517
+#: forum/main/views.py:481 forum/main/views.py:518
 msgid "Your message has been sent."
 msgstr "Ваше сообщение отправлено."
 
-#: forum/main/views.py:488
+#: forum/main/views.py:489
 msgid "The message has been deleted."
 msgstr "Сообщение удалено."
 
-#: forum/main/views.py:521
+#: forum/main/views.py:522
 msgid "The message was cancelled."
 msgstr "Сообщение было отменено."
 
-#: forum/templates/_buttons_topic.html:5 forum/templates/_comments.html:47
+#: forum/templates/_buttons_topic.html:5 forum/templates/_buttons_topic.html:9
+#: forum/templates/_comments.html:47 forum/templates/_comments.html:51
 msgid "Edit"
 msgstr "Редактировать"
-
-#: forum/templates/_buttons_topic.html:9 forum/templates/_comments.html:51
-msgid "Edit [Moderator]"
-msgstr "Редактировать [Модератор]"
 
 #: forum/templates/_buttons_topic.html:15
 #: forum/templates/_buttons_topic_group.html:25
@@ -385,20 +386,19 @@ msgid "Up"
 msgstr "Вверх"
 
 #: forum/templates/_buttons_topic_group.html:6
-msgid "Create topic group [Moderator]"
-msgstr "Создать группу для тем [Модератор]"
+msgid "Create topic group"
+msgstr "Создать группу для тем"
 
 #: forum/templates/_buttons_topic_group.html:9
-msgid "Edit topic group [Moderator]"
-msgstr "Редактировать группу для тем [Модератор]"
+#: forum/templates/edit_topic_group.html:4
+#: forum/templates/edit_topic_group.html:13
+msgid "Edit topic group"
+msgstr "Редактировать группу для тем"
 
 #: forum/templates/_buttons_topic_group.html:14
+#: forum/templates/_buttons_topic_group.html:18
 msgid "Create topic"
 msgstr "Создать тему"
-
-#: forum/templates/_buttons_topic_group.html:18
-msgid "Create topic [Moderator]"
-msgstr "Создать тему [Модератор]"
 
 #: forum/templates/_comments.html:18 forum/templates/topic.html:26
 msgid "Created"
@@ -519,11 +519,6 @@ msgstr "Редактировать профиль"
 #: forum/templates/edit_topic.html:4 forum/templates/edit_topic.html:16
 msgid "Edit topic"
 msgstr "Редактировать тему"
-
-#: forum/templates/edit_topic_group.html:4
-#: forum/templates/edit_topic_group.html:13
-msgid "Edit topic group"
-msgstr "Редактировать группу для тем"
 
 #: forum/templates/edit_topic_group.html:11
 msgid "Edit home page"
@@ -666,8 +661,8 @@ msgid "Send message"
 msgstr "Отправить сообщение"
 
 #: forum/templates/user.html:52
-msgid "Edit profile [Admin]"
-msgstr "Редактировать профиль [Админ]"
+msgid "Edit full profile info"
+msgstr "Редактировать всю информацию о профиле"
 
 #: forum/templates/user.html:58
 msgid "Topics on the forum"

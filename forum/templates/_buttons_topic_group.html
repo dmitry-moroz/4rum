@@ -3,10 +3,10 @@
     <div class="right-buttons">
         {% if current_user.is_moderator() %}
         <a class="btn btn-success btn-sm" href="{{ url_for('main.create_topic_group', topic_group_id=topic_group.id) }}">
-            <span class="glyphicon glyphicon-plus-sign"></span> {{ _('Create topic group [Moderator]') }}
+            <span class="glyphicon glyphicon-exclamation-sign"></span> {{ _('Create topic group') }}
         </a>
         <a class="btn btn-warning btn-sm" href="{{ url_for('main.edit_topic_group', topic_group_id=topic_group.id) }}">
-            <span class="glyphicon glyphicon-edit"></span> {{ _('Edit topic group [Moderator]') }}
+            <span class="glyphicon glyphicon-exclamation-sign"></span> {{ _('Edit topic group') }}
         </a>
         {% endif %}
         {% if not topic_group.protected and current_user.can(Permission.WRITE) %}
@@ -15,7 +15,7 @@
         </a>
         {% elif current_user.is_moderator() %}
         <a class="btn btn-success btn-sm" href="{{ url_for('main.create_topic', topic_group_id=topic_group.id) }}">
-            <span class="glyphicon glyphicon-plus-sign"></span> {{ _('Create topic [Moderator]') }}
+            <span class="glyphicon glyphicon-exclamation-sign"></span> {{ _('Create topic') }}
         </a>
         {% endif %}
     </div>
