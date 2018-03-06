@@ -24,7 +24,7 @@ $ python manage.py db upgrade
 $ python manage.py insert_initial_data
 $ python manage.py insert_fake_data
 # Compile translations
-$ pybabel compile -d translations
+$ pybabel compile -d forum/translations
 # Run server
 $ python manage.py runserver -h 0.0.0.0 -p 8000
 ```
