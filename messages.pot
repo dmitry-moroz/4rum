@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-03-06 12:30+0300\n"
+"POT-Creation-Date: 2018-03-06 13:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -281,11 +281,11 @@ msgid "Your comment has been published."
 msgstr ""
 
 #: forum/main/views.py:93
-msgid "Topic has been created."
+msgid "The topic has been created."
 msgstr ""
 
 #: forum/main/views.py:103 forum/main/views.py:148
-msgid "Topic has been saved. Fill data for a poll."
+msgid "The topic has been saved. Fill data for a poll."
 msgstr ""
 
 #: forum/main/views.py:109
@@ -305,7 +305,7 @@ msgid "The topic has been deleted."
 msgstr ""
 
 #: forum/main/views.py:202
-msgid "Topic group has been created."
+msgid "The topic group has been created."
 msgstr ""
 
 #: forum/main/views.py:206
@@ -313,7 +313,7 @@ msgid "Topic group creation was cancelled."
 msgstr ""
 
 #: forum/main/views.py:237
-msgid "Topic group has been updated."
+msgid "The topic group has been updated."
 msgstr ""
 
 #: forum/main/views.py:241
@@ -321,55 +321,56 @@ msgid "Topic group editing was cancelled."
 msgstr ""
 
 #: forum/main/views.py:246
-msgid "Topic group is not deleted. Only empty topic group can be deleted."
+msgid "The topic group is not deleted. Only empty topic group can be deleted."
 msgstr ""
 
-#: forum/main/views.py:301
+#: forum/main/views.py:252
+msgid "The topic group has been deleted."
+msgstr ""
+
+#: forum/main/views.py:302
 msgid "Your profile has been updated."
 msgstr ""
 
-#: forum/main/views.py:332
+#: forum/main/views.py:333
 msgid "The profile has been updated."
 msgstr ""
 
-#: forum/main/views.py:386
+#: forum/main/views.py:387
 msgid "The comment has been updated."
 msgstr ""
 
-#: forum/main/views.py:390
+#: forum/main/views.py:391
 msgid "Comment editing was cancelled."
 msgstr ""
 
-#: forum/main/views.py:397
+#: forum/main/views.py:398
 msgid "The comment has been deleted."
 msgstr ""
 
-#: forum/main/views.py:412
+#: forum/main/views.py:413
 msgid "You have already voted for this poll."
 msgstr ""
 
-#: forum/main/views.py:415
+#: forum/main/views.py:416
 msgid "Your vote has been taken."
 msgstr ""
 
-#: forum/main/views.py:480 forum/main/views.py:517
+#: forum/main/views.py:481 forum/main/views.py:518
 msgid "Your message has been sent."
 msgstr ""
 
-#: forum/main/views.py:488
+#: forum/main/views.py:489
 msgid "The message has been deleted."
 msgstr ""
 
-#: forum/main/views.py:521
+#: forum/main/views.py:522
 msgid "The message was cancelled."
 msgstr ""
 
-#: forum/templates/_buttons_topic.html:5 forum/templates/_comments.html:47
+#: forum/templates/_buttons_topic.html:5 forum/templates/_buttons_topic.html:9
+#: forum/templates/_comments.html:47 forum/templates/_comments.html:51
 msgid "Edit"
-msgstr ""
-
-#: forum/templates/_buttons_topic.html:9 forum/templates/_comments.html:51
-msgid "Edit [Moderator]"
 msgstr ""
 
 #: forum/templates/_buttons_topic.html:15
@@ -378,19 +379,18 @@ msgid "Up"
 msgstr ""
 
 #: forum/templates/_buttons_topic_group.html:6
-msgid "Create topic group [Moderator]"
+msgid "Create topic group"
 msgstr ""
 
 #: forum/templates/_buttons_topic_group.html:9
-msgid "Edit topic group [Moderator]"
+#: forum/templates/edit_topic_group.html:4
+#: forum/templates/edit_topic_group.html:13
+msgid "Edit topic group"
 msgstr ""
 
 #: forum/templates/_buttons_topic_group.html:14
-msgid "Create topic"
-msgstr ""
-
 #: forum/templates/_buttons_topic_group.html:18
-msgid "Create topic [Moderator]"
+msgid "Create topic"
 msgstr ""
 
 #: forum/templates/_comments.html:18 forum/templates/topic.html:26
@@ -512,11 +512,6 @@ msgstr ""
 
 #: forum/templates/edit_topic.html:4 forum/templates/edit_topic.html:16
 msgid "Edit topic"
-msgstr ""
-
-#: forum/templates/edit_topic_group.html:4
-#: forum/templates/edit_topic_group.html:13
-msgid "Edit topic group"
 msgstr ""
 
 #: forum/templates/edit_topic_group.html:11
@@ -660,7 +655,7 @@ msgid "Send message"
 msgstr ""
 
 #: forum/templates/user.html:52
-msgid "Edit profile [Admin]"
+msgid "Edit full profile info"
 msgstr ""
 
 #: forum/templates/user.html:58

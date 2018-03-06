@@ -90,7 +90,7 @@ def create_topic(topic_group_id):
         if with_poll:
             poll_answers = form.poll_answers.data.strip().splitlines()
             new_topic.update_poll_answers(poll_answers)
-        flash(lazy_gettext('Topic has been created.'))
+        flash(lazy_gettext('The topic has been created.'))
         return redirect(url_for('main.topic', topic_id=new_topic.id))
 
     elif not with_poll and form.add_poll.data:
@@ -100,7 +100,7 @@ def create_topic(topic_group_id):
                                   author=current_user._get_current_object())
                 db.session.add(new_topic)
                 db.session.commit()
-                flash(lazy_gettext('Topic has been saved. Fill data for a poll.'))
+                flash(lazy_gettext('The topic has been saved. Fill data for a poll.'))
                 return redirect(url_for('main.edit_topic', topic_id=new_topic.id, poll=1))
         else:
             return redirect(url_for('main.create_topic', topic_group_id=topic_group_id, poll=1))
@@ -145,7 +145,7 @@ def edit_topic(topic_id):
         tpc.body = form.body.data
         tpc.updated_at = datetime.utcnow()
         db.session.add(tpc)
-        flash(lazy_gettext('Topic has been saved. Fill data for a poll.'))
+        flash(lazy_gettext('The topic has been saved. Fill data for a poll.'))
         return redirect(url_for('main.edit_topic', topic_id=tpc.id, poll=1))
 
     elif form.cancel.data:
@@ -199,7 +199,7 @@ def create_topic_group(topic_group_id):
                                  author=current_user._get_current_object(), group=t_group)
         db.session.add(new_t_group)
         db.session.commit()
-        flash(lazy_gettext('Topic group has been created.'))
+        flash(lazy_gettext('The topic group has been created.'))
         return redirect(url_for('main.topic_group', topic_group_id=new_t_group.id))
 
     elif form.cancel.data:
@@ -234,7 +234,7 @@ def edit_topic_group(topic_group_id):
         t_group.protected = form.protected.data
         t_group.updated_at = datetime.utcnow()
         db.session.add(t_group)
-        flash(lazy_gettext('Topic group has been updated.'))
+        flash(lazy_gettext('The topic group has been updated.'))
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
 
     elif form.cancel.data:
@@ -242,13 +242,14 @@ def edit_topic_group(topic_group_id):
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
 
     elif form.delete and form.delete.data:
-        if t_group.topics.first() or t_group.topic_groups.first():
-            flash(lazy_gettext('Topic group is not deleted. Only empty topic group can be deleted.'))
+        if t_group.topics.filter_by(deleted=False).first() or t_group.topic_groups.filter_by(deleted=False).first():
+            flash(lazy_gettext('The topic group is not deleted. Only empty topic group can be deleted.'))
             return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
         else:
             t_group.deleted = True
             t_group.updated_at = datetime.utcnow()
             db.session.add(t_group)
+            flash(lazy_gettext('The topic group has been deleted.'))
             return redirect(url_for('main.topic_group', topic_group_id=t_group.group_id))
 
     if not form.is_submitted():
