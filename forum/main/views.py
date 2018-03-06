@@ -553,7 +553,4 @@ def set_locale():
 
 @babel.localeselector
 def get_locale():
-    locale = session.get('locale', None)
-    if locale:
-        return locale
-    return request.accept_languages.best_match(current_app.config['SUPPORTED_LANGUAGES'].keys())
+    return session.get('locale', current_app.config['BABEL_DEFAULT_LOCALE'])
