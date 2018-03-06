@@ -6,7 +6,6 @@ from flask_script import Manager, Shell
 
 from forum.app import create_app, db
 from forum.models import User, Role, Permission, Topic, TopicGroup, Comment, PollVote, PollAnswer, Message
-from utils import data_generator
 
 app = create_app()
 manager = Manager(app)
@@ -48,6 +47,7 @@ def insert_initial_data():
 @manager.command
 def insert_fake_data():
     """Adds fake data to database."""
+    from utils import data_generator
     data_generator.generate_fake_users()
     data_generator.generate_fake_topic_groups()
     data_generator.generate_fake_topics()
