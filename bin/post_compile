@@ -1,1 +1,2 @@
+# Post-compile hook for Heroku to compile translations
 pybabel compile -d forum/translations
