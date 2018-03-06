@@ -14,6 +14,12 @@ revision = 'b8b351be2ba0'
 down_revision = 'b73e67b82c56'
 branch_labels = None
 depends_on = None
+set_updated_at_comments = """
+UPDATE comments SET updated_at = created_at
+"""
+set_updated_at_topics = """
+UPDATE topics SET updated_at = created_at
+"""
 
 
 def upgrade():
@@ -21,6 +27,8 @@ def upgrade():
     op.add_column('comments', sa.Column('updated_at', sa.DateTime(), nullable=True))
     op.add_column('topics', sa.Column('updated_at', sa.DateTime(), nullable=True))
     # ### end Alembic commands ###
+    op.execute(set_updated_at_comments)
+    op.execute(set_updated_at_topics)
 
 
 def downgrade():

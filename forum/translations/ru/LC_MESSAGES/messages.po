@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-03-02 18:24+0300\n"
-"PO-Revision-Date: 2018-03-02 18:27+0300\n"
+"POT-Creation-Date: 2018-03-06 12:30+0300\n"
+"PO-Revision-Date: 2018-03-06 12:33+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -20,12 +20,12 @@ msgstr ""
 "Generated-By: Babel 2.5.1\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: forum/auth/forms.py:12 forum/auth/forms.py:22 forum/auth/forms.py:75
-#: forum/auth/forms.py:85 forum/main/forms.py:43 forum/templates/user.html:23
+#: forum/auth/forms.py:12 forum/auth/forms.py:19 forum/auth/forms.py:70
+#: forum/auth/forms.py:79 forum/main/forms.py:43 forum/templates/user.html:23
 msgid "Email"
 msgstr "Email"
 
-#: forum/auth/forms.py:13 forum/auth/forms.py:26 forum/auth/forms.py:59
+#: forum/auth/forms.py:13 forum/auth/forms.py:23 forum/auth/forms.py:55
 msgid "Password"
 msgstr "Пароль"
 
@@ -38,85 +38,85 @@ msgstr "Запомнить меня"
 msgid "Log in"
 msgstr "Войти"
 
-#: forum/auth/forms.py:23 forum/main/forms.py:44
+#: forum/auth/forms.py:20 forum/main/forms.py:44
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: forum/auth/forms.py:24 forum/main/forms.py:45
+#: forum/auth/forms.py:21 forum/main/forms.py:45
 msgid "Usernames must have only letters, numbers, dots or underscores"
 msgstr ""
 "Имена пользователей должны содержать только буквы, цифры, точки или "
 "символы подчеркивания"
 
-#: forum/auth/forms.py:27 forum/auth/forms.py:44 forum/auth/forms.py:87
+#: forum/auth/forms.py:24 forum/auth/forms.py:40 forum/auth/forms.py:81
 msgid "Passwords must match."
 msgstr "Пароли должны совпадать."
 
-#: forum/auth/forms.py:28 forum/auth/forms.py:88
+#: forum/auth/forms.py:25 forum/auth/forms.py:82
 msgid "Confirm password"
 msgstr "Подтвердите пароль"
 
-#: forum/auth/forms.py:29 forum/templates/auth/register.html:4
+#: forum/auth/forms.py:26 forum/templates/auth/register.html:4
 #: forum/templates/auth/register.html:10
 msgid "Register"
 msgstr "Зарегистрироваться"
 
-#: forum/auth/forms.py:33 forum/auth/forms.py:66 forum/main/forms.py:62
+#: forum/auth/forms.py:30 forum/auth/forms.py:62 forum/main/forms.py:63
 msgid "Email already registered."
 msgstr "Email уже зарегистрирован."
 
-#: forum/auth/forms.py:38 forum/main/forms.py:67
+#: forum/auth/forms.py:34 forum/main/forms.py:68
 msgid "Username already in use."
 msgstr "Имя пользователя уже используется."
 
-#: forum/auth/forms.py:42
+#: forum/auth/forms.py:38
 msgid "Old password"
 msgstr "Старый пароль"
 
-#: forum/auth/forms.py:43 forum/auth/forms.py:86
+#: forum/auth/forms.py:39 forum/auth/forms.py:80
 msgid "New password"
 msgstr "Новый пароль"
 
-#: forum/auth/forms.py:45
+#: forum/auth/forms.py:41
 msgid "Confirm new password"
 msgstr "Подтвердите новый пароль"
 
-#: forum/auth/forms.py:46 forum/templates/auth/change_password.html:4
+#: forum/auth/forms.py:42 forum/templates/auth/change_password.html:4
 #: forum/templates/auth/change_password.html:10 forum/templates/base.html:50
 msgid "Change password"
 msgstr "Изменить пароль"
 
-#: forum/auth/forms.py:50
+#: forum/auth/forms.py:46
 msgid "Invalid old password."
 msgstr "Неверный старый пароль."
 
-#: forum/auth/forms.py:54
+#: forum/auth/forms.py:50
 msgid "New password is the same as old password."
 msgstr "Новый пароль совпадает со старым паролем."
 
-#: forum/auth/forms.py:58
+#: forum/auth/forms.py:54
 msgid "New email"
 msgstr "Новый email"
 
-#: forum/auth/forms.py:60 forum/templates/base.html:51
+#: forum/auth/forms.py:56 forum/templates/base.html:51
 msgid "Change email"
 msgstr "Изменить email"
 
-#: forum/auth/forms.py:64
+#: forum/auth/forms.py:60
 msgid "This is your current email."
 msgstr "Это Ваш текущий email."
 
-#: forum/auth/forms.py:71
+#: forum/auth/forms.py:66
 msgid "Invalid password."
 msgstr "Неверный пароль."
 
-#: forum/auth/forms.py:76 forum/auth/forms.py:89
+#: forum/auth/forms.py:71 forum/auth/forms.py:83
 #: forum/templates/auth/reset_password.html:4
 #: forum/templates/auth/reset_password.html:10
 msgid "Reset password"
 msgstr "Сбросить пароль"
 
-#: forum/auth/forms.py:80 forum/auth/forms.py:93
+#: forum/auth/forms.py:75 forum/auth/forms.py:87
 msgid "Unknown email address."
 msgstr "Неизвестный email адрес."
 
@@ -128,55 +128,55 @@ msgstr "Неверное имя пользователя или пароль."
 msgid "You have been logged out."
 msgstr "Вы вышли из системы."
 
-#: forum/auth/views.py:57 forum/auth/views.py:81
+#: forum/auth/views.py:62 forum/auth/views.py:86
 #: forum/templates/auth/unconfirmed.html:3
 msgid "Confirm your account"
 msgstr "Подтвердите Ваш аккаунт"
 
-#: forum/auth/views.py:58
+#: forum/auth/views.py:63
 msgid "A confirmation email has been sent to you by email."
 msgstr "Письмо с подтверждением отправлено Вам по электронной почте."
 
-#: forum/auth/views.py:69
+#: forum/auth/views.py:74
 msgid "You have confirmed your account. Thanks!"
 msgstr "Вы подтвердили аккаунт. Спасибо!"
 
-#: forum/auth/views.py:71 forum/auth/views.py:118 forum/auth/views.py:148
+#: forum/auth/views.py:76 forum/auth/views.py:124 forum/auth/views.py:154
 msgid "The confirmation link is invalid or has expired."
 msgstr "Ссылка для подтверждения неверная или истекла."
 
-#: forum/auth/views.py:83
+#: forum/auth/views.py:88
 msgid "A new confirmation email has been sent to you by email."
 msgstr "Новое письмо с подтверждением отправлено Вам по электронной почте."
 
-#: forum/auth/views.py:94
+#: forum/auth/views.py:99
 msgid "Your password has been updated."
 msgstr "Ваш пароль был обновлен."
 
-#: forum/auth/views.py:105
+#: forum/auth/views.py:111
 msgid "Confirm your new email"
 msgstr "Подтвердите Ваш новый email"
 
-#: forum/auth/views.py:107
+#: forum/auth/views.py:113
 msgid "A confirmation email has been sent to your new email."
 msgstr "Письмо с подтверждением отправлено на Ваш новый email."
 
-#: forum/auth/views.py:116
+#: forum/auth/views.py:122
 msgid "You have confirmed your new email. Thanks!"
 msgstr "Вы подтвердили новый email. Спасибо!"
 
-#: forum/auth/views.py:130
+#: forum/auth/views.py:136
 msgid "Instructions to reset your password"
 msgstr "Инструкции по сбросу пароля"
 
-#: forum/auth/views.py:132
+#: forum/auth/views.py:138
 msgid ""
 "An email with instructions to reset password has been sent to you by email."
 msgstr ""
 "Электронное письмо с инструкциями по сбросу пароля отправлено Вам по "
 "электронной почте."
 
-#: forum/auth/views.py:145
+#: forum/auth/views.py:151
 msgid "You have reset your password to new."
 msgstr "Вы сбросили пароль на новый."
 
@@ -196,9 +196,9 @@ msgstr "О себе"
 msgid "Link to avatar"
 msgstr "Ссылка на аватар"
 
-#: forum/main/forms.py:39 forum/main/forms.py:53 forum/main/forms.py:73
-#: forum/main/forms.py:82 forum/main/forms.py:97 forum/main/forms.py:107
-#: forum/main/forms.py:120 forum/main/forms.py:131 forum/main/forms.py:140
+#: forum/main/forms.py:39 forum/main/forms.py:53 forum/main/forms.py:75
+#: forum/main/forms.py:95 forum/main/forms.py:113 forum/main/forms.py:133
+#: forum/main/forms.py:142
 msgid "Submit"
 msgstr "Отправить"
 
@@ -210,74 +210,75 @@ msgstr "Подтвержденный"
 msgid "Role"
 msgstr "Роль"
 
-#: forum/main/forms.py:71 forum/main/forms.py:79 forum/main/forms.py:93
-#: forum/main/forms.py:102 forum/main/forms.py:117
+#: forum/main/forms.py:72 forum/main/forms.py:90 forum/main/forms.py:109
 msgid "Title"
 msgstr "Заголовок"
 
-#: forum/main/forms.py:72 forum/main/forms.py:81 forum/main/forms.py:94
-#: forum/main/forms.py:104 forum/main/forms.py:139 forum/main/forms.py:147
-#: forum/main/forms.py:155
-msgid "Text"
-msgstr "Текст"
-
-#: forum/main/forms.py:74 forum/main/forms.py:83
-msgid "Add poll"
-msgstr "Добавить голосование"
-
-#: forum/main/forms.py:75 forum/main/forms.py:84 forum/main/forms.py:98
-#: forum/main/forms.py:108 forum/main/forms.py:121 forum/main/forms.py:141
-#: forum/main/forms.py:157
-msgid "Cancel"
-msgstr "Отменить"
-
-#: forum/main/forms.py:80 forum/main/forms.py:103
+#: forum/main/forms.py:73 forum/main/forms.py:91
 msgid "Topic group ID"
 msgstr "ID группы для тем"
 
-#: forum/main/forms.py:85 forum/main/forms.py:109 forum/main/forms.py:142
-#: forum/main/forms.py:150
+#: forum/main/forms.py:74 forum/main/forms.py:92 forum/main/forms.py:141
+#: forum/main/forms.py:149 forum/main/forms.py:157
+msgid "Text"
+msgstr "Текст"
+
+#: forum/main/forms.py:76
+msgid "Add poll"
+msgstr "Добавить голосование"
+
+#: forum/main/forms.py:77 forum/main/forms.py:96 forum/main/forms.py:114
+#: forum/main/forms.py:143 forum/main/forms.py:159
+msgid "Cancel"
+msgstr "Отменить"
+
+#: forum/main/forms.py:78 forum/main/forms.py:97 forum/main/forms.py:115
+#: forum/main/forms.py:144 forum/main/forms.py:152
 msgid "Delete"
 msgstr "Удалить"
 
-#: forum/main/forms.py:89 forum/main/forms.py:113
+#: forum/main/forms.py:86 forum/main/forms.py:105 forum/main/forms.py:127
 msgid "Topic group with such ID is not exist."
 msgstr "Группа для тем с таким ID не существует."
 
-#: forum/main/forms.py:95 forum/main/forms.py:105
+#: forum/main/forms.py:93
 msgid "Poll question"
 msgstr "Вопрос для голосования"
 
-#: forum/main/forms.py:96 forum/main/forms.py:106
+#: forum/main/forms.py:94
 msgid "Poll answers"
 msgstr "Варианты ответов для голосования"
 
-#: forum/main/forms.py:118
+#: forum/main/forms.py:110
+msgid "Parent topic group ID"
+msgstr "ID родительской группы для тем"
+
+#: forum/main/forms.py:111
 msgid "Priority"
 msgstr "Приоритет"
 
-#: forum/main/forms.py:119
+#: forum/main/forms.py:112
 msgid "Moderators only"
 msgstr "Только для модераторов"
 
-#: forum/main/forms.py:129
+#: forum/main/forms.py:131
 msgid "Leave your comment, {username}:"
 msgstr "Оставьте свой комментарий, {username}:"
 
-#: forum/main/forms.py:146 forum/main/forms.py:154
+#: forum/main/forms.py:148 forum/main/forms.py:156
 #: forum/templates/message.html:47 forum/templates/messages.html:29
 msgid "Subject"
 msgstr "Тема"
 
-#: forum/main/forms.py:148 forum/main/forms.py:156
+#: forum/main/forms.py:150 forum/main/forms.py:158
 msgid "Send"
 msgstr "Отправить"
 
-#: forum/main/forms.py:149
+#: forum/main/forms.py:151
 msgid "Close"
 msgstr "Закрыть"
 
-#: forum/main/forms.py:162
+#: forum/main/forms.py:164
 msgid "Search"
 msgstr "Поиск"
 
@@ -285,75 +286,88 @@ msgstr "Поиск"
 msgid "Your comment has been published."
 msgstr "Ваш комментарий опубликован."
 
-#: forum/main/views.py:92
+#: forum/main/views.py:93
 msgid "Topic has been created."
 msgstr "Тема создана."
 
-#: forum/main/views.py:102 forum/main/views.py:146
+#: forum/main/views.py:103 forum/main/views.py:148
 msgid "Topic has been saved. Fill data for a poll."
 msgstr "Тема сохранена. Заполните данные для опроса."
 
-#: forum/main/views.py:108
+#: forum/main/views.py:109
 msgid "Topic creation was cancelled."
 msgstr "Создание темы было отменено."
 
-#: forum/main/views.py:136
+#: forum/main/views.py:138
 msgid "The topic has been updated."
 msgstr "Тема обновлена."
 
-#: forum/main/views.py:150
+#: forum/main/views.py:152
 msgid "Topic editing was cancelled."
 msgstr "Редактирование темы было отменено."
 
-#: forum/main/views.py:160
+#: forum/main/views.py:162
 msgid "The topic has been deleted."
 msgstr "Тема удалена."
 
-#: forum/main/views.py:197
+#: forum/main/views.py:202
 msgid "Topic group has been created."
 msgstr "Группа для тем создана."
 
-#: forum/main/views.py:201
+#: forum/main/views.py:206
 msgid "Topic group creation was cancelled."
 msgstr "Создание группы для тем было отменено."
 
+#: forum/main/views.py:237
+msgid "Topic group has been updated."
+msgstr "Группа для тем обновлена."
+
 #: forum/main/views.py:241
+msgid "Topic group editing was cancelled."
+msgstr "Редактирование группы для тем было отменено."
+
+#: forum/main/views.py:246
+msgid "Topic group is not deleted. Only empty topic group can be deleted."
+msgstr ""
+"Группа для тем не удалена. Только пустая группа для тем может быть удалена."
+
+#: forum/main/views.py:301
 msgid "Your profile has been updated."
 msgstr "Ваш профиль обновлен."
 
-#: forum/main/views.py:269
+#: forum/main/views.py:332
 msgid "The profile has been updated."
 msgstr "Профиль обновлен."
 
-#: forum/main/views.py:322
+#: forum/main/views.py:386
 msgid "The comment has been updated."
 msgstr "Комментарий обновлен."
 
-#: forum/main/views.py:326
+#: forum/main/views.py:390
 msgid "Comment editing was cancelled."
 msgstr "Редактирование комментария было отменено."
 
-#: forum/main/views.py:333
+#: forum/main/views.py:397
 msgid "The comment has been deleted."
 msgstr "Комментарий удален."
 
-#: forum/main/views.py:347
+#: forum/main/views.py:412
 msgid "You have already voted for this poll."
 msgstr "Вы уже голосовали в этом опросе."
 
-#: forum/main/views.py:350
+#: forum/main/views.py:415
 msgid "Your vote has been taken."
 msgstr "Ваш голос принят."
 
-#: forum/main/views.py:415 forum/main/views.py:452
+#: forum/main/views.py:480 forum/main/views.py:517
 msgid "Your message has been sent."
 msgstr "Ваше сообщение отправлено."
 
-#: forum/main/views.py:423
+#: forum/main/views.py:488
 msgid "The message has been deleted."
 msgstr "Сообщение удалено."
 
-#: forum/main/views.py:456
+#: forum/main/views.py:521
 msgid "The message was cancelled."
 msgstr "Сообщение было отменено."
 
@@ -366,7 +380,7 @@ msgid "Edit [Moderator]"
 msgstr "Редактировать [Модератор]"
 
 #: forum/templates/_buttons_topic.html:15
-#: forum/templates/_buttons_topic_group.html:22
+#: forum/templates/_buttons_topic_group.html:25
 msgid "Up"
 msgstr "Вверх"
 
@@ -374,11 +388,15 @@ msgstr "Вверх"
 msgid "Create topic group [Moderator]"
 msgstr "Создать группу для тем [Модератор]"
 
-#: forum/templates/_buttons_topic_group.html:11
+#: forum/templates/_buttons_topic_group.html:9
+msgid "Edit topic group [Moderator]"
+msgstr "Редактировать группу для тем [Модератор]"
+
+#: forum/templates/_buttons_topic_group.html:14
 msgid "Create topic"
 msgstr "Создать тему"
 
-#: forum/templates/_buttons_topic_group.html:15
+#: forum/templates/_buttons_topic_group.html:18
 msgid "Create topic [Moderator]"
 msgstr "Создать тему [Модератор]"
 
@@ -502,6 +520,15 @@ msgstr "Редактировать профиль"
 #: forum/templates/edit_topic.html:4 forum/templates/edit_topic.html:16
 msgid "Edit topic"
 msgstr "Редактировать тему"
+
+#: forum/templates/edit_topic_group.html:4
+#: forum/templates/edit_topic_group.html:13
+msgid "Edit topic group"
+msgstr "Редактировать группу для тем"
+
+#: forum/templates/edit_topic_group.html:11
+msgid "Edit home page"
+msgstr "Редактировать домашнюю страницу"
 
 #: forum/templates/hot.html:4
 msgid "The most hot topics"

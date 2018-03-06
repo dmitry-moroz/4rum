@@ -3,7 +3,7 @@ from flask_babel import lazy_gettext
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SelectField, SubmitField, IntegerField
 from wtforms import ValidationError
-from wtforms.validators import DataRequired, Length, Email, Regexp
+from wtforms.validators import DataRequired, InputRequired, Length, Email, Regexp
 
 from ..models import Role, User, TopicGroup
 
@@ -70,7 +70,7 @@ class EditProfileAdminForm(FlaskForm):
 
 class TopicForm(FlaskForm):
     title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
-    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[DataRequired()])
+    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[InputRequired()])
     body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
     submit = SubmitField(lazy_gettext('Submit'))
     add_poll = SubmitField(lazy_gettext('Add poll'))
@@ -88,7 +88,7 @@ class TopicForm(FlaskForm):
 
 class TopicWithPollForm(FlaskForm):
     title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
-    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[DataRequired()])
+    group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[InputRequired()])
     body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
     poll_question = StringField(lazy_gettext('Poll question'), validators=[DataRequired(), Length(0, 256)])
     poll_answers = TextAreaField(lazy_gettext('Poll answers'), validators=[DataRequired()], render_kw={'rows': 10})
@@ -107,14 +107,24 @@ class TopicWithPollForm(FlaskForm):
 
 class TopicGroupForm(FlaskForm):
     title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 64)])
+    group_id = IntegerField(lazy_gettext('Parent topic group ID'), validators=[InputRequired()])
     priority = SelectField(lazy_gettext('Priority'), coerce=int)
     protected = BooleanField(lazy_gettext('Moderators only'))
     submit = SubmitField(lazy_gettext('Submit'))
     cancel = SubmitField(lazy_gettext('Cancel'))
+    delete = SubmitField(lazy_gettext('Delete'))
 
     def __init__(self, *args, **kwargs):
         super(TopicGroupForm, self).__init__(*args, **kwargs)
         self.priority.choices = [(p, p) for p in current_app.config['TOPIC_GROUP_PRIORITY']]
+
+    def remove_edit_fields(self):
+        del self.group_id
+        del self.delete
+
+    def validate_group_id(self, field):
+        if not TopicGroup.query.filter_by(id=field.data).first():
+            raise ValidationError(lazy_gettext('Topic group with such ID is not exist.'))
 
 
 class CommentForm(FlaskForm):

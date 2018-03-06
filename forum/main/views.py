@@ -14,11 +14,11 @@ from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAns
 
 
 def get_topic_group(topic_group_id):
-    t_group = TopicGroup.query.get_or_404(topic_group_id)
+    t_group = TopicGroup.query.filter_by(id=topic_group_id, deleted=False).first_or_404()
     t_groups = TopicGroup.query.with_entities(
         TopicGroup, func.sum(case([(Topic.deleted == False, 1)], else_=0))).outerjoin(
         Topic, TopicGroup.id == Topic.group_id).filter(
-        TopicGroup.group_id == t_group.id).group_by(
+        and_(TopicGroup.deleted == False, TopicGroup.group_id == t_group.id)).group_by(
         TopicGroup.id).order_by(TopicGroup.priority, TopicGroup.created_at.desc()).all()
 
     page = request.args.get('page', 1, type=int)
@@ -112,7 +112,7 @@ def create_topic(topic_group_id):
     return render_template('create_topic.html', form=form, topic_group=t_group)
 
 
-@main.route('/edit/<int:topic_id>', methods=['GET', 'POST'])
+@main.route('/edit_topic/<int:topic_id>', methods=['GET', 'POST'])
 @login_required
 @permission_required(Permission.WRITE)
 def edit_topic(topic_id):
@@ -162,13 +162,14 @@ def edit_topic(topic_id):
         flash(lazy_gettext('The topic has been deleted.'))
         return redirect(url_for('main.topic_group', topic_group_id=tpc.group_id))
 
-    form.title.data = tpc.title
-    form.body.data = tpc.body
-    if form.group_id:
-        form.group_id.data = tpc.group_id
-    if tpc.poll:
-        form.poll_question.data = tpc.poll
-        form.poll_answers.data = '\n'.join([a.body for a in tpc.poll_answers.filter_by(deleted=False).all()])
+    if not form.is_submitted():
+        form.title.data = tpc.title
+        form.body.data = tpc.body
+        if form.group_id:
+            form.group_id.data = tpc.group_id
+        if tpc.poll:
+            form.poll_question.data = tpc.poll
+            form.poll_answers.data = '\n'.join([a.body for a in tpc.poll_answers.filter_by(deleted=False).all()])
 
     return render_template('edit_topic.html', form=form, topic=tpc)
 
@@ -189,6 +190,7 @@ def create_topic_group(topic_group_id):
     t_group = TopicGroup.query.get_or_404(topic_group_id)
 
     form = TopicGroupForm()
+    form.remove_edit_fields()
 
     if form.submit.data and form.validate_on_submit():
         if form.priority.data not in current_app.config['TOPIC_GROUP_PRIORITY']:
@@ -205,6 +207,60 @@ def create_topic_group(topic_group_id):
         return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
 
     return render_template('create_topic_group.html', form=form, topic_group=t_group)
+
+
+@main.route('/edit_topic_group/<int:topic_group_id>', methods=['GET', 'POST'])
+@login_required
+@permission_required(Permission.MODERATE)
+def edit_topic_group(topic_group_id):
+    t_group = TopicGroup.query.filter_by(id=topic_group_id, deleted=False).first_or_404()
+
+    form = TopicGroupForm()
+    if t_group.is_root_topic_group():
+        del form.title
+        del form.priority
+        del form.group_id
+        del form.delete
+
+    if form.submit.data and form.validate_on_submit():
+        if form.priority and form.priority.data not in current_app.config['TOPIC_GROUP_PRIORITY']:
+            abort(404)
+        if form.title:
+            t_group.title = form.title.data
+        if form.group_id:
+            t_group.group_id = form.group_id.data
+        if form.priority:
+            t_group.priority = form.priority.data
+        t_group.protected = form.protected.data
+        t_group.updated_at = datetime.utcnow()
+        db.session.add(t_group)
+        flash(lazy_gettext('Topic group has been updated.'))
+        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
+
+    elif form.cancel.data:
+        flash(lazy_gettext('Topic group editing was cancelled.'))
+        return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
+
+    elif form.delete and form.delete.data:
+        if t_group.topics.first() or t_group.topic_groups.first():
+            flash(lazy_gettext('Topic group is not deleted. Only empty topic group can be deleted.'))
+            return redirect(url_for('main.topic_group', topic_group_id=topic_group_id))
+        else:
+            t_group.deleted = True
+            t_group.updated_at = datetime.utcnow()
+            db.session.add(t_group)
+            return redirect(url_for('main.topic_group', topic_group_id=t_group.group_id))
+
+    if not form.is_submitted():
+        if form.title:
+            form.title.data = t_group.title
+        if form.group_id:
+            form.group_id.data = t_group.group_id
+        if form.priority:
+            form.priority.data = t_group.priority
+        form.protected.data = t_group.protected
+
+    return render_template('edit_topic_group.html', form=form, topic_group=t_group)
 
 
 @main.route('/user/<username>')
@@ -245,10 +301,11 @@ def edit_profile():
         flash(lazy_gettext('Your profile has been updated.'))
         return redirect(url_for('main.user', username=current_user.username))
 
-    form.name.data = current_user.name
-    form.homeland.data = current_user.homeland
-    form.about.data = current_user.about
-    form.avatar.data = current_user.avatar
+    if not form.is_submitted():
+        form.name.data = current_user.name
+        form.homeland.data = current_user.homeland
+        form.about.data = current_user.about
+        form.avatar.data = current_user.avatar
 
     return render_template('edit_profile.html', form=form)
 
@@ -275,14 +332,15 @@ def edit_profile_admin(user_id):
         flash(lazy_gettext('The profile has been updated.'))
         return redirect(url_for('main.user', username=user.username))
 
-    form.email.data = user.email
-    form.username.data = user.username
-    form.confirmed.data = user.confirmed
-    form.role.data = user.role_id
-    form.name.data = user.name
-    form.homeland.data = user.homeland
-    form.about.data = user.about
-    form.avatar.data = user.avatar
+    if not form.is_submitted():
+        form.email.data = user.email
+        form.username.data = user.username
+        form.confirmed.data = user.confirmed
+        form.role.data = user.role_id
+        form.name.data = user.name
+        form.homeland.data = user.homeland
+        form.about.data = user.about
+        form.avatar.data = user.avatar
 
     return render_template('edit_profile.html', form=form, user=user)
 
@@ -339,7 +397,8 @@ def edit_comment(comment_id):
         flash(lazy_gettext('The comment has been deleted.'))
         return redirect(request.args.get('next') or url_for('main.topic', topic_id=comment.topic_id))
 
-    form.body.data = comment.body
+    if not form.is_submitted():
+        form.body.data = comment.body
 
     return render_template('edit_comment.html', form=form, comment=comment)
 

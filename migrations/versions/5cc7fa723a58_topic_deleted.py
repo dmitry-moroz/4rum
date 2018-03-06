@@ -14,6 +14,9 @@ revision = '5cc7fa723a58'
 down_revision = '887cd3ffe259'
 branch_labels = None
 depends_on = None
+set_deleted = """
+UPDATE topics SET deleted = False
+"""
 
 
 def upgrade():
@@ -21,6 +24,7 @@ def upgrade():
     op.add_column('topics', sa.Column('deleted', sa.Boolean(), nullable=True))
     op.create_index(op.f('ix_topics_deleted'), 'topics', ['deleted'], unique=False)
     # ### end Alembic commands ###
+    op.execute(set_deleted)
 
 
 def downgrade():
