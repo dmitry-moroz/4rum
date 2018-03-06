@@ -19,10 +19,21 @@ class Config:
     DB_HOST = os.environ.get('DB_HOST', 'pg')
     DB_PORT = os.environ.get('DB_PORT', '5432')
     DB_NAME = os.environ.get('DB_NAME', 'forum')
-    PG_DATABASE_URI = 'postgresql://{user}:{password}@{hostname}:{port}/{db_name}'.format(
+    PG_DATABASE_URL = 'postgresql://{user}:{password}@{hostname}:{port}/{db_name}'.format(
         user=DB_USER, password=DB_PASSWORD, hostname=DB_HOST, port=DB_PORT, db_name=DB_NAME
     )
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', PG_DATABASE_URI)
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', PG_DATABASE_URL)
+
+    MQ_USER = os.environ.get('MQ_USER', 'guest')
+    MQ_PASSWORD = os.environ.get('MQ_PASSWORD', 'password')
+    MQ_HOST = os.environ.get('MQ_HOST', 'mq')
+    MQ_PORT = os.environ.get('MQ_PORT', '5672')
+    MQ_VHOST = os.environ.get('MQ_VHOST', 'forum')
+    AMQP_URL = 'amqp://{user}:{password}@{hostname}:{port}/{vhost}'.format(
+        user=MQ_USER, password=MQ_PASSWORD, hostname=MQ_HOST, port=MQ_PORT, vhost=MQ_VHOST
+    )
+    CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL',
+                                       os.environ.get('RABBITMQ_BIGWIG_URL', AMQP_URL))
 
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587

@@ -1,12 +1,12 @@
 from flask import render_template, redirect, request, url_for, flash
-from flask_babel import lazy_gettext
+from flask_babel import lazy_gettext, gettext
 from flask_login import login_user, logout_user, login_required, current_user
 
 from . import auth
 from .forms import (LoginForm, RegistrationForm, ChangePasswordForm, ChangeEmailForm, ResetPasswordRequestForm,
                     ResetPasswordForm)
 from ..app import db
-from ..email import send_email
+from ..celery_tasks import send_email
 from ..models import User
 
 
@@ -59,7 +59,12 @@ def register():
         db.session.add(user)
         db.session.commit()
         token = user.generate_token()
-        send_email(user.email, lazy_gettext('Confirm your account'), 'auth/email/confirm', user=user, token=token)
+        send_email.delay(
+            recipients=[user.email],
+            subject=gettext('Confirm your account'),
+            body=render_template('auth/email/confirm.txt', user=user, token=token),
+            html=render_template('auth/email/confirm.html', user=user, token=token)
+        )
         flash(lazy_gettext('A confirmation email has been sent to you by email.'))
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
@@ -83,8 +88,12 @@ def resend_confirmation():
     if current_user.confirmed:
         return redirect(url_for('main.index'))
     token = current_user.generate_token()
-    send_email(current_user.email, lazy_gettext('Confirm your account'), 'auth/email/confirm', user=current_user,
-               token=token)
+    send_email.delay(
+        recipients=[current_user.email],
+        subject=gettext('Confirm your account'),
+        body=render_template('auth/email/confirm.txt', user=current_user, token=token),
+        html=render_template('auth/email/confirm.html', user=current_user, token=token)
+    )
     flash(lazy_gettext('A new confirmation email has been sent to you by email.'))
     return redirect(url_for('main.index'))
 
@@ -108,8 +117,12 @@ def change_email():
     if form.validate_on_submit():
         new_email = form.new_email.data.lower()
         token = current_user.generate_token(new_email=new_email)
-        send_email(new_email, lazy_gettext('Confirm your new email'), 'auth/email/confirm_new_email',
-                   user=current_user, token=token)
+        send_email.delay(
+            recipients=[new_email],
+            subject=gettext('Confirm your new email'),
+            body=render_template('auth/email/confirm_new_email.txt', user=current_user, token=token),
+            html=render_template('auth/email/confirm_new_email.html', user=current_user, token=token)
+        )
         flash(lazy_gettext('A confirmation email has been sent to your new email.'))
         return redirect(request.args.get('next') or url_for('main.index'))
     return render_template('auth/change_email.html', form=form)
@@ -133,8 +146,12 @@ def reset_password_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         token = user.generate_token()
-        send_email(user.email, lazy_gettext('Instructions to reset your password'), 'auth/email/reset_password',
-                   user=user, token=token)
+        send_email.delay(
+            recipients=[user.email],
+            subject=gettext('Instructions to reset your password'),
+            body=render_template('auth/email/reset_password.txt', user=user, token=token),
+            html=render_template('auth/email/reset_password.html', user=user, token=token)
+        )
         flash(lazy_gettext('An email with instructions to reset password has been sent to you by email.'))
         return redirect(request.args.get('next') or url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)

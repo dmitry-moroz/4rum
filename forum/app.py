@@ -1,3 +1,4 @@
+from celery import Celery
 from flask import Flask
 from flask_babel import Babel
 from flask_babel import lazy_gettext
@@ -16,6 +17,7 @@ babel = Babel()
 login_manager = LoginManager()
 login_manager.localize_callback = lazy_gettext
 login_manager.login_view = 'auth.login'
+celery = Celery(__name__, broker=config.CELERY_BROKER_URL)
 
 
 def create_app():
@@ -28,6 +30,7 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     babel.init_app(app)
+    celery.conf.update(app.config)
 
     if app.config['SSL_REDIRECT']:
         from flask_sslify import SSLify
