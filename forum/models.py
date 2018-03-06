@@ -10,8 +10,8 @@ from markdown.extensions.tables import TableExtension
 from sqlalchemy import func, or_, and_
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from .config import config
 from .app import db, login_manager
+from .config import config
 
 
 class Permission:
@@ -113,13 +113,13 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def generate_token(self, expiration=3600, **kwargs):
-        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        s = Serializer(current_app.secret_key, expiration)
         data = {'user_id': self.id}
         data.update(kwargs)
         return s.dumps(data)
 
     def confirm_token(self, token):
-        s = Serializer(current_app.config['SECRET_KEY'])
+        s = Serializer(current_app.secret_key)
         try:
             data = s.loads(token)
         except:
