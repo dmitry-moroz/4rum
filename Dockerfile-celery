@@ -1,0 +1,11 @@
+FROM python:2
+
+MAINTAINER Dmitry Moroz "mds.freeman@gmail.com"
+
+ADD forum /app/src/forum
+ADD requirements /app/src/requirements
+WORKDIR /app/src/
+
+RUN pip install -r requirements/dev.txt
+
+CMD ["celery", "worker", "-A", "forum.celery_worker.celery"]

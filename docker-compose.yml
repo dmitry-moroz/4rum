@@ -21,3 +21,8 @@ services:
       - "8000:8000"
     env_file:
         - web.env
+  celery:
+    container_name: 4rum-celery
+    image: m0r0z/4rum-celery
+    env_file:
+        - web.env
