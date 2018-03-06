@@ -5,6 +5,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.contrib.fixers import ProxyFix
 
 from .config import config
 
@@ -28,7 +29,13 @@ def create_app():
     login_manager.init_app(app)
     babel.init_app(app)
 
-    if app.config['DEBUG']:
+    if app.config['SSL_REDIRECT']:
+        from flask_sslify import SSLify
+        SSLify(app)
+
+    app.wsgi_app = ProxyFix(app.wsgi_app)
+
+    if app.debug:
         from flask_debugtoolbar import DebugToolbarExtension
         debug_toolbar = DebugToolbarExtension()
         debug_toolbar.init_app(app)

@@ -9,7 +9,8 @@ class Config:
 
     DEBUG = bool(os.environ.get('DEBUG', ''))
     DEBUG_TB_INTERCEPT_REDIRECTS = False
-    TESTING = False
+    TESTING = bool(os.environ.get('TESTING', ''))
+    SSL_REDIRECT = bool(os.environ.get('SSL_REDIRECT', ''))
 
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -21,7 +22,7 @@ class Config:
     PG_DATABASE_URI = 'postgresql://{user}:{password}@{hostname}:{port}/{db_name}'.format(
         user=DB_USER, password=DB_PASSWORD, hostname=DB_HOST, port=DB_PORT, db_name=DB_NAME
     )
-    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI', PG_DATABASE_URI)
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', PG_DATABASE_URI)
 
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
