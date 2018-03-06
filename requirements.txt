@@ -1,1 +1,3 @@
--r requirements/prod.txt
+# This requirements file is used by Heroku
+# requirements for other configurations are located in the requirements subdirectory.
+-r requirements/dev.txt
