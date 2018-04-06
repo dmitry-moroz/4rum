@@ -3,6 +3,17 @@
 
 {% block title %}4RUM - {{ topic.title }}{% endblock %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='simplemde.min.css') }}">
+<script src="{{ url_for('static', filename='simplemde.min.js') }}"></script>
+<style>
+.CodeMirror, .CodeMirror-scroll {
+	min-height: 120px;
+}
+</style>
+{% endblock %}
+
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='img/speech-icon.png') }}">
@@ -101,4 +112,15 @@
 {% include '_comments.html' %}
 {{ macros.pagination_widget(pagination, 'main.topic', topic_id=topic.id, fragment='#comments') }}
 
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("body"),
+        spellChecker: false,
+        status: false
+    });
+</script>
 {% endblock %}
