@@ -53,6 +53,7 @@ class Config:
     USERS_PER_PAGE = 20
     ROOT_TOPIC_GROUP = 0
     IS_PROTECTED_ROOT_TOPIC_GROUP = True
+    TOPIC_GROUPS_ONLY_ON_1ST_PAGE = True
 
     ALLOWED_TAGS = [
         'a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code', 'em', 'i', 'img', 'li', 'ol', 'pre', 'strong', 'ul',

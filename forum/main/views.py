@@ -14,14 +14,18 @@ from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAns
 
 
 def get_topic_group(topic_group_id):
-    t_group = TopicGroup.query.filter_by(id=topic_group_id, deleted=False).first_or_404()
-    t_groups = TopicGroup.query.with_entities(
-        TopicGroup, func.sum(case([(Topic.deleted == False, 1)], else_=0))).outerjoin(
-        Topic, TopicGroup.id == Topic.group_id).filter(
-        and_(TopicGroup.deleted == False, TopicGroup.group_id == t_group.id)).group_by(
-        TopicGroup.id).order_by(TopicGroup.priority, TopicGroup.created_at.desc()).all()
-
     page = request.args.get('page', 1, type=int)
+    t_group = TopicGroup.query.filter_by(id=topic_group_id, deleted=False).first_or_404()
+
+    if page == 1 or not current_app.config['TOPIC_GROUPS_ONLY_ON_1ST_PAGE']:
+        t_groups = TopicGroup.query.with_entities(
+            TopicGroup, func.sum(case([(Topic.deleted == False, 1)], else_=0))).outerjoin(
+            Topic, TopicGroup.id == Topic.group_id).filter(
+            and_(TopicGroup.deleted == False, TopicGroup.group_id == t_group.id)).group_by(
+            TopicGroup.id).order_by(TopicGroup.priority, TopicGroup.created_at.desc()).all()
+    else:
+        t_groups = []
+
     pagination = Topic.query.with_entities(
         Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
         User, Topic.author_id == User.id).outerjoin(
