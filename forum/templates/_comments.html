@@ -39,7 +39,11 @@
             <br>
             {% endif %}
             <div class="comment-body">
-                {{ comment.body }}
+                {% if comment.body_html %}
+                    {{ comment.body_html | safe }}
+                {% else %}
+                    {{ comment.body }}
+                {% endif %}
             </div>
             <div class="comment-buttons">
                 {% if current_user.id==comment.author_id and current_user.can(Permission.WRITE) %}

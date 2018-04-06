@@ -14,6 +14,14 @@ from .app import db, login_manager
 from .config import config
 
 
+def on_changed_body_set_body_html(target, value, oldvalue, initiator):
+    html = markdown(value, extensions=[TableExtension()], output_format='html')
+    clean_html = bleach.clean(html, tags=current_app.config['ALLOWED_TAGS'],
+                              attributes=current_app.config['ALLOWED_ATTRIBUTES'],
+                              strip=True)
+    target.body_html = bleach.linkify(clean_html)
+
+
 class Permission:
     READ = 0x01
     PARTICIPATE = 0x02
@@ -233,14 +241,6 @@ class Topic(db.Model):
         return db.session.query(
             func.count(Comment.id)).filter(and_(Comment.topic_id == self.id, Comment.deleted == False)).scalar()
 
-    @staticmethod
-    def on_changed_body(target, value, oldvalue, initiator):
-        html = markdown(value, extensions=[TableExtension()], output_format='html')
-        clean_html = bleach.clean(html, tags=current_app.config['ALLOWED_TAGS'],
-                                  attributes=current_app.config['ALLOWED_ATTRIBUTES'],
-                                  strip=True)
-        target.body_html = bleach.linkify(clean_html)
-
     def get_poll_results(self):
         votes = db.session.query(PollAnswer.body, func.count(PollVote.id)).outerjoin(
             PollVote, PollAnswer.id == PollVote.poll_answer_id).filter(
@@ -273,7 +273,7 @@ class Topic(db.Model):
         db.session.add(self)
 
 
-db.event.listen(Topic.body, 'set', Topic.on_changed_body)
+db.event.listen(Topic.body, 'set', on_changed_body_set_body_html)
 
 
 class TopicGroup(db.Model):
@@ -312,11 +312,15 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text)
+    body_html = db.Column(db.Text)
     created_at = db.Column(db.DateTime, index=True, default=func.now())
     updated_at = db.Column(db.DateTime, default=func.now())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'), index=True)
     deleted = db.Column(db.Boolean, index=True, default=False)
+
+
+db.event.listen(Comment.body, 'set', on_changed_body_set_body_html)
 
 
 class PollAnswer(db.Model):

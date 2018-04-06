@@ -3,6 +3,12 @@
 
 {% block title %}D3 - {{ _('Edit comment') }}{% endblock %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='simplemde.min.css') }}">
+<script src="{{ url_for('static', filename='simplemde.min.js') }}"></script>
+{% endblock %}
+
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='img/pen-icon.png') }}">
@@ -19,4 +25,15 @@
 <div>
     {{ wtf.quick_form(form, button_map={'submit':'success', 'cancel':'warning', 'delete':'danger'}, novalidate=True) }}
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("body"),
+        spellChecker: false,
+        status: false
+    });
+</script>
 {% endblock %}
