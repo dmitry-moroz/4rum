@@ -2,6 +2,17 @@
 
 {% block title %}4RUM - {{ _('Message') }}{% endblock %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='simplemde.min.css') }}">
+<script src="{{ url_for('static', filename='simplemde.min.js') }}"></script>
+<style>
+.CodeMirror, .CodeMirror-scroll {
+	min-height: 200px;
+}
+</style>
+{% endblock %}
+
 {% block page_content %}
 <div class="page-header">
     <img class="common-thumbnail" src="{{ url_for('static', filename='img/mail-read-icon.png') }}">
@@ -48,7 +59,11 @@
         </div>
     </div>
     <div class="message-page-content">
-        {{ message.body }}
+        {% if message.body_html %}
+            {{ message.body_html | safe }}
+        {% else %}
+            {{ message.body }}
+        {% endif %}
     </div>
 
 </div>
@@ -66,4 +81,15 @@
     </div>
 {% endif %}
 
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("body"),
+        spellChecker: false,
+        status: false
+    });
+</script>
 {% endblock %}

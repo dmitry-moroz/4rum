@@ -65,6 +65,7 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128))
     body = db.Column(db.Text)
+    body_html = db.Column(db.Text)
     created_at = db.Column(db.DateTime, index=True, default=func.now())
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'), index=True)
     receiver_id = db.Column(db.Integer, db.ForeignKey('users.id'), index=True)
@@ -273,9 +274,6 @@ class Topic(db.Model):
         db.session.add(self)
 
 
-db.event.listen(Topic.body, 'set', on_changed_body_set_body_html)
-
-
 class TopicGroup(db.Model):
     __tablename__ = 'topic_groups'
     id = db.Column(db.Integer, primary_key=True)
@@ -320,9 +318,6 @@ class Comment(db.Model):
     deleted = db.Column(db.Boolean, index=True, default=False)
 
 
-db.event.listen(Comment.body, 'set', on_changed_body_set_body_html)
-
-
 class PollAnswer(db.Model):
     __tablename__ = 'polls_answers'
     id = db.Column(db.Integer, primary_key=True)
@@ -340,3 +335,7 @@ class PollVote(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=func.now())
     deleted = db.Column(db.Boolean, index=True, default=False)
+
+db.event.listen(Message.body, 'set', on_changed_body_set_body_html)
+db.event.listen(Topic.body, 'set', on_changed_body_set_body_html)
+db.event.listen(Comment.body, 'set', on_changed_body_set_body_html)
