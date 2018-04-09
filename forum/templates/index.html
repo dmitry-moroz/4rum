@@ -5,7 +5,7 @@
 
 {% block page_content %}
 <div class="page-header">
-    <img class="common-thumbnail" src="{{ url_for('static', filename='img/d3-violet.png') }}">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/d3-{0}.png'.format(config['THEME'])) }}">
     <div class="common-header">
         <h2>
             {{ _('Housing complex D3 - Forum') }}
