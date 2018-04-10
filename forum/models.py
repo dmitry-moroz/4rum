@@ -336,6 +336,7 @@ class PollVote(db.Model):
     created_at = db.Column(db.DateTime, default=func.now())
     deleted = db.Column(db.Boolean, index=True, default=False)
 
+
 db.event.listen(Message.body, 'set', on_changed_body_set_body_html)
 db.event.listen(Topic.body, 'set', on_changed_body_set_body_html)
 db.event.listen(Comment.body, 'set', on_changed_body_set_body_html)

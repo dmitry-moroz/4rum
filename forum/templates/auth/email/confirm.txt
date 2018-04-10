@@ -1,13 +1,10 @@
-Dear {{ user.username }},
+{{ _('Dear') }} {{ user.username }},
 
-Welcome to D3-Forum!
-
-To confirm your account please click on the following link:
-
+{{ _('Welcome to') }} {{ _('D3-Forum') }}!
+{{ _('To confirm your account please click on the following link:') }}
 {{ url_for('auth.confirm', token=token, _external=True) }}
 
-Sincerely,
+{{ _('Sincerely') }},
+{{ _('The D3-Forum Team') }}
 
-The D3-Forum Team
-
-Note: replies to this email address are not monitored.
+{{ _('Note: replies to this email address are not monitored.') }}
