@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-10 15:02+0300\n"
-"PO-Revision-Date: 2018-04-10 15:05+0300\n"
+"POT-Creation-Date: 2018-04-10 15:28+0300\n"
+"PO-Revision-Date: 2018-04-10 15:44+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -719,28 +719,30 @@ msgstr "Нажмите здесь"
 
 #: forum/templates/auth/email/confirm.html:1
 #: forum/templates/auth/email/confirm.txt:1
+#: forum/templates/auth/email/confirm_new_email.html:1
+#: forum/templates/auth/email/confirm_new_email.txt:1
+#: forum/templates/auth/email/reset_password.html:1
+#: forum/templates/auth/email/reset_password.txt:1
 msgid "Dear"
 msgstr "Уважаемый"
 
 #: forum/templates/auth/email/confirm.html:3
-#: forum/templates/auth/email/confirm.txt:3
-msgid "Welcome to"
-msgstr "Добро пожаловать на сайт"
-
-#: forum/templates/auth/email/confirm.html:3
-#: forum/templates/auth/email/confirm.txt:3
-msgid "D3-Forum"
-msgstr "D3-Форум"
+msgid "Welcome to <b>D3-Forum</b>!"
+msgstr "Добро пожаловать на сайт <b>D3-Форум</b>!"
 
 #: forum/templates/auth/email/confirm.html:4
 msgid "To confirm your account please"
-msgstr "Чтобы подтвердить свою учетную запись, пожалуйста"
+msgstr "Чтобы подтвердить свою учетную запись, пожалуйста,"
 
 #: forum/templates/auth/email/confirm.html:4
+#: forum/templates/auth/email/confirm_new_email.html:4
+#: forum/templates/auth/email/reset_password.html:4
 msgid "click here"
 msgstr "нажмите здесь"
 
 #: forum/templates/auth/email/confirm.html:5
+#: forum/templates/auth/email/confirm_new_email.html:5
+#: forum/templates/auth/email/reset_password.html:5
 msgid ""
 "Alternatively, you can paste the following link in your browser's address "
 "bar:"
@@ -749,22 +751,81 @@ msgstr ""
 
 #: forum/templates/auth/email/confirm.html:9
 #: forum/templates/auth/email/confirm.txt:7
+#: forum/templates/auth/email/confirm_new_email.html:9
+#: forum/templates/auth/email/confirm_new_email.txt:7
+#: forum/templates/auth/email/reset_password.html:10
+#: forum/templates/auth/email/reset_password.txt:8
 msgid "Sincerely"
 msgstr "С уважением"
 
 #: forum/templates/auth/email/confirm.html:10
 #: forum/templates/auth/email/confirm.txt:8
+#: forum/templates/auth/email/confirm_new_email.html:10
+#: forum/templates/auth/email/confirm_new_email.txt:8
+#: forum/templates/auth/email/reset_password.html:11
+#: forum/templates/auth/email/reset_password.txt:9
 msgid "The D3-Forum Team"
 msgstr "Команда D3-Форум"
 
 #: forum/templates/auth/email/confirm.html:13
 #: forum/templates/auth/email/confirm.txt:10
+#: forum/templates/auth/email/confirm_new_email.html:13
+#: forum/templates/auth/email/confirm_new_email.txt:10
+#: forum/templates/auth/email/reset_password.html:14
+#: forum/templates/auth/email/reset_password.txt:11
 msgid "Note: replies to this email address are not monitored."
 msgstr "Примечание: ответы на этот адрес электронной почты не отслеживаются."
 
+#: forum/templates/auth/email/confirm.txt:3
+msgid "Welcome to D3-Forum!"
+msgstr "Добро пожаловать на сайт D3-Форум!"
+
 #: forum/templates/auth/email/confirm.txt:4
 msgid "To confirm your account please click on the following link:"
-msgstr "Чтобы подтвердить свою учетную запись, пройдите по следующей ссылке:"
+msgstr ""
+"Чтобы подтвердить свою учетную запись, пожалуйста, пройдите по следующей "
+"ссылке:"
+
+#: forum/templates/auth/email/confirm_new_email.html:3
+msgid "You have changed your email for <b>D3-Forum</b> account."
+msgstr ""
+"Вы изменили свой адрес электронной почты для учетной записи <b>D3-Форум</b>."
+
+#: forum/templates/auth/email/confirm_new_email.html:4
+msgid "To confirm your new email please"
+msgstr "Чтобы подтвердить свой новый адрес электронной почты, пожалуйста,"
+
+#: forum/templates/auth/email/confirm_new_email.txt:3
+msgid "You have changed your email for D3-Forum account."
+msgstr "Вы изменили свой адрес электронной почты для учетной записи D3-Форум."
+
+#: forum/templates/auth/email/confirm_new_email.txt:4
+msgid "To confirm your new email please click on the following link:"
+msgstr ""
+"Чтобы подтвердить свой новый адрес электронной почты, пожалуйста, пройдите "
+"по следующей ссылке:"
+
+#: forum/templates/auth/email/reset_password.html:3
+msgid "You have requested password reset for <b>D3-Forum</b> account."
+msgstr "Вы запросили сброс пароля для учетной записи <b>D3-Форум</b>."
+
+#: forum/templates/auth/email/reset_password.html:4
+msgid "To reset your password please"
+msgstr "Чтобы сбросить свой пароль, пожалуйста,"
+
+#: forum/templates/auth/email/reset_password.html:7
+#: forum/templates/auth/email/reset_password.txt:6
+msgid "If you have not requested a password reset simply ignore this message."
+msgstr ""
+"Если Вы не запрашивали сброс пароля, просто проигнорируйте это сообщение."
+
+#: forum/templates/auth/email/reset_password.txt:3
+msgid "You have requested password reset for D3-Forum account."
+msgstr "Вы запросили сброс пароля для учетной записи D3-Форум."
+
+#: forum/templates/auth/email/reset_password.txt:4
+msgid "To reset your password please click on the following link:"
+msgstr "Чтобы сбросить свой пароль, пожалуйста, нажмите на следующую ссылку:"
 
 #: forum/templates/errors/400.html:3 forum/templates/errors/400.html:9
 msgid "Bad Request"

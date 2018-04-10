@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-10 15:02+0300\n"
+"POT-Creation-Date: 2018-04-10 15:28+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -708,17 +708,15 @@ msgstr ""
 
 #: forum/templates/auth/email/confirm.html:1
 #: forum/templates/auth/email/confirm.txt:1
+#: forum/templates/auth/email/confirm_new_email.html:1
+#: forum/templates/auth/email/confirm_new_email.txt:1
+#: forum/templates/auth/email/reset_password.html:1
+#: forum/templates/auth/email/reset_password.txt:1
 msgid "Dear"
 msgstr ""
 
 #: forum/templates/auth/email/confirm.html:3
-#: forum/templates/auth/email/confirm.txt:3
-msgid "Welcome to"
-msgstr ""
-
-#: forum/templates/auth/email/confirm.html:3
-#: forum/templates/auth/email/confirm.txt:3
-msgid "D3-Forum"
+msgid "Welcome to <b>D3-Forum</b>!"
 msgstr ""
 
 #: forum/templates/auth/email/confirm.html:4
@@ -726,10 +724,14 @@ msgid "To confirm your account please"
 msgstr ""
 
 #: forum/templates/auth/email/confirm.html:4
+#: forum/templates/auth/email/confirm_new_email.html:4
+#: forum/templates/auth/email/reset_password.html:4
 msgid "click here"
 msgstr ""
 
 #: forum/templates/auth/email/confirm.html:5
+#: forum/templates/auth/email/confirm_new_email.html:5
+#: forum/templates/auth/email/reset_password.html:5
 msgid ""
 "Alternatively, you can paste the following link in your browser's address"
 " bar:"
@@ -737,21 +739,74 @@ msgstr ""
 
 #: forum/templates/auth/email/confirm.html:9
 #: forum/templates/auth/email/confirm.txt:7
+#: forum/templates/auth/email/confirm_new_email.html:9
+#: forum/templates/auth/email/confirm_new_email.txt:7
+#: forum/templates/auth/email/reset_password.html:10
+#: forum/templates/auth/email/reset_password.txt:8
 msgid "Sincerely"
 msgstr ""
 
 #: forum/templates/auth/email/confirm.html:10
 #: forum/templates/auth/email/confirm.txt:8
+#: forum/templates/auth/email/confirm_new_email.html:10
+#: forum/templates/auth/email/confirm_new_email.txt:8
+#: forum/templates/auth/email/reset_password.html:11
+#: forum/templates/auth/email/reset_password.txt:9
 msgid "The D3-Forum Team"
 msgstr ""
 
 #: forum/templates/auth/email/confirm.html:13
 #: forum/templates/auth/email/confirm.txt:10
+#: forum/templates/auth/email/confirm_new_email.html:13
+#: forum/templates/auth/email/confirm_new_email.txt:10
+#: forum/templates/auth/email/reset_password.html:14
+#: forum/templates/auth/email/reset_password.txt:11
 msgid "Note: replies to this email address are not monitored."
+msgstr ""
+
+#: forum/templates/auth/email/confirm.txt:3
+msgid "Welcome to D3-Forum!"
 msgstr ""
 
 #: forum/templates/auth/email/confirm.txt:4
 msgid "To confirm your account please click on the following link:"
+msgstr ""
+
+#: forum/templates/auth/email/confirm_new_email.html:3
+msgid "You have changed your email for <b>D3-Forum</b> account."
+msgstr ""
+
+#: forum/templates/auth/email/confirm_new_email.html:4
+msgid "To confirm your new email please"
+msgstr ""
+
+#: forum/templates/auth/email/confirm_new_email.txt:3
+msgid "You have changed your email for D3-Forum account."
+msgstr ""
+
+#: forum/templates/auth/email/confirm_new_email.txt:4
+msgid "To confirm your new email please click on the following link:"
+msgstr ""
+
+#: forum/templates/auth/email/reset_password.html:3
+msgid "You have requested password reset for <b>D3-Forum</b> account."
+msgstr ""
+
+#: forum/templates/auth/email/reset_password.html:4
+msgid "To reset your password please"
+msgstr ""
+
+#: forum/templates/auth/email/reset_password.html:7
+#: forum/templates/auth/email/reset_password.txt:6
+msgid "If you have not requested a password reset simply ignore this message."
+msgstr ""
+
+#: forum/templates/auth/email/reset_password.txt:3
+msgid "You have requested password reset for D3-Forum account."
+msgstr ""
+
+#: forum/templates/auth/email/reset_password.txt:4
+msgid "To reset your password please click on the following link:"
 msgstr ""
 
 #: forum/templates/errors/400.html:3 forum/templates/errors/400.html:9

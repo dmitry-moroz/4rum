@@ -1,6 +1,6 @@
 {{ _('Dear') }} <b>{{ user.username }}</b>,
 <p>
-    {{ _('Welcome to') }} <b>{{ _('D3-Forum') }}</b>!
+    {{ _('Welcome to <b>D3-Forum</b>!') }}
     <br>{{ _('To confirm your account please') }} <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">{{ _('click here') }}</a>.
     <br>{{ _('Alternatively, you can paste the following link in your browser\'s address bar:') }}
     <br>{{ url_for('auth.confirm', token=token, _external=True) }}

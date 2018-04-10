@@ -1,6 +1,6 @@
 {{ _('Dear') }} {{ user.username }},
 
-{{ _('Welcome to') }} {{ _('D3-Forum') }}!
+{{ _('Welcome to D3-Forum!') }}
 {{ _('To confirm your account please click on the following link:') }}
 {{ url_for('auth.confirm', token=token, _external=True) }}
 
