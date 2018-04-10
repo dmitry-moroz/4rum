@@ -1,13 +1,10 @@
-Dear {{ user.username }},
+{{ _('Dear') }} {{ user.username }},
 
-You have changed your email for 4RUM account.
-
-To confirm your new email please click on the following link:
-
+{{ _('You have changed your email for 4RUM account.') }}
+{{ _('To confirm your new email please click on the following link:') }}
 {{ url_for('auth.confirm_new_email', token=token, _external=True) }}
 
-Sincerely,
+{{ _('Sincerely') }},
+{{ _('The 4RUM Team') }}
 
-The 4RUM Team
-
-Note: replies to this email address are not monitored.
+{{ _('Note: replies to this email address are not monitored.') }}

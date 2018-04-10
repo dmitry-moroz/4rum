@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, current_app
 from flask_babel import lazy_gettext, gettext
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -14,8 +14,11 @@ from ..models import User
 def check_confirmed():
     if current_user.is_authenticated:
         current_user.ping()
-        if (not current_user.confirmed and request.endpoint and
-                request.endpoint[:5] != 'auth.' and request.endpoint != 'static'):
+        if (not current_user.confirmed and
+                request.endpoint and
+                request.endpoint[:5] != 'auth.' and
+                request.endpoint != 'main.set_locale' and
+                request.endpoint != 'static'):
             return redirect(url_for('auth.unconfirmed'))
 
 
@@ -64,6 +67,12 @@ def register():
             subject=gettext('Confirm your account'),
             body=render_template('auth/email/confirm.txt', user=user, token=token),
             html=render_template('auth/email/confirm.html', user=user, token=token)
+        )
+        send_email.delay(
+            recipients=[current_app.config['APP_ADMIN']],
+            subject='New user',
+            body=render_template('email/new_user.txt', user=user),
+            html=render_template('email/new_user.html', user=user)
         )
         flash(lazy_gettext('A confirmation email has been sent to you by email.'))
         return redirect(url_for('auth.login'))

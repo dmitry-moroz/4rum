@@ -1,8 +1,14 @@
-<p>Dear {{ user.username }},</p>
-<p>You have changed your email for <b>4RUM</b> account.</p>
-<p>To confirm your new email please <a href="{{ url_for('auth.confirm_new_email', token=token, _external=True) }}">click here</a>.</p>
-<p>Alternatively, you can paste the following link in your browser's address bar:</p>
-<p>{{ url_for('auth.confirm_new_email', token=token, _external=True) }}</p>
-<p>Sincerely,</p>
-<p>The 4RUM Team</p>
-<p><small>Note: replies to this email address are not monitored.</small></p>
+{{ _('Dear') }} <b>{{ user.username }}</b>,
+<p>
+    {{ _('You have changed your email for <b>4RUM</b> account.') }}
+    <br>{{ _('To confirm your new email please') }} <a href="{{ url_for('auth.confirm_new_email', token=token, _external=True) }}">{{ _('click here') }}</a>.
+    <br>{{ _('Alternatively, you can paste the following link in your browser\'s address bar:') }}
+    <br>{{ url_for('auth.confirm_new_email', token=token, _external=True) }}
+</p>
+<p>
+    {{ _('Sincerely') }},
+    <br>{{ _('The 4RUM Team') }}
+</p>
+<p>
+    <small>{{ _('Note: replies to this email address are not monitored.') }}</small>
+</p>

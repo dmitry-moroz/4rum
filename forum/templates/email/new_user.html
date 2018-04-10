@@ -1,1 +1,6 @@
-User <b>{{ user.username }}</b> has joined.
+New user has joined.
+<p>
+    Username: {{ user.username }}
+    <br>Email: {{ user.email }}
+    <br>Profile: {{ url_for('main.user', username=user.username, _external=True) }}
+</p>
