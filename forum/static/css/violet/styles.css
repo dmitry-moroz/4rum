@@ -8,9 +8,17 @@ body {
 }
 
 /* CSS to disable mobile version of the site */
-/* TODO: check this fix with mobile device */
-div.non-responsive {
-    min-width: 1170px;
+.container {
+    min-width: 940px !important;
+}
+.navbar {
+    min-width: 940px !important;
+}
+div.footer-grad {
+    min-width: 940px;
+}
+div.footer {
+    min-width: 940px;
 }
 
 
