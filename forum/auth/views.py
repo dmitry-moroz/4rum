@@ -13,9 +13,11 @@ from ..models import User
 def is_endpoint_always_accessible():
     return (
         request.endpoint and
-        request.endpoint[:5] == 'auth.' and
-        request.endpoint == 'main.set_locale' and
-        request.endpoint == 'static'
+        (
+            request.endpoint[:5] == 'auth.' or
+            request.endpoint == 'main.set_locale' or
+            request.endpoint == 'static'
+        )
     )
 
 
