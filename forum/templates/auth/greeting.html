@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}D3 - {{ _('Forum') }}{% endblock %}
+
+{% block head %}
+{{ super() }}
+<style>
+body::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.4;
+    background-image: url("{{ url_for('static', filename='img/greeting.jpeg') }}");
+    background-repeat: no-repeat;
+    background-position: 10% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+</style>
+{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">D3</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{ url_for('auth.login') }}">{{ _('Log in') }}</a></li>
+            <li><a href="{{ url_for('auth.register') }}">{{ _('Register') }}</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  {{ get_locale() }} <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                {% for new_locale in config['SUPPORTED_LANGUAGES'] %}
+                <li><a href="{{ url_for('main.set_locale', locale=new_locale, next=request.url) }}">{{ new_locale }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block page_content %}
+<div class="greeting img-rounded">
+    <div class="page-header">
+        <img class="common-thumbnail" src="{{ url_for('static', filename='img/d3-{0}.png'.format(config['THEME'])) }}">
+        <div class="common-header">
+            <h2 style="margin-top: 0;">{{ _('Housing complex D3 - Forum') }}</h2>
+        </div>
+    </div>
+    <p>
+        {{ _('Welcome to closed forum of housing complex D3.') }}
+        <br>{{ _('To access this site please login. If you are new user you have to register account.') }}
+    <p/>
+    </p>
+        {{ _('Administrator of the forum') }}: {{ config['MAIL_USERNAME'] }}
+        <br>{{ _('Sales department') }}: +375 44 7 666 333
+    <p/>
+</div>
+{% endblock %}

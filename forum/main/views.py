@@ -38,12 +38,15 @@ def get_topic_group(topic_group_id):
 
 @main.route('/')
 def index():
+    if current_user.is_anonymous:
+        return redirect(url_for('auth.greeting'))
     t_group, t_groups, pagination = get_topic_group(current_app.config['ROOT_TOPIC_GROUP'])
     return render_template('index.html', topic_group=t_group, topic_groups=t_groups, topics=pagination.items,
                            pagination=pagination)
 
 
 @main.route('/topic/<int:topic_id>', methods=['GET', 'POST'])
+@login_required
 def topic(topic_id):
     tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
 
@@ -179,6 +182,7 @@ def edit_topic(topic_id):
 
 
 @main.route('/topic_group/<int:topic_group_id>')
+@login_required
 def topic_group(topic_group_id):
     if topic_group_id == current_app.config['ROOT_TOPIC_GROUP']:
         return redirect(url_for('main.index'))
@@ -351,6 +355,7 @@ def edit_profile_admin(user_id):
 
 
 @main.route('/latest')
+@login_required
 def latest():
     page_arg = request.args.get('page', 1, type=int)
     target_arg = request.args.get('target', 'topics', type=str)
@@ -422,6 +427,7 @@ def vote(answer_id):
 
 
 @main.route('/hot')
+@login_required
 def hot():
     page_arg = request.args.get('page', 1, type=int)
     period_arg = request.args.get('period', 'week', type=str)
