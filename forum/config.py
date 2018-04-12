@@ -56,8 +56,10 @@ class Config:
     TOPIC_GROUPS_ONLY_ON_1ST_PAGE = True
 
     ALLOWED_TAGS = [
-        'a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code', 'em', 'i', 'img', 'li', 'ol', 'pre', 'strong', 'ul',
-        'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'hr'
+        'a', 'abbr', 'acronym', 'b', 'blockquote', 'br', 'code', 'dd', 'del', 'details', 'dl', 'dt', 'em', 'h1', 'h2',
+        'h3', 'h4', 'h5', 'h6', 'h7', 'h8', 'hr', 'i', 'img', 'ins', 'kbd', 'li', 'ol', 'p', 'pre', 'q', 'rp', 'rt',
+        'ruby', 's', 'samp', 'strike', 'strong', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'tfoot', 'th',
+        'thead', 'tr', 'tt', 'ul', 'var'
     ]
     ALLOWED_ATTRIBUTES = {
         'a': ['href', 'title'],
