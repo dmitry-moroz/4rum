@@ -38,7 +38,7 @@
             {% else %}
             <br>
             {% endif %}
-            <div class="comment-body">
+            <div class="comment-body markdown">
                 {% if comment.body_html %}
                     {{ comment.body_html | safe }}
                 {% else %}

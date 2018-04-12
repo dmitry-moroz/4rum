@@ -48,7 +48,7 @@
 
     </div>
 
-    <div class="topic-page-content">
+    <div class="topic-page-content markdown">
         {% if topic.body_html %}
             {{ topic.body_html | safe }}
         {% else %}
@@ -120,7 +120,8 @@
     var simplemde = new SimpleMDE({
         element: document.getElementById("body"),
         spellChecker: false,
-        status: false
+        status: false,
+        showIcons: ["code", "table", "horizontal-rule"],
     });
 </script>
 {% endblock %}

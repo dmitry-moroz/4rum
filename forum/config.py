@@ -57,7 +57,7 @@ class Config:
 
     ALLOWED_TAGS = [
         'a', 'abbr', 'acronym', 'b', 'br', 'blockquote', 'code', 'em', 'i', 'img', 'li', 'ol', 'pre', 'strong', 'ul',
-        'h1', 'h2', 'h3', 'p', 'table', 'thead', 'tbody', 'tr', 'th', 'td'
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'hr'
     ]
     ALLOWED_ATTRIBUTES = {
         'a': ['href', 'title'],
