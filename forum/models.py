@@ -6,7 +6,6 @@ from flask import current_app
 from flask_login import UserMixin, AnonymousUserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from markdown import markdown
-from markdown.extensions.tables import TableExtension
 from sqlalchemy import func, or_, and_
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -15,10 +14,15 @@ from .config import config
 
 
 def on_changed_body_set_body_html(target, value, oldvalue, initiator):
-    html = markdown(value, extensions=[TableExtension()], output_format='html')
+    extensions = [
+        'markdown.extensions.tables',
+        'markdown.extensions.nl2br',
+        'markdown.extensions.sane_lists',
+        'markdown.extensions.attr_list',
+    ]
+    html = markdown(value, extensions=extensions, output_format='html')
     clean_html = bleach.clean(html, tags=current_app.config['ALLOWED_TAGS'],
-                              attributes=current_app.config['ALLOWED_ATTRIBUTES'],
-                              strip=True)
+                              attributes=current_app.config['ALLOWED_ATTRIBUTES'], strip=True)
     target.body_html = bleach.linkify(clean_html)
 
 

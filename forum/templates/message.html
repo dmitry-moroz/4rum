@@ -58,7 +58,7 @@
             {{ _('Subject') }}: <b>{{ message.title }}</b>
         </div>
     </div>
-    <div class="message-page-content">
+    <div class="message-page-content markdown">
         {% if message.body_html %}
             {{ message.body_html | safe }}
         {% else %}
@@ -89,7 +89,8 @@
     var simplemde = new SimpleMDE({
         element: document.getElementById("body"),
         spellChecker: false,
-        status: false
+        status: false,
+        showIcons: ["code", "table", "horizontal-rule"],
     });
 </script>
 {% endblock %}
