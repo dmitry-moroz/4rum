@@ -8,10 +8,20 @@ body {
 }
 
 /* CSS to disable mobile version of the site */
-/* TODO: check this fix with mobile device */
-div.non-responsive {
-    min-width: 1170px;
+/*
+.container {
+    min-width: 940px !important;
 }
+.navbar {
+    min-width: 940px !important;
+}
+div.footer-grad {
+    min-width: 940px;
+}
+div.footer {
+    min-width: 940px;
+}
+*/
 
 
 /* ### Reviewed: ### */
@@ -56,7 +66,7 @@ a.underline-on-hover:hover {
     text-decoration: underline !important;
 }
 div.no-data-text {
-    padding: 16px;
+    padding: 32px;
     text-align: center;
     font-weight: bold;
     font-size: 150%;
@@ -133,25 +143,32 @@ ul.topics li.topic {
 ul.topics li.topic:hover {
     background-color: #ecf0f1;
 }
-div.topic-date {
-    float: right;
-    font-size: small;
+div.topic-info-row {
+    margin-left: 48px;
+    min-height: 40px;
+    display: flex;
 }
-div.topic-comments-info {
-    float: right;
+div.topic-info-col-l {
+    text-align: left;
+    flex: 3;
 }
-span.topic-comments-info {
-    min-width: 120px !important;
-    display: inline-block !important;
+div.topic-info-col-r {
+    text-align: right;
+    flex: 1;
 }
-div.topic-author {
+div.topic-info-author {
 }
-div.topic-title {
+div.topic-info-title {
     font-weight: bold;
 }
-div.topic-content {
-    margin-left: 48px;
-    min-height: 48px;
+div.topic-info-date {
+    font-size: small;
+}
+div.topic-info-comments {
+}
+span.topic-info-comments {
+    min-width: 120px !important;
+    display: inline-block !important;
 }
 
 /* CSS for topic group page and topic groups list */
@@ -200,40 +217,37 @@ div.topic-page-title {
     padding: 16px;
     border-bottom: 1px solid #2c3e50;
 }
-div.topic-page-meta {
-    margin-left: 56px;
-}
 div.topic-page-content {
     padding: 16px;
     min-height: 100px;
     overflow-x: auto;
 }
 
-/* CSS for topic body */
-div.topic-page-content h1 {
+/* CSS for markdown */
+div.markdown h1 {
     font-size: 160%;
 }
-div.topic-page-content h2 {
+div.markdown h2 {
     font-size: 140%;
 }
-div.topic-page-content h3 {
+div.markdown h3 {
     font-size: 120%;
 }
-div.topic-page-content table {
+div.markdown table {
     width: 100%;
     border: 1px solid;
     border-collapse: collapse;
 }
-div.topic-page-content th {
+div.markdown th {
     background: #b4bcc2;
     padding: 8px;
     border: 1px solid;
 }
-div.topic-page-content td {
+div.markdown td {
     padding: 8px;
     border: 1px solid;
 }
-div.topic-page-content img {
+div.markdown img {
     max-width: 100%;
     max-height: 600px;
     display: block;
@@ -258,22 +272,34 @@ ul.comments li.comment {
     border-top: 1px solid #dee2e2;
     border-bottom: 1px solid #dee2e2;
 }
-div.comment-date {
-    float: right;
-    font-size: small;
+div.comment-content {
+    margin-left: 48px;
 }
-div.comment-author {
+div.comment-info-row {
+    min-height: 40px;
+    display: flex;
+}
+div.comment-info-col-l {
+    text-align: left;
+    flex: 3;
+}
+div.comment-info-col-r {
+    text-align: right;
+    flex: 1;
+}
+div.comment-info-author {
+}
+div.comment-info-date {
+    font-size: small;
 }
 div.comment-body {
     max-height: 600px;
     overflow-x: auto;
     overflow-y: auto;
-    padding-top: 16px;
-    padding-bottom: 16px;
-}
-div.comment-content {
-    margin-left: 48px;
-    min-height: 48px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 8px;
+    border-top: 1px solid #dee2e2;
 }
 div.comment-buttons {
     text-align: right;
@@ -311,8 +337,16 @@ ul.poll-answers-voted li.poll-answer-voted {
     color: #2c3e50;
     font-weight: bold;
 }
-div.poll-percent-info {
-    float: right;
+div.poll-answer-info-row {
+    display: flex;
+}
+div.poll-answer-info-col-l {
+    text-align: left;
+    flex: 3;
+}
+div.poll-answer-info-col-r {
+    text-align: right;
+    flex: 1;
 }
 
 /* CSS for messages */
@@ -346,8 +380,19 @@ div.message-page-content {
     min-height: 100px;
     overflow-x: auto;
 }
-div.message-date {
-    float: right;
+div.message-info-row {
+    min-height: 40px;
+    display: flex;
+}
+div.message-info-col-l {
+    text-align: left;
+    flex: 3;
+}
+div.message-info-col-r {
+    text-align: right;
+    flex: 1;
+}
+div.message-info-date {
     font-size: small;
 }
 
@@ -359,4 +404,12 @@ img.community-thumbnail {
     width: 32px;
     height: 32px;
     object-fit: cover;
+}
+
+/* CSS for greeting */
+div.greeting {
+    background: #ffffff;
+    margin: 120px 0px 0px 0px;
+    padding: 32px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

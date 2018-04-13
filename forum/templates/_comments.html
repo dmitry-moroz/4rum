@@ -1,5 +1,4 @@
 {% if comments %}
-
 <ul class="comments">
     {% for comment_data in comments %}
     {% if use_rich_comments %}
@@ -14,30 +13,36 @@
             </a>
         </div>
         <div class="comment-content">
-            <div class="comment-date">
-                {{ _('Created') }}: {{ format_datetime(comment.created_at, 'd MMMM YYYY, H:mm') }}
+            <div class="comment-info-row">
+                <div class="comment-info-col-l">
+                    <div class="comment-info-author">
+                        <a href="{{ url_for('main.user', username=author.username) }}">
+                            {{ author.username }}
+                        </a>
+                        {% if use_rich_comments %}
+                        {{ _('in topic') }}
+                        <a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">
+                            "{{ topic.title }}"
+                        </a>
+                        {% endif %}
+                    </div>
+                    {% if comment.author.name %}
+                    <div class="comment-info-author">
+                        {{ comment.author.name }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="comment-info-col-r">
+                    <div class="comment-info-date">
+                        {{ _('Created') }}: {{ format_datetime(comment.created_at, 'd MMMM YYYY, H:mm') }}
+                    </div>
+                    {% if comment.created_at != comment.updated_at %}
+                    <div class="comment-info-date">
+                        {{ _('Updated') }}: {{ format_datetime(comment.updated_at, 'd MMMM YYYY, H:mm') }}
+                    </div>
+                    {% endif %}
+                </div>
             </div>
-            <div class="comment-author">
-                <a href="{{ url_for('main.user', username=author.username) }}">
-                    {{ author.username }}
-                </a>
-                {% if use_rich_comments %}
-                    {{ _('in topic') }}
-                    <a href="{{ url_for('main.topic', topic_id=comment.topic_id) }}">
-                        "{{ topic.title }}"
-                    </a>
-                {% endif %}
-            </div>
-            {% if comment.created_at != comment.updated_at %}
-            <div class="comment-date">
-                {{ _('Updated') }}: {{ format_datetime(comment.updated_at, 'd MMMM YYYY, H:mm') }}
-            </div>
-            {% endif %}
-            {% if comment.author.name %}
-            <div class="comment-author">{{ comment.author.name }}</div>
-            {% else %}
-            <br>
-            {% endif %}
             <div class="comment-body markdown">
                 {% if comment.body_html %}
                     {{ comment.body_html | safe }}
@@ -60,5 +65,4 @@
     </li>
     {% endfor %}
 </ul>
-
 {% endif %}

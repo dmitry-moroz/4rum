@@ -24,52 +24,62 @@
 {% include '_buttons_topic.html' %}
 
 <div class="topic-page img-rounded">
-
     <div class="topic-page-title">
-
         <div>
             <a href="{{ url_for('main.user', username=topic.author.username) }}">
                 <img class="img-rounded common-thumbnail" src="{{ topic.author.avatar }}">
             </a>
         </div>
-
-        <div class="topic-page-meta">
-            <div class="topic-date">{{ _('Created') }}: {{ format_datetime(topic.created_at, 'd MMMM YYYY, H:mm') }}</div>
-            <div class="topic-author"><a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a></div>
-            {% if topic.created_at != topic.updated_at %}
-            <div class="topic-date">{{ _('Updated') }}: {{ format_datetime(topic.updated_at, 'd MMMM YYYY, H:mm') }}</div>
-            {% endif %}
-            {% if topic.author.name %}
-            <div class="topic-author">{{ topic.author.name }}</div>
-            {% else %}
-            <br>
-            {% endif %}
+        <div class="topic-info-row">
+            <div class="topic-info-col-l">
+                <div class="topic-info-author">
+                    <a href="{{ url_for('main.user', username=topic.author.username) }}">{{ topic.author.username }}</a>
+                </div>
+                {% if topic.author.name %}
+                <div class="topic-info-author">
+                    {{ topic.author.name }}
+                </div>
+                {% endif %}
+            </div>
+            <div class="topic-info-col-r">
+                <div class="topic-info-date">
+                    {{ _('Created') }}: {{ format_datetime(topic.created_at, 'd MMMM YYYY, H:mm') }}
+                </div>
+                {% if topic.created_at != topic.updated_at %}
+                <div class="topic-info-date">
+                    {{ _('Updated') }}: {{ format_datetime(topic.updated_at, 'd MMMM YYYY, H:mm') }}
+                </div>
+                {% endif %}
+            </div>
         </div>
-
     </div>
-
-    <div class="topic-page-content markdown">
+    <div class="topic-page-content">
+        <div class="markdown">
         {% if topic.body_html %}
             {{ topic.body_html | safe }}
         {% else %}
             {{ topic.body }}
         {% endif %}
-
-    {% if topic.poll and current_user.can(Permission.PARTICIPATE) %}
+        </div>
+        {% if topic.poll and current_user.can(Permission.PARTICIPATE) %}
         <br>
         <h4 id="poll">{{ topic.poll }}</h4>
         {% if user_vote %}
         <ul class="poll-answers-voted">
             {% for answer, votes, percent in poll_data %}
-                <li class="poll-answer-voted img-rounded">
-                    {{ answer }}
-                    <div class="poll-percent-info">
+            <li class="poll-answer-voted img-rounded">
+                <div class="poll-answer-info-row">
+                    <div class="poll-answer-info-col-l">
+                        {{ answer }}
+                    </div>
+                    <div class="poll-answer-info-col-r">
                         {{ percent }}% ({{ _('votes') }}: {{ votes }})
                     </div>
-                    <div class="progress progress-margin">
-                        <div class="progress-bar progress-bar-success progress-margin" style="width:{{ percent }}%;"></div>
-                    </div>
-                </li>
+                </div>
+                <div class="progress progress-margin">
+                    <div class="progress-bar progress-bar-success progress-margin" style="width:{{ percent }}%;"></div>
+                </div>
+            </li>
             {% endfor %}
         </ul>
         <h5>{{ _('You chosen') }} "{{ user_vote[0] }}"</h5>
@@ -84,10 +94,8 @@
             {% endfor %}
         </ul>
         {% endif %}
-    {% endif %}
-
+        {% endif %}
     </div>
-
 </div>
 
 <div id="comments" class="page-header">
@@ -96,22 +104,20 @@
         <h2>{{ _('Comments') }}:</h2>
     </div>
 </div>
-
 {% if form %}
-    {% import "bootstrap/wtf.html" as wtf %}
-    <div>
-        <a href="{{ url_for('main.user', username=current_user.username) }}">
-            <img class="img-rounded common-thumbnail" src="{{ current_user.avatar }}">
-        </a>
-    </div>
-    <div class="comments-form">
-        {{ wtf.quick_form(form, button_map={'submit':'success'}, novalidate=True) }}
-    </div>
+{% import "bootstrap/wtf.html" as wtf %}
+<div>
+    <a href="{{ url_for('main.user', username=current_user.username) }}">
+        <img class="img-rounded common-thumbnail" src="{{ current_user.avatar }}">
+    </a>
+</div>
+<div class="comments-form">
+    {{ wtf.quick_form(form, button_map={'submit':'success'}, novalidate=True) }}
+</div>
 {% endif %}
 
 {% include '_comments.html' %}
 {{ macros.pagination_widget(pagination, 'main.topic', topic_id=topic.id, fragment='#comments') }}
-
 {% endblock %}
 
 {% block scripts %}
