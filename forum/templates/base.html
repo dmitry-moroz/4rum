@@ -22,12 +22,14 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ url_for('main.index') }}">D3</a>
         </div>
+        {% if current_user.is_authenticated %}
         <ul class="nav navbar-nav">
             <li><a href="{{ url_for('main.index') }}">{{ _('Forum') }}</a></li>
             <li><a href="{{ url_for('main.latest') }}">{{ _('Latest') }}</a></li>
             <li><a href="{{ url_for('main.hot') }}">{{ _('Hot') }}</a></li>
             <li><a href="{{ url_for('main.community') }}">{{ _('Community') }}</a></li>
         </ul>
+        {% endif %}
         <ul class="nav navbar-nav navbar-right">
 
             {% if current_user.is_authenticated %}
@@ -51,6 +53,7 @@
             </li>
             {% else %}
             <li><a href="{{ url_for('auth.login') }}">{{ _('Log in') }}</a></li>
+            <li><a href="{{ url_for('auth.register') }}">{{ _('Register') }}</a></li>
             {% endif %}
 
             <li class="dropdown">

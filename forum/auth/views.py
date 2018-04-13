@@ -10,16 +10,30 @@ from ..celery_tasks import send_email
 from ..models import User
 
 
+def is_endpoint_always_accessible():
+    return (
+        request.endpoint and
+        (
+            request.endpoint[:5] == 'auth.' or
+            request.endpoint == 'main.set_locale' or
+            request.endpoint == 'static'
+        )
+    )
+
+
 @auth.before_app_request
-def check_confirmed():
+def before_app_request():
     if current_user.is_authenticated:
         current_user.ping()
-        if (not current_user.confirmed and
-                request.endpoint and
-                request.endpoint[:5] != 'auth.' and
-                request.endpoint != 'main.set_locale' and
-                request.endpoint != 'static'):
+        if not (current_user.confirmed or is_endpoint_always_accessible()):
             return redirect(url_for('auth.unconfirmed'))
+
+
+@auth.route('/greeting')
+def greeting():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    return render_template('auth/greeting.html')
 
 
 @auth.route('/unconfirmed')
@@ -31,6 +45,8 @@ def unconfirmed():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
@@ -42,11 +58,10 @@ def login():
 
 
 @auth.route('/logout')
-@login_required
 def logout():
     logout_user()
     flash(lazy_gettext('You have been logged out.'))
-    return redirect(url_for('main.index'))
+    return redirect(url_for('auth.greeting'))
 
 
 @auth.route('/register', methods=['GET', 'POST'])
