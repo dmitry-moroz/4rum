@@ -27,8 +27,10 @@ def get_topic_group(topic_group_id):
         t_groups = []
 
     pagination = Topic.query.with_entities(
-        Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
-        User, Topic.author_id == User.id).outerjoin(
+        Topic, User,
+        func.sum(case([(Comment.deleted == False, 1)], else_=0)),
+        func.max(case([(Comment.deleted == False, Comment.created_at)], else_=None))
+        ).join(User, Topic.author_id == User.id).outerjoin(
         Comment, Topic.id == Comment.topic_id).filter(
         and_(Topic.group_id == t_group.id, Topic.deleted == False)).group_by(Topic.id, User.id).order_by(
         Topic.created_at.desc()).paginate(page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
@@ -279,8 +281,10 @@ def user(username):
 
     page = request.args.get('page', 1, type=int)
     pagination = Topic.query.with_entities(
-        Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
-        User, Topic.author_id == User.id).outerjoin(
+        Topic, User,
+        func.sum(case([(Comment.deleted == False, 1)], else_=0)),
+        func.max(case([(Comment.deleted == False, Comment.created_at)], else_=None))
+        ).join(User, Topic.author_id == User.id).outerjoin(
         Comment, Topic.id == Comment.topic_id).filter(
         and_(Topic.author_id == user.id, Topic.deleted == False)).group_by(Topic.id, User.id).order_by(
         Topic.created_at.desc()).paginate(page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
@@ -362,8 +366,10 @@ def latest():
 
     if target_arg == 'topics':
         pagination = Topic.query.with_entities(
-            Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
-            User, Topic.author_id == User.id).outerjoin(
+            Topic, User,
+            func.sum(case([(Comment.deleted == False, 1)], else_=0)),
+            func.max(case([(Comment.deleted == False, Comment.created_at)], else_=None))
+            ).join(User, Topic.author_id == User.id).outerjoin(
             Comment, Topic.id == Comment.topic_id).filter(Topic.deleted == False).group_by(Topic.id, User.id).order_by(
             Topic.created_at.desc()).paginate(
             page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
@@ -441,8 +447,10 @@ def hot():
     }
 
     pagination = Topic.query.with_entities(
-        Topic, User, func.sum(case([(Comment.deleted == False, 1)], else_=0))).join(
-        User, Topic.author_id == User.id).outerjoin(
+        Topic, User,
+        func.sum(case([(Comment.deleted == False, 1)], else_=0)),
+        func.max(case([(Comment.deleted == False, Comment.created_at)], else_=None))
+        ).join(User, Topic.author_id == User.id).outerjoin(
         Comment, Topic.id == Comment.topic_id).filter(
         and_(Topic.deleted == False, between(Topic.created_at, periods[period_arg][0], periods[period_arg][1]))
         ).group_by(Topic.id, User.id).order_by(Topic.interest.desc()).paginate(

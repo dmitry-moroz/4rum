@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-11 18:11+0300\n"
-"PO-Revision-Date: 2018-04-11 18:15+0300\n"
+"POT-Creation-Date: 2018-04-13 16:20+0300\n"
+"PO-Revision-Date: 2018-04-13 16:21+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -122,63 +122,63 @@ msgstr "Сбросить пароль"
 msgid "Unknown email address."
 msgstr "Неизвестный email адрес."
 
-#: forum/auth/views.py:54
+#: forum/auth/views.py:56
 msgid "Invalid username or password."
 msgstr "Неверное имя пользователя или пароль."
 
-#: forum/auth/views.py:61
+#: forum/auth/views.py:63
 msgid "You have been logged out."
 msgstr "Вы вышли из системы."
 
-#: forum/auth/views.py:80 forum/auth/views.py:115
+#: forum/auth/views.py:82 forum/auth/views.py:117
 #: forum/templates/auth/unconfirmed.html:3
 msgid "Confirm your account"
 msgstr "Подтвердите Ваш аккаунт"
 
-#: forum/auth/views.py:90
+#: forum/auth/views.py:92
 msgid "A confirmation email has been sent to you by email."
 msgstr "Письмо с подтверждением отправлено Вам по электронной почте."
 
-#: forum/auth/views.py:101
+#: forum/auth/views.py:103
 msgid "You have confirmed your account. Thanks!"
 msgstr "Вы подтвердили аккаунт. Спасибо!"
 
-#: forum/auth/views.py:103 forum/auth/views.py:159 forum/auth/views.py:193
+#: forum/auth/views.py:105 forum/auth/views.py:161 forum/auth/views.py:195
 msgid "The confirmation link is invalid or has expired."
 msgstr "Ссылка для подтверждения неверная или истекла."
 
-#: forum/auth/views.py:119
+#: forum/auth/views.py:121
 msgid "A new confirmation email has been sent to you by email."
 msgstr "Новое письмо с подтверждением отправлено Вам по электронной почте."
 
-#: forum/auth/views.py:130
+#: forum/auth/views.py:132
 msgid "Your password has been updated."
 msgstr "Ваш пароль был обновлен."
 
-#: forum/auth/views.py:144
+#: forum/auth/views.py:146
 msgid "Confirm your new email"
 msgstr "Подтвердите Ваш новый email"
 
-#: forum/auth/views.py:148
+#: forum/auth/views.py:150
 msgid "A confirmation email has been sent to your new email."
 msgstr "Письмо с подтверждением отправлено на Ваш новый email."
 
-#: forum/auth/views.py:157
+#: forum/auth/views.py:159
 msgid "You have confirmed your new email. Thanks!"
 msgstr "Вы подтвердили новый email. Спасибо!"
 
-#: forum/auth/views.py:173
+#: forum/auth/views.py:175
 msgid "Instructions to reset your password"
 msgstr "Инструкции по сбросу пароля"
 
-#: forum/auth/views.py:177
+#: forum/auth/views.py:179
 msgid ""
 "An email with instructions to reset password has been sent to you by email."
 msgstr ""
 "Электронное письмо с инструкциями по сбросу пароля отправлено Вам по "
 "электронной почте."
 
-#: forum/auth/views.py:190
+#: forum/auth/views.py:192
 msgid "You have reset your password to new."
 msgstr "Вы сбросили пароль на новый."
 
@@ -267,7 +267,7 @@ msgstr "Только для модераторов"
 msgid "Leave your comment, {username}:"
 msgstr "Оставьте свой комментарий, {username}:"
 
-#: forum/main/forms.py:148 forum/main/forms.py:156 forum/templates/message.html:58
+#: forum/main/forms.py:148 forum/main/forms.py:156 forum/templates/message.html:56
 #: forum/templates/messages.html:29
 msgid "Subject"
 msgstr "Тема"
@@ -284,101 +284,101 @@ msgstr "Закрыть"
 msgid "Search"
 msgstr "Поиск"
 
-#: forum/main/views.py:56
+#: forum/main/views.py:58
 msgid "Your comment has been published."
 msgstr "Ваш комментарий опубликован."
 
-#: forum/main/views.py:100
+#: forum/main/views.py:102
 msgid "The topic has been created."
 msgstr "Тема создана."
 
-#: forum/main/views.py:110 forum/main/views.py:155
+#: forum/main/views.py:112 forum/main/views.py:157
 msgid "The topic has been saved. Fill data for a poll."
 msgstr "Тема сохранена. Заполните данные для опроса."
 
-#: forum/main/views.py:116
+#: forum/main/views.py:118
 msgid "Topic creation was cancelled."
 msgstr "Создание темы было отменено."
 
-#: forum/main/views.py:145
+#: forum/main/views.py:147
 msgid "The topic has been updated."
 msgstr "Тема обновлена."
 
-#: forum/main/views.py:159
+#: forum/main/views.py:161
 msgid "Topic editing was cancelled."
 msgstr "Редактирование темы было отменено."
 
-#: forum/main/views.py:169
+#: forum/main/views.py:171
 msgid "The topic has been deleted."
 msgstr "Тема удалена."
 
-#: forum/main/views.py:210
+#: forum/main/views.py:212
 msgid "The topic group has been created."
 msgstr "Группа для тем создана."
 
-#: forum/main/views.py:214
+#: forum/main/views.py:216
 msgid "Topic group creation was cancelled."
 msgstr "Создание группы для тем было отменено."
 
-#: forum/main/views.py:245
+#: forum/main/views.py:247
 msgid "The topic group has been updated."
 msgstr "Группа для тем обновлена."
 
-#: forum/main/views.py:249
+#: forum/main/views.py:251
 msgid "Topic group editing was cancelled."
 msgstr "Редактирование группы для тем было отменено."
 
-#: forum/main/views.py:254
+#: forum/main/views.py:256
 msgid "The topic group is not deleted. Only empty topic group can be deleted."
 msgstr ""
 "Группа для тем не удалена. Только пустая группа для тем может быть удалена."
 
-#: forum/main/views.py:260
+#: forum/main/views.py:262
 msgid "The topic group has been deleted."
 msgstr "Группа для тем удалена."
 
-#: forum/main/views.py:310
+#: forum/main/views.py:314
 msgid "Your profile has been updated."
 msgstr "Ваш профиль обновлен."
 
-#: forum/main/views.py:341
+#: forum/main/views.py:345
 msgid "The profile has been updated."
 msgstr "Профиль обновлен."
 
-#: forum/main/views.py:396
+#: forum/main/views.py:402
 msgid "The comment has been updated."
 msgstr "Комментарий обновлен."
 
-#: forum/main/views.py:400
+#: forum/main/views.py:406
 msgid "Comment editing was cancelled."
 msgstr "Редактирование комментария было отменено."
 
-#: forum/main/views.py:407
+#: forum/main/views.py:413
 msgid "The comment has been deleted."
 msgstr "Комментарий удален."
 
-#: forum/main/views.py:422
+#: forum/main/views.py:428
 msgid "You have already voted for this poll."
 msgstr "Вы уже голосовали в этом опросе."
 
-#: forum/main/views.py:425
+#: forum/main/views.py:431
 msgid "Your vote has been taken."
 msgstr "Ваш голос принят."
 
-#: forum/main/views.py:491 forum/main/views.py:528
+#: forum/main/views.py:499 forum/main/views.py:536
 msgid "Your message has been sent."
 msgstr "Ваше сообщение отправлено."
 
-#: forum/main/views.py:499
+#: forum/main/views.py:507
 msgid "The message has been deleted."
 msgstr "Сообщение удалено."
 
-#: forum/main/views.py:532
+#: forum/main/views.py:540
 msgid "The message was cancelled."
 msgstr "Сообщение было отменено."
 
 #: forum/templates/_buttons_topic.html:5 forum/templates/_buttons_topic.html:9
-#: forum/templates/_comments.html:51 forum/templates/_comments.html:55
+#: forum/templates/_comments.html:56 forum/templates/_comments.html:60
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -402,15 +402,16 @@ msgstr "Редактировать группу для тем"
 msgid "Create topic"
 msgstr "Создать тему"
 
-#: forum/templates/_comments.html:18 forum/templates/topic.html:37
-msgid "Created"
-msgstr "Создано"
-
-#: forum/templates/_comments.html:25
+#: forum/templates/_comments.html:23
 msgid "in topic"
 msgstr "в теме"
 
-#: forum/templates/_comments.html:33 forum/templates/topic.html:40
+#: forum/templates/_comments.html:37 forum/templates/_topics.html:21
+#: forum/templates/topic.html:46
+msgid "Created"
+msgstr "Создано"
+
+#: forum/templates/_comments.html:41 forum/templates/topic.html:50
 msgid "Updated"
 msgstr "Обновлено"
 
@@ -418,12 +419,21 @@ msgstr "Обновлено"
 msgid "Topics"
 msgstr "Темы"
 
-#: forum/templates/_topics.html:21 forum/templates/latest.html:19
-#: forum/templates/topic.html:96
+#: forum/templates/_topics.html:26
+msgid "Last comment"
+msgstr "Последний комментарий"
+
+#: forum/templates/_topics.html:26 forum/templates/community.html:49
+#: forum/templates/user.html:35
+msgid "ago"
+msgstr "назад"
+
+#: forum/templates/_topics.html:32 forum/templates/latest.html:19
+#: forum/templates/topic.html:104
 msgid "Comments"
 msgstr "Комментарии"
 
-#: forum/templates/_topics.html:34
+#: forum/templates/_topics.html:41
 msgid "Topics not found"
 msgstr "Темы не найдены"
 
@@ -476,10 +486,6 @@ msgstr "Участник с"
 #: forum/templates/community.html:25 forum/templates/user.html:35
 msgid "Last seen"
 msgstr "Последняя активность"
-
-#: forum/templates/community.html:49 forum/templates/user.html:35
-msgid "ago"
-msgstr "назад"
 
 #: forum/templates/community.html:56
 msgid "Users not found"
@@ -585,19 +591,19 @@ msgstr "для"
 msgid "from"
 msgstr "от"
 
-#: forum/templates/message.html:35
-msgid "Sent"
-msgstr "Отправлено"
-
-#: forum/templates/message.html:38 forum/templates/send_message.html:29
+#: forum/templates/message.html:36 forum/templates/send_message.html:29
 msgid "From"
 msgstr "От"
 
-#: forum/templates/message.html:48 forum/templates/send_message.html:39
+#: forum/templates/message.html:46 forum/templates/send_message.html:39
 msgid "To"
 msgstr "Для"
 
-#: forum/templates/message.html:76
+#: forum/templates/message.html:61
+msgid "Sent"
+msgstr "Отправлено"
+
+#: forum/templates/message.html:80
 msgid "Reply"
 msgstr "Ответить"
 
@@ -633,11 +639,11 @@ msgstr "Новое сообщение"
 msgid "New message to"
 msgstr "Новое сообщение для"
 
-#: forum/templates/topic.html:67
+#: forum/templates/topic.html:76
 msgid "votes"
 msgstr "голоса"
 
-#: forum/templates/topic.html:75
+#: forum/templates/topic.html:85
 msgid "You chosen"
 msgstr "Вы выбрали"
 
