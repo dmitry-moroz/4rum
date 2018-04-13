@@ -54,6 +54,7 @@
                 </li>
                 {% else %}
                 <li><a href="{{ url_for('auth.login') }}">{{ _('Log in') }}</a></li>
+                <li><a href="{{ url_for('auth.register') }}">{{ _('Register') }}</a></li>
                 {% endif %}
 
                 <li class="dropdown">
