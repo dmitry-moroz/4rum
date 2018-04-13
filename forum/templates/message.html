@@ -29,33 +29,38 @@
 </div>
 
 <div class="message-page img-rounded">
-
     <div class="message-page-title">
-        <div class="message-date">
-            {{ _('Sent') }}: {{ format_datetime(message.created_at, 'd MMMM YYYY, H:mm') }}
-        </div>
-        <div>
-            {{ _('From') }}:
-            <a href="{{ url_for('main.user', username=message.author.username) }}">
-                {% if message.author.name %}
-                    {{ message.author.name }}
-                {% else %}
-                    {{ message.author.username }}
-                {% endif %}
-            </a>
-        </div>
-        <div>
-            {{ _('To') }}:
-            <a href="{{ url_for('main.user', username=message.receiver.username) }}">
-                {% if message.receiver.name %}
-                    {{ message.receiver.name }}
-                {% else %}
-                    {{ message.receiver.username }}
-                {% endif %}
-            </a>
-        </div>
-        <div>
-            {{ _('Subject') }}: <b>{{ message.title }}</b>
+        <div class="message-info-row">
+            <div class="message-info-col-l">
+                <div>
+                    {{ _('From') }}:
+                    <a href="{{ url_for('main.user', username=message.author.username) }}">
+                        {% if message.author.name %}
+                            {{ message.author.name }}
+                        {% else %}
+                            {{ message.author.username }}
+                        {% endif %}
+                    </a>
+                </div>
+                <div>
+                    {{ _('To') }}:
+                    <a href="{{ url_for('main.user', username=message.receiver.username) }}">
+                        {% if message.receiver.name %}
+                            {{ message.receiver.name }}
+                        {% else %}
+                            {{ message.receiver.username }}
+                        {% endif %}
+                    </a>
+                </div>
+                <div>
+                    {{ _('Subject') }}: <b>{{ message.title }}</b>
+                </div>
+            </div>
+            <div class="message-info-col-r">
+                <div class="message-info-date">
+                    {{ _('Sent') }}: {{ format_datetime(message.created_at, 'd MMMM YYYY, H:mm') }}
+                </div>
+            </div>
         </div>
     </div>
     <div class="message-page-content markdown">
@@ -65,22 +70,20 @@
             {{ message.body }}
         {% endif %}
     </div>
-
 </div>
 
 {% if form %}
-    {% import "bootstrap/wtf.html" as wtf %}
-    <div class="page-header">
-        <img class="common-thumbnail" src="{{ url_for('static', filename='img/mail-send-icon.png') }}">
-        <div class="common-header">
-            <h2>{{ _('Reply') }}:</h2>
-        </div>
+{% import "bootstrap/wtf.html" as wtf %}
+<div class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/mail-send-icon.png') }}">
+    <div class="common-header">
+        <h2>{{ _('Reply') }}:</h2>
     </div>
-    <div>
-        {{ wtf.quick_form(form, button_map={'send':'success', 'close':'warning', 'delete':'danger'}, novalidate=True) }}
-    </div>
+</div>
+<div>
+    {{ wtf.quick_form(form, button_map={'send':'success', 'close':'warning', 'delete':'danger'}, novalidate=True) }}
+</div>
 {% endif %}
-
 {% endblock %}
 
 {% block scripts %}
