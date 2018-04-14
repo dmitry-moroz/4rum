@@ -60,7 +60,7 @@ def topic(topic_id):
 
     page = request.args.get('page', 1, type=int)
     if page == -1:
-        page = (tpc.comments_count - 1) // current_app.config['COMMENTS_PER_PAGE'] + 1
+        page = max((tpc.comments_count - 1) // current_app.config['COMMENTS_PER_PAGE'] + 1, 1)
 
     pagination = Comment.query.with_entities(
         Comment, User).join(User, Comment.author_id == User.id).filter(
@@ -572,3 +572,22 @@ def set_locale():
 @babel.localeselector
 def get_locale():
     return session.get('locale', current_app.config['BABEL_DEFAULT_LOCALE'])
+
+
+@main.route('/participation')
+@login_required
+def participation():
+    page_arg = request.args.get('page', 1, type=int)
+
+    comments_count = func.sum(case([(Comment.deleted == False, 1)], else_=0))
+    last_commented = func.max(case([(Comment.deleted == False, Comment.created_at)], else_=Topic.created_at))
+
+    pagination = Topic.query.with_entities(
+        Topic, User, comments_count, last_commented
+        ).join(User, Topic.author_id == User.id).outerjoin(
+        Comment, Topic.id == Comment.topic_id).filter(Topic.deleted == False).filter(
+        or_(Topic.author_id == current_user.id, Comment.author_id == current_user.id)).group_by(
+        Topic.id, User.id).order_by(last_commented.desc()).paginate(
+        page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+
+    return render_template('participation.html', topics=pagination.items, pagination=pagination)

@@ -15,17 +15,17 @@
                 <div class="topic-info-title">
                     <a href="{{ url_for('main.topic', topic_id=topic.id) }}">{{ topic.title }}</a>
                 </div>
-            </div>
-            <div class="topic-info-col-r">
                 <div class="topic-info-date">
-                    {{ _('Created') }}: {{ format_datetime(topic.created_at, 'd MMMM YYYY') }}
-                </div>
-                <div class="topic-info-date">
-                    {% if last_comment_at %}
+                    {% if last_comment_at and last_comment_at != topic.created_at %}
                     <a href="{{ url_for('main.topic', topic_id=topic.id, page=-1) }}#comments">
                         {{ _('Last comment') }}: {{ format_timedelta(last_comment_at) }} {{ _('ago') }}
                     </a>
                     {% endif %}
+                </div>
+            </div>
+            <div class="topic-info-col-r">
+                <div class="topic-info-date">
+                    {{ _('Created') }}: {{ format_datetime(topic.created_at, 'd MMMM YYYY') }}
                 </div>
                 <div class="topic-info-comments">
                     <a class="no-underline" href="{{ url_for('main.topic', topic_id=topic.id) }}#comments">

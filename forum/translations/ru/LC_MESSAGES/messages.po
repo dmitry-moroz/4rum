@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-13 16:20+0300\n"
-"PO-Revision-Date: 2018-04-13 16:21+0300\n"
+"POT-Creation-Date: 2018-04-14 11:32+0300\n"
+"PO-Revision-Date: 2018-04-14 11:33+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr "Запомнить меня"
 
 #: forum/auth/forms.py:15 forum/templates/auth/greeting.html:37
 #: forum/templates/auth/login.html:4 forum/templates/auth/login.html:10
-#: forum/templates/base.html:55
+#: forum/templates/base.html:59
 msgid "Log in"
 msgstr "Войти"
 
@@ -59,7 +59,7 @@ msgstr "Подтвердите пароль"
 
 #: forum/auth/forms.py:26 forum/templates/auth/greeting.html:38
 #: forum/templates/auth/register.html:4 forum/templates/auth/register.html:10
-#: forum/templates/base.html:56
+#: forum/templates/base.html:60
 msgid "Register"
 msgstr "Зарегистрироваться"
 
@@ -84,7 +84,7 @@ msgid "Confirm new password"
 msgstr "Подтвердите новый пароль"
 
 #: forum/auth/forms.py:42 forum/templates/auth/change_password.html:4
-#: forum/templates/auth/change_password.html:10 forum/templates/base.html:49
+#: forum/templates/auth/change_password.html:10 forum/templates/base.html:53
 msgid "Change password"
 msgstr "Изменить пароль"
 
@@ -100,7 +100,7 @@ msgstr "Новый пароль совпадает со старым парол�
 msgid "New email"
 msgstr "Новый email"
 
-#: forum/auth/forms.py:56 forum/templates/base.html:50
+#: forum/auth/forms.py:56 forum/templates/base.html:54
 msgid "Change email"
 msgstr "Изменить email"
 
@@ -406,7 +406,7 @@ msgstr "Создать тему"
 msgid "in topic"
 msgstr "в теме"
 
-#: forum/templates/_comments.html:37 forum/templates/_topics.html:21
+#: forum/templates/_comments.html:37 forum/templates/_topics.html:28
 #: forum/templates/topic.html:46
 msgid "Created"
 msgstr "Создано"
@@ -419,11 +419,11 @@ msgstr "Обновлено"
 msgid "Topics"
 msgstr "Темы"
 
-#: forum/templates/_topics.html:26
+#: forum/templates/_topics.html:21
 msgid "Last comment"
 msgstr "Последний комментарий"
 
-#: forum/templates/_topics.html:26 forum/templates/community.html:49
+#: forum/templates/_topics.html:21 forum/templates/community.html:49
 #: forum/templates/user.html:35
 msgid "ago"
 msgstr "назад"
@@ -458,12 +458,17 @@ msgstr "Сообщество"
 msgid "Profile"
 msgstr "Профиль"
 
-#: forum/templates/base.html:48 forum/templates/messages.html:4
+#: forum/templates/base.html:49 forum/templates/messages.html:4
 #: forum/templates/messages.html:10
 msgid "Messages"
 msgstr "Сообщения"
 
-#: forum/templates/base.html:51
+#: forum/templates/base.html:52 forum/templates/participation.html:4
+#: forum/templates/participation.html:10
+msgid "Topics with my participation"
+msgstr "Темы с моим участием"
+
+#: forum/templates/base.html:55
 msgid "Log out"
 msgstr "Выйти"
 
