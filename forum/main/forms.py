@@ -36,7 +36,7 @@ class EditProfileForm(FlaskForm):
     homeland = StringField(lazy_gettext('Homeland'), validators=[Length(0, 64)])
     about = TextAreaField(lazy_gettext('About me'))
     avatar = StringField(lazy_gettext('Link to avatar'), validators=[Length(0, 256)])
-    submit = SubmitField(lazy_gettext('Submit'))
+    submit = SubmitField(lazy_gettext('Save'))
 
 
 class EditProfileAdminForm(FlaskForm):
@@ -50,7 +50,7 @@ class EditProfileAdminForm(FlaskForm):
     homeland = StringField(lazy_gettext('Homeland'), validators=[Length(0, 64)])
     about = TextAreaField(lazy_gettext('About me'))
     avatar = StringField(lazy_gettext('Link to avatar'), validators=[Length(0, 256)])
-    submit = SubmitField(lazy_gettext('Submit'))
+    submit = SubmitField(lazy_gettext('Save'))
 
     def __init__(self, user, *args, **kwargs):
         super(EditProfileAdminForm, self).__init__(*args, **kwargs)
@@ -72,7 +72,7 @@ class TopicForm(FlaskForm):
     title = StringField(lazy_gettext('Title'), validators=[DataRequired(), Length(0, 128)])
     group_id = IntegerField(lazy_gettext('Topic group ID'), validators=[InputRequired()])
     body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
-    submit = SubmitField(lazy_gettext('Submit'))
+    submit = SubmitField(lazy_gettext('Save'))
     add_poll = SubmitField(lazy_gettext('Add poll'))
     cancel = SubmitField(lazy_gettext('Cancel'))
     delete = SubmitField(lazy_gettext('Delete'))
@@ -92,7 +92,7 @@ class TopicWithPollForm(FlaskForm):
     body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 20})
     poll_question = StringField(lazy_gettext('Poll question'), validators=[DataRequired(), Length(0, 256)])
     poll_answers = TextAreaField(lazy_gettext('Poll answers'), validators=[DataRequired()], render_kw={'rows': 10})
-    submit = SubmitField(lazy_gettext('Submit'))
+    submit = SubmitField(lazy_gettext('Save'))
     cancel = SubmitField(lazy_gettext('Cancel'))
     delete = SubmitField(lazy_gettext('Delete'))
 
@@ -110,7 +110,7 @@ class TopicGroupForm(FlaskForm):
     group_id = IntegerField(lazy_gettext('Parent topic group ID'), validators=[InputRequired()])
     priority = SelectField(lazy_gettext('Priority'), coerce=int)
     protected = BooleanField(lazy_gettext('Moderators only'))
-    submit = SubmitField(lazy_gettext('Submit'))
+    submit = SubmitField(lazy_gettext('Save'))
     cancel = SubmitField(lazy_gettext('Cancel'))
     delete = SubmitField(lazy_gettext('Delete'))
 
@@ -139,7 +139,7 @@ class CommentForm(FlaskForm):
 
 class CommentEditForm(FlaskForm):
     body = TextAreaField(lazy_gettext('Text'), validators=[DataRequired()], render_kw={'rows': 8})
-    submit = SubmitField(lazy_gettext('Submit'))
+    submit = SubmitField(lazy_gettext('Save'))
     cancel = SubmitField(lazy_gettext('Cancel'))
     delete = SubmitField(lazy_gettext('Delete'))
 

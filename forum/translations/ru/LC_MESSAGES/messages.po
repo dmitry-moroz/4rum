@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-14 11:32+0300\n"
-"PO-Revision-Date: 2018-04-14 11:33+0300\n"
+"POT-Creation-Date: 2018-04-14 12:00+0300\n"
+"PO-Revision-Date: 2018-04-14 12:01+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -199,10 +199,9 @@ msgid "Link to avatar"
 msgstr "Ссылка на аватар"
 
 #: forum/main/forms.py:39 forum/main/forms.py:53 forum/main/forms.py:75
-#: forum/main/forms.py:95 forum/main/forms.py:113 forum/main/forms.py:133
-#: forum/main/forms.py:142
-msgid "Submit"
-msgstr "Отправить"
+#: forum/main/forms.py:95 forum/main/forms.py:113 forum/main/forms.py:142
+msgid "Save"
+msgstr "Сохранить"
 
 #: forum/main/forms.py:47
 msgid "Confirmed"
@@ -266,6 +265,10 @@ msgstr "Только для модераторов"
 #: forum/main/forms.py:131
 msgid "Leave your comment, {username}:"
 msgstr "Оставьте свой комментарий, {username}:"
+
+#: forum/main/forms.py:133
+msgid "Submit"
+msgstr "Отправить"
 
 #: forum/main/forms.py:148 forum/main/forms.py:156 forum/templates/message.html:56
 #: forum/templates/messages.html:29
