@@ -56,7 +56,7 @@ def topic(topic_id):
     if form and form.validate_on_submit():
         tpc.add_comment(current_user, form.body.data)
         flash(lazy_gettext('Your comment has been published.'))
-        return redirect(url_for('main.topic', topic_id=topic_id, page=-1))
+        return redirect(url_for('main.topic', topic_id=topic_id, page=-1, _anchor='comment-last'))
 
     page = request.args.get('page', 1, type=int)
     if page == -1:
