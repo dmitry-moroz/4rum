@@ -27,6 +27,11 @@
                 <div class="topic-info-date">
                     {{ _('Created') }}: {{ format_datetime(topic.created_at, 'd MMMM YYYY') }}
                 </div>
+                {% if topic.created_at != topic.updated_at %}
+                <div class="topic-info-date">
+                    {{ _('Updated') }}: {{ format_datetime(topic.updated_at, 'd MMMM YYYY') }}
+                </div>
+                {% endif %}
                 <div class="topic-info-comments">
                     <a class="no-underline" href="{{ url_for('main.topic', topic_id=topic.id, _anchor='comments') }}">
                         <span class="label label-primary topic-info-comments">{{ _('Comments') }}: {{ comments_count }}</span>
