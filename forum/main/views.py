@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from flask import render_template, redirect, url_for, abort, flash, request, current_app, session
 from flask_babel import lazy_gettext
 from flask_login import login_required, current_user
+from flask_wtf import FlaskForm
 from sqlalchemy import func, case, between, and_, or_
 
 from . import main
@@ -419,17 +420,19 @@ def edit_comment(comment_id):
     return render_template('edit_comment.html', form=form, comment=comment)
 
 
-@main.route('/vote/<int:answer_id>')
+@main.route('/topic/<int:topic_id>/vote/<int:answer_id>', methods=['POST'])
 @login_required
 @permission_required(Permission.PARTICIPATE)
-def vote(answer_id):
-    answer = PollAnswer.query.filter_by(id=answer_id, deleted=False).first_or_404()
-    if current_user.get_vote(answer.topic):
-        flash(lazy_gettext('You have already voted for this poll.'))
-    else:
-        answer.topic.add_vote(current_user, answer)
-        flash(lazy_gettext('Your vote has been taken.'))
-    return redirect(request.args.get('next') or url_for('main.topic', topic_id=answer.topic_id))
+def vote(topic_id, answer_id):
+    form = FlaskForm()
+    if form.validate_on_submit():
+        answer = PollAnswer.query.filter_by(id=answer_id, topic_id=topic_id, deleted=False).first_or_404()
+        if current_user.get_vote(answer.topic):
+            flash(lazy_gettext('You have already voted for this poll.'))
+        else:
+            answer.topic.add_vote(current_user, answer)
+            flash(lazy_gettext('Your vote has been taken.'))
+    return redirect(request.args.get('next') or url_for('main.topic', topic_id=topic_id))
 
 
 @main.route('/hot')
