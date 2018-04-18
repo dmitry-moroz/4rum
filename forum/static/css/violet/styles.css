@@ -306,19 +306,21 @@ div.comment-buttons {
 }
 
 /* CSS for poll */
-ul.poll-answers {
-    list-style-type: none;
-    padding: 0px;
+div.poll-answers {
     margin: 16px 0px 0px 0px;
 }
-ul.poll-answers li.poll-answer {
+input.poll-answer {
+    width: 100%;
     padding: 8px;
     margin: 1px 0px 0px 0px;
     border: 1px solid #b4bcc2;
-    color: #3C032C;
     font-weight: bold;
+    text-align: left;
+    white-space: pre-wrap;
+    background-color: #ffffff;
+    color: #3C032C;
 }
-ul.poll-answers li.poll-answer:hover {
+input.poll-answer:hover {
     background-color: #3C032C;
     color: #ffffff;
 }

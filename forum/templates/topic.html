@@ -84,15 +84,14 @@
         </ul>
         <h5>{{ _('You chosen') }} "{{ user_vote[0] }}"</h5>
         {% else %}
-        <ul class="poll-answers">
-            {% for answer_id, answer in poll_data %}
-            <a class="no-underline" href="{{ url_for('main.vote', answer_id=answer_id, next=request.url) }}">
-                <li class="poll-answer img-rounded">
-                    {{ answer }}
-                </li>
-            </a>
-            {% endfor %}
-        </ul>
+        <div class="poll-answers">
+        {% for answer_id, answer in poll_data %}
+            <form action="{{ url_for('main.vote', topic_id=topic.id, answer_id=answer_id, next=request.url) }}" method="POST">
+                <input name="csrf_token" type="hidden" value="{{ generate_csrf() }}">
+                <input name="submit" type="submit" value="{{ answer }}" class="poll-answer img-rounded">
+            </form>
+        {% endfor %}
+        </div>
         {% endif %}
         {% endif %}
     </div>
