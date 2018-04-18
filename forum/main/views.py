@@ -33,7 +33,7 @@ def get_topic_group(topic_group_id):
         ).join(User, Topic.author_id == User.id).outerjoin(
         Comment, Topic.id == Comment.topic_id).filter(
         and_(Topic.group_id == t_group.id, Topic.deleted == False)).group_by(Topic.id, User.id).order_by(
-        Topic.created_at.desc()).paginate(page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+        Topic.created_at.desc()).paginate(page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=True)
 
     return t_group, t_groups, pagination
 
@@ -56,16 +56,16 @@ def topic(topic_id):
     if form and form.validate_on_submit():
         tpc.add_comment(current_user, form.body.data)
         flash(lazy_gettext('Your comment has been published.'))
-        return redirect(url_for('main.topic', topic_id=topic_id, page=-1))
+        return redirect(url_for('main.topic', topic_id=topic_id, page=-1, _anchor='comment-last'))
 
     page = request.args.get('page', 1, type=int)
     if page == -1:
-        page = (tpc.comments_count - 1) // current_app.config['COMMENTS_PER_PAGE'] + 1
+        page = max((tpc.comments_count - 1) // current_app.config['COMMENTS_PER_PAGE'] + 1, 1)
 
     pagination = Comment.query.with_entities(
         Comment, User).join(User, Comment.author_id == User.id).filter(
         and_(Comment.topic_id == tpc.id, Comment.deleted == False)).order_by(
-        Comment.created_at.asc()).paginate(page, per_page=current_app.config['COMMENTS_PER_PAGE'], error_out=False)
+        Comment.created_at.asc()).paginate(page, per_page=current_app.config['COMMENTS_PER_PAGE'], error_out=True)
 
     user_vote = current_user.get_vote(tpc)
     if tpc.poll and user_vote:
@@ -287,7 +287,7 @@ def user(username):
         ).join(User, Topic.author_id == User.id).outerjoin(
         Comment, Topic.id == Comment.topic_id).filter(
         and_(Topic.author_id == user.id, Topic.deleted == False)).group_by(Topic.id, User.id).order_by(
-        Topic.created_at.desc()).paginate(page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+        Topic.created_at.desc()).paginate(page, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=True)
 
     topics_count = db.session.query(func.count(Topic.id)).filter(
         and_(Topic.author_id == user.id, Topic.deleted == False)).scalar()
@@ -372,13 +372,13 @@ def latest():
             ).join(User, Topic.author_id == User.id).outerjoin(
             Comment, Topic.id == Comment.topic_id).filter(Topic.deleted == False).group_by(Topic.id, User.id).order_by(
             Topic.created_at.desc()).paginate(
-            page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+            page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=True)
     elif target_arg == 'comments':
         pagination = Comment.query.with_entities(
             Comment, User, Topic).join(User, Comment.author_id == User.id).join(
             Topic, Comment.topic_id == Topic.id).filter(Comment.deleted == False).order_by(
             Comment.created_at.desc()).paginate(
-            page_arg, per_page=current_app.config['COMMENTS_PER_PAGE'], error_out=False)
+            page_arg, per_page=current_app.config['COMMENTS_PER_PAGE'], error_out=True)
     else:
         abort(400)
 
@@ -454,7 +454,7 @@ def hot():
         Comment, Topic.id == Comment.topic_id).filter(
         and_(Topic.deleted == False, between(Topic.created_at, periods[period_arg][0], periods[period_arg][1]))
         ).group_by(Topic.id, User.id).order_by(Topic.interest.desc()).paginate(
-        page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=False)
+        page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=True)
 
     return render_template('hot.html', period=period_arg, topics=pagination.items, pagination=pagination)
 
@@ -469,12 +469,12 @@ def messages():
         pagination = Message.query.with_entities(Message, User).join(
             User, Message.author_id == User.id).filter(
             and_(Message.receiver_id == current_user.id, Message.receiver_deleted == False)).order_by(
-            Message.created_at.desc()).paginate(page, per_page=current_app.config['MESSAGES_PER_PAGE'], error_out=False)
+            Message.created_at.desc()).paginate(page, per_page=current_app.config['MESSAGES_PER_PAGE'], error_out=True)
     elif direction == 'sent':
         pagination = Message.query.with_entities(Message, User).join(
             User, Message.receiver_id == User.id).filter(
             and_(Message.author_id == current_user.id, Message.author_deleted == False)).order_by(
-            Message.created_at.desc()).paginate(page, per_page=current_app.config['MESSAGES_PER_PAGE'], error_out=False)
+            Message.created_at.desc()).paginate(page, per_page=current_app.config['MESSAGES_PER_PAGE'], error_out=True)
     else:
         abort(400)
 
@@ -553,11 +553,11 @@ def community():
         search_str = '%{}%'.format(form.text.data.lower())
         pagination = User.query.order_by(User.id.asc()).filter(
             or_(User.username_normalized.like(search_str), func.lower(User.name).like(search_str))).paginate(
-            page, per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
+            page, per_page=current_app.config['USERS_PER_PAGE'], error_out=True)
     else:
         page = request.args.get('page', 1, type=int)
         pagination = User.query.order_by(User.id.asc()).paginate(
-            page, per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
+            page, per_page=current_app.config['USERS_PER_PAGE'], error_out=True)
 
     return render_template('community.html', form=form, users=pagination.items, pagination=pagination)
 
@@ -572,3 +572,22 @@ def set_locale():
 @babel.localeselector
 def get_locale():
     return session.get('locale', current_app.config['BABEL_DEFAULT_LOCALE'])
+
+
+@main.route('/participation')
+@login_required
+def participation():
+    page_arg = request.args.get('page', 1, type=int)
+
+    comments_count = func.sum(case([(Comment.deleted == False, 1)], else_=0))
+    last_commented = func.max(case([(Comment.deleted == False, Comment.created_at)], else_=Topic.created_at))
+
+    pagination = Topic.query.with_entities(
+        Topic, User, comments_count, last_commented
+        ).join(User, Topic.author_id == User.id).outerjoin(
+        Comment, Topic.id == Comment.topic_id).filter(Topic.deleted == False).filter(
+        or_(Topic.author_id == current_user.id, Comment.author_id == current_user.id)).group_by(
+        Topic.id, User.id).order_by(last_commented.desc()).paginate(
+        page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=True)
+
+    return render_template('participation.html', topics=pagination.items, pagination=pagination)

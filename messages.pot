@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-13 16:20+0300\n"
+"POT-Creation-Date: 2018-04-14 12:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: forum/auth/forms.py:15 forum/templates/auth/greeting.html:37
 #: forum/templates/auth/login.html:4 forum/templates/auth/login.html:10
-#: forum/templates/base.html:55
+#: forum/templates/base.html:59
 msgid "Log in"
 msgstr ""
 
@@ -54,7 +54,7 @@ msgstr ""
 
 #: forum/auth/forms.py:26 forum/templates/auth/greeting.html:38
 #: forum/templates/auth/register.html:4 forum/templates/auth/register.html:10
-#: forum/templates/base.html:56
+#: forum/templates/base.html:60
 msgid "Register"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgid "Confirm new password"
 msgstr ""
 
 #: forum/auth/forms.py:42 forum/templates/auth/change_password.html:4
-#: forum/templates/auth/change_password.html:10 forum/templates/base.html:49
+#: forum/templates/auth/change_password.html:10 forum/templates/base.html:53
 msgid "Change password"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr ""
 msgid "New email"
 msgstr ""
 
-#: forum/auth/forms.py:56 forum/templates/base.html:50
+#: forum/auth/forms.py:56 forum/templates/base.html:54
 msgid "Change email"
 msgstr ""
 
@@ -193,9 +193,8 @@ msgid "Link to avatar"
 msgstr ""
 
 #: forum/main/forms.py:39 forum/main/forms.py:53 forum/main/forms.py:75
-#: forum/main/forms.py:95 forum/main/forms.py:113 forum/main/forms.py:133
-#: forum/main/forms.py:142
-msgid "Submit"
+#: forum/main/forms.py:95 forum/main/forms.py:113 forum/main/forms.py:142
+msgid "Save"
 msgstr ""
 
 #: forum/main/forms.py:47
@@ -259,6 +258,10 @@ msgstr ""
 
 #: forum/main/forms.py:131
 msgid "Leave your comment, {username}:"
+msgstr ""
+
+#: forum/main/forms.py:133
+msgid "Submit"
 msgstr ""
 
 #: forum/main/forms.py:148 forum/main/forms.py:156
@@ -399,7 +402,7 @@ msgstr ""
 msgid "in topic"
 msgstr ""
 
-#: forum/templates/_comments.html:37 forum/templates/_topics.html:21
+#: forum/templates/_comments.html:37 forum/templates/_topics.html:28
 #: forum/templates/topic.html:46
 msgid "Created"
 msgstr ""
@@ -412,11 +415,11 @@ msgstr ""
 msgid "Topics"
 msgstr ""
 
-#: forum/templates/_topics.html:26
+#: forum/templates/_topics.html:21
 msgid "Last comment"
 msgstr ""
 
-#: forum/templates/_topics.html:26 forum/templates/community.html:49
+#: forum/templates/_topics.html:21 forum/templates/community.html:49
 #: forum/templates/user.html:35
 msgid "ago"
 msgstr ""
@@ -451,12 +454,17 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: forum/templates/base.html:48 forum/templates/messages.html:4
+#: forum/templates/base.html:49 forum/templates/messages.html:4
 #: forum/templates/messages.html:10
 msgid "Messages"
 msgstr ""
 
-#: forum/templates/base.html:51
+#: forum/templates/base.html:52 forum/templates/participation.html:4
+#: forum/templates/participation.html:10
+msgid "Topics with my participation"
+msgstr ""
+
+#: forum/templates/base.html:55
 msgid "Log out"
 msgstr ""
 

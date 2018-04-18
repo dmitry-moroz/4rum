@@ -44,8 +44,12 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
-                <li><a href="{{ url_for('main.messages') }}">
-                    {{ _('Messages') }} {% if unread_messages %}<span class="badge gray-badge">{{ unread_messages }}{% endif %}</span></a></li>
+                <li>
+                    <a href="{{ url_for('main.messages') }}">
+                    {{ _('Messages') }} {% if unread_messages %}<span class="badge gray-badge">{{ unread_messages }}{% endif %}</span>
+                    </a>
+                </li>
+                <li><a href="{{ url_for('main.participation') }}">{{ _('Topics with my participation') }}</a></li>
                 <li><a href="{{ url_for('auth.change_password') }}">{{ _('Change password') }}</a></li>
                 <li><a href="{{ url_for('auth.change_email') }}">{{ _('Change email') }}</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">{{ _('Log out') }}</a></li>
