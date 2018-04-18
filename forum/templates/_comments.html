@@ -6,7 +6,7 @@
     {% else %}
         {% set comment, author = comment_data %}
     {% endif %}
-    <li id="comment{{ comment.id }}" class="comment img-rounded">
+    <li id="{% if loop.index == comments|length %}comment-last{% else %}comment-{{ comment.id }}{% endif %}" class="comment img-rounded">
         <div>
             <a href="{{ url_for('main.user', username=author.username) }}">
                 <img class="img-rounded common-thumbnail" src="{{ author.avatar }}">
