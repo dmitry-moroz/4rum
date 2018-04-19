@@ -11,7 +11,7 @@ from .forms import (EditProfileForm, EditProfileAdminForm, TopicForm, TopicGroup
                     CommentForm, CommentEditForm, MessageReplyForm, MessageSendForm, SearchForm)
 from ..app import babel, db
 from ..decorators import admin_required, permission_required
-from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message
+from ..models import Permission, Role, User, Topic, TopicGroup, Comment, PollAnswer, Message, Favorite
 
 
 def get_topic_group(topic_group_id):
@@ -49,6 +49,7 @@ def index():
 @main.route('/topic/<int:topic_id>', methods=['GET', 'POST'])
 def topic(topic_id):
     tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
+    tpc_in_favorites = Favorite.query.filter_by(topic_id=tpc.id, user_id=current_user.id).first()
 
     form = CommentForm(current_user) if current_user.can(Permission.PARTICIPATE) else None
     if form and form.validate_on_submit():
@@ -71,8 +72,8 @@ def topic(topic_id):
     else:
         poll_data = [(a.id, a.body) for a in tpc.poll_answers.filter_by(deleted=False).all()]
 
-    return render_template('topic.html', topic=tpc, form=form, user_vote=user_vote, poll_data=poll_data,
-                           comments=pagination.items, pagination=pagination)
+    return render_template('topic.html', topic=tpc, topic_in_favorites=tpc_in_favorites, form=form, user_vote=user_vote,
+                           poll_data=poll_data, comments=pagination.items, pagination=pagination)
 
 
 @main.route('/create_topic/<int:topic_group_id>', methods=['GET', 'POST'])
@@ -591,3 +592,41 @@ def participation():
         page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=True)
 
     return render_template('participation.html', topics=pagination.items, pagination=pagination)
+
+
+@main.route('/favorites')
+@login_required
+def view_favorites():
+    page_arg = request.args.get('page', 1, type=int)
+
+    comments_count = func.sum(case([(Comment.deleted == False, 1)], else_=0))
+    last_commented = func.max(case([(Comment.deleted == False, Comment.created_at)], else_=Topic.created_at))
+
+    pagination = Topic.query.with_entities(
+        Topic, User, comments_count, last_commented
+        ).join(User, Topic.author_id == User.id).join(
+        Favorite, and_(Favorite.topic_id == Topic.id, Favorite.user_id == current_user.id)
+        ).outerjoin(Comment, Topic.id == Comment.topic_id).filter(Topic.deleted == False).group_by(
+        Topic.id, User.id).order_by(last_commented.desc()).paginate(
+        page_arg, per_page=current_app.config['TOPICS_PER_PAGE'], error_out=True)
+
+    return render_template('favorites.html', topics=pagination.items, pagination=pagination)
+
+
+@main.route('/topic/<int:topic_id>/favorite', methods=['POST'])
+@login_required
+def change_favorites(topic_id):
+    form = FlaskForm()
+    if form.validate_on_submit():
+        tpc = Topic.query.filter_by(id=topic_id, deleted=False).first_or_404()
+        tpc_in_favorites = Favorite.query.filter_by(topic_id=tpc.id, user_id=current_user.id).first()
+
+        if tpc_in_favorites:
+            db.session.delete(tpc_in_favorites)
+            flash(lazy_gettext('The topic has been deleted from favorites.'))
+        else:
+            new_favorite = Favorite(topic_id=tpc.id, user_id=current_user.id)
+            db.session.add(new_favorite)
+            flash(lazy_gettext('The topic has been added to favorites.'))
+
+    return redirect(request.args.get('next') or url_for('main.topic', topic_id=topic_id))

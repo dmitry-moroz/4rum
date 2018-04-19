@@ -1,5 +1,15 @@
 <div class="buttons-panel">
     <div class="right-buttons">
+        <form name="change_favorites_form" action="{{ url_for('main.change_favorites', topic_id=topic.id, next=request.url) }}" method="POST">
+            <input name="csrf_token" type="hidden" value="{{ generate_csrf() }}">
+            <a class="btn btn-success btn-sm" onclick="change_favorites_form.submit()">
+                {% if topic_in_favorites %}
+                <span class="glyphicon glyphicon-star"></span> {{ _('Remove from favorites') }}
+                {% else %}
+                <span class="glyphicon glyphicon-star-empty"></span> {{ _('Add to favorites') }}
+                {% endif %}
+            </a>
+        </form>
         {% if current_user.id==topic.author_id and current_user.can(Permission.WRITE) %}
         <a class="btn btn-warning btn-sm" href="{{ url_for('main.edit_topic', topic_id=topic.id) }}">
             <span class="glyphicon glyphicon-edit"></span> {{ _('Edit') }}

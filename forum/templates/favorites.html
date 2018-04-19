@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}D3 - {{ _('Favorite topics') }}{% endblock %}
+
+{% block page_content %}
+<div id="favorites" class="page-header">
+    <img class="common-thumbnail" src="{{ url_for('static', filename='img/star-icon.png') }}">
+    <div class="common-header">
+        <h2>{{ _('Favorite topics') }}</h2>
+    </div>
+</div>
+{% include '_topics.html' %}
+{{ macros.pagination_widget(pagination, 'main.favorites', fragment='#favorites') }}
+{% endblock %}

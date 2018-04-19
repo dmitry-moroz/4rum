@@ -98,6 +98,9 @@ div.buttons-panel {
 div.right-buttons {
     float: right;
 }
+div.right-buttons a, div.right-buttons form {
+    display: inline-block;
+}
 
 /* CSS for account profile */
 div.profile-header {
