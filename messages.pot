@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-14 12:00+0300\n"
+"POT-Creation-Date: 2018-04-19 13:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: forum/auth/forms.py:15 forum/templates/auth/greeting.html:37
 #: forum/templates/auth/login.html:4 forum/templates/auth/login.html:10
-#: forum/templates/base.html:59
+#: forum/templates/base.html:60
 msgid "Log in"
 msgstr ""
 
@@ -54,7 +54,7 @@ msgstr ""
 
 #: forum/auth/forms.py:26 forum/templates/auth/greeting.html:38
 #: forum/templates/auth/register.html:4 forum/templates/auth/register.html:10
-#: forum/templates/base.html:60
+#: forum/templates/base.html:61
 msgid "Register"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgid "Confirm new password"
 msgstr ""
 
 #: forum/auth/forms.py:42 forum/templates/auth/change_password.html:4
-#: forum/templates/auth/change_password.html:10 forum/templates/base.html:53
+#: forum/templates/auth/change_password.html:10 forum/templates/base.html:54
 msgid "Change password"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgstr ""
 msgid "New email"
 msgstr ""
 
-#: forum/auth/forms.py:56 forum/templates/base.html:54
+#: forum/auth/forms.py:56 forum/templates/base.html:55
 msgid "Change email"
 msgstr ""
 
@@ -281,104 +281,121 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: forum/main/views.py:58
+#: forum/main/views.py:60
 msgid "Your comment has been published."
 msgstr ""
 
-#: forum/main/views.py:102
+#: forum/main/views.py:104
 msgid "The topic has been created."
 msgstr ""
 
-#: forum/main/views.py:112 forum/main/views.py:157
+#: forum/main/views.py:114 forum/main/views.py:159
 msgid "The topic has been saved. Fill data for a poll."
 msgstr ""
 
-#: forum/main/views.py:118
+#: forum/main/views.py:120
 msgid "Topic creation was cancelled."
 msgstr ""
 
-#: forum/main/views.py:147
+#: forum/main/views.py:149
 msgid "The topic has been updated."
 msgstr ""
 
-#: forum/main/views.py:161
+#: forum/main/views.py:163
 msgid "Topic editing was cancelled."
 msgstr ""
 
-#: forum/main/views.py:171
+#: forum/main/views.py:173
 msgid "The topic has been deleted."
 msgstr ""
 
-#: forum/main/views.py:212
+#: forum/main/views.py:214
 msgid "The topic group has been created."
 msgstr ""
 
-#: forum/main/views.py:216
+#: forum/main/views.py:218
 msgid "Topic group creation was cancelled."
 msgstr ""
 
-#: forum/main/views.py:247
+#: forum/main/views.py:249
 msgid "The topic group has been updated."
 msgstr ""
 
-#: forum/main/views.py:251
+#: forum/main/views.py:253
 msgid "Topic group editing was cancelled."
 msgstr ""
 
-#: forum/main/views.py:256
+#: forum/main/views.py:258
 msgid "The topic group is not deleted. Only empty topic group can be deleted."
 msgstr ""
 
-#: forum/main/views.py:262
+#: forum/main/views.py:264
 msgid "The topic group has been deleted."
 msgstr ""
 
-#: forum/main/views.py:314
+#: forum/main/views.py:316
 msgid "Your profile has been updated."
 msgstr ""
 
-#: forum/main/views.py:345
+#: forum/main/views.py:347
 msgid "The profile has been updated."
 msgstr ""
 
-#: forum/main/views.py:402
+#: forum/main/views.py:404
 msgid "The comment has been updated."
 msgstr ""
 
-#: forum/main/views.py:406
+#: forum/main/views.py:408
 msgid "Comment editing was cancelled."
 msgstr ""
 
-#: forum/main/views.py:413
+#: forum/main/views.py:415
 msgid "The comment has been deleted."
 msgstr ""
 
-#: forum/main/views.py:428
+#: forum/main/views.py:432
 msgid "You have already voted for this poll."
 msgstr ""
 
-#: forum/main/views.py:431
+#: forum/main/views.py:435
 msgid "Your vote has been taken."
 msgstr ""
 
-#: forum/main/views.py:499 forum/main/views.py:536
+#: forum/main/views.py:503 forum/main/views.py:540
 msgid "Your message has been sent."
 msgstr ""
 
-#: forum/main/views.py:507
+#: forum/main/views.py:511
 msgid "The message has been deleted."
 msgstr ""
 
-#: forum/main/views.py:540
+#: forum/main/views.py:544
 msgid "The message was cancelled."
 msgstr ""
 
-#: forum/templates/_buttons_topic.html:5 forum/templates/_buttons_topic.html:9
-#: forum/templates/_comments.html:56 forum/templates/_comments.html:60
-msgid "Edit"
+#: forum/main/views.py:629
+msgid "The topic has been deleted from favorites."
+msgstr ""
+
+#: forum/main/views.py:633
+msgid "The topic has been added to favorites."
+msgstr ""
+
+#: forum/templates/_buttons_topic.html:7
+msgid "Remove from favorites"
+msgstr ""
+
+#: forum/templates/_buttons_topic.html:9
+msgid "Add to favorites"
 msgstr ""
 
 #: forum/templates/_buttons_topic.html:15
+#: forum/templates/_buttons_topic.html:19 forum/templates/_comments.html:56
+#: forum/templates/_comments.html:60
+msgid "Edit"
+msgstr ""
+
+#: forum/templates/_buttons_topic.html:25
 #: forum/templates/_buttons_topic_group.html:25
 msgid "Up"
 msgstr ""
@@ -407,7 +424,8 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: forum/templates/_comments.html:41 forum/templates/topic.html:50
+#: forum/templates/_comments.html:41 forum/templates/_topics.html:32
+#: forum/templates/topic.html:50
 msgid "Updated"
 msgstr ""
 
@@ -424,12 +442,12 @@ msgstr ""
 msgid "ago"
 msgstr ""
 
-#: forum/templates/_topics.html:32 forum/templates/latest.html:19
-#: forum/templates/topic.html:104
+#: forum/templates/_topics.html:37 forum/templates/latest.html:19
+#: forum/templates/topic.html:103
 msgid "Comments"
 msgstr ""
 
-#: forum/templates/_topics.html:41
+#: forum/templates/_topics.html:46
 msgid "Topics not found"
 msgstr ""
 
@@ -446,25 +464,29 @@ msgstr ""
 msgid "Hot"
 msgstr ""
 
-#: forum/templates/base.html:30 forum/templates/community.html:5
+#: forum/templates/base.html:30
+msgid "Favorites"
+msgstr ""
+
+#: forum/templates/base.html:31 forum/templates/community.html:5
 msgid "Community"
 msgstr ""
 
-#: forum/templates/base.html:46
+#: forum/templates/base.html:47
 msgid "Profile"
 msgstr ""
 
-#: forum/templates/base.html:49 forum/templates/messages.html:4
+#: forum/templates/base.html:50 forum/templates/messages.html:4
 #: forum/templates/messages.html:10
 msgid "Messages"
 msgstr ""
 
-#: forum/templates/base.html:52 forum/templates/participation.html:4
+#: forum/templates/base.html:53 forum/templates/participation.html:4
 #: forum/templates/participation.html:10
 msgid "Topics with my participation"
 msgstr ""
 
-#: forum/templates/base.html:55
+#: forum/templates/base.html:56
 msgid "Log out"
 msgstr ""
 
@@ -532,6 +554,10 @@ msgstr ""
 
 #: forum/templates/edit_topic_group.html:11
 msgid "Edit home page"
+msgstr ""
+
+#: forum/templates/favorites.html:4 forum/templates/favorites.html:10
+msgid "Favorite topics"
 msgstr ""
 
 #: forum/templates/hot.html:4
