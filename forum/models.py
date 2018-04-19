@@ -94,6 +94,7 @@ class User(UserMixin, db.Model):
     sent_messages = db.relationship('Message', foreign_keys=[Message.author_id], backref='author', lazy='dynamic')
     received_messages = db.relationship('Message', foreign_keys=[Message.receiver_id], backref='receiver',
                                         lazy='dynamic')
+    favorite_topics = db.relationship('Topic', secondary='favorites', lazy='dynamic')
 
     # Profile:
     name = db.Column(db.String(64))
@@ -339,6 +340,12 @@ class PollVote(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=func.now())
     deleted = db.Column(db.Boolean, index=True, default=False)
+
+
+class Favorite(db.Model):
+    __tablename__ = 'favorites'
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True, index=True)
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'), primary_key=True, index=True)
 
 
 db.event.listen(Message.body, 'set', on_changed_body_set_body_html)
