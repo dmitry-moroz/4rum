@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-04-18 15:43+0300\n"
-"PO-Revision-Date: 2018-04-18 15:44+0300\n"
+"POT-Creation-Date: 2018-04-19 13:10+0300\n"
+"PO-Revision-Date: 2018-04-19 13:11+0300\n"
 "Last-Translator: \n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr "Запомнить меня"
 
 #: forum/auth/forms.py:15 forum/templates/auth/greeting.html:37
 #: forum/templates/auth/login.html:4 forum/templates/auth/login.html:10
-#: forum/templates/base.html:60
+#: forum/templates/base.html:61
 msgid "Log in"
 msgstr "Войти"
 
@@ -59,7 +59,7 @@ msgstr "Подтвердите пароль"
 
 #: forum/auth/forms.py:26 forum/templates/auth/greeting.html:38
 #: forum/templates/auth/register.html:4 forum/templates/auth/register.html:10
-#: forum/templates/base.html:61
+#: forum/templates/base.html:62
 msgid "Register"
 msgstr "Зарегистрироваться"
 
@@ -84,7 +84,7 @@ msgid "Confirm new password"
 msgstr "Подтвердите новый пароль"
 
 #: forum/auth/forms.py:42 forum/templates/auth/change_password.html:4
-#: forum/templates/auth/change_password.html:10 forum/templates/base.html:54
+#: forum/templates/auth/change_password.html:10 forum/templates/base.html:55
 msgid "Change password"
 msgstr "Изменить пароль"
 
@@ -100,7 +100,7 @@ msgstr "Новый пароль совпадает со старым парол�
 msgid "New email"
 msgstr "Новый email"
 
-#: forum/auth/forms.py:56 forum/templates/base.html:55
+#: forum/auth/forms.py:56 forum/templates/base.html:56
 msgid "Change email"
 msgstr "Изменить email"
 
@@ -287,105 +287,121 @@ msgstr "Закрыть"
 msgid "Search"
 msgstr "Поиск"
 
-#: forum/main/views.py:55
+#: forum/main/views.py:57
 msgid "Your comment has been published."
 msgstr "Ваш комментарий опубликован."
 
-#: forum/main/views.py:99
+#: forum/main/views.py:101
 msgid "The topic has been created."
 msgstr "Тема создана."
 
-#: forum/main/views.py:109 forum/main/views.py:154
+#: forum/main/views.py:111 forum/main/views.py:156
 msgid "The topic has been saved. Fill data for a poll."
 msgstr "Тема сохранена. Заполните данные для опроса."
 
-#: forum/main/views.py:115
+#: forum/main/views.py:117
 msgid "Topic creation was cancelled."
 msgstr "Создание темы было отменено."
 
-#: forum/main/views.py:144
+#: forum/main/views.py:146
 msgid "The topic has been updated."
 msgstr "Тема обновлена."
 
-#: forum/main/views.py:158
+#: forum/main/views.py:160
 msgid "Topic editing was cancelled."
 msgstr "Редактирование темы было отменено."
 
-#: forum/main/views.py:168
+#: forum/main/views.py:170
 msgid "The topic has been deleted."
 msgstr "Тема удалена."
 
-#: forum/main/views.py:208
+#: forum/main/views.py:210
 msgid "The topic group has been created."
 msgstr "Группа для тем создана."
 
-#: forum/main/views.py:212
+#: forum/main/views.py:214
 msgid "Topic group creation was cancelled."
 msgstr "Создание группы для тем было отменено."
 
-#: forum/main/views.py:243
+#: forum/main/views.py:245
 msgid "The topic group has been updated."
 msgstr "Группа для тем обновлена."
 
-#: forum/main/views.py:247
+#: forum/main/views.py:249
 msgid "Topic group editing was cancelled."
 msgstr "Редактирование группы для тем было отменено."
 
-#: forum/main/views.py:252
+#: forum/main/views.py:254
 msgid "The topic group is not deleted. Only empty topic group can be deleted."
 msgstr ""
 "Группа для тем не удалена. Только пустая группа для тем может быть удалена."
 
-#: forum/main/views.py:258
+#: forum/main/views.py:260
 msgid "The topic group has been deleted."
 msgstr "Группа для тем удалена."
 
-#: forum/main/views.py:310
+#: forum/main/views.py:312
 msgid "Your profile has been updated."
 msgstr "Ваш профиль обновлен."
 
-#: forum/main/views.py:341
+#: forum/main/views.py:343
 msgid "The profile has been updated."
 msgstr "Профиль обновлен."
 
-#: forum/main/views.py:397
+#: forum/main/views.py:399
 msgid "The comment has been updated."
 msgstr "Комментарий обновлен."
 
-#: forum/main/views.py:401
+#: forum/main/views.py:403
 msgid "Comment editing was cancelled."
 msgstr "Редактирование комментария было отменено."
 
-#: forum/main/views.py:408
+#: forum/main/views.py:410
 msgid "The comment has been deleted."
 msgstr "Комментарий удален."
 
-#: forum/main/views.py:423
+#: forum/main/views.py:427
 msgid "You have already voted for this poll."
 msgstr "Вы уже голосовали в этом опросе."
 
-#: forum/main/views.py:426
+#: forum/main/views.py:430
 msgid "Your vote has been taken."
 msgstr "Ваш голос принят."
 
-#: forum/main/views.py:493 forum/main/views.py:530
+#: forum/main/views.py:497 forum/main/views.py:534
 msgid "Your message has been sent."
 msgstr "Ваше сообщение отправлено."
 
-#: forum/main/views.py:501
+#: forum/main/views.py:505
 msgid "The message has been deleted."
 msgstr "Сообщение удалено."
 
-#: forum/main/views.py:534
+#: forum/main/views.py:538
 msgid "The message was cancelled."
 msgstr "Сообщение было отменено."
 
-#: forum/templates/_buttons_topic.html:5 forum/templates/_buttons_topic.html:9
+#: forum/main/views.py:626
+msgid "The topic has been deleted from favorites."
+msgstr "Тема удалена из избранного."
+
+#: forum/main/views.py:630
+msgid "The topic has been added to favorites."
+msgstr "Тема добавлена в избранное."
+
+#: forum/templates/_buttons_topic.html:7
+msgid "Remove from favorites"
+msgstr "Удалить из избранного"
+
+#: forum/templates/_buttons_topic.html:9
+msgid "Add to favorites"
+msgstr "Добавить в избранное"
+
+#: forum/templates/_buttons_topic.html:15 forum/templates/_buttons_topic.html:19
 #: forum/templates/_comments.html:56 forum/templates/_comments.html:60
 msgid "Edit"
 msgstr "Редактировать"
 
-#: forum/templates/_buttons_topic.html:15
+#: forum/templates/_buttons_topic.html:25
 #: forum/templates/_buttons_topic_group.html:25
 msgid "Up"
 msgstr "Вверх"
@@ -433,7 +449,7 @@ msgid "ago"
 msgstr "назад"
 
 #: forum/templates/_topics.html:37 forum/templates/latest.html:19
-#: forum/templates/topic.html:104
+#: forum/templates/topic.html:103
 msgid "Comments"
 msgstr "Комментарии"
 
@@ -453,25 +469,29 @@ msgstr "Свежее"
 msgid "Hot"
 msgstr "Горячее"
 
-#: forum/templates/base.html:32 forum/templates/community.html:5
+#: forum/templates/base.html:32
+msgid "Favorites"
+msgstr "Избранное"
+
+#: forum/templates/base.html:33 forum/templates/community.html:5
 msgid "Community"
 msgstr "Сообщество"
 
-#: forum/templates/base.html:47
+#: forum/templates/base.html:48
 msgid "Profile"
 msgstr "Профиль"
 
-#: forum/templates/base.html:50 forum/templates/messages.html:4
+#: forum/templates/base.html:51 forum/templates/messages.html:4
 #: forum/templates/messages.html:10
 msgid "Messages"
 msgstr "Сообщения"
 
-#: forum/templates/base.html:53 forum/templates/participation.html:4
+#: forum/templates/base.html:54 forum/templates/participation.html:4
 #: forum/templates/participation.html:10
 msgid "Topics with my participation"
 msgstr "Темы с моим участием"
 
-#: forum/templates/base.html:56
+#: forum/templates/base.html:57
 msgid "Log out"
 msgstr "Выйти"
 
@@ -538,6 +558,10 @@ msgstr "Редактировать тему"
 #: forum/templates/edit_topic_group.html:11
 msgid "Edit home page"
 msgstr "Редактировать домашнюю страницу"
+
+#: forum/templates/favorites.html:4 forum/templates/favorites.html:10
+msgid "Favorite topics"
+msgstr "Избранные темы"
 
 #: forum/templates/hot.html:4
 msgid "The most hot topics"
