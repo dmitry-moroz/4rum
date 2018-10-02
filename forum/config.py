@@ -33,7 +33,7 @@ class Config:
         user=MQ_USER, password=MQ_PASSWORD, hostname=MQ_HOST, port=MQ_PORT, vhost=MQ_VHOST
     )
     CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL',
-                                       os.environ.get('RABBITMQ_BIGWIG_URL', AMQP_URL))
+                                       os.environ.get('CLOUDAMQP_URL', AMQP_URL))
 
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
